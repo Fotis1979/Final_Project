@@ -8,7 +8,7 @@ useEffect (() => {
   color === "green" && setScore((prev) => prev +10)
 },[color])
 
-
+//  ;; L NLKNLNLKLKN
 return (
     <div className="Counter">
 
