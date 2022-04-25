@@ -1,0 +1,76 @@
+import { useState, useEffect } from 'react';
+import './App.css';
+
+const App = () => {
+
+  const [questions, setQuestions] = useState()
+  const [message, setMessage] = useState()
+
+  const answerHandler = (e) => {
+   
+    
+      fetch("https://the-trivia-api.com/api/questions?limit=50")
+        .then(res => res.json())
+        .then(data => setQuestions((data[Math.floor(Math.random() * 50)])))
+      setMessage("")
+    
+    e.target.value === questions.correctAnswer ?
+      setMessage("YEEESSS !!!! U WERE WRIGHT !!!") :
+      setMessage("NOOOOOO !!! U ARE SHIT...")
+
+    // const timeOut = setTimeout(newQ, 4000)
+ 
+  }
+
+
+  
+    questions &&
+  console.log(questions);
+  questions &&
+    console.log(questions.incorrectAnswers);
+  questions &&
+    console.log(questions.question);
+  questions &&
+    console.log(questions.correctAnswer);
+
+    return (
+
+    <main>
+      <h1>Questions</h1>
+      <aside>
+        {questions &&
+          <h2> CATEGORY:
+            {" " + questions.category}</h2>
+        }<br />
+
+        {questions &&
+          <div className="question"> {questions.question}</div>
+        }
+        <br />
+        {questions &&
+          <button id={questions.id} value={questions.correctAnswer} onClick={answerHandler}>{questions.correctAnswer}</button>
+        }
+
+        {questions &&
+          <button id={questions.id} value={questions.incorrectAnswers[0]} onClick={answerHandler}> {questions.incorrectAnswers[0]}</button>
+        }
+
+        {questions &&
+          <button id={questions.id} value={questions.incorrectAnswers[1]} onClick={answerHandler}> {questions.incorrectAnswers[1]}</button>
+        }
+
+        {questions &&
+          <button id={questions.id} value={questions.incorrectAnswers[2]} onClick={answerHandler}> {questions.incorrectAnswers[2]}</button>
+        }
+<button onClick={answerHandler}>START GAME</button>
+        <p>{message} </p>
+
+      </aside>
+
+    </main>
+  );
+}
+
+export default App;
+
+

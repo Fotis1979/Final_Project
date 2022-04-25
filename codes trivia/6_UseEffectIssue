@@ -1,0 +1,150 @@
+import { useState, useEffect } from 'react';
+import './App.css';
+
+
+const App = () => {
+
+  const [questions, setQuestions] = useState()
+  const [message, setMessage] = useState()
+  const [color, setColor] = useState()
+  const [wrightAnswer, setWrightAnswer] = useState()
+
+  // *** FUNCTION to render new question on every click. ***
+
+  const answerSubmit = (e) => {
+
+    e.preventDefault()
+
+    // *** SET TIMEOUT to wait four seconds until the next fetch. ***
+
+    setTimeout(newQ, 4000)
+
+    //  *** FUNCTION to fetch fifty api question objects and choose one of them randomly. ***
+
+    function newQ() {
+
+      fetch("https://the-trivia-api.com/api/questions?limit=50")
+        .then(res => res.json())
+        .then(data => setQuestions((data[Math.floor(Math.random() * 50)])))
+      setMessage("")
+      setColor("")
+      setWrightAnswer("")
+    }
+
+    // *** SET MESSAGES to display or not after giving wright or wrong answers. ***
+
+    if (e.target.value === questions.correctAnswer) {
+      setMessage("WRIGHT ANSWER !!!")
+      setWrightAnswer("")
+      setColor("green")
+    } else {
+      setMessage("WRONG ANSWER !!!")
+      setColor("red")
+      e.target.value !== questions.correctAnswer && setWrightAnswer(questions.correctAnswer)
+    }
+  }
+
+  // *** CONSOLE.LOGS for testing ***
+
+  // questions &&
+  // console.log(questions.incorrectAnswers.indexOf(questions.correctAnswer));
+  // console.log(questions.correctAnswer);
+  // color &&
+  //   console.log({backgroundColor: `${color}`});
+  //   questions &&
+  // console.log(questions);
+  // questions &&
+  //   console.log(questions.incorrectAnswers);
+  // questions &&
+  //   console.log(questions.question);
+  // questions &&
+  //   console.log(questions.correctAnswer);
+
+  // *** FUNCTION to shuffle the items of the array in a random order. ***
+
+  useEffect(() => {
+    function randomArrayShuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
+    // *** U HAVE TO !!! call the function !!! It then resets the array to the shuffled array.***
+    questions &&
+      randomArrayShuffle(questions.incorrectAnswers)
+  }, [])
+
+
+  // *** Push the Correct answer to the incorrect answers array. ***
+
+  questions && questions.incorrectAnswers.length <= 3 &&
+    questions.incorrectAnswers.push(questions.correctAnswer)
+
+  // *** CONSOLE.LOGS for testing ***
+
+
+  // questions &&
+  //   console.log(questions.incorrectAnswers);
+
+  //   questions && 
+  //   console.log(questions.correctAnswer
+  //     );
+  return (
+
+    <main>
+      <br />
+      <h1>QUIZ GAME</h1>
+      <br /><br />
+      {questions &&
+        <h2> CATEGORY:
+          {" " + questions.category}</h2>}
+      
+      <br />
+
+
+      {questions &&
+        <div className="question"> {questions.question}</div>
+      }
+      <br />
+
+      <aside className="questions-section">
+        {questions &&
+          <button style={{ backgroundColor: `${color}` }} id={questions.id} value={questions.incorrectAnswers[0]} onClick={(e) => answerSubmit(e)}>{questions.incorrectAnswers[0]}</button>
+        }
+
+        {questions &&
+          <button style={{ backgroundColor: `${color}` }} id={questions.id} value={questions.incorrectAnswers[1]} onClick={(e) => answerSubmit(e)}> {questions.incorrectAnswers[1]}</button>
+        }
+
+        {questions &&
+          <button style={{ backgroundColor: `${color}` }} id={questions.id} value={questions.incorrectAnswers[2]} onClick={(e) => answerSubmit(e)}> {questions.incorrectAnswers[2]}</button>
+        }
+
+        {questions &&
+          <button style={{ backgroundColor: `${color}` }} id={questions.id} value={questions.incorrectAnswers[3]} onClick={(e) => answerSubmit(e)}> {questions.incorrectAnswers[3]}</button>
+        }
+        {!questions && <button onClick={answerSubmit}>START GAME</button>}
+
+        <br />
+        <br />
+
+        <p style={{ color: `${color}` }}>{message} </p>
+
+        <br />
+          <div className><p>{wrightAnswer !== "" && questions && "Wright Answer was : " + wrightAnswer}</p>
+</div>
+        
+      </aside>
+
+    </main>
+  );
+}
+
+export default App;
+
+
