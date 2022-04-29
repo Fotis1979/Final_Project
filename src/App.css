@@ -125,6 +125,7 @@
         flex-direction: column;
         width: 300px;
         text-align: center;
+        z-index: 20;
     }
 
     .sec{
@@ -142,4 +143,24 @@
               top: -20px;
              }
           }
+
+          .qCounter{
+              position: absolute;
+              display:grid;
+              color: rgb(0, 162, 211);
+              padding-top: 826px;
+              left: 1526px;
+              font-size: 30px;
+              font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+              z-index: 22;
+          }
     
+
+          img{
+              object-fit: cover;
+              position: relative;
+              padding-top: 30px;
+          }
+
+          
+     

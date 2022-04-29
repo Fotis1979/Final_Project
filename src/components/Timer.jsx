@@ -4,8 +4,7 @@ import { useState } from 'react'
 
 
 
-const Timer = ({ setQuestions , score, setScore, setMessage}) => {
-
+const Timer = ({ setQuestions , score, gameOver, setGameOver, setScore, setMessage}) => {
     const [seconds, setSeconds] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [hours, setHours] = useState(0)
@@ -14,6 +13,7 @@ const Timer = ({ setQuestions , score, setScore, setMessage}) => {
     const [secondsO, setSecondsO] = useState(0)
 
 
+    // gameOver && setQuestions("")
 
 
     useEffect(() => {
@@ -38,13 +38,16 @@ const Timer = ({ setQuestions , score, setScore, setMessage}) => {
     useEffect(() => {
         seconds === 10 && setSecondsO("")
         seconds === 60 && setSeconds(0)
-        seconds === 60 && setSecondsO(0)
+        seconds === 0 && setSecondsO(0)
         minutes === 3 && setQuestions("")
+        minutes === 3 && setGameOver(true) 
+        seconds === 0 && setGameOver(false)
+        // gameOver && setQuestions("")
         minutes === 3 && setScore(0)
         minutes === 3 && setMessage("")
 
+// console.log(gameOver);
     }, [seconds])
-
     return (
         <div>
 

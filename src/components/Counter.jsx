@@ -1,14 +1,13 @@
 import React from 'react'
 import { useEffect } from 'react'
 
-const Counter = ({score, setScore, color}) => {
+const Counter = ({score, setScore, color, setColor, newQuestion}) => {
 
 useEffect (() => {
   
-  color === "green" && setScore((prev) => prev +10)
+  color === "green" && newQuestion===false && setScore((prev) => prev +10)
 },[color])
 
-//  ;; L NLKNLNLKLKN
 return (
     <div className="Counter">
 
