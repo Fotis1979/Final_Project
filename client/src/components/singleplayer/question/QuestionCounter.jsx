@@ -1,28 +1,24 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect, useContext } from "react";
+import MyContext from "../../../context/MyContext";
 
-const QuestionCounter = ({newQuestion, color}) => {
-    const [qCount, setQCount] = useState(1)
-    useEffect(() => {
+const QuestionCounter = () => {
+  const context = useContext(MyContext);
+  const {
+    color,
 
-    newQuestion && setQCount((prev) => (prev + 1))
-    color && setQCount((prev) => (prev + 1))
-        
-    },[newQuestion, color]) 
+    newQuestion,
+  } = context;
+  const [qCount, setQCount] = useState(1);
+  useEffect(() => {
+    newQuestion && setQCount((prev) => prev + 1);
+    color && setQCount((prev) => prev + 1);
+  }, [newQuestion, color]);
 
+  return (
+    <div>
+      <p className="qCounter">Question Count {qCount}</p>
+    </div>
+  );
+};
 
-
-
-
-
-
-    return (
-        <div>
-            <p className= "qCounter">
-                Question Count {qCount}
-            </p>
-            
-        </div>
-    )
-}
-
-export default QuestionCounter
+export default QuestionCounter;

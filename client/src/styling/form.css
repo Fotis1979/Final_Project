@@ -1,0 +1,11 @@
+.register-btn,.login-btn{
+    height: 3vh;
+    width: 7vw;
+    font-size: medium;float: right;
+
+}
+form{
+    height: 8vh;
+    width: auto;
+    float: right;
+}
