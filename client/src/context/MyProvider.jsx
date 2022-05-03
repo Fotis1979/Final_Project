@@ -12,6 +12,11 @@ const MyProvider = ({ children }) => {
   const [newQuestion, setNewQuestion] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [g, setG] = useState(false);
+  const [error, setError] = useState (false);
+  const [category, setCategory] = useState();
+  const [difficulty, setDifficulty] = useState();
+  const [gameMode, setGameMode] = useState();
+  const [number, setNumber] = useState();
 
   return (
     <MyContext.Provider
@@ -32,6 +37,16 @@ const MyProvider = ({ children }) => {
         setGameOver,
         g,
         setG,
+        error,
+        setError,
+        category,
+        setCategory,
+        difficulty,
+        setDifficulty,
+        gameMode,
+        setGameMode,
+        number,
+        setNumber
       }}
     >
       {children}
