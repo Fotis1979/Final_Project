@@ -2,12 +2,14 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../components/pages/Home";
 import Questions from "../components/pages/Questions";
+import Test from "../components/singleplayer/settings/Test";
 
 const Routings = () => (
   <Router>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/questions" element={<Questions />} />
+      <Route path="/settings" element={<Test />} />
     </Routes>
   </Router>
 );

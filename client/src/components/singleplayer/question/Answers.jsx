@@ -152,11 +152,11 @@ const Answers = () => {
               </button>
             )}
 
-            {!questions && (
+            {/* {!questions && (
               <button onClick={(e) => AnswerSubmit(e)}>
                 {gameOver === false ? "START QUIZ" : "ClicK foR NEXT GAME"}
               </button>
-            )}
+            )} */}
 
             <br />
             <br />
