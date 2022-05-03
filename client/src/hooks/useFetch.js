@@ -5,8 +5,17 @@ const useFetch = (url, initialState) => {
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
-      .then((results) => setData({ results, loading: false, error: null }))
-      .catch((error) => setData({ results: null, loading: false, error }));
+      .then((results) => setData({ results, id: null, loading: false, error: null }))
+      .catch((error) => setData({ results: null,id:null, loading: false, error }));
+
+  //     let i = 0
+
+  
+  // data.map(n => {
+  //         n['id'] = i;
+  //         i++; 
+  //     });
+  //     console.log(data);
   }, [url]);
   return data;
 };

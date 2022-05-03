@@ -4,6 +4,7 @@ import MyContext from "../../../context/MyContext";
 
 import x from "../../../assets/images/x.png";
 import q from "../../../assets/images/q.jpg";
+
 const Answers = () => {
   const context = useContext(MyContext);
   const {
@@ -15,9 +16,9 @@ const Answers = () => {
     setColor,
     wrightAnswer,
     setWrightAnswer,
-
+    d,
     gameOver,
-
+    setD,
     g,
     setG,
   } = context;
@@ -35,12 +36,12 @@ const Answers = () => {
       // console.log("fetched");
       !color &&
         fetch(
-          "https://the-trivia-api.com/api/questions?limit=50&difficulty=hard"
+          `https://the-trivia-api.com/api/questions?limit=50&difficulty=${d}`
         )
           .then((res) => res.json())
           .then((data) => setQuestions(data[Math.floor(Math.random()) * 50]));
 
-      setMessage("");
+      setMessage(""); 
       setColor("");
       setWrightAnswer("");
     }
@@ -62,7 +63,9 @@ const Answers = () => {
   };
   useEffect(() => {
     LockButtons();
-  }, [color]);
+  }, [color,LockButtons]);
+
+ questions && console.log(questions.difficulty);
 
   // *** FUNCTION to shuffle the items of the array in a random order. ***
   function RandomArrayShuffle(array) {
@@ -81,6 +84,11 @@ const Answers = () => {
     return array;
   }
 
+  const f = (e) => {
+
+    setD(e.target.value)
+  }
+
   // *** CONSOLE.LOGS for testing ***
   // questions && console.log(questions.incorrectAnswers.indexOf(questions.correctAnswer));
   // questions && console.log(questions.incorrectAnswers);
@@ -88,10 +96,12 @@ const Answers = () => {
 
   // *** PUSH the Correct answer to the incorrect answers array and shuffle the array running the shuffleArray function in the end. ***
 
+
   questions &&
     questions.incorrectAnswers.length === 3 &&
     questions.incorrectAnswers.push(questions.correctAnswer) &&
     RandomArrayShuffle();
+    console.log(d);
   return (
     <div>
       <div className="canvas">
@@ -180,6 +190,13 @@ const Answers = () => {
         {!questions && !gameOver && (
           <img className="start" src={`${q}`} alt="img" />
         )}
+    {questions && <select onChange={e => f(e)}>
+       <option value = "easy">easy</option>
+       <option value= "medium">medium</option>
+       <option value = "hard">hard</option>
+
+     </select>}
+     {questions &&   <p>difficulty :  { questions.difficulty}</p>  }
       </div>
     </div>
   );
