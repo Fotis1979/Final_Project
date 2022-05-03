@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styling/home.css";
 
 import Nav from "./Nav";
-
+import homescreen from "../../assets/images/homescreen.png";
 const Home = () => {
   return (
     <div>
       <Nav />
-      <Link to="/questions">
-        <button>start playing</button>
+      <img className="home-screen-bg" src={homescreen} alt="home back ground" />
+      <Link to="/settings">
+        <button>set the game</button>
       </Link>
     </div>
   );
