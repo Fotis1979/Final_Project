@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styling/home.css";
 
 import Nav from "./Nav";
-
-const Home = () => {
+import homescreen from "../../assets/images/homescreen.png";
+const Settings = () => {
   return (
     <div>
       <Nav />
-      <Link to="/questions">
-        <button>start playing</button>
+      <img className="home-screen-bg" src={homescreen} alt="home back ground" />
+      <Link to="/settings">
+        set the game
       </Link>
     </div>
   );
 };
 
-export default Home;
+export default Settings;
