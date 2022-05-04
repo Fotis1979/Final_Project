@@ -10,7 +10,7 @@ const Home = () => {
       <Nav />
       <img className="home-screen-bg" src={homescreen} alt="home back ground" />
       <Link to="/settings">
-        <button>set the game</button>
+        <button className="set-game-btn">set game</button>
       </Link>
     </div>
   );
