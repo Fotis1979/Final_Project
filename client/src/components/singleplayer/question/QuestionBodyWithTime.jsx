@@ -8,9 +8,9 @@ import Timer from "./Timer";
 const QuestionBody = () => {
   return (
     <main>
-      <Answers />
+      {/* <Answers />
       <QuestionCounter />
-      <QuestionTimer />
+      <QuestionTimer /> */}
       <Timer />
       {/* <Counter /> */}
     </main>

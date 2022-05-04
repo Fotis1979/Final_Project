@@ -117,9 +117,6 @@ const Settings = () => {
         <button onClick={handleSubmit} className="play-btn">
           play now
         </button>
-        {!questions && !gameOver && (
-          <img className="start" src={`${q}`} alt="img" />
-        )}
       </div>
     </div>
   );

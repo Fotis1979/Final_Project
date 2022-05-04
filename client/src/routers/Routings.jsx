@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../components/pages/Home";
 import Questions from "../components/pages/Questions";
-//import Settings from "../components/singleplayer/settings/Settings";
-import Settings from "../components/pages/Settings";
+import Settings from "../components/singleplayer/settings/Settings";
+
 import Test from "../components/singleplayer/settings/Test";
 
 const Routings = () => (
