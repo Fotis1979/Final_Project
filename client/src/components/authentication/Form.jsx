@@ -39,7 +39,7 @@ const Form = () => {
   };
 
   const loginHandler = () => {
-    const url = "http://localhost:3001/auth/login";
+    const url = "http://localhost:8080/auth/login";
     const options = {
       method: "POST",
       headers: {
@@ -64,7 +64,7 @@ const Form = () => {
   };
 
   const registerHandler = () => {
-    const url = "http://localhost:3001/auth/register";
+    const url = "http://localhost:8080/auth/register";
     const options = {
       method: "POST",
       headers: {
