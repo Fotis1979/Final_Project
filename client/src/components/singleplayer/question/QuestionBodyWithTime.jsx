@@ -12,7 +12,7 @@ const QuestionBody = () => {
       <QuestionCounter />
       <QuestionTimer />
       <Timer />
-      <Counter />
+      {/* <Counter /> */}
     </main>
   );
 };

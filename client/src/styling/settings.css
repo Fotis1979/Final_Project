@@ -1,4 +1,17 @@
 .settings{
     display: flex;
     flex-direction: column;
+    width: 40vw;
+    margin-left: 30vw;
+    gap: 5px;
+}
+select{
+    height: 3vh;
+}
+select:hover{
+    background-color: rgb(208, 228, 228);
+}
+.play-btn{
+width: 30vw;
+margin-left: 35vw;
 }

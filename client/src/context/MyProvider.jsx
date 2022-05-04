@@ -17,10 +17,17 @@ const MyProvider = ({ children }) => {
   const [difficulty, setDifficulty] = useState();
   const [gameMode, setGameMode] = useState();
   const [number, setNumber] = useState();
+  const [hints, setHints] = useState(0);
+  const [diff, setDiff] = useState("easy");
+  const [cat, setCat] = useState("arts");
 
   return (
     <MyContext.Provider
       value={{
+        cat,
+        setCat,
+        diff,
+        setDiff,
         questions,
         setQuestions,
         message,
@@ -47,6 +54,8 @@ const MyProvider = ({ children }) => {
         setGameMode,
         number,
         setNumber,
+        hints,
+        setHints,
       }}
     >
       {children}
