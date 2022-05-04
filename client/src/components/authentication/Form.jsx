@@ -1,17 +1,17 @@
 import "../../styling/form.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import MyContext from "../../context/MyContext";
 const Form = () => {
+  const context = useContext(MyContext);
+  const { email, setEmail, pass, setPass } = context;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/profile");
-    }
-  }, []);
-
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/profile");
+  //   }
+  // }, []);
 
   console.log("email:", email);
   console.log("pass:", pass);
@@ -39,9 +39,7 @@ const Form = () => {
   };
 
   const loginHandler = () => {
-    //onsole.log(e);
-
-    const url = "https://damp-brook-37645.herokuapp.com/auth/login";
+    const url = "http://localhost:3001/auth/login";
     const options = {
       method: "POST",
       headers: {
@@ -50,15 +48,14 @@ const Form = () => {
       body: JSON.stringify({ email, pass }),
     };
 
-    //TODO: Adapt to the object with the status and msg. + token
     fetch(url, options)
       .then((response) => response.json())
       .then((result) => {
-        if (result.token != undefined) {
+        if (result.token !== undefined) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("email", email);
           setEmail(email);
-          navigate("/home");
+          navigate("/");
         } else {
           alert(result.msg);
         }
@@ -67,7 +64,7 @@ const Form = () => {
   };
 
   const registerHandler = () => {
-    const url = "https://damp-brook-37645.herokuapp.com/auth/register";
+    const url = "http://localhost:3001/auth/register";
     const options = {
       method: "POST",
       headers: {

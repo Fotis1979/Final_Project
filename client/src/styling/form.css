@@ -4,8 +4,9 @@
     font-size: medium;float: right;
 
 }
-form{
-    height: 8vh;
-    width: auto;
-    float: right;
-}
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

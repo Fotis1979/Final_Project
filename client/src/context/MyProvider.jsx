@@ -18,6 +18,8 @@ const MyProvider = ({ children }) => {
   const [gameMode, setGameMode] = useState();
   const [number, setNumber] = useState();
   const [hints, setHints] = useState(0);
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
 
   return (
     <MyContext.Provider
@@ -50,6 +52,10 @@ const MyProvider = ({ children }) => {
         setNumber,
         hints,
         setHints,
+        email,
+        setEmail,
+        pass,
+        setPass,
       }}
     >
       {children}
