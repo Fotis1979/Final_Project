@@ -6,7 +6,8 @@ const db = require("./config/db");
 require("dotenv").config();
 app.use(express.json());
 db();
-const port = process.env.PORT || 3000;
+const port = 8080;
+//process.env.PORT || 8080;
 
 let allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
