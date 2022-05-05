@@ -1,7 +1,8 @@
 import React from "react";
 import MyContext from "./MyContext";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../../src/App.css";
+
 
 const MyProvider = ({ children }) => {
   const [questions, setQuestions] = useState();
@@ -17,10 +18,33 @@ const MyProvider = ({ children }) => {
   const [difficulty, setDifficulty] = useState();
   const [gameMode, setGameMode] = useState();
   const [number, setNumber] = useState();
+  const [allAnswers, setAllAnswers] = useState();
+  const [correctAnswer, setCorrectAnswer] = useState();
+  const [incorrect, setIncorrect] = useState();
+  const [quest, setQuest] = useState([]);
+  const [diff, setDiff] = useState();
+  const [cat, setCat] = useState()
+  const [newQ, setNewQ] = useState()
+  
+  const [hints, setHints] = useState(0);
 
   return (
     <MyContext.Provider
       value={{
+        newQ,
+        setNewQ,
+        cat, 
+        setCat,
+        diff, 
+        setDiff,
+        quest, 
+        setQuest,
+        incorrect, 
+        setIncorrect,
+        correctAnswer,
+        setCorrectAnswer, 
+        allAnswers,
+        setAllAnswers,
         questions,
         setQuestions,
         message,
@@ -47,6 +71,8 @@ const MyProvider = ({ children }) => {
         setGameMode,
         number,
         setNumber,
+        hints,
+        setHints,
       }}
     >
       {children}

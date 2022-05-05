@@ -5,10 +5,10 @@ const QuestionCounter = () => {
   const context = useContext(MyContext);
   const {
     color,
-
+    
     newQuestion,
   } = context;
-  const [qCount, setQCount] = useState(1);
+  const [qCount, setQCount] = useState(0);
   useEffect(() => {
     newQuestion && setQCount((prev) => prev + 1);
     color && setQCount((prev) => prev + 1);

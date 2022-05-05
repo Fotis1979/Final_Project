@@ -4,16 +4,16 @@ import "../../styling/home.css";
 
 import Nav from "./Nav";
 import homescreen from "../../assets/images/homescreen.png";
-const Home = () => {
+const Settings = () => {
   return (
     <div>
       <Nav />
       <img className="home-screen-bg" src={homescreen} alt="home back ground" />
       <Link to="/settings">
-        <button>set the game</button>
+        set the game
       </Link>
     </div>
   );
 };
 
-export default Home;
+export default Settings;
