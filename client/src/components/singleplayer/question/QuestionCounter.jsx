@@ -5,7 +5,7 @@ const QuestionCounter = () => {
   const context = useContext(MyContext);
   const {
     color,
-
+    
     newQuestion,
   } = context;
   const [qCount, setQCount] = useState(1);

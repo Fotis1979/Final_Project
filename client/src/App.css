@@ -187,3 +187,13 @@ CSS HEX
               font-size: 30px;  
             }
 
+.questions{
+    position: absolute;
+    left: 850px;
+    padding-top: 400px;
+}
+
+.buttons{
+display: flex;
+flex-direction: column;
+}

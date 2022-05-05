@@ -2,8 +2,7 @@ import React from "react";
 import MyContext from "./MyContext";
 import { useState, useEffect, useContext } from "react";
 import "../../src/App.css";
-import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+
 
 const MyProvider = ({ children }) => {
   const [questions, setQuestions] = useState();
@@ -23,22 +22,16 @@ const MyProvider = ({ children }) => {
   const [correctAnswer, setCorrectAnswer] = useState();
   const [incorrect, setIncorrect] = useState();
   const [quest, setQuest] = useState([]);
-  const [diff, setDiff] = useState("");
-  const [cat, setCat] = useState("")
-
-
+  const [diff, setDiff] = useState();
+  const [cat, setCat] = useState()
+  const [newQ, setNewQ] = useState()
   
-
-
-
-
-
-
-
 
   return (
     <MyContext.Provider
       value={{
+        newQ,
+        setNewQ,
         cat, 
         setCat,
         diff, 
