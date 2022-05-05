@@ -5,8 +5,7 @@
 
 }
 form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 8vh;
+    width: auto;
+    float: right;
   }
