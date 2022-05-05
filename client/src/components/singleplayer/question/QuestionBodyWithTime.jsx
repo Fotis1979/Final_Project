@@ -40,13 +40,17 @@ setColor("")
     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
     
   };
+  console.log(rightAnswer[indexCounter]);
   // console.log(indexCounter);
 
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el));
-  arrayRandomize(answers);
+  
+    arrayRandomize(answers);
+
+
   console.log("answers are :", answers);
   console.log(rightAnswer);
 
