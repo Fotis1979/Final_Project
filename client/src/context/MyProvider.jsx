@@ -26,6 +26,7 @@ const MyProvider = ({ children }) => {
   const [cat, setCat] = useState()
   const [newQ, setNewQ] = useState()
   
+  const [hints, setHints] = useState(0);
 
   return (
     <MyContext.Provider
@@ -70,6 +71,8 @@ const MyProvider = ({ children }) => {
         setGameMode,
         number,
         setNumber,
+        hints,
+        setHints,
       }}
     >
       {children}
