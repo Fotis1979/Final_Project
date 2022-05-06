@@ -29,7 +29,7 @@ const MyProvider = ({ children }) => {
   const [hints, setHints] = useState(0);
   const [lock, setLock] = useState(false);
 
-  const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`;
+  const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
 
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);

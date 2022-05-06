@@ -18,6 +18,8 @@ const Settings = () => {
     setQuestions,
     correctAnswer,
     setCorrectAnswer,
+    number,
+    setNumber,
     diff,
     question,
     setQuestion,
@@ -40,6 +42,9 @@ const Settings = () => {
   };
   const x = (e) => {
     setCat(e.target.value);
+  };
+  const n = (e) => {
+    setNumber(e.target.value);
   };
 
   // useEffect(() => {
@@ -82,9 +87,7 @@ const Settings = () => {
   // d && console.log(correctAnswer);
   // d && console.log(d.category);
   // console.log(diff);
-  const g = () => {
-    console.log(questions);
-  };
+
   console.log(diff);
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -152,7 +155,16 @@ const Settings = () => {
             </option>
           </select>
         }
-        <button onClick={() => g()}>newQ</button>
+        <label className="select" htmlFor="number"></label>
+        <input
+          type="number"
+          name="number"
+          min="10"
+          max="20"
+          required="required"
+          onChange={(e) => n(e)}
+          value={number}
+        ></input>
       </div>
     </div>
   );
