@@ -46,7 +46,7 @@ const Timer = () => {
     minutes === 3 && setGameOver(true);
     seconds === 0 && setGameOver(false);
     // gameOver && setQuestions("")
-    minutes === 3 && setScore(0);
+    //minutes === 3 && setScore(0);
     minutes === 3 && setMessage("");
 
     // console.log(gameOver);

@@ -2,7 +2,7 @@ import React from "react";
 import MyContext from "./MyContext";
 import { useState, useEffect, useContext } from "react";
 import "../../src/App.css";
-
+import useFetch from "../hooks/useFetch";
 
 const MyProvider = ({ children }) => {
   const [questions, setQuestions] = useState();
@@ -22,27 +22,42 @@ const MyProvider = ({ children }) => {
   const [correctAnswer, setCorrectAnswer] = useState();
   const [incorrect, setIncorrect] = useState();
   const [quest, setQuest] = useState([]);
-  const [diff, setDiff] = useState();
-  const [cat, setCat] = useState()
-  const [newQ, setNewQ] = useState()
-  
+  const [diff, setDiff] = useState("easy");
+  const [cat, setCat] = useState("arts");
+  const [newQ, setNewQ] = useState();
+  const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
+  const [lock, setLock] = useState(false);
 
+  const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`;
+
+  const initialState = { results: null, loading: true, eror: null };
+  const { results, loading, eror } = useFetch(url, initialState);
+
+  if (loading) return <p>loading ..</p>;
+  if (eror) return <p>{eror}</p>;
   return (
     <MyContext.Provider
       value={{
+        lock,
+        setLock,
+        randomAnswers,
+        setRandomAnswers,
+        results,
+        loading,
+        eror,
         newQ,
         setNewQ,
-        cat, 
+        cat,
         setCat,
-        diff, 
+        diff,
         setDiff,
-        quest, 
+        quest,
         setQuest,
-        incorrect, 
+        incorrect,
         setIncorrect,
         correctAnswer,
-        setCorrectAnswer, 
+        setCorrectAnswer,
         allAnswers,
         setAllAnswers,
         questions,
