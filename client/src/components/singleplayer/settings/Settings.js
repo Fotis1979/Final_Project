@@ -42,23 +42,25 @@ const {
     setNumber 
 }= context;
 
-const url =(`https://the-trivia-api.com/api/questions?categories=${category}&difficulty=${difficulty}`);
+const url =(`https://the-trivia-api.com/api/questions?categories=${category}&limit=${number}&difficulty=${difficulty}`);
 
 const initialState = { results: null, loading: true, error: null };
 const { results} = useFetch(url, initialState);
 console.log(results);
 const navigate = useNavigate();
+
+
 const handleSubmit = () =>{
-        if(!gameMode || !difficulty || !category){
+        if(!gameMode || !difficulty || !category || !number){
           setError(true);
           return;
         }
-        else {
-          setError(false);
-          navigate('/questions');
+        else if(number >= 10 && number <= 50){
+            setError(false);
+            navigate('/questions');
         }
       };
-     console.log(category);
+     console.log(number);
   return (
     <div className='content'>
         <div className='settings'>
@@ -86,11 +88,10 @@ const handleSubmit = () =>{
         ))
     }
         </select>
-        {/* <label className='select' htmlFor="number"></label>
-        <select name='number' required="required" onChange={(e) => setNumber(e.target.value)} value={number}>
-        <option value="" disabled="disabled" selected="defaultValue">Number of Questions</option>
-        <option value='5'>5</option>
-        </select> */}
+        <label className='select' htmlFor="number"></label>
+        <input type='number' name='number' min="10" max="20" required="required" onChange={(e) => setNumber(e.target.value)} value={number}>
+            
+        </input>
         </div>
         <button onClick={handleSubmit}>play now</button>
     </div>
