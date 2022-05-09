@@ -25,6 +25,8 @@ const Settings = () => {
     cat,
     setCat,
     initialState,
+    number,
+    setNumber,
   } = context;
 
   // const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`
@@ -41,6 +43,13 @@ const Settings = () => {
   const x = (e) => {
     setCat(e.target.value);
   };
+  const n =(e) =>{
+    setNumber(e.target.value);
+  }
+  console.log(number);
+  console.log(results);
+  
+  
 
   // useEffect(() => {
   //     d &&
@@ -82,9 +91,7 @@ const Settings = () => {
   // d && console.log(correctAnswer);
   // d && console.log(d.category);
   // console.log(diff);
-  const g = () => {
-    console.log(questions);
-  };
+  
   console.log(diff);
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -152,7 +159,12 @@ const Settings = () => {
             </option>
           </select>
         }
-        <button onClick={() => g()}>newQ</button>
+        
+        <input type='number' id="myNum" required="required" onChange={(e) => n(e)}  value={number}>
+          
+        </input>
+        
+        
       </div>
     </div>
   );
