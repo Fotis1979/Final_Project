@@ -1,13 +1,20 @@
 import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { useState, useEffect, useContext } from "react";
+import {useNavigate} from "react-router-dom"
+
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
 
 const Settings = () => {
+
   const context = useContext(MyContext);
   const {
+    number,
+    setNumber,
     loading,
+    indexCounter,
+    setIndexCounter,
     eror,
     results,
     incorrect,
@@ -27,13 +34,8 @@ const Settings = () => {
     initialState,
   } = context;
 
-  // const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`
+  const navigate = useNavigate();
 
-  // const d = useFetch(url)
-  // d && console.log(url);
-  // d && console.log(d.results);
-  // diff && cat && setQuestions(d.results)
-  // questions && console.log(questions);
 
   const f = (e) => {
     setDiff(e.target.value);
@@ -41,50 +43,11 @@ const Settings = () => {
   const x = (e) => {
     setCat(e.target.value);
   };
-
-  // useEffect(() => {
-  //     d &&
-  //     setQuestions(d.map(e => e.d.results.question) )
-  //       d &&  setIncorrect(d.results.incorrectAnswers)
-  // }, [d, incorrect,setIncorrect,setQuestions,setDiff])
-
-  // useEffect(() => {
-  //     incorrect &&
-  //         incorrect.length <= 3 && setAllAnswers(incorrect.push(d.results.correctAnswer))
-  //     incorrect && setAllAnswers(incorrect)
-
-  // }, [incorrect])
-
-  // function RandomArrayShuffle(array) {
-  //     var currentIndex = array.length,
-  //         temporaryValue,
-  //         randomIndex;
-
-  //     while (0 !== currentIndex) {
-  //         randomIndex = Math.floor(Math.random() * currentIndex);
-  //         currentIndex -= 1;
-  //         temporaryValue = array[currentIndex];
-  //         array[currentIndex] =
-  //             array[randomIndex];
-  //         array[randomIndex] = temporaryValue;
-  //     }
-  //     return array;
-  // }
-
-  // allAnswers && RandomArrayShuffle(allAnswers)
-
-  // useEffect(() => {
-  //     allAnswers && console.log(d.results.correctAnswer)
-  //     console.log(allAnswers)
-  // }, [d, allAnswers,questions])
-
-  //   d&& setCorrectAnswer(d.results.correctAnswer)
-  // d && console.log(correctAnswer);
-  // d && console.log(d.category);
-  // console.log(diff);
-  const g = () => {
-    console.log(questions);
+  const n = (e) => {   
+    setNumber(e.target.value)
+    
   };
+
   console.log(diff);
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -152,7 +115,9 @@ const Settings = () => {
             </option>
           </select>
         }
-        <button onClick={() => g()}>newQ</button>
+     <label htmlFor="number">Amount of Questions</label>
+        <input className='amount'  type="number" name='number' min="1" max="50" required="required" onChange={(e) => n(e)}  value={number}>
+        </input>
       </div>
     </div>
   );

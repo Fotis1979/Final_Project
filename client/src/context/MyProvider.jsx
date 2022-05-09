@@ -5,32 +5,26 @@ import "../../src/App.css";
 import useFetch from "../hooks/useFetch";
 
 const MyProvider = ({ children }) => {
-  const [questions, setQuestions] = useState();
   const [message, setMessage] = useState();
   const [color, setColor] = useState();
   const [rightAnswer, setRightAnswer] = useState();
   const [score, setScore] = useState(0);
-  const [newQuestion, setNewQuestion] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-  const [g, setG] = useState(false);
-  const [error, setError] = useState(false);
   const [category, setCategory] = useState();
   const [difficulty, setDifficulty] = useState();
   const [gameMode, setGameMode] = useState();
-  const [number, setNumber] = useState();
-  const [allAnswers, setAllAnswers] = useState();
-  const [correctAnswer, setCorrectAnswer] = useState();
-  const [incorrect, setIncorrect] = useState();
-  const [quest, setQuest] = useState([]);
+  const [number, setNumber] = useState(0);
   const [diff, setDiff] = useState("easy");
   const [cat, setCat] = useState("arts");
-  const [newQ, setNewQ] = useState();
   const [randomAnswers, setRandomAnswers] = useState([]);
+
   const [hints, setHints] = useState(0);
-  const [lock, setLock] = useState(false);
+  const [wrongAnswers, setWrongAnswers] = useState();
+  const [indexCounter, setIndexCounter] = useState(0);
+  const [gameOver, setGameOver] = useState(true);
 
-  const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`;
 
+
+  const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
 
@@ -39,29 +33,21 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
-        lock,
-        setLock,
+        indexCounter, 
+        setIndexCounter,
+        wrongAnswers, 
+        setWrongAnswers,
         randomAnswers,
         setRandomAnswers,
         results,
         loading,
         eror,
-        newQ,
-        setNewQ,
         cat,
+        gameOver,
+        setGameOver,
         setCat,
         diff,
         setDiff,
-        quest,
-        setQuest,
-        incorrect,
-        setIncorrect,
-        correctAnswer,
-        setCorrectAnswer,
-        allAnswers,
-        setAllAnswers,
-        questions,
-        setQuestions,
         message,
         setMessage,
         color,
@@ -70,14 +56,7 @@ const MyProvider = ({ children }) => {
         setRightAnswer,
         score,
         setScore,
-        newQuestion,
-        setNewQuestion,
-        gameOver,
-        setGameOver,
-        g,
-        setG,
-        error,
-        setError,
+       
         category,
         setCategory,
         difficulty,
