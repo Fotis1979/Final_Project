@@ -3,6 +3,7 @@ import { useContext } from "react";
 import MyContext from "../../../context/MyContext";
 const Hints = () => {
   const context = useContext(MyContext);
+
   const {
     hints,
     setHints,
@@ -12,6 +13,7 @@ const Hints = () => {
     <div className="Counter">
       <label>HINTS : </label>
       <span>{hints }</span>
+
     </div>
   );
 };

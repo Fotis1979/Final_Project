@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom"
 
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 const Settings = () => {
 
@@ -16,22 +17,14 @@ const Settings = () => {
     indexCounter,
     setIndexCounter,
     eror,
-    results,
-    incorrect,
-    setIncorrect,
-    allAnswers,
-    setAllAnswers,
-    questions,
-    setQuestions,
-    correctAnswer,
-    setCorrectAnswer,
+
+    number,
+    setNumber,
     diff,
-    question,
-    setQuestion,
+
     setDiff,
-    cat,
+
     setCat,
-    initialState,
   } = context;
 
   const navigate = useNavigate();
@@ -43,10 +36,51 @@ const Settings = () => {
   const x = (e) => {
     setCat(e.target.value);
   };
-  const n = (e) => {   
-    setNumber(e.target.value)
-    
+
+  const n = (e) => {
+    setNumber(e.target.value);
   };
+
+  // useEffect(() => {
+  //     d &&
+  //     setQuestions(d.map(e => e.d.results.question) )
+  //       d &&  setIncorrect(d.results.incorrectAnswers)
+  // }, [d, incorrect,setIncorrect,setQuestions,setDiff])
+
+  // useEffect(() => {
+  //     incorrect &&
+  //         incorrect.length <= 3 && setAllAnswers(incorrect.push(d.results.correctAnswer))
+  //     incorrect && setAllAnswers(incorrect)
+
+  // }, [incorrect])
+
+  // function RandomArrayShuffle(array) {
+  //     var currentIndex = array.length,
+  //         temporaryValue,
+  //         randomIndex;
+
+  //     while (0 !== currentIndex) {
+  //         randomIndex = Math.floor(Math.random() * currentIndex);
+  //         currentIndex -= 1;
+  //         temporaryValue = array[currentIndex];
+  //         array[currentIndex] =
+  //             array[randomIndex];
+  //         array[randomIndex] = temporaryValue;
+  //     }
+  //     return array;
+  // }
+
+  // allAnswers && RandomArrayShuffle(allAnswers)
+
+  // useEffect(() => {
+  //     allAnswers && console.log(d.results.correctAnswer)
+  //     console.log(allAnswers)
+  // }, [d, allAnswers,questions])
+
+  //   d&& setCorrectAnswer(d.results.correctAnswer)
+  // d && console.log(correctAnswer);
+  // d && console.log(d.category);
+  // console.log(diff);
 
   console.log(diff);
   if (loading) return <p>loading ..</p>;
@@ -54,6 +88,7 @@ const Settings = () => {
 
   return (
     <div>
+      <Nav />
       <h1>ChOOSE SETTINGS</h1>
       <Link to="/questions">
         <button>PLAY</button>
@@ -115,9 +150,22 @@ const Settings = () => {
             </option>
           </select>
         }
+
+        <label htmlFor="number"> Number Of Questions</label>
+        <input
+          type="number"
+          name="number"
+          min="10"
+          max="50"
+          required="required"
+          onChange={(e) => n(e)}
+          value={number}
+        ></input>
+   
      <label htmlFor="number">Amount of Questions</label>
         <input className='amount'  type="number" name='number' min="1" max="50" required="required" onChange={(e) => n(e)}  value={number}>
         </input>
+
       </div>
     </div>
   );
