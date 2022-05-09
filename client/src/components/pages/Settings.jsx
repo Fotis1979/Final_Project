@@ -1,14 +1,13 @@
 import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { useState, useEffect, useContext } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
 
 const Settings = () => {
-
   const context = useContext(MyContext);
   const {
     number,
@@ -17,9 +16,6 @@ const Settings = () => {
     indexCounter,
     setIndexCounter,
     eror,
-
-    number,
-    setNumber,
     diff,
 
     setDiff,
@@ -28,7 +24,6 @@ const Settings = () => {
   } = context;
 
   const navigate = useNavigate();
-
 
   const f = (e) => {
     setDiff(e.target.value);
@@ -161,11 +156,18 @@ const Settings = () => {
           onChange={(e) => n(e)}
           value={number}
         ></input>
-   
-     <label htmlFor="number">Amount of Questions</label>
-        <input className='amount'  type="number" name='number' min="1" max="50" required="required" onChange={(e) => n(e)}  value={number}>
-        </input>
 
+        <label htmlFor="number">Amount of Questions</label>
+        <input
+          className="amount"
+          type="number"
+          name="number"
+          min="1"
+          max="50"
+          required="required"
+          onChange={(e) => n(e)}
+          value={number}
+        ></input>
       </div>
     </div>
   );
