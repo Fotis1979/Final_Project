@@ -1,19 +1,19 @@
-import { NavLink } from 'react-router-dom';
-import '../../styling/nav.css';
-import Form from '../authentication/Form';
+import { NavLink } from "react-router-dom";
+import "../../styling/nav.css";
+import Form from "../authentication/Form";
 const Nav = () => {
-	return (
-		<nav>
-			<div className='nav--ul'>
-				<Form />
-				<NavLink to='/'>
-					<span>Home</span>
-				</NavLink>
-				<NavLink to='/settings'>
-					<span>Settings</span>
-				</NavLink>
-			</div>
-		</nav>
-	);
+  return (
+    <nav>
+      <ul className="ul-header">
+        <Form />
+        <NavLink to="/">
+          <li>Home</li>
+        </NavLink>
+        <NavLink to="/settings">
+          <li>Settings</li>
+        </NavLink>
+      </ul>
+    </nav>
+  );
 };
 export default Nav;

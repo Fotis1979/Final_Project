@@ -1,0 +1,11 @@
+.home-screen-bg{
+   width: 100vw;
+    height: 50vh;
+}
+.set-game-btn{
+    width: 20vw;
+    margin-left: 37vw;
+}
+.set-game-btn:hover{
+    background-color: rgb(167, 147, 121);
+}

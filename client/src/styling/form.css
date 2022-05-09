@@ -1,46 +1,11 @@
-.nav--form {
-	height: 8vh;
-	width: auto;
-	float: right;
-	border: dotted 3px #fff;
-	border-radius: 50px;
-	display: flex;
-	align-items: center;
-	padding-left: 20px;
-}
-.nav--inputs input {
-	font-family: 'Coiny', cursive;
-	display: flex;
-	height: 20px;
-	width: 150px;
-	gap: 5px;
-	margin: 5px auto;
-	margin-right: 10px;
-	padding: 5px;
-	border-radius: 10px;
-}
-.register--btn,
-.login--btn {
-	height: 4vh;
-	width: 7vw;
-	padding: 20px 80px;
-	font-family: 'Faster One', cursive;
-	font-size: 1.3rem;
-	border: solid 2px #fff;
+.register-btn,.login-btn{
+    height: 3vh;
+    width: 7vw;
+    font-size: medium;float: right;
 
-	border-radius: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	float: right;
 }
-.register--btn {
-	background-color: #fdea03ff;
-	color: #00ebfcff;
-	margin-right: 10px;
-}
-.login--btn {
-	background-color: #18a0fb;
-	color: #fff;
-	margin-right: 20px;
-}
+form {
+    height: 8vh;
+    width: auto;
+    float: right;
+  }
