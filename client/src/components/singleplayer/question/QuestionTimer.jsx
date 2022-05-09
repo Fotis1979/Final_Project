@@ -9,7 +9,10 @@ const QuestionTimer = () => {
     setQuestions,
     message,
     setMessage,
-
+      diff,
+      cat,
+      setIndexCounter,
+    indexCounter,
     setColor,
     setRightAnswer,
     questions,
@@ -37,17 +40,14 @@ const QuestionTimer = () => {
   useEffect(() => {
     newQuestion &&
       fetch(
-        "https://the-trivia-api.com/api/questions?limit=50&difficulty=medium"
+        `https://the-trivia-api.com/api/questions?limit=50&difficulty=${diff}&&categories=${cat}`
       )
         .then((res) => res.json())
         .then((data) => setQuestions(data[Math.floor(Math.random() * 50)]));
 
-    setMessage("");
-    setColor("");
     setRightAnswer("");
   }, [newQuestion]);
-  console.log(questions);
-  console.log(newQuestion);
+
   return (
     <div className="question-timer">
       <span className="sec">{seconds}</span>

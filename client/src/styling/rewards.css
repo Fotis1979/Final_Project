@@ -1,11 +1,4 @@
-.rewards-main-section{
-height: 10vh;
-background-color: rgb(196, 172, 172);
 
-}
-.Counter{
-    background-color: aliceblue;
-}
 .counter-hints{
     display: flex;
     align-items: center;
@@ -21,4 +14,12 @@ background-color: rgb(196, 172, 172);
     background: linear-gradient(#87d2df, #97a2c5);
     font-size: 1.2rem;
     font-weight:lighter;
+}
+
+.rewards-main-section{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+
 }
