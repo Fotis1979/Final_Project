@@ -8,13 +8,14 @@ import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questionBodyWithTime.css";
 import Rewards from "../rewards/Rewards";
-
+import Nav from "../../pages/Nav";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
     loading,
     eror,
     results,
+    number,
     allAnswers,
     questions,
     lock,
@@ -24,6 +25,7 @@ const QuestionBody = () => {
     score,
     setScore,
   } = context;
+
   const [error, setError] = useState(false);
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
@@ -32,7 +34,7 @@ const QuestionBody = () => {
   const wrongAnswers = results.map((item) => item.incorrectAnswers);
   const rightAnswer = results.map((item) => item.correctAnswer);
 
-  // console.log(questionArray);
+  console.log(questionArray);
   // console.log(wrongAnswers);
   // console.log(rightAnswer);
 
@@ -54,14 +56,19 @@ const QuestionBody = () => {
     if (selected) {
       setSelected();
     } else setError("Please select an option first");
-
-    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+    if (indexCounter <= number) {
+      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+    } else {
+      setIndexCounter(number);
+      console.log("no more questions");
+    }
   };
   console.log(rightAnswer[indexCounter]);
-  // console.log(indexCounter);
+  console.log(indexCounter);
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
+
   wrongAnswers[indexCounter].map((el) => answers.push(el));
 
   useEffect(() => {
@@ -80,33 +87,14 @@ const QuestionBody = () => {
 
   console.log(results[indexCounter].correctAnswer);
 
-  // const testHandler = (e) => {
-  //   console.log(e.target.value);
-  //   if (e.target.value === rightAnswer[indexCounter]) {
-  //     console.log("correct");
-  //     setColor("green");
-  //     // e.target.style.backgroundColor = "green";
-  //   } else {
-  //     // e.target.style.backgroundColor = "red";
-  //     setColor("red");
-
-  //     console.log("wrong");
-  //   }
-  // };
   console.log(results[indexCounter].category);
-
-  // const LockButtons = () => {
-  //   color ? setLock(true) : setLock(false);
-  // };
-  // useEffect(() => {
-  //   LockButtons();
-  // }, [color]);
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
-
+  // if (results === undefined) return <p>no more questions</p>;
   return (
-    <main>
+    <div>
+      <Nav />
       <Rewards />
       <div className="App">
         <header className="App-header">
@@ -143,10 +131,10 @@ const QuestionBody = () => {
       </div>
       <QuestionCounter />
       {/* <QuestionTimer /> */}
-      <Timer />
-      <Counter />
+      {/* <Timer />
+      <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}
-    </main>
+    </div>
   );
 };
 

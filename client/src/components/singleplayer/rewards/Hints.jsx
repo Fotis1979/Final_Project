@@ -16,7 +16,7 @@ const Hints = () => {
   return (
     <div className="counter-hints">
       <label>hints : </label>
-      <span>{hints / 2}</span>
+      <span>{hints}</span>
     </div>
   );
 };

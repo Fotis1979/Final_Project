@@ -3,30 +3,21 @@ import useFetch from "../../hooks/useFetch";
 import { useState, useEffect, useContext } from "react";
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 const Settings = () => {
   const context = useContext(MyContext);
   const {
     loading,
     eror,
-    results,
-    incorrect,
-    setIncorrect,
-    allAnswers,
-    setAllAnswers,
-    questions,
-    setQuestions,
-    correctAnswer,
-    setCorrectAnswer,
+
     number,
     setNumber,
     diff,
-    question,
-    setQuestion,
+
     setDiff,
-    cat,
+
     setCat,
-    initialState,
   } = context;
 
   // const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`
@@ -94,6 +85,7 @@ const Settings = () => {
 
   return (
     <div>
+      <Nav />
       <h1>ChOOSE SETTINGS</h1>
       <Link to="/questions">
         <button>PLAY</button>
@@ -155,12 +147,12 @@ const Settings = () => {
             </option>
           </select>
         }
-        <label className="select" htmlFor="number"></label>
+        <label htmlFor="number"> Number Of Questions</label>
         <input
           type="number"
           name="number"
           min="10"
-          max="20"
+          max="50"
           required="required"
           onChange={(e) => n(e)}
           value={number}

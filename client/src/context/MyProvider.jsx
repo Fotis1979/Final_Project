@@ -17,7 +17,7 @@ const MyProvider = ({ children }) => {
   const [category, setCategory] = useState();
   const [difficulty, setDifficulty] = useState();
   const [gameMode, setGameMode] = useState();
-  const [number, setNumber] = useState();
+  const [number, setNumber] = useState(10);
   const [allAnswers, setAllAnswers] = useState();
   const [correctAnswer, setCorrectAnswer] = useState();
   const [incorrect, setIncorrect] = useState();
@@ -28,24 +28,22 @@ const MyProvider = ({ children }) => {
   const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
 
- 
-
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
 
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
 
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
 
+  console.log(results);
+
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
+
   return (
     <MyContext.Provider
       value={{
-        lock,
-        setLock,
         randomAnswers,
         setRandomAnswers,
         results,
