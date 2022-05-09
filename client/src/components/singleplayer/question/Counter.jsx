@@ -14,12 +14,12 @@ const Counter = () => {
     hints,
     setHints,
   } = context;
-  console.log("hints", hints);
+  // console.log("hints", hints);
   // useEffect(() => {
   //   color === "green" && newQuestion === false && setScore((prev) => prev + 10);
   // }, [color]);
   useEffect(() => {
-    score !== 0 && score % 50 === 0 && setHints((prev) => prev + 1);
+    score !== 0 && score % 50 === 0 && setHints((prev) => (prev + 1));
   }, [score]);
   return (
     <div className="Counter">

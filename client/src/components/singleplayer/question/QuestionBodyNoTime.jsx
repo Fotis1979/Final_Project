@@ -1,19 +1,27 @@
 import React from "react";
 import MyContext from "../../../context/MyContext";
+import Counter from "./Counter";
 import QuestionCounter from "./QuestionCounter";
+import QuestionTimer from "./QuestionTimer";
+import Timer from "./Timer";
+import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questionBodyWithTime.css";
 import Rewards from "../rewards/Rewards";
+
 import Nav from "../../pages/Nav";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
-    // questionArray,
     loading,
-    eror,
-    results,
     number,
+    setNumber,
+    eror,
+    hints,
+    setHints,
+    results,
+
     randomAnswers,
     setRandomAnswers,
     score,
@@ -24,13 +32,21 @@ const QuestionBody = () => {
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-  const questionArray = results.map((item) => item.question); //set state to everything
+
+
+  const questionArray = results.map((item) => item.question);
   const wrongAnswers = results.map((item) => item.incorrectAnswers);
   const rightAnswer = results.map((item) => item.correctAnswer);
 
-  console.log(questionArray);
+  // console.log(questionArray);
   // console.log(wrongAnswers);
   // console.log(rightAnswer);
+
+const nav = useNavigate()
+
+indexCounter === number-1 &&nav('/')
+
+
 
   const handleSelect = (i) => {
     if (selected === i && selected === rightAnswer[indexCounter])
@@ -50,15 +66,8 @@ const QuestionBody = () => {
     if (selected) {
       setSelected();
     } else setError("Please select an option first");
-    if (indexCounter <= number) {
-      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-    } else {
-      setIndexCounter(number);
-      console.log("no more questions");
-    }
+    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
   };
-  console.log(rightAnswer[indexCounter]);
-  console.log(indexCounter);
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
@@ -68,28 +77,23 @@ const QuestionBody = () => {
   useEffect(() => {
     setRandomAnswers(arrayRandomize(answers));
   }, [indexCounter]);
-
-  //   useEffect(() => {
-
-  //     answers.sort(() => 0.5 - Math.random())
-  // },[indexCounter])
-
-  console.log(answers);
-  console.log("answers are :", answers);
-  console.log(randomAnswers);
-  console.log(rightAnswer);
-
-  console.log(results[indexCounter].correctAnswer);
-
-  console.log(results[indexCounter].category);
+  
+  // console.log(answers);
+  // console.log("answers are :", answers);
+  // console.log(randomAnswers);
+  // console.log(results[indexCounter].correctAnswer);
+  // console.log(results[indexCounter].category);
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
-  // if (results === undefined) return <p>no more questions</p>;
+
   return (
     <div>
       <Nav />
       <Rewards />
+     
+      {(hints === 1 || hints === 2) && <button className="Counter" onClick={() => wrongAnswers[indexCounter + 1].length > 1 && wrongAnswers[indexCounter + 1].pop() && setHints(prev => (prev - 1))}>{hints === 2 ? "DoubleClick for 50/50 CHANCHE" :"useHint"}</button>}
+
       <div className="App">
         <header className="App-header">
           <div className="quest-sec">
@@ -97,7 +101,11 @@ const QuestionBody = () => {
           </div>
           <div className="ans-sec">
             {randomAnswers.map((el, index) => (
+
               <div key={index} className="align-items">
+
+              <div className="align-items">
+
                 <button
                   value={el}
                   className={`singleOption  ${selected && handleSelect(el)}`}
@@ -114,12 +122,15 @@ const QuestionBody = () => {
           <button onClick={nextHandler}>next</button>
         </header>
       </div>
+
       <QuestionCounter />
       {/* <QuestionTimer /> */}
       {/* <Timer />
       <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}
     </div>
+
+   
   );
 };
 

@@ -16,6 +16,7 @@ CSS HEX
     }
 
     main {
+        width: 100%;
         display: flex;
         flex-direction: row;
          }
@@ -104,9 +105,8 @@ CSS HEX
         margin: 30px;
         border: deeppink 1px solid;
         border-radius: 40px;
-        position: absolute;
-        width:10vw;
-        height:5vh;
+        width:30%;
+        height:7vh;
         color: rgb(19, 5, 5);
         background: linear-gradient(#87d2df, #97a2c5);
         font-size: 1.2rem;
@@ -197,3 +197,8 @@ CSS HEX
 display: flex;
 flex-direction: column;
 }
+.amount{
+    height: 40px;
+    font-size: 30px;
+}
+

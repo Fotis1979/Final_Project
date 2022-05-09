@@ -1,14 +1,21 @@
 import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { useState, useEffect, useContext } from "react";
+import {useNavigate} from "react-router-dom"
+
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
 
 const Settings = () => {
+
   const context = useContext(MyContext);
   const {
+    number,
+    setNumber,
     loading,
+    indexCounter,
+    setIndexCounter,
     eror,
 
     number,
@@ -20,13 +27,8 @@ const Settings = () => {
     setCat,
   } = context;
 
-  // const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`
+  const navigate = useNavigate();
 
-  // const d = useFetch(url)
-  // d && console.log(url);
-  // d && console.log(d.results);
-  // diff && cat && setQuestions(d.results)
-  // questions && console.log(questions);
 
   const f = (e) => {
     setDiff(e.target.value);
@@ -34,6 +36,7 @@ const Settings = () => {
   const x = (e) => {
     setCat(e.target.value);
   };
+
   const n = (e) => {
     setNumber(e.target.value);
   };
@@ -147,6 +150,7 @@ const Settings = () => {
             </option>
           </select>
         }
+
         <label htmlFor="number"> Number Of Questions</label>
         <input
           type="number"
@@ -157,6 +161,11 @@ const Settings = () => {
           onChange={(e) => n(e)}
           value={number}
         ></input>
+   
+     <label htmlFor="number">Amount of Questions</label>
+        <input className='amount'  type="number" name='number' min="1" max="50" required="required" onChange={(e) => n(e)}  value={number}>
+        </input>
+
       </div>
     </div>
   );
