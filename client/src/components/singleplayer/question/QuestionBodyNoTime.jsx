@@ -32,8 +32,6 @@ const QuestionBody = () => {
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-
-
   const questionArray = results.map((item) => item.question);
   const wrongAnswers = results.map((item) => item.incorrectAnswers);
   const rightAnswer = results.map((item) => item.correctAnswer);
@@ -42,11 +40,9 @@ const QuestionBody = () => {
   // console.log(wrongAnswers);
   // console.log(rightAnswer);
 
-const nav = useNavigate()
+  const nav = useNavigate();
 
-indexCounter === number-1 &&nav('/')
-
-
+  indexCounter === number - 1 && nav("/");
 
   const handleSelect = (i) => {
     if (selected === i && selected === rightAnswer[indexCounter])
@@ -77,7 +73,7 @@ indexCounter === number-1 &&nav('/')
   useEffect(() => {
     setRandomAnswers(arrayRandomize(answers));
   }, [indexCounter]);
-  
+
   // console.log(answers);
   // console.log("answers are :", answers);
   // console.log(randomAnswers);
@@ -91,8 +87,19 @@ indexCounter === number-1 &&nav('/')
     <div>
       <Nav />
       <Rewards />
-     
-      {(hints === 1 || hints === 2) && <button className="Counter" onClick={() => wrongAnswers[indexCounter + 1].length > 1 && wrongAnswers[indexCounter + 1].pop() && setHints(prev => (prev - 1))}>{hints === 2 ? "DoubleClick for 50/50 CHANCHE" :"useHint"}</button>}
+
+      {(hints === 1 || hints === 2) && (
+        <button
+          className="Counter"
+          onClick={() =>
+            wrongAnswers[indexCounter + 1].length > 1 &&
+            wrongAnswers[indexCounter + 1].pop() &&
+            setHints((prev) => prev - 1)
+          }
+        >
+          {hints === 2 ? "DoubleClick for 50/50 CHANCHE" : "useHint"}
+        </button>
+      )}
 
       <div className="App">
         <header className="App-header">
@@ -101,11 +108,7 @@ indexCounter === number-1 &&nav('/')
           </div>
           <div className="ans-sec">
             {randomAnswers.map((el, index) => (
-
               <div key={index} className="align-items">
-
-              <div className="align-items">
-
                 <button
                   value={el}
                   className={`singleOption  ${selected && handleSelect(el)}`}
@@ -129,8 +132,6 @@ indexCounter === number-1 &&nav('/')
       <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}
     </div>
-
-   
   );
 };
 
