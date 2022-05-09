@@ -7,7 +7,7 @@ import Timer from "./Timer";
 import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
-import "../../../styling/questionBodyWithTime.css";
+
 import Rewards from "../rewards/Rewards";
 
 import Nav from "../../pages/Nav";
