@@ -15,14 +15,15 @@ const useFetch = (url, initialState) => {
           error: null,
         })
       )
-      .catch((error) =>
+      .catch((error) => {
+        console.log("error on the usefetch", error);
         setData({
           results: null,
           //   id: null,
           loading: false,
           error,
-        })
-      );
+        });
+      });
     console.log("rendered");
   }, [url]);
 

@@ -146,17 +146,6 @@ const Settings = () => {
           </select>
         }
 
-        <label htmlFor="number"> Number Of Questions</label>
-        <input
-          type="number"
-          name="number"
-          min="10"
-          max="50"
-          required="required"
-          onChange={(e) => n(e)}
-          value={number}
-        ></input>
-
         <label htmlFor="number">Amount of Questions</label>
         <input
           className="amount"
