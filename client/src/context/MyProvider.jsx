@@ -27,7 +27,12 @@ const MyProvider = ({ children }) => {
   const [newQ, setNewQ] = useState();
   const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
-  const [lock, setLock] = useState(false);
+
+ 
+
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
 
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
 
@@ -88,6 +93,10 @@ const MyProvider = ({ children }) => {
         setNumber,
         hints,
         setHints,
+        email,
+        setEmail,
+        pass,
+        setPass,
       }}
     >
       {children}
