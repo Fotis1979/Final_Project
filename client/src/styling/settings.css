@@ -1,17 +1,53 @@
-.settings{
-    display: flex;
-    flex-direction: column;
-    width: 40vw;
-    margin-left: 30vw;
-    gap: 5px;
+html {
+	background-color: #00ebfcff;
 }
-select{
-    height: 3vh;
+
+.settings {
+	background-color: #fdea03ff;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	margin-top: 10vh;
+	padding: 30px;
+	width: 500px;
+	height: 500px;
+	border-radius: 50px;
+	border: groove 20px #e57fedff;
+
+	/*gap: 10vh;*/
 }
-select:hover{
-    background-color: rgb(208, 228, 228);
+.settings select,
+.settings input {
+	font-family: 'Coiny', cursive;
+	font-size: larger;
+	width: 100%;
+	background-color: #00ebfcff;
+	border: solid 2px #fff;
+
+	padding: 10px 0;
+	margin: 5px 0;
 }
-.play-btn{
-width: 30vw;
-margin-left: 35vw;
+select:hover,
+input:hover {
+	background-color: rgb(255, 255, 255);
+}
+.play-btn {
+	width: 300px;
+
+	font-family: 'Coiny', cursive;
+	font-size: xx-large;
+	margin-top: 20px;
+	padding: 5px 50px;
+	border: solid 5px #020a89ff;
+	border-radius: 50px;
+
+	background-color: #00ebfcff;
+	color: #020a89ff;
+}
+
+.play-btn:hover {
+	background-color: #fff;
 }
