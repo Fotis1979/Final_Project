@@ -55,7 +55,7 @@ const Form = () => {
           localStorage.setItem("token", result.token);
           localStorage.setItem("email", email);
           setEmail(email);
-          navigate("/");
+          navigate("/settings");
         } else {
           alert(result.msg);
         }
