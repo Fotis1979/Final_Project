@@ -1,9 +1,6 @@
 import React from "react";
 import MyContext from "../../../context/MyContext";
-import Counter from "./Counter";
 import QuestionCounter from "./QuestionCounter";
-import QuestionTimer from "./QuestionTimer";
-import Timer from "./Timer";
 import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questionBodyWithTime.css";
@@ -12,14 +9,11 @@ import Nav from "../../pages/Nav";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
+    // questionArray,
     loading,
     eror,
     results,
     number,
-    allAnswers,
-    questions,
-    lock,
-    setLock,
     randomAnswers,
     setRandomAnswers,
     score,
@@ -30,7 +24,7 @@ const QuestionBody = () => {
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-  const questionArray = results.map((item) => item.question);
+  const questionArray = results.map((item) => item.question); //set state to everything
   const wrongAnswers = results.map((item) => item.incorrectAnswers);
   const rightAnswer = results.map((item) => item.correctAnswer);
 
@@ -103,25 +97,16 @@ const QuestionBody = () => {
           </div>
           <div className="ans-sec">
             {randomAnswers.map((el, index) => (
-              <div className="align-items">
+              <div key={index} className="align-items">
                 <button
                   value={el}
                   className={`singleOption  ${selected && handleSelect(el)}`}
                   key={el}
                   onClick={() => handleCheck(el)}
                   disabled={selected}
-                  //onClick={(e) => testHandler(e)}
-                  // className="answers-btn"
-                  //  style={{ backgroundColor: `${color}` }}
                 >
                   {index + 1 + "." + el}
                 </button>
-                {/* <button
-                  value={el}
-                  onClick={lock === false ? (e) => testHandler(e) : undefined}
-                  className="answers-btn"
-                  style={{ backgroundColor: `${color}` }}
-                ></button> */}
               </div>
             ))}
           </div>

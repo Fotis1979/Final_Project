@@ -1,5 +1,5 @@
 import React from "react";
-import QuestionBodyWithTime from "../singleplayer/question/QuestionBodyWithTime";
+import QuestionBodyNoTime from "../singleplayer/question/QuestionBodyNoTime";
 import Rewards from "../singleplayer/rewards/Rewards";
 import Nav from "./Nav";
 const Questions = () => {
@@ -7,7 +7,7 @@ const Questions = () => {
     <div>
       <Nav />
       <Rewards />
-      <QuestionBodyWithTime />
+      <QuestionBodyNoTime />
     </div>
   );
 };

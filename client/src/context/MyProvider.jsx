@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MyContext from "./MyContext";
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import "../../src/App.css";
 import useFetch from "../hooks/useFetch";
 
@@ -27,14 +27,17 @@ const MyProvider = ({ children }) => {
   const [newQ, setNewQ] = useState();
   const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
-
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+
+  const [questionArray, setQuestionArray] = useState();
 
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
 
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
+  // const questionArray = results.map((item) => item.question); //set state to everything
+  //results.map((item) => setQuestionArray(item.question));
 
   console.log(results);
 
@@ -44,6 +47,7 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        questionArray,
         randomAnswers,
         setRandomAnswers,
         results,
