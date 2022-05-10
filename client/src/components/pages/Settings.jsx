@@ -9,166 +9,148 @@ import Nav from './Nav';
 import '../../styling/settings.css';
 
 const Settings = () => {
-	const context = useContext(MyContext);
-	const {
-		number,
-		setNumber,
-		loading,
-		indexCounter,
-		setIndexCounter,
-		eror,
-		diff,
+  const context = useContext(MyContext);
+  const {
+    results,
+    number,
+    setNumber,
+    loading,
+    indexCounter,
+    setIndexCounter,
+    eror,
+    diff,
+    email,
+    setDiff,
+    pass,
 
-		setDiff,
+    setCat,
+  } = context;
 
-		setCat,
-	} = context;
+  const [s, setS] = useState("NoTime")
 
-	const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-	const f = (e) => {
-		setDiff(e.target.value);
-	};
-	const x = (e) => {
-		setCat(e.target.value);
-	};
+  const f = (e) => {
+    setDiff(e.target.value);
+  };
+  const x = (e) => {
+    setCat(e.target.value);
+  };
 
-	const n = (e) => {
-		setNumber(e.target.value);
-	};
+  const n = (e) => {
+    setNumber(e.target.value);
+  };
 
-	// useEffect(() => {
-	//     d &&
-	//     setQuestions(d.map(e => e.d.results.question) )
-	//       d &&  setIncorrect(d.results.incorrectAnswers)
-	// }, [d, incorrect,setIncorrect,setQuestions,setDiff])
+  const gameMode = (e) => {
 
-	// useEffect(() => {
-	//     incorrect &&
-	//         incorrect.length <= 3 && setAllAnswers(incorrect.push(d.results.correctAnswer))
-	//     incorrect && setAllAnswers(incorrect)
+    setS(e.target.value)
+    console.log(e.target.value);
+    console.log(s);
+  }
 
-	// }, [incorrect])
+  console.log(diff);
+  if (loading) return <p>loading ..</p>;
+  if (eror) return <p>{eror}</p>;
 
-	// function RandomArrayShuffle(array) {
-	//     var currentIndex = array.length,
-	//         temporaryValue,
-	//         randomIndex;
+  return (
+    <div>
+      <Nav />
+      <h1>ChOOSE SETTINGS</h1>
+       {s === "NoTime" ? <Link to="/questions">
+        <button>PLAY</button>
+      </Link> : <Link to="/timeMode">
+        <button>PLAY</button>
+      </Link>}
 
-	//     while (0 !== currentIndex) {
-	//         randomIndex = Math.floor(Math.random() * currentIndex);
-	//         currentIndex -= 1;
-	//         temporaryValue = array[currentIndex];
-	//         array[currentIndex] =
-	//             array[randomIndex];
-	//         array[randomIndex] = temporaryValue;
-	//     }
-	//     return array;
-	// }
+      <div className="settings">
+        <label>Difficulty</label>
 
-	// allAnswers && RandomArrayShuffle(allAnswers)
+        {
+          <select onChange={(e) => f(e)}>
 
-	// useEffect(() => {
-	//     allAnswers && console.log(d.results.correctAnswer)
-	//     console.log(allAnswers)
-	// }, [d, allAnswers,questions])
+            <option onChange={(e) => f(e)} value="easy">
+              easy
+            </option>
+            <option onChange={(e) => f(e)} value="medium">
+              medium
+            </option>
+            <option onChange={(e) => f(e)} value="hard">
+              hard
+            </option>
+          </select>
+        }
+        <label>Categories</label>
+        {
+          <select onChange={(e) => x(e)}>
 
-	//   d&& setCorrectAnswer(d.results.correctAnswer)
-	// d && console.log(correctAnswer);
-	// d && console.log(d.category);
-	// console.log(diff);
 
-	console.log(diff);
-	if (loading) return <p>loading ..</p>;
-	if (eror) return <p>{eror}</p>;
+            <option onChange={(e) => x(e)} value="Arts">
+              Arts & Literature
+            </option>
+            <option onChange={(e) => x(e)} value="Film">
+              Film & TV
+            </option>
+            <option onChange={(e) => x(e)} value="Food">
+              Food & Drink
+            </option>
+            <option onChange={(e) => x(e)} value="General Knowledge">
+              General Knowledge
+            </option>
 
-	return (
-		<div>
-			<Nav />
-			<div className='settings'>
-				<h1>choose settings</h1>
+            <option onChange={(e) => x(e)} value="Geography">
+              Geography
+            </option>
 
-				<div>
-					<label>Difficulty</label>
-					{
-						<select onChange={(e) => f(e)}>
-							<option onChange={(e) => f(e)} value='easy'>
-								easy
-							</option>
-							<option onChange={(e) => f(e)} value='medium'>
-								medium
-							</option>
-							<option onChange={(e) => f(e)} value='hard'>
-								hard
-							</option>
-						</select>
-					}
-					<label>Categories</label>
-					{
-						<select onChange={(e) => x(e)}>
-							<option onChange={(e) => x(e)} value='Arts'>
-								Arts & Literature
-							</option>
-							<option onChange={(e) => x(e)} value='Film'>
-								Film & TV
-							</option>
-							<option onChange={(e) => x(e)} value='Food'>
-								Food & Drink
-							</option>
-							<option onChange={(e) => x(e)} value='General Knowledge'>
-								General Knowledge
-							</option>
-							<option onChange={(e) => x(e)} value='Geography'>
-								Geography
-							</option>
-							<option onChange={(e) => x(e)} value='History'>
-								History
-							</option>
-							<option onChange={(e) => x(e)} value='Music'>
-								Music
-							</option>
-							<option onChange={(e) => x(e)} value='Science'>
-								Science
-							</option>
-							<option onChange={(e) => f(e)} value='Society'>
-								Society & Culture{' '}
-							</option>
-							<option onChange={(e) => f(e)} value='Sport'>
-								Sport & Leisure{' '}
-							</option>
-						</select>
-					}
+            <option onChange={(e) => x(e)} value="History">
+              History
+            </option>
 
-					{/*<label htmlFor='number'> Number Of Questions</label>
-					<input
-						type='number'
-						name='number'
-						min='10'
-						max='50'
-						required='required'
-						onChange={(e) => n(e)}
-						value={number}
-					></input>*/}
+            <option onChange={(e) => x(e)} value="Music">
+              Music
+            </option>
 
-					<label htmlFor='number'>Amount of Questions</label>
-					<input
-						className='amount'
-						type='number'
-						name='number'
-						min='1'
-						max='50'
-						required='required'
-						onChange={(e) => n(e)}
-						value={number}
-					></input>
-				</div>
+            <option onChange={(e) => x(e)} value="Science">
+              Science
+            </option>
 
-				<Link to='/questions'>
-					<button className='play-btn'>PLAY</button>
-				</Link>
-			</div>
-		</div>
-	);
+            <option onChange={(e) => x(e)} value="Society">
+              Society & Culture{" "}
+            </option>
+            <option onChange={(e) => x(e)} value="Sport">
+              Sport & Leisure{" "}
+            </option>
+          </select>
+
+        }
+        
+        <label htmlFor="number">Amount of Questions</label>
+        <input
+          className="amount"
+          type="number"
+          name="number"
+          min="1"
+          max="50"
+          required="required"
+          onChange={(e) => n(e)}
+          value={number}
+        ></input>
+        <label>Game Mode</label>
+
+        {
+          <select onChange={(e) => gameMode(e)}>
+
+            <option onChange={(e) => gameMode(e)} value="NoTime">
+              NoTime
+            </option>
+            <option onChange={(e) => gameMode(e)} value="Time">
+              Time
+            </option>
+
+          </select>
+        }
+      </div>
+    </div>
+  );
 };
 
 export default Settings;

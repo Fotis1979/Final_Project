@@ -8,11 +8,12 @@ const MyProvider = ({ children }) => {
 
   const [message, setMessage] = useState();
   const [color, setColor] = useState();
-
   const [score, setScore] = useState(0);
   const [category, setCategory] = useState();
   const [difficulty, setDifficulty] = useState();
   const [gameMode, setGameMode] = useState();
+  const [seconds, setSeconds] = useState(0);
+
   const [error, setError] = useState(false);
   const [number, setNumber] = useState(10);
   const [allAnswers, setAllAnswers] = useState();
@@ -36,11 +37,20 @@ const MyProvider = ({ children }) => {
   const [indexCounter, setIndexCounter] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
+
+
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
-
-  console.log(results);
+  // const questionArray = results.map((item) => item.question); //set state to everything
+  //results.map((item) => setQuestionArray(item.question));
+  useEffect(() => {
+    if (results !== null) {
+      setQuestionArray(results.map((item) => item.question));
+      setWrongAnswers(results.map((item) => item.incorrectAnswers));
+      setRightAnswer(results.map((item) => item.correctAnswer));
+    }
+  }, [results]);
 
   useEffect(() => {
     if (results !== null) {
@@ -66,7 +76,8 @@ const MyProvider = ({ children }) => {
         setIndexCounter,
         wrongAnswers,
         setWrongAnswers,
-
+        seconds, 
+        setSeconds,
         randomAnswers,
         setRandomAnswers,
         results,
