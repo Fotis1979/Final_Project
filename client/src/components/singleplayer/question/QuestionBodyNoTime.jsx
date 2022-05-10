@@ -1,4 +1,3 @@
-
 import React from "react";
 import MyContext from "../../../context/MyContext";
 import Counter from "./Counter";
@@ -15,8 +14,8 @@ import Nav from "../../pages/Nav";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
-    answers,
-    setAnswers,
+    // answers,
+    // setAnswers,
     loading,
     error,
     setError,
@@ -73,21 +72,21 @@ const QuestionBody = () => {
     } else setError("Please select an option first");
     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
   };
-  useEffect(() => {
-    //results.map((item) => setQuestionArray(item.question));
-    const combinedAnswers = (right, wrong) => [right, ...wrong];
-    setAnswers(
-      combinedAnswers(rightAnswer[indexCounter], wrongAnswers[indexCounter])
-    );
-  }, [indexCounter]);
+  // useEffect(() => {
+  //   //results.map((item) => setQuestionArray(item.question));
+  //   const combinedAnswers = (right, wrong) => [right, ...wrong];
+  //   setAnswers(
+  //     combinedAnswers(rightAnswer[indexCounter], wrongAnswers[indexCounter])
+  //   );
+  // }, [indexCounter]);
 
   console.log(answers);
 
-  // const answers = [];
+  const answers = [];
 
-  // answers.push(rightAnswer[indexCounter]);
+  answers.push(rightAnswer[indexCounter]);
 
-  // wrongAnswers[indexCounter].map((el) => answers.push(el));
+  wrongAnswers[indexCounter].map((el) => answers.push(el));
 
   useEffect(() => {
     //results.map((item) => setQuestionArray(item.question));
@@ -152,9 +151,8 @@ const QuestionBody = () => {
       {/* <Timer />
 
       <Counter /> */}
-		
-		</div>
-	);
+    </div>
+  );
 };
 
 export default QuestionBody;
