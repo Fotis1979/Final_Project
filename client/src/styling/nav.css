@@ -1,19 +1,16 @@
-.ul-header{
-    background-color: aquamarine;
-    height: 100px;
-    ;
+nav {
+	background-color: #e57fedff;
+	/*height: 100px;*/
+	width: 100%;
+	font-family: 'Faster One', cursive;
+	font-size: x-large;
 }
-nav{
-    background-color: aquamarine;
-    height: 100px;
-    width: 100vw;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 20px;  
-    
-}
-
-.email{
-    
+.nav--ul {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+	margin: auto 2vw;
+	height: 10hv;
+	/*border: solid 2px red;*/
 }

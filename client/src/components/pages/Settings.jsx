@@ -1,11 +1,12 @@
-import React from "react";
-import useFetch from "../../hooks/useFetch";
-import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import useFetch from '../../hooks/useFetch';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import MyContext from "../../context/MyContext";
-import { Link } from "react-router-dom";
-import Nav from "./Nav";
+import MyContext from '../../context/MyContext';
+import { Link } from 'react-router-dom';
+import Nav from './Nav';
+
+import '../../styling/settings.css';
 
 const Settings = () => {
   const context = useContext(MyContext);

@@ -1,29 +1,19 @@
-import { NavLink } from "react-router-dom";
-import "../../styling/nav.css";
-import Form from "../authentication/Form";
-import MyContext from "../../context/MyContext";
-import { useContext } from "react";
-
+import { NavLink } from 'react-router-dom';
+import '../../styling/nav.css';
+import Form from '../authentication/Form';
 const Nav = () => {
-  const context = useContext(MyContext);
-  const {
-   score,
-
-   indexCounter
-  } = context;
-  console.log(indexCounter);
-  return (
-    <nav>
-      <ul className="ul-header">
-       { <Form />}
-        <NavLink to="/">
-          <li>Home</li>
-        </NavLink>
-        <NavLink to="/settings">
-          <li>Settings</li>
-        </NavLink>
-      </ul>
-    </nav>
-  );
+	return (
+		<nav>
+			<div className='nav--ul'>
+				<Form />
+				<NavLink to='/'>
+					<span>Home</span>
+				</NavLink>
+				<NavLink to='/settings'>
+					<span>Settings</span>
+				</NavLink>
+			</div>
+		</nav>
+	);
 };
 export default Nav;

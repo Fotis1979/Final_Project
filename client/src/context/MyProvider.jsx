@@ -1,41 +1,39 @@
-import React, { useEffect } from "react";
-import MyContext from "./MyContext";
-import { useState } from "react";
-import "../../src/App.css";
-import useFetch from "../hooks/useFetch";
+import { useEffect } from 'react';
+import MyContext from './MyContext';
+import { useState } from 'react';
+import '../../src/App.css';
+import useFetch from '../hooks/useFetch';
 
 const MyProvider = ({ children }) => {
+
   const [message, setMessage] = useState();
   const [color, setColor] = useState();
-  const [rightAnswer, setRightAnswer] = useState([]);
   const [score, setScore] = useState(0);
   const [category, setCategory] = useState();
   const [difficulty, setDifficulty] = useState();
   const [gameMode, setGameMode] = useState();
   const [seconds, setSeconds] = useState(0);
 
+  const [error, setError] = useState(false);
   const [number, setNumber] = useState(10);
   const [allAnswers, setAllAnswers] = useState();
   const [correctAnswer, setCorrectAnswer] = useState();
   const [incorrect, setIncorrect] = useState();
   const [quest, setQuest] = useState([]);
 
-
-
   const [diff, setDiff] = useState("easy");
   const [cat, setCat] = useState("arts");
   const [randomAnswers, setRandomAnswers] = useState([]);
-
   const [hints, setHints] = useState(0);
-
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
   const [questionArray, setQuestionArray] = useState([]);
-
-  
-
   const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [rightAnswer, setRightAnswer] = useState([]);
+
+  const [answers, setAnswers] = useState([]);
+
   const [indexCounter, setIndexCounter] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
@@ -54,18 +52,29 @@ const MyProvider = ({ children }) => {
     }
   }, [results]);
 
+  useEffect(() => {
+    if (results !== null) {
+      setQuestionArray(results.map((item) => item.question));
+      setWrongAnswers(results.map((item) => item.incorrectAnswers));
+      setRightAnswer(results.map((item) => item.correctAnswer));
+    }
+  }, [results]);
+
   if (loading) return <p>loading ..</p>;
-  if (eror) return <p>{eror}</p>;
+  if (eror) return <p>'eror'</p>;
 
   return (
     <MyContext.Provider
       value={{
-
+        answers,
+        setAnswers,
+        error,
+        setError,
         questionArray,
-
-        indexCounter, 
+        setQuestionArray,
+        indexCounter,
         setIndexCounter,
-        wrongAnswers, 
+        wrongAnswers,
         setWrongAnswers,
         seconds, 
         setSeconds,
@@ -88,7 +97,7 @@ const MyProvider = ({ children }) => {
         setRightAnswer,
         score,
         setScore,
-       
+
         category,
         setCategory,
         difficulty,
@@ -108,6 +117,9 @@ const MyProvider = ({ children }) => {
       {children}
     </MyContext.Provider>
   );
+
+		
+
 };
 
 export default MyProvider;

@@ -1,7 +1,6 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState, useContext } from "react";
-import MyContext from "../../../context/MyContext";
+import { useEffect } from 'react';
+import { useState, useContext } from 'react';
+import MyContext from '../../../context/MyContext';
 
 const QuestionTimer = () => {
   const context = useContext(MyContext);
