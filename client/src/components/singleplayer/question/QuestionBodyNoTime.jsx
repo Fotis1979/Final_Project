@@ -80,8 +80,6 @@ const QuestionBody = () => {
   //   );
   // }, [indexCounter]);
 
-  console.log(answers);
-
   const answers = [];
 
   answers.push(rightAnswer[indexCounter]);
@@ -127,7 +125,7 @@ const QuestionBody = () => {
             Q{indexCounter + 1} . {questionArray[indexCounter]}
           </div>
           <div className="ans-sec">
-            {answers.map((el, index) => (
+            {randomAnswers.map((el, index) => (
               <div key={index} className="align-items">
                 <button
                   value={el}
