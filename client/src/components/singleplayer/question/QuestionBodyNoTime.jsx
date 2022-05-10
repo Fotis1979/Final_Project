@@ -1,3 +1,4 @@
+
 import React from "react";
 import MyContext from "../../../context/MyContext";
 import Counter from "./Counter";
@@ -149,10 +150,11 @@ const QuestionBody = () => {
       <QuestionCounter />
       {/* <QuestionTimer /> */}
       {/* <Timer />
+
       <Counter /> */}
-      {/* { questions && <p>{questions}</p> } */}
-    </div>
-  );
+		
+		</div>
+	);
 };
 
 export default QuestionBody;

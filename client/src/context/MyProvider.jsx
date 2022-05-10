@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import MyContext from "./MyContext";
-import { useState } from "react";
-import "../../src/App.css";
-import useFetch from "../hooks/useFetch";
+import { useEffect } from 'react';
+import MyContext from './MyContext';
+import { useState } from 'react';
+import '../../src/App.css';
+import useFetch from '../hooks/useFetch';
 
 const MyProvider = ({ children }) => {
+
   const [message, setMessage] = useState();
   const [color, setColor] = useState();
 
@@ -105,6 +106,9 @@ const MyProvider = ({ children }) => {
       {children}
     </MyContext.Provider>
   );
+
+		
+
 };
 
 export default MyProvider;
