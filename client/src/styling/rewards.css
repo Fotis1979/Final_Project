@@ -1,24 +1,21 @@
-.rewards-main-section{
-height: 10vh;
-background-color: rgb(196, 172, 172);
+.counter-hints {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 30px;
+	border: deeppink 11px solid;
+	border-radius: 40px;
+	position: absolute;
+	margin-left: 30vw;
+	width: 10vw;
+	height: 5vh;
+	color: rgb(19, 5, 5);
+	font-size: 1.2rem;
+	font-weight: lighter;
+}
 
-}
-.Counter{
-    background-color: aliceblue;
-}
-.counter-hints{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 30px;
-    border: deeppink 1px solid;
-    border-radius: 40px;
-    position: absolute;
-    margin-left: 30vw;
-    width:10vw;
-    height:5vh;
-    color: rgb(19, 5, 5);
-    background: linear-gradient(#87d2df, #97a2c5);
-    font-size: 1.2rem;
-    font-weight:lighter;
+.rewards--section {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }

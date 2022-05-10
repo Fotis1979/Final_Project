@@ -1,136 +1,174 @@
-import React from 'react'
-import useFetch from '../../hooks/useFetch'
-import { useState, useEffect, useContext } from 'react'
-import MyContext from '../../context/MyContext'
-import { Link } from 'react-router-dom'
+import useFetch from '../../hooks/useFetch';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import MyContext from '../../context/MyContext';
+import { Link } from 'react-router-dom';
+import Nav from './Nav';
 
+import '../../styling/settings.css';
 
 const Settings = () => {
-    const context = useContext(MyContext);
-    const {
-        incorrect, setIncorrect, allAnswers, setAllAnswers, questions, setQuestions, correctAnswer, setCorrectAnswer, diff, question, setQuestion, setDiff, cat, setCat, initialState
-    } = context;
+	const context = useContext(MyContext);
+	const {
+		number,
+		setNumber,
+		loading,
+		indexCounter,
+		setIndexCounter,
+		eror,
+		diff,
 
+		setDiff,
 
+		setCat,
+	} = context;
 
+	const navigate = useNavigate();
 
-    const url = `https://the-trivia-api.com/api/questions?limit=50&&categories=${cat}&&difficulty=${diff}`
+	const f = (e) => {
+		setDiff(e.target.value);
+	};
+	const x = (e) => {
+		setCat(e.target.value);
+	};
 
-    const d = useFetch(url)
-    d && console.log(url);
-    d && console.log(d.results);
-    diff && cat && setQuestions(d.results)
-    questions && console.log(questions);
+	const n = (e) => {
+		setNumber(e.target.value);
+	};
 
-    const f = (e) => {
+	// useEffect(() => {
+	//     d &&
+	//     setQuestions(d.map(e => e.d.results.question) )
+	//       d &&  setIncorrect(d.results.incorrectAnswers)
+	// }, [d, incorrect,setIncorrect,setQuestions,setDiff])
 
-        setDiff(e.target.value)
-    }
-    const x = (e) => {
+	// useEffect(() => {
+	//     incorrect &&
+	//         incorrect.length <= 3 && setAllAnswers(incorrect.push(d.results.correctAnswer))
+	//     incorrect && setAllAnswers(incorrect)
 
-        setCat(e.target.value)
-    }
+	// }, [incorrect])
 
-    // useEffect(() => {
-    //     d &&
-    //     setQuestions(d.map(e => e.d.results.question) )
-    //       d &&  setIncorrect(d.results.incorrectAnswers)
-    // }, [d, incorrect,setIncorrect,setQuestions,setDiff])
+	// function RandomArrayShuffle(array) {
+	//     var currentIndex = array.length,
+	//         temporaryValue,
+	//         randomIndex;
 
-    // useEffect(() => {
-    //     incorrect &&
-    //         incorrect.length <= 3 && setAllAnswers(incorrect.push(d.results.correctAnswer))
-    //     incorrect && setAllAnswers(incorrect)
+	//     while (0 !== currentIndex) {
+	//         randomIndex = Math.floor(Math.random() * currentIndex);
+	//         currentIndex -= 1;
+	//         temporaryValue = array[currentIndex];
+	//         array[currentIndex] =
+	//             array[randomIndex];
+	//         array[randomIndex] = temporaryValue;
+	//     }
+	//     return array;
+	// }
 
-    // }, [incorrect])
+	// allAnswers && RandomArrayShuffle(allAnswers)
 
+	// useEffect(() => {
+	//     allAnswers && console.log(d.results.correctAnswer)
+	//     console.log(allAnswers)
+	// }, [d, allAnswers,questions])
 
-    // function RandomArrayShuffle(array) {
-    //     var currentIndex = array.length,
-    //         temporaryValue,
-    //         randomIndex;
+	//   d&& setCorrectAnswer(d.results.correctAnswer)
+	// d && console.log(correctAnswer);
+	// d && console.log(d.category);
+	// console.log(diff);
 
-    //     while (0 !== currentIndex) {
-    //         randomIndex = Math.floor(Math.random() * currentIndex);
-    //         currentIndex -= 1;
-    //         temporaryValue = array[currentIndex];
-    //         array[currentIndex] =
-    //             array[randomIndex];
-    //         array[randomIndex] = temporaryValue;
-    //     }
-    //     return array;
-    // }
+	console.log(diff);
+	if (loading) return <p>loading ..</p>;
+	if (eror) return <p>{eror}</p>;
 
+	return (
+		<div>
+			<Nav />
+			<div className='settings'>
+				<h1>choose settings</h1>
 
-    // allAnswers && RandomArrayShuffle(allAnswers)
+				<div>
+					<label>Difficulty</label>
+					{
+						<select onChange={(e) => f(e)}>
+							<option onChange={(e) => f(e)} value='easy'>
+								easy
+							</option>
+							<option onChange={(e) => f(e)} value='medium'>
+								medium
+							</option>
+							<option onChange={(e) => f(e)} value='hard'>
+								hard
+							</option>
+						</select>
+					}
+					<label>Categories</label>
+					{
+						<select onChange={(e) => x(e)}>
+							<option onChange={(e) => x(e)} value='Arts'>
+								Arts & Literature
+							</option>
+							<option onChange={(e) => x(e)} value='Film'>
+								Film & TV
+							</option>
+							<option onChange={(e) => x(e)} value='Food'>
+								Food & Drink
+							</option>
+							<option onChange={(e) => x(e)} value='General Knowledge'>
+								General Knowledge
+							</option>
+							<option onChange={(e) => x(e)} value='Geography'>
+								Geography
+							</option>
+							<option onChange={(e) => x(e)} value='History'>
+								History
+							</option>
+							<option onChange={(e) => x(e)} value='Music'>
+								Music
+							</option>
+							<option onChange={(e) => x(e)} value='Science'>
+								Science
+							</option>
+							<option onChange={(e) => f(e)} value='Society'>
+								Society & Culture{' '}
+							</option>
+							<option onChange={(e) => f(e)} value='Sport'>
+								Sport & Leisure{' '}
+							</option>
+						</select>
+					}
 
-    // useEffect(() => {
-    //     allAnswers && console.log(d.results.correctAnswer)
-    //     console.log(allAnswers)
-    // }, [d, allAnswers,questions])
+					{/*<label htmlFor='number'> Number Of Questions</label>
+					<input
+						type='number'
+						name='number'
+						min='10'
+						max='50'
+						required='required'
+						onChange={(e) => n(e)}
+						value={number}
+					></input>*/}
 
+					<label htmlFor='number'>Amount of Questions</label>
+					<input
+						className='amount'
+						type='number'
+						name='number'
+						min='1'
+						max='50'
+						required='required'
+						onChange={(e) => n(e)}
+						value={number}
+					></input>
+				</div>
 
-    //   d&& setCorrectAnswer(d.results.correctAnswer)
-    // d && console.log(correctAnswer);
-    // d && console.log(d.category);
-    // console.log(diff);
-    const g = () => {
+				<Link to='/questions'>
+					<button className='play-btn'>PLAY</button>
+				</Link>
+			</div>
+		</div>
+	);
+};
 
-        console.log(questions);
-    }
-
-
-    return (
-
-        <div>
-            <h1>ChOOSE SETTINGS</h1>
-            <Link to="/questions">
-
-                <button>PLAY</button>
-            </Link>
-
-            <div className="settings">
-                <label >Difficulty</label>
-
-                {d && <select onChange={e => f(e)}>
-                    <option onChange={e => f(e)} value="easy">easy</option>
-                    <option onChange={e => f(e)} value="medium">medium</option>
-                    <option onChange={e => f(e)} value="hard">hard</option>
-
-                </select>}
-                <label >Categories</label>
-                {d && <select onChange={e => x(e)}>
-                    <option onChange={e => x(e)} value="Arts">Arts & Literature</option>
-                    <option onChange={e => x(e)} value="Film">Film & TV</option>
-                    <option onChange={e => x(e)} value="Food">Food & Drink</option>
-                    <option onChange={e => x(e)} value="General Knowledge">General Knowledge</option>
-
-                    <option onChange={e => x(e)} value="Geography">Geography</option>
-
-                    <option onChange={e => x(e)} value="History">History</option>
-
-                    <option onChange={e => x(e)} value="Music">Music</option>
-
-                    <option onChange={e => x(e)} value="Science">Science</option>
-
-                    <option onChange={e => f(e)} value="Society">Society & Culture </option>
-                    <option onChange={e => f(e)} value="Sport">Sport & Leisure </option>
-
-
-
-                </select>}
-                <button onClick={() => g()}>newQ</button>
-            </div>
-
-        </div>
-
-
-
-
-
-    )
-
-}
-
-export default Settings
+export default Settings;

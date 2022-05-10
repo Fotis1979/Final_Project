@@ -1,24 +1,16 @@
-import React from "react";
-import { useContext } from "react";
-import MyContext from "../../../context/MyContext";
+import { useContext } from 'react';
+import MyContext from '../../../context/MyContext';
 const Hints = () => {
-  const context = useContext(MyContext);
-  const {
-    color,
+	const context = useContext(MyContext);
 
-    score,
-    setScore,
-    newQuestion,
-    hints,
-    setHints,
-  } = context;
+	const { hints, setHints } = context;
 
-  return (
-    <div className="counter-hints">
-      <label>hints : </label>
-      <span>{hints}</span>
-    </div>
-  );
+	return (
+		<div className='Counter'>
+			<label>HINTS : </label>
+			<span>{hints}</span>
+		</div>
+	);
 };
 
 export default Hints;
