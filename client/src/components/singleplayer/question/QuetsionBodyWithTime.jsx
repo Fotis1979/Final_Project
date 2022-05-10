@@ -4,38 +4,52 @@ import Counter from "./Counter";
 import QuestionCounter from "./QuestionCounter";
 import QuestionTimer from "./QuestionTimer";
 import Timer from "./Timer";
+import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questionBodyWithTime.css";
 import Rewards from "../rewards/Rewards";
+import Nav2 from "../../pages/Nav2";
 
+import Nav from "../../pages/Nav";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
     loading,
+    number,
+    setNumber,
     eror,
+    hints,
+    setHints,
     results,
-    allAnswers,
-    questions,
-    lock,
-    setLock,
+    email,
+    seconds,
+    setSeconds,
+    wrongAnswers,
+    rightAnswer,
+    questionArray,
     randomAnswers,
     setRandomAnswers,
+    cat,
+    setCat,
     score,
     setScore,
+    setWrongAnswers
   } = context;
+
   const [error, setError] = useState(false);
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-  const questionArray = results.map((item) => item.question);
-  const wrongAnswers = results.map((item) => item.incorrectAnswers);
-  const rightAnswer = results.map((item) => item.correctAnswer);
 
   // console.log(questionArray);
   // console.log(wrongAnswers);
   // console.log(rightAnswer);
 
+  const nav = useNavigate();
+
+  indexCounter === (number -1)+1 && nav("/game_over") 
+  
   const handleSelect = (i) => {
     if (selected === i && selected === rightAnswer[indexCounter])
       return "select";
@@ -49,65 +63,60 @@ const QuestionBody = () => {
     setError(false);
   };
 
+
   const nextHandler = () => {
     // console.log("first");
     if (selected) {
       setSelected();
     } else setError("Please select an option first");
-
     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
   };
-  console.log(rightAnswer[indexCounter]);
-  // console.log(indexCounter);
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
-  wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  useEffect(() => {
+  wrongAnswers[indexCounter].map((el) => answers.push(el))
+
+
+console.log(answers);
+
+  useEffect(() => {  
+
     setRandomAnswers(arrayRandomize(answers));
   }, [indexCounter]);
 
-  //   useEffect(() => {
 
-  //     answers.sort(() => 0.5 - Math.random())
-  // },[indexCounter])
+  useEffect(() => {
 
-  console.log(answers);
-  console.log("answers are :", answers);
-  console.log(randomAnswers);
-  console.log(rightAnswer);
+    seconds === 15 && setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
 
+  }, [seconds])
+
+
+  // !**********!***************!******!********!
+  // const x = (e) => {
+  //   setCat(e.target.value);
+  // };
+    // !**********!***************!******!********!
+
+
+
+  // console.log(answers);
+  // console.log("answers are :", answers);
+  // console.log(randomAnswers);
   console.log(results[indexCounter].correctAnswer);
+  // console.log(results[indexCounter].category);
 
-  // const testHandler = (e) => {
-  //   console.log(e.target.value);
-  //   if (e.target.value === rightAnswer[indexCounter]) {
-  //     console.log("correct");
-  //     setColor("green");
-  //     // e.target.style.backgroundColor = "green";
-  //   } else {
-  //     // e.target.style.backgroundColor = "red";
-  //     setColor("red");
-
-  //     console.log("wrong");
-  //   }
-  // };
-  console.log(results[indexCounter].category);
-
-  // const LockButtons = () => {
-  //   color ? setLock(true) : setLock(false);
-  // };
-  // useEffect(() => {
-  //   LockButtons();
-  // }, [color]);
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
 
   return (
-    <main>
+    <div>
+      <Nav2 />
       <Rewards />
+
+ 
       <div className="App">
         <header className="App-header">
           <div className="quest-sec">
@@ -115,43 +124,68 @@ const QuestionBody = () => {
           </div>
           <div className="ans-sec">
             {randomAnswers.map((el, index) => (
-              <div className="align-items">
+              <div key={index} className="align-items">
                 <button
-                  name={el}
                   value={el}
                   className={`singleOption  ${selected && handleSelect(el)}`}
                   key={el}
-                  onClick={() => handleCheck(el)}
+                  onClick={() => handleCheck(el) }
                   disabled={selected}
-                  //onClick={(e) => testHandler(e)}
-                  // className="answers-btn"
-                  //  style={{ backgroundColor: `${color}` }}
                 >
                   {index + 1 + "." + el}
                 </button>
-                {/* <button
-                  value={el}
-                  onClick={lock === false ? (e) => testHandler(e) : undefined}
-                  className="answers-btn"
-                  style={{ backgroundColor: `${color}` }}
-                ></button> */}
               </div>
             ))}
           </div>
-
+          {(hints === 1 || hints === 2) && (
+        <button
+          className="Counter"
+          onClick={() =>
+          randomAnswers.pop() &&
+            setHints((prev) => prev - 1)
+         
+          } 
+        >   
+{         console.log(randomAnswers)
+}          {hints === 2 ? "DoubleClick for 50/50 CHANCE" : "useHint"}
+        </button>
+      )}
+      
+          <QuestionTimer />
           <button onClick={nextHandler}>next</button>
-        
         </header>
       </div>
+
+
+ {/* // !**********!***************!******!********! */}
+
+  {/* <label>Categories</label>
+        {
+          <select onChange={(e) => x(e)}>
+
+            <option onChange={(e) => x(e)} value="Music">
+              Music
+            </option>
+
+            <option onChange={(e) => x(e)} value="Society">
+              Society & Culture{" "}
+            </option>
+            <option onChange={(e) => x(e)} value="Sport">
+              Sport & Leisure{" "}
+            </option>
+          </select>
+
+        } */}
+
+ {/* !**********!***************!******!********! */}
+
+
       <QuestionCounter />
       {/* <QuestionTimer /> */}
-      {/* <Timer /> */}
-    
-   
-     <Counter />
-    
+      {/* <Timer />
+      <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}
-    </main>
+    </div>
   );
 };
 

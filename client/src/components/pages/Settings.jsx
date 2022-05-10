@@ -10,6 +10,7 @@ import Nav from "./Nav";
 const Settings = () => {
   const context = useContext(MyContext);
   const {
+    results,
     number,
     setNumber,
     loading,
@@ -17,13 +18,16 @@ const Settings = () => {
     setIndexCounter,
     eror,
     diff,
-
+    email,
     setDiff,
+    pass,
 
     setCat,
   } = context;
 
-  const navigate = useNavigate();
+  const [s, setS] = useState("NoTime")
+
+  // const navigate = useNavigate();
 
   const f = (e) => {
     setDiff(e.target.value);
@@ -36,46 +40,12 @@ const Settings = () => {
     setNumber(e.target.value);
   };
 
-  // useEffect(() => {
-  //     d &&
-  //     setQuestions(d.map(e => e.d.results.question) )
-  //       d &&  setIncorrect(d.results.incorrectAnswers)
-  // }, [d, incorrect,setIncorrect,setQuestions,setDiff])
+  const gameMode = (e) => {
 
-  // useEffect(() => {
-  //     incorrect &&
-  //         incorrect.length <= 3 && setAllAnswers(incorrect.push(d.results.correctAnswer))
-  //     incorrect && setAllAnswers(incorrect)
-
-  // }, [incorrect])
-
-  // function RandomArrayShuffle(array) {
-  //     var currentIndex = array.length,
-  //         temporaryValue,
-  //         randomIndex;
-
-  //     while (0 !== currentIndex) {
-  //         randomIndex = Math.floor(Math.random() * currentIndex);
-  //         currentIndex -= 1;
-  //         temporaryValue = array[currentIndex];
-  //         array[currentIndex] =
-  //             array[randomIndex];
-  //         array[randomIndex] = temporaryValue;
-  //     }
-  //     return array;
-  // }
-
-  // allAnswers && RandomArrayShuffle(allAnswers)
-
-  // useEffect(() => {
-  //     allAnswers && console.log(d.results.correctAnswer)
-  //     console.log(allAnswers)
-  // }, [d, allAnswers,questions])
-
-  //   d&& setCorrectAnswer(d.results.correctAnswer)
-  // d && console.log(correctAnswer);
-  // d && console.log(d.category);
-  // console.log(diff);
+    setS(e.target.value)
+    console.log(e.target.value);
+    console.log(s);
+  }
 
   console.log(diff);
   if (loading) return <p>loading ..</p>;
@@ -85,15 +55,18 @@ const Settings = () => {
     <div>
       <Nav />
       <h1>ChOOSE SETTINGS</h1>
-      <Link to="/questions">
+       {s === "NoTime" ? <Link to="/questions">
         <button>PLAY</button>
-      </Link>
+      </Link> : <Link to="/timeMode">
+        <button>PLAY</button>
+      </Link>}
 
       <div className="settings">
         <label>Difficulty</label>
 
         {
           <select onChange={(e) => f(e)}>
+
             <option onChange={(e) => f(e)} value="easy">
               easy
             </option>
@@ -108,6 +81,8 @@ const Settings = () => {
         <label>Categories</label>
         {
           <select onChange={(e) => x(e)}>
+
+
             <option onChange={(e) => x(e)} value="Arts">
               Arts & Literature
             </option>
@@ -137,26 +112,16 @@ const Settings = () => {
               Science
             </option>
 
-            <option onChange={(e) => f(e)} value="Society">
+            <option onChange={(e) => x(e)} value="Society">
               Society & Culture{" "}
             </option>
-            <option onChange={(e) => f(e)} value="Sport">
+            <option onChange={(e) => x(e)} value="Sport">
               Sport & Leisure{" "}
             </option>
           </select>
+
         }
-
-        <label htmlFor="number"> Number Of Questions</label>
-        <input
-          type="number"
-          name="number"
-          min="10"
-          max="50"
-          required="required"
-          onChange={(e) => n(e)}
-          value={number}
-        ></input>
-
+        
         <label htmlFor="number">Amount of Questions</label>
         <input
           className="amount"
@@ -168,6 +133,20 @@ const Settings = () => {
           onChange={(e) => n(e)}
           value={number}
         ></input>
+        <label>Game Mode</label>
+
+        {
+          <select onChange={(e) => gameMode(e)}>
+
+            <option onChange={(e) => gameMode(e)} value="NoTime">
+              NoTime
+            </option>
+            <option onChange={(e) => gameMode(e)} value="Time">
+              Time
+            </option>
+
+          </select>
+        }
       </div>
     </div>
   );

@@ -93,7 +93,6 @@ CSS HEX
 
     p{
         font-size: 30px;
-        font-weight: bold;
         color: royalblue;
 
     }
@@ -126,9 +125,8 @@ CSS HEX
     }
 
     .question-timer{
-        margin-top: 650px;
         margin-left: 40px;
-        padding-top: 80px;
+    
         display: flex;
         font-style: impact;
         font-size: 55px;
@@ -175,6 +173,7 @@ CSS HEX
 
 
           .settings{
+              padding-top: 10px;
               display: flex;
               flex-direction: column;
               width: 200px;
@@ -200,5 +199,12 @@ flex-direction: column;
 .amount{
     height: 40px;
     font-size: 30px;
+}
+
+.gameOver{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 

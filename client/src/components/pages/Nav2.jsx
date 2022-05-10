@@ -8,21 +8,22 @@ const Nav = () => {
   const context = useContext(MyContext);
   const {
    score,
+   email,
 
    indexCounter
   } = context;
-  console.log(indexCounter);
+  // console.log(indexCounter);
   return (
     <nav>
-      <ul className="ul-header">
-       { <Form />}
-        <NavLink to="/">
+      <p className="email">User: {email}</p> 
+
+        {/* <NavLink to="/">
           <li>Home</li>
         </NavLink>
         <NavLink to="/settings">
           <li>Settings</li>
-        </NavLink>
-      </ul>
+        </NavLink> */}
+      
     </nav>
   );
 };

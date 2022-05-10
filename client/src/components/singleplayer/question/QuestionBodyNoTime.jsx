@@ -9,6 +9,7 @@ import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questionBodyWithTime.css";
 import Rewards from "../rewards/Rewards";
+import Nav2 from "../../pages/Nav2";
 
 import Nav from "../../pages/Nav";
 const QuestionBody = () => {
@@ -21,7 +22,10 @@ const QuestionBody = () => {
     hints,
     setHints,
     results,
-
+    email,
+    wrongAnswers,
+    rightAnswer,
+    questionArray,
     randomAnswers,
     setRandomAnswers,
     score,
@@ -32,9 +36,6 @@ const QuestionBody = () => {
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-  const questionArray = results.map((item) => item.question);
-  const wrongAnswers = results.map((item) => item.incorrectAnswers);
-  const rightAnswer = results.map((item) => item.correctAnswer);
 
   // console.log(questionArray);
   // console.log(wrongAnswers);
@@ -42,7 +43,7 @@ const QuestionBody = () => {
 
   const nav = useNavigate();
 
-  indexCounter === number - 1 && nav("/");
+  indexCounter === (number -1)+1 && nav("/game_over");
 
   const handleSelect = (i) => {
     if (selected === i && selected === rightAnswer[indexCounter])
@@ -85,7 +86,7 @@ const QuestionBody = () => {
 
   return (
     <div>
-      <Nav />
+      <Nav2 />
       <Rewards />
 
       {(hints === 1 || hints === 2) && (
@@ -100,7 +101,6 @@ const QuestionBody = () => {
           {hints === 2 ? "DoubleClick for 50/50 CHANCHE" : "useHint"}
         </button>
       )}
-
       <div className="App">
         <header className="App-header">
           <div className="quest-sec">

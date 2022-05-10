@@ -4,8 +4,16 @@
     ;
 }
 nav{
-    background-color: blue;
+    background-color: aquamarine;
     height: 100px;
-    width: 100%;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;  
+    
+}
+
+.email{
     
 }
