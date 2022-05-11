@@ -1,156 +1,139 @@
-import React from "react";
-import MyContext from "../../../context/MyContext";
-import Counter from "./Counter";
-import QuestionCounter from "./QuestionCounter";
-import QuestionTimer from "./QuestionTimer";
-import Timer from "./Timer";
-import { useNavigate } from "react-router";
-import { useContext, useState, useEffect } from "react";
-import arrayRandomize from "../../../hooks/arrayRandomize";
+import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import MyContext from '../../../context/MyContext';
 
-import Rewards from "../rewards/Rewards";
-import Nav2 from "../../pages/Nav2";
+import Counter from './Counter';
+import Timer from './Timer';
+import QuestionCounter from './QuestionCounter';
+import QuestionTimer from './QuestionTimer';
 
-import Nav from "../../pages/Nav";
+import Nav from '../../pages/Nav';
+import Nav2 from '../../pages/Nav2';
+import Rewards from '../rewards/Rewards';
+
+import arrayRandomize from '../../../hooks/arrayRandomize';
+import '../../../styling/questions.css';
+
 const QuestionBody = () => {
-  const context = useContext(MyContext);
-  const {
-    // answers,
-    // setAnswers,
-    loading,
-    error,
-    setError,
-    number,
-    setNumber,
-    eror,
-    hints,
-    setHints,
-    results,
-    questionArray,
-    wrongAnswers,
-    rightAnswer,
-    setQuestionArray,
-    randomAnswers,
-    setRandomAnswers,
-    score,
-    setScore,
-  } = context;
+	const context = useContext(MyContext);
+	const {
+		loading,
+		number,
+		setNumber,
+		eror,
+		hints,
+		setHints,
+		results,
+		email,
+		wrongAnswers,
+		rightAnswer,
+		questionArray,
+		randomAnswers,
+		setRandomAnswers,
+		score,
+		setScore,
+	} = context;
 
-  const [selected, setSelected] = useState();
-  const [indexCounter, setIndexCounter] = useState(0);
+	const [error, setError] = useState(false);
+	const [selected, setSelected] = useState();
+	const [indexCounter, setIndexCounter] = useState(0);
 
-  console.log("indexCounter", indexCounter);
+	// console.log(questionArray);
+	// console.log(wrongAnswers);
+	// console.log(rightAnswer);
 
-  // const questionArray = results.map((item) => item.question);
-  // const wrongAnswers = results.map((item) => item.incorrectAnswers);
-  // const rightAnswer = results.map((item) => item.correctAnswer);
+	const nav = useNavigate();
 
-  console.log(questionArray);
-  console.log(wrongAnswers);
-  console.log(rightAnswer);
+	indexCounter === number - 1 + 1 && nav('/game_over');
 
-  const nav = useNavigate();
+	const handleSelect = (i) => {
+		if (selected === i && selected === rightAnswer[indexCounter])
+			return 'select';
+		else if (selected === i && selected !== rightAnswer[indexCounter])
+			return 'wrong';
+		else if (i === rightAnswer[indexCounter]) return 'select';
+	};
+	const handleCheck = (i) => {
+		setSelected(i);
+		if (i === rightAnswer[indexCounter]) setScore(score + 10);
+		setError(false);
+	};
 
-  indexCounter === (number -1)+1 && nav("/game_over");
+	const nextHandler = () => {
+		// console.log("first");
+		if (selected) {
+			setSelected();
+		} else setError('Please select an option first');
+		setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+	};
 
-  const handleSelect = (i) => {
-    if (selected === i && selected === rightAnswer[indexCounter])
-      return "select";
-    else if (selected === i && selected !== rightAnswer[indexCounter])
-      return "wrong";
-    else if (i === rightAnswer[indexCounter]) return "select";
-  };
-  const handleCheck = (i) => {
-    setSelected(i);
-    if (i === rightAnswer[indexCounter]) setScore(score + 10);
-    setError(false);
-  };
+	const answers = [];
+	answers.push(rightAnswer[indexCounter]);
 
-  const nextHandler = () => {
-    // console.log("first");
-    if (selected) {
-      setSelected();
-    } else setError("Please select an option first");
-    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-  };
-  // useEffect(() => {
-  //   //results.map((item) => setQuestionArray(item.question));
-  //   const combinedAnswers = (right, wrong) => [right, ...wrong];
-  //   setAnswers(
-  //     combinedAnswers(rightAnswer[indexCounter], wrongAnswers[indexCounter])
-  //   );
-  // }, [indexCounter]);
+	wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  const answers = [];
+	useEffect(() => {
+		setRandomAnswers(arrayRandomize(answers));
+	}, [indexCounter]);
 
-  answers.push(rightAnswer[indexCounter]);
+	// console.log(answers);
+	// console.log("answers are :", answers);
+	// console.log(randomAnswers);
+	// console.log(results[indexCounter].correctAnswer);
+	// console.log(results[indexCounter].category);
 
-  wrongAnswers[indexCounter].map((el) => answers.push(el));
+	if (loading) return <p>loading ..</p>;
+	if (eror) return <p>{eror}</p>;
 
-  useEffect(() => {
-    //results.map((item) => setQuestionArray(item.question));
+	return (
+		<>
+			<Nav />
+			<Rewards />
 
-    setRandomAnswers(arrayRandomize(answers));
-  }, [indexCounter]);
+			{(hints === 1 || hints === 2) && (
+				<button
+					className='rewards--btn'
+					onClick={() =>
+						wrongAnswers[indexCounter + 1].length > 1 &&
+						wrongAnswers[indexCounter + 1].pop() &&
+						setHints((prev) => prev - 1)
+					}
+				>
+					{hints === 2 ? 'DoubleClick for 50/50 CHANCHE' : 'useHint'}
+				</button>
+			)}
+			<div className='qa--section'>
+				<div className='questions--section'>
+					Q{indexCounter + 1} . {questionArray[indexCounter]}
+				</div>
+				<div className='answers--section'>
+					{randomAnswers.map((el, index) => (
+						<div key={index} className='align-items'>
+							<button
+								value={el}
+								className={`singleOption  ${selected && handleSelect(el)}`}
+								key={el}
+								onClick={() => handleCheck(el)}
+								disabled={selected}
+							>
+								{index + 1 + '.' + el}
+							</button>
+						</div>
+					))}
+				</div>
 
-  // console.log(answers);
-  // console.log("answers are :", answers);
-  // console.log(randomAnswers);
-  // console.log(results[indexCounter].correctAnswer);
-  // console.log(results[indexCounter].category);
+				<button className='next--btn' onClick={nextHandler}>
+					next
+				</button>
+			</div>
 
-  if (loading) return <p>loading ..</p>;
-  if (eror) return <p>{eror}</p>;
-
-  return (
-    <div>
-      <Nav2 />
-      <Rewards />
-
-      {(hints === 1 || hints === 2) && (
-        <button
-          className="Counter"
-          onClick={() =>
-            wrongAnswers[indexCounter + 1].length > 1 &&
-            wrongAnswers[indexCounter + 1].pop() &&
-            setHints((prev) => prev - 1)
-          }
-        >
-          {hints === 2 ? "DoubleClick for 50/50 CHANCHE" : "useHint"}
-        </button>
-      )}
-      <div className="App">
-        <header className="App-header">
-          <div className="quest-sec">
-            Q{indexCounter + 1} . {questionArray[indexCounter]}
-          </div>
-          <div className="ans-sec">
-            {randomAnswers.map((el, index) => (
-              <div key={index} className="align-items">
-                <button
-                  value={el}
-                  className={`singleOption  ${selected && handleSelect(el)}`}
-                  key={el}
-                  onClick={() => handleCheck(el)}
-                  disabled={selected}
-                >
-                  {index + 1 + "." + el}
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <button onClick={nextHandler}>next</button>
-        </header>
-      </div>
-
-      <QuestionCounter />
-      {/* <QuestionTimer /> */}
-      {/* <Timer />
-
+			<QuestionCounter />
+			{/* <QuestionTimer /> */}
+			{/* <Timer />
       <Counter /> */}
-    </div>
-  );
+			{/* { questions && <p>{questions}</p> } */}
+		</>
+	);
 };
 
 export default QuestionBody;

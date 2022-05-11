@@ -1,17 +1,29 @@
+/*
+
+CSS HEX
+--electric-blue: #00EBFCff;
+--violet-web: #E57FEDff;        complement
+--baby-powder: #FDFDFBff;
+--phthalo-blue: #020A89ff;      dominant
+	button blue: #18A0FB
+--middle-yellow: #FDEA03ff;     accent
+	dark green: #66D700
+	bright green: #ACFD63
+*/
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-main {
-	/*display: grid;*/
-}
+
 .qa--section {
 	padding-bottom: 10px;
 	padding-top: 20px;
 	padding-left: 20px;
 	text-align: center;
-	border: 5px solid yellowgreen;
+	border-radius: 100%;
+	border: 1rem dotted #fdea03ff;
 }
 
 .questions--section {
@@ -62,9 +74,9 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
-	border: 5px solid grey;
 	padding: 20px;
 	margin-top: 10px;
+	border: 5px solid grey;
 }
 
 .options {
@@ -78,11 +90,11 @@ main {
 }
 
 .singleOption {
+	background-color: #18a0fb;
 	font-family: 'Coiny', cursive;
 	height: 50px;
 	margin: 10px;
 	font-size: 1rem;
-
 	/*display: flex;*/
 	/*flex-grow: 1;*/
 	/*flex-direction: row;*/
@@ -90,7 +102,7 @@ main {
 	width: 100%;
 	border-radius: 50px;
 	color: #fff;
-	background-color: #18a0fb;
+	/*border: solid 1px #020a89ff;*/
 }
 
 @media (max-width: 614px) {
@@ -108,21 +120,55 @@ main {
 .select {
 	background-color: rgb(7, 207, 0);
 	color: white;
-	border: solid 3px #18a0fb4d;
 	box-shadow: -5px 5px 5px rgba(255, 255, 255, 0.753);
+	border: solid 3px #18a0fb4d;
 }
 
 .wrong {
 	background-color: rgb(233, 0, 0);
 	color: white;
-	border: solid 3px #18a0fb4d;
 	box-shadow: -5px 5px 5px #7e7e7ee7;
+	border: solid 3px #18a0fb4d;
 }
 
 .rewards--section {
 	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
+.qCounter {
+	background: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin: 30px;
+	float: right;
+	border-radius: 22px;
+	width: 250px;
+	font-size: medium;
+	box-shadow: 3px -3px 3px #ffffffe7;
+	border: ridge 3px #fdea03ff;
+}
+
+.counter--hints {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 30px;
+	border-radius: 40px;
+	position: absolute;
+	margin-left: 30vw;
+	width: 10vw;
+	height: 5vh;
+	color: rgb(19, 5, 5);
+	font-size: 1.2rem;
+	font-weight: lighter;
+	border: deeppink 11px solid;
+}
+
 .next--btn {
+	background-color: #e57fedff;
 	height: 20px;
 	width: 200px;
 	padding: 20px 80px;
@@ -134,5 +180,17 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #e57fedff;
 }
+
+/*
+
+CSS HEX
+--electric-blue: #00EBFCff;
+--violet-web: #E57FEDff;        complement
+--baby-powder: #FDFDFBff;
+--phthalo-blue: #020A89ff;      dominant
+	button blue: #18A0FB
+--middle-yellow: #FDEA03ff;     accent
+	dark green: #66D700
+	bright green: #ACFD63
+*/
