@@ -1,3 +1,4 @@
+
 html {
 	background-color: #00ebfcff;
 }
@@ -36,14 +37,11 @@ input:hover {
 }
 .play-btn {
 	width: 300px;
-
 	font-family: 'Coiny', cursive;
 	font-size: xx-large;
-	margin-top: 20px;
-	padding: 5px 50px;
+	padding-bottom: 15px;
 	border: solid 5px #020a89ff;
 	border-radius: 50px;
-
 	background-color: #00ebfcff;
 	color: #020a89ff;
 }
