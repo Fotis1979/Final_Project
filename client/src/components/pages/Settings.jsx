@@ -1,14 +1,15 @@
-import useFetch from '../../hooks/useFetch';
-import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import useFetch from "../../hooks/useFetch";
+import { useState, useEffect, useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
-import MyContext from '../../context/MyContext';
-import { Link } from 'react-router-dom';
-import Nav from './Nav';
+import MyContext from "../../context/MyContext";
+import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
-import '../../styling/settings.css';
+import "../../styling/settings.css";
 
 const Settings = () => {
+  const navigate = useNavigate();
   const context = useContext(MyContext);
   const {
     results,
@@ -26,7 +27,7 @@ const Settings = () => {
     setCat,
   } = context;
 
-  const [s, setS] = useState("NoTime")
+  const [s, setS] = useState("NoTime");
 
   // const navigate = useNavigate();
 
@@ -42,11 +43,18 @@ const Settings = () => {
   };
 
   const gameMode = (e) => {
+    setS(e.target.value);
 
-    setS(e.target.value)
     console.log(e.target.value);
     console.log(s);
-  }
+  };
+  const checkHandler = () => {
+    if (s === "NoTime") {
+      navigate("/questions");
+    } else if (s === "Time") {
+      navigate("/timeMode");
+    }
+  };
 
   console.log(diff);
   if (loading) return <p>loading ..</p>;
@@ -56,18 +64,19 @@ const Settings = () => {
     <div>
       <Nav />
       <h1>ChOOSE SETTINGS</h1>
-       {s === "NoTime" ? <Link to="/questions">
-        <button>PLAY</button>
-      </Link> : <Link to="/timeMode">
-        <button>PLAY</button>
-      </Link>}
+      {/* {s === "NoTime" ? 
+       <Link to="/questions">     <button>PLAY</button>  </Link>
+        :
+      <Link to="/timeMode">       <button>PLAY</button>  </Link>} */}
+      <button className="play-btn" onClick={checkHandler}>
+        PLAY
+      </button>
 
       <div className="settings">
         <label>Difficulty</label>
 
         {
           <select onChange={(e) => f(e)}>
-
             <option onChange={(e) => f(e)} value="easy">
               easy
             </option>
@@ -82,8 +91,6 @@ const Settings = () => {
         <label>Categories</label>
         {
           <select onChange={(e) => x(e)}>
-
-
             <option onChange={(e) => x(e)} value="Arts">
               Arts & Literature
             </option>
@@ -120,9 +127,8 @@ const Settings = () => {
               Sport & Leisure{" "}
             </option>
           </select>
-
         }
-        
+
         <label htmlFor="number">Amount of Questions</label>
         <input
           className="amount"
@@ -138,14 +144,12 @@ const Settings = () => {
 
         {
           <select onChange={(e) => gameMode(e)}>
-
             <option onChange={(e) => gameMode(e)} value="NoTime">
               NoTime
             </option>
             <option onChange={(e) => gameMode(e)} value="Time">
               Time
             </option>
-
           </select>
         }
       </div>

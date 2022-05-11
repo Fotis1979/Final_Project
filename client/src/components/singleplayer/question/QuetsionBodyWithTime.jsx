@@ -7,7 +7,7 @@ import Timer from "./Timer";
 import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
-import "../../../styling/questionBodyWithTime.css";
+import "../../../styling/questions.css";
 import Rewards from "../rewards/Rewards";
 import Nav2 from "../../pages/Nav2";
 
@@ -17,6 +17,7 @@ const QuestionBody = () => {
   const {
     loading,
     number,
+    setAnswers,
     setNumber,
     eror,
     hints,
@@ -41,28 +42,30 @@ const QuestionBody = () => {
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-
   // console.log(questionArray);
   // console.log(wrongAnswers);
   // console.log(rightAnswer);
 
   const nav = useNavigate();
 
-  indexCounter === (number -1)+1 && nav("/game_over") 
-  
+  indexCounter === (number - 1) + 1 && nav("/game_over")
+
   const handleSelect = (i) => {
+    setSeconds(0)
+
     if (selected === i && selected === rightAnswer[indexCounter])
       return "select";
     else if (selected === i && selected !== rightAnswer[indexCounter])
       return "wrong";
     else if (i === rightAnswer[indexCounter]) return "select";
+ 
   };
+
   const handleCheck = (i) => {
     setSelected(i);
     if (i === rightAnswer[indexCounter]) setScore(score + 10);
     setError(false);
   };
-
 
   const nextHandler = () => {
     // console.log("first");
@@ -70,6 +73,8 @@ const QuestionBody = () => {
       setSelected();
     } else setError("Please select an option first");
     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+
+    setSeconds(0)
   };
 
   const answers = [];
@@ -77,13 +82,15 @@ const QuestionBody = () => {
 
   wrongAnswers[indexCounter].map((el) => answers.push(el))
 
-
-console.log(answers);
-
-  useEffect(() => {  
-
-    setRandomAnswers(arrayRandomize(answers));
+  useEffect(() => {
+    console.log(rightAnswer[indexCounter]);
+  console.log(answers);
   }, [indexCounter]);
+  
+  // useEffect(() => {  
+
+  //   setRandomAnswers(arrayRandomize(answers));
+  // }, [indexCounter]);
 
 
   useEffect(() => {
@@ -92,21 +99,22 @@ console.log(answers);
 
   }, [seconds])
 
-
   // !**********!***************!******!********!
-  // const x = (e) => {
-  //   setCat(e.target.value);
-  // };
-    // !**********!***************!******!********!
+  const x = (e) => {
+    setCat(e.target.value);
+  };
+  // !**********!***************!******!********!
 
-
+  const pop = (e) => {
+    e.pop()
+    setHints((prev) => (prev - 1))
+  }
 
   // console.log(answers);
   // console.log("answers are :", answers);
   // console.log(randomAnswers);
-  console.log(results[indexCounter].correctAnswer);
+  // console.log(results);
   // console.log(results[indexCounter].category);
-
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -116,20 +124,20 @@ console.log(answers);
       <Nav2 />
       <Rewards />
 
- 
       <div className="App">
         <header className="App-header">
           <div className="quest-sec">
             Q{indexCounter + 1} . {questionArray[indexCounter]}
           </div>
           <div className="ans-sec">
-            {randomAnswers.map((el, index) => (
+            {answers.sort().map((el, index) => (
               <div key={index} className="align-items">
                 <button
                   value={el}
                   className={`singleOption  ${selected && handleSelect(el)}`}
                   key={el}
-                  onClick={() => handleCheck(el) }
+                  onClick={(() => handleCheck(el)) 
+                  }
                   disabled={selected}
                 >
                   {index + 1 + "." + el}
@@ -137,49 +145,41 @@ console.log(answers);
               </div>
             ))}
           </div>
-          {(hints === 1 || hints === 2) && (
-        <button
-          className="Counter"
-          onClick={() =>
-          randomAnswers.pop() &&
-            setHints((prev) => prev - 1)
-         
-          } 
-        >   
-{         console.log(randomAnswers)
-}          {hints === 2 ? "DoubleClick for 50/50 CHANCE" : "useHint"}
-        </button>
-      )}
-      
+          {!selected && (hints === 1 || hints >= 2) && wrongAnswers[indexCounter].length >= 2 && (
+            <button
+              className="Counter"
+              onClick={() =>
+                pop(wrongAnswers[indexCounter])
+              }
+            >
+              {hints >= 2 ? "DoubleClick for 50/50 CHANCE" : hints === 1 && "useHint"}
+            </button>
+          )}
+
           <QuestionTimer />
-          <button onClick={nextHandler}>next</button>
+          {<button className="play-btn" onClick={(nextHandler)}>next</button>}
         </header>
       </div>
+      {/* // !**********!***************!******!********! */}
 
+     
+      {(score % 100 === 0 || (score % 100) === 10) && score !== 0 && score !== 10 ? 
+        <select onChange={(e) => x(e)}>
+          <option onChange={(e) => x(e)} value="Music">
+            Music
+          </option>
 
- {/* // !**********!***************!******!********! */}
+          <option onChange={(e) => x(e)} value="Society">
+            Society & Culture{" "}
+          </option>
+          <option onChange={(e) => x(e)} value="Sport">
+            Sport & Leisure{" "}
+          </option>
+        </select>
+        : setCat(cat)
 
-  {/* <label>Categories</label>
-        {
-          <select onChange={(e) => x(e)}>
-
-            <option onChange={(e) => x(e)} value="Music">
-              Music
-            </option>
-
-            <option onChange={(e) => x(e)} value="Society">
-              Society & Culture{" "}
-            </option>
-            <option onChange={(e) => x(e)} value="Sport">
-              Sport & Leisure{" "}
-            </option>
-          </select>
-
-        } */}
-
- {/* !**********!***************!******!********! */}
-
-
+      }
+      {/* !**********!***************!******!********! */}
       <QuestionCounter />
       {/* <QuestionTimer /> */}
       {/* <Timer />
