@@ -17,7 +17,12 @@ const QuestionBody = () => {
   const {
     // answers,
     // setAnswers,
+    cat,
+    setCat,
+    seconds,
+    setSeconds,
     loading,
+    email,
     error,
     setError,
     number,
@@ -51,7 +56,7 @@ const QuestionBody = () => {
 
   const nav = useNavigate();
 
-  indexCounter === (number -1)+1 && nav("/game_over");
+  indexCounter === number - 1 + 1 && nav("/game_over");
 
   const handleSelect = (i) => {
     if (selected === i && selected === rightAnswer[indexCounter])
@@ -81,23 +86,44 @@ const QuestionBody = () => {
   //   );
   // }, [indexCounter]);
 
+  //setting localstorage:
+
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "question",
+  //     JSON.stringify(questionArray[indexCounter])
+  //   );
+  //   // localStorage.setItem("index", JSON.stringify(indexCounter));
+  // }, [questionArray, indexCounter]);
+
+  // useEffect(() => {
+  //   if (email === localStorage.getItem("email")) {
+  //     setQuestionArray(localStorage.getItem("question"));
+  //     setIndexCounter(localStorage.getItem("index"));
+  //   }
+  // }, [email]);
+
   const answers = [];
 
   answers.push(rightAnswer[indexCounter]);
 
   wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  useEffect(() => {
-    //results.map((item) => setQuestionArray(item.question));
+  // useEffect(() => {
+  //   //results.map((item) => setQuestionArray(item.question));
 
-    setRandomAnswers(arrayRandomize(answers));
-  }, [indexCounter]);
+  //   setRandomAnswers(arrayRandomize(answers));
+  // }, [indexCounter]);
 
   // console.log(answers);
   // console.log("answers are :", answers);
   // console.log(randomAnswers);
   // console.log(results[indexCounter].correctAnswer);
   // console.log(results[indexCounter].category);
+  const pop = (e) => {
+    e.pop();
+    setHints((prev) => prev - 1);
+  };
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -125,7 +151,7 @@ const QuestionBody = () => {
             Q{indexCounter + 1} . {questionArray[indexCounter]}
           </div>
           <div className="ans-sec">
-            {randomAnswers.map((el, index) => (
+            {answers.sort().map((el, index) => (
               <div key={index} className="align-items">
                 <button
                   value={el}
@@ -140,7 +166,22 @@ const QuestionBody = () => {
             ))}
           </div>
 
-          <button onClick={nextHandler}>next</button>
+          {!selected &&
+            (hints === 1 || hints >= 2) &&
+            wrongAnswers[indexCounter].length >= 2 && (
+              <button
+                className="Counter"
+                onClick={() => pop(wrongAnswers[indexCounter])}
+              >
+                {hints >= 2
+                  ? "DoubleClick for 50/50 CHANCE"
+                  : hints === 1 && "useHint"}
+              </button>
+            )}
+
+          <button className="play-btn" onClick={nextHandler}>
+            next
+          </button>
         </header>
       </div>
 

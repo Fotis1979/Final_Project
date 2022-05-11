@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useState, useContext } from 'react';
-import MyContext from '../../../context/MyContext';
+import { useEffect } from "react";
+import { useState, useContext } from "react";
+import MyContext from "../../../context/MyContext";
 
 const QuestionTimer = () => {
   const context = useContext(MyContext);
@@ -8,9 +8,9 @@ const QuestionTimer = () => {
     setQuestions,
     message,
     setMessage,
-      diff,
-      cat,
-      setIndexCounter,
+    diff,
+    cat,
+    setIndexCounter,
     indexCounter,
     setColor,
     setRightAnswer,
@@ -23,25 +23,21 @@ const QuestionTimer = () => {
     setQuestionArray,
     seconds,
     setSeconds,
-    wrongAnswers
-    
+    wrongAnswers,
   } = context;
-
 
   useEffect(() => {
     function incrementSeconds() {
       setSeconds((prev) => prev + 1);
     }
     setInterval(incrementSeconds, 1000);
-  }, []);
+  }, [seconds]);
 
   useEffect(() => {
     // seconds === 16 && setNewQuestion(true);
     seconds === 16 && setSeconds(0);
     // message && setSeconds(0);
   }, [seconds]);
-
-
 
   // useEffect(() => {
   //   newQuestion &&
