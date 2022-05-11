@@ -3,6 +3,7 @@ const app = express();
 const public = require("./router/public");
 const auth = require("./router/auth");
 const db = require("./config/db");
+const profile = require("./router/profile");
 require("dotenv").config();
 app.use(express.json());
 db();
@@ -20,5 +21,6 @@ app.use(allowCrossDomain);
 
 app.use("/", public);
 app.use("/auth", auth);
+app.use("/profile", profile);
 
 app.listen(port, () => console.log(`server is listening to port ${port}`));

@@ -35,7 +35,7 @@ const QuestionBody = () => {
     setCat,
     score,
     setScore,
-    setWrongAnswers
+    setWrongAnswers,
   } = context;
 
   const [error, setError] = useState(false);
@@ -48,17 +48,16 @@ const QuestionBody = () => {
 
   const nav = useNavigate();
 
-  indexCounter === (number - 1) + 1 && nav("/game_over")
+  indexCounter === number - 1 + 1 && nav("/game_over");
 
   const handleSelect = (i) => {
-    setSeconds(0)
+    setSeconds(0);
 
     if (selected === i && selected === rightAnswer[indexCounter])
       return "select";
     else if (selected === i && selected !== rightAnswer[indexCounter])
       return "wrong";
     else if (i === rightAnswer[indexCounter]) return "select";
- 
   };
 
   const handleCheck = (i) => {
@@ -74,30 +73,28 @@ const QuestionBody = () => {
     } else setError("Please select an option first");
     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
 
-    setSeconds(0)
+    setSeconds(0);
   };
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
 
-  wrongAnswers[indexCounter].map((el) => answers.push(el))
+  wrongAnswers[indexCounter].map((el) => answers.push(el));
 
   useEffect(() => {
     console.log(rightAnswer[indexCounter]);
-  console.log(answers);
+    console.log(answers);
   }, [indexCounter]);
-  
-  // useEffect(() => {  
+
+  // useEffect(() => {
 
   //   setRandomAnswers(arrayRandomize(answers));
   // }, [indexCounter]);
 
-
   useEffect(() => {
-
-    seconds === 15 && setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-
-  }, [seconds])
+    seconds === 15 &&
+      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+  }, [seconds]);
 
   // !**********!***************!******!********!
   const x = (e) => {
@@ -106,9 +103,9 @@ const QuestionBody = () => {
   // !**********!***************!******!********!
 
   const pop = (e) => {
-    e.pop()
-    setHints((prev) => (prev - 1))
-  }
+    e.pop();
+    setHints((prev) => prev - 1);
+  };
 
   // console.log(answers);
   // console.log("answers are :", answers);
@@ -136,8 +133,7 @@ const QuestionBody = () => {
                   value={el}
                   className={`singleOption  ${selected && handleSelect(el)}`}
                   key={el}
-                  onClick={(() => handleCheck(el)) 
-                  }
+                  onClick={() => handleCheck(el)}
                   disabled={selected}
                 >
                   {index + 1 + "." + el}
@@ -145,25 +141,32 @@ const QuestionBody = () => {
               </div>
             ))}
           </div>
-          {!selected && (hints === 1 || hints >= 2) && wrongAnswers[indexCounter].length >= 2 && (
-            <button
-              className="Counter"
-              onClick={() =>
-                pop(wrongAnswers[indexCounter])
-              }
-            >
-              {hints >= 2 ? "DoubleClick for 50/50 CHANCE" : hints === 1 && "useHint"}
-            </button>
-          )}
+          {!selected &&
+            (hints === 1 || hints >= 2) &&
+            wrongAnswers[indexCounter].length >= 2 && (
+              <button
+                className="Counter"
+                onClick={() => pop(wrongAnswers[indexCounter])}
+              >
+                {hints >= 2
+                  ? "DoubleClick for 50/50 CHANCE"
+                  : hints === 1 && "useHint"}
+              </button>
+            )}
 
           <QuestionTimer />
-          {<button className="play-btn" onClick={(nextHandler)}>next</button>}
+          {
+            <button className="play-btn" onClick={nextHandler}>
+              next
+            </button>
+          }
         </header>
       </div>
       {/* // !**********!***************!******!********! */}
 
-     
-      {(score % 100 === 0 || (score % 100) === 10) && score !== 0 && score !== 10 ? 
+      {(score % 100 === 0 || score % 100 === 10) &&
+      score !== 0 &&
+      score !== 10 ? (
         <select onChange={(e) => x(e)}>
           <option onChange={(e) => x(e)} value="Music">
             Music
@@ -176,12 +179,12 @@ const QuestionBody = () => {
             Sport & Leisure{" "}
           </option>
         </select>
-        : setCat(cat)
-
-      }
+      ) : (
+        setCat(cat)
+      )}
       {/* !**********!***************!******!********! */}
       <QuestionCounter />
-      {/* <QuestionTimer /> */}
+      <QuestionTimer />
       {/* <Timer />
       <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}

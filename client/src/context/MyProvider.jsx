@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
-import MyContext from './MyContext';
-import { useState } from 'react';
-import '../../src/App.css';
-import useFetch from '../hooks/useFetch';
+import { useEffect } from "react";
+import MyContext from "./MyContext";
+import { useState } from "react";
+import "../../src/App.css";
+import useFetch from "../hooks/useFetch";
 
 const MyProvider = ({ children }) => {
-
   const [message, setMessage] = useState();
   const [color, setColor] = useState();
   const [score, setScore] = useState(0);
@@ -37,20 +36,23 @@ const MyProvider = ({ children }) => {
   const [indexCounter, setIndexCounter] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
+  //profile State
 
+  const [isProfileSaved, setIsProfileSaved] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(
+    "https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png"
+  );
+  const [avatarFile, setAvatarFile] = useState();
+  const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+
+  const [loginMsg, setLoginMsg] = useState("");
 
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
   // const questionArray = results.map((item) => item.question); //set state to everything
   //results.map((item) => setQuestionArray(item.question));
-  useEffect(() => {
-    if (results !== null) {
-      setQuestionArray(results.map((item) => item.question));
-      setWrongAnswers(results.map((item) => item.incorrectAnswers));
-      setRightAnswer(results.map((item) => item.correctAnswer));
-    }
-  }, [results]);
 
   useEffect(() => {
     if (results !== null) {
@@ -76,7 +78,7 @@ const MyProvider = ({ children }) => {
         setIndexCounter,
         wrongAnswers,
         setWrongAnswers,
-        seconds, 
+        seconds,
         setSeconds,
         randomAnswers,
         setRandomAnswers,
@@ -112,14 +114,23 @@ const MyProvider = ({ children }) => {
         setEmail,
         pass,
         setPass,
+
+        //profile State
+        name,
+        setName,
+        avatarFile,
+        setAvatarFile,
+        birthDate,
+        setBirthDate,
+        isProfileSaved,
+        setIsProfileSaved,
+        loginMsg,
+        setLoginMsg,
       }}
     >
       {children}
     </MyContext.Provider>
   );
-
-		
-
 };
 
 export default MyProvider;
