@@ -17,6 +17,7 @@ const QuestionBody = () => {
   const {
     loading,
     number,
+    setAnswers,
     setNumber,
     eror,
     hints,
@@ -58,6 +59,7 @@ const QuestionBody = () => {
       return "wrong";
     else if (i === rightAnswer[indexCounter]) return "select";
   };
+
   const handleCheck = (i) => {
     setSelected(i);
     if (i === rightAnswer[indexCounter]) setScore(score + 10);
@@ -79,33 +81,36 @@ const QuestionBody = () => {
 
   wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  console.log(answers);
-  console.log("first");
-
   useEffect(() => {
-    setRandomAnswers(arrayRandomize(answers));
+    console.log(rightAnswer[indexCounter]);
+    console.log(answers);
   }, [indexCounter]);
+
+  // useEffect(() => {
+
+  //   setRandomAnswers(arrayRandomize(answers));
+  // }, [indexCounter]);
 
   useEffect(() => {
     seconds === 15 &&
       setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
   }, [seconds]);
 
+  // !**********!***************!******!********!
+  const x = (e) => {
+    setCat(e.target.value);
+  };
+  // !**********!***************!******!********!
+
   const pop = (e) => {
     e.pop();
     setHints((prev) => prev - 1);
   };
 
-  // !**********!***************!******!********!
-  // const x = (e) => {
-  //   setCat(e.target.value);
-  // };
-  // !**********!***************!******!********!
-
   // console.log(answers);
   // console.log("answers are :", answers);
   // console.log(randomAnswers);
-  // console.log(results[indexCounter].correctAnswer);
+  // console.log(results);
   // console.log(results[indexCounter].category);
 
   if (loading) return <p>loading ..</p>;
@@ -136,7 +141,6 @@ const QuestionBody = () => {
               </div>
             ))}
           </div>
-
           {!selected &&
             (hints === 1 || hints >= 2) &&
             wrongAnswers[indexCounter].length >= 2 && (
@@ -149,47 +153,36 @@ const QuestionBody = () => {
                   : hints === 1 && "useHint"}
               </button>
             )}
-          {/* {(hints === 1 || hints === 2) && (
-            <button
-              className="Counter"
-              onClick={() =>
-                randomAnswers.pop() && setHints((prev) => prev - 1)
-              }
-            >
-              {console.log(randomAnswers)}{" "}
-              {hints === 2 ? "DoubleClick for 50/50 CHANCE" : "useHint"}
-            </button>
-          )} */}
 
-          {/* <QuestionTimer /> */}
-          <button className="play-btn" onClick={nextHandler}>
-            next
-          </button>
+          <QuestionTimer />
+          {
+            <button className="play-btn" onClick={nextHandler}>
+              next
+            </button>
+          }
         </header>
       </div>
-
       {/* // !**********!***************!******!********! */}
 
-      {/* <label>Categories</label>
-        {
-          <select onChange={(e) => x(e)}>
+      {(score % 100 === 0 || score % 100 === 10) &&
+      score !== 0 &&
+      score !== 10 ? (
+        <select onChange={(e) => x(e)}>
+          <option onChange={(e) => x(e)} value="Music">
+            Music
+          </option>
 
-            <option onChange={(e) => x(e)} value="Music">
-              Music
-            </option>
-
-            <option onChange={(e) => x(e)} value="Society">
-              Society & Culture{" "}
-            </option>
-            <option onChange={(e) => x(e)} value="Sport">
-              Sport & Leisure{" "}
-            </option>
-          </select>
-
-        } */}
-
+          <option onChange={(e) => x(e)} value="Society">
+            Society & Culture{" "}
+          </option>
+          <option onChange={(e) => x(e)} value="Sport">
+            Sport & Leisure{" "}
+          </option>
+        </select>
+      ) : (
+        setCat(cat)
+      )}
       {/* !**********!***************!******!********! */}
-
       <QuestionCounter />
       <QuestionTimer />
       {/* <Timer />

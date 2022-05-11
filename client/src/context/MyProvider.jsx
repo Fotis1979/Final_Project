@@ -34,7 +34,7 @@ const MyProvider = ({ children }) => {
   const [answers, setAnswers] = useState([]);
 
   const [indexCounter, setIndexCounter] = useState(0);
-  const [gameOver, setGameOver] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
 
   //profile State
 

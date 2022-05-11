@@ -6,6 +6,7 @@ const QuestionTimer = () => {
   const context = useContext(MyContext);
   const {
     setQuestions,
+    results,
     message,
     setMessage,
     diff,
