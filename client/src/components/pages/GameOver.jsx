@@ -1,12 +1,15 @@
-import React from 'react'
-import x from '../../../src/assets/images/x.png'
+import x from '../../../src/assets/images/x.png';
+import Nav from './Nav';
 
 const GameOver = () => {
-    return (
-        <div className="gameOver">
-            <img  src={x} alt="Game_Over" />
-        </div>
-    )
-}
+	return (
+		<>
+			<Nav />
+			<div className='gameOver'>
+				<img src={x} alt='Game_Over' />
+			</div>
+		</>
+	);
+};
 
-export default GameOver
+export default GameOver;

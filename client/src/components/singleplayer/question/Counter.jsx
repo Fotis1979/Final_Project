@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import MyContext from '../../../context/MyContext';
-import '../../../styling/rewards.css';
+import '../../../styling/questions.css';
 
 const Counter = () => {
 	const context = useContext(MyContext);
@@ -22,7 +22,7 @@ const Counter = () => {
 		
 	}, [score]);
 	return (
-		<div className='Counter'>
+		<div className='rewards--btn'>
 			<label>SCORE : </label>
 			<span>{score}</span>
 		</div>
