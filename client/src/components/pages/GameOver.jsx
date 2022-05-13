@@ -6,7 +6,7 @@ const GameOver = () => {
 		<>
 			<Nav />
 			<div className='gameOver'>
-				<img src={x} alt='Game_Over' />
+				<img className='gameOver--img' src={x} alt='Game_Over' />
 			</div>
 		</>
 	);
