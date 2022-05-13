@@ -2,17 +2,19 @@ import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import MyContext from '../../../context/MyContext';
 
+import arrayRandomize from '../../../hooks/arrayRandomize';
+
 import Counter from './Counter';
 import Timer from './Timer';
 import QuestionCounter from './QuestionCounter';
 import QuestionTimer from './QuestionTimer';
+import Rewards from '../rewards/Rewards';
 
 import Nav from '../../pages/Nav';
 import Nav2 from '../../pages/Nav2';
-import Rewards from '../rewards/Rewards';
 
-import arrayRandomize from '../../../hooks/arrayRandomize';
 import '../../../styling/questions.css';
+//import '../../../styling/questionBodyWithTime.css';
 
 const QuestionBody = () => {
 	const context = useContext(MyContext);
@@ -25,13 +27,18 @@ const QuestionBody = () => {
 		setHints,
 		results,
 		email,
+		seconds,
+		setSeconds,
 		wrongAnswers,
 		rightAnswer,
 		questionArray,
 		randomAnswers,
 		setRandomAnswers,
+		cat,
+		setCat,
 		score,
 		setScore,
+		setWrongAnswers,
 	} = context;
 
 	const [error, setError] = useState(false);
@@ -72,14 +79,27 @@ const QuestionBody = () => {
 
 	wrongAnswers[indexCounter].map((el) => answers.push(el));
 
+	console.log(answers);
+
 	useEffect(() => {
 		setRandomAnswers(arrayRandomize(answers));
 	}, [indexCounter]);
 
+	useEffect(() => {
+		seconds === 15 &&
+			setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+	}, [seconds]);
+
+	// !**********!***************!******!********!
+	// const x = (e) => {
+	//   setCat(e.target.value);
+	// };
+	// !**********!***************!******!********!
+
 	// console.log(answers);
 	// console.log("answers are :", answers);
 	// console.log(randomAnswers);
-	// console.log(results[indexCounter].correctAnswer);
+	console.log(results[indexCounter].correctAnswer);
 	// console.log(results[indexCounter].category);
 
 	if (loading) return <p>loading ..</p>;
@@ -89,19 +109,6 @@ const QuestionBody = () => {
 		<>
 			<Nav />
 			<Rewards />
-
-			{(hints === 1 || hints === 2) && (
-				<button
-					className='rewards--btn'
-					onClick={() =>
-						wrongAnswers[indexCounter + 1].length > 1 &&
-						wrongAnswers[indexCounter + 1].pop() &&
-						setHints((prev) => prev - 1)
-					}
-				>
-					{hints === 2 ? 'DoubleClick for 50/50 CHANCHE' : 'useHint'}
-				</button>
-			)}
 			<div className='qa--section'>
 				<div className='questions--section'>
 					Q{indexCounter + 1} . {questionArray[indexCounter]}
@@ -121,19 +128,52 @@ const QuestionBody = () => {
 						</div>
 					))}
 				</div>
-
+				{(hints === 1 || hints === 2) && (
+					<button
+						className='rewards--btn'
+						onClick={() => randomAnswers.pop() && setHints((prev) => prev - 1)}
+					>
+						{console.log(randomAnswers)}{' '}
+						{hints === 2 ? 'DoubleClick for 50/50 CHANCE' : 'useHint'}
+					</button>
+				)}
 				<button className='next--btn' onClick={nextHandler}>
 					next
 				</button>
+				<QuestionTimer />
+				<QuestionCounter />
+				{/*<Counter />*/}
 			</div>
-
-			<QuestionCounter />
-			{/* <QuestionTimer /> */}
-			{/* <Timer />
-      <Counter /> */}
-			{/* { questions && <p>{questions}</p> } */}
 		</>
 	);
 };
 
 export default QuestionBody;
+
+{
+	/* // !**********!***************!******!********! */
+}
+
+{
+	/* <label>Categories</label>
+	{
+		<select onChange={(e) => x(e)}>
+
+			<option onChange={(e) => x(e)} value="Music">
+				Music
+			</option>
+
+			<option onChange={(e) => x(e)} value="Society">
+				Society & Culture{" "}
+			</option>
+			<option onChange={(e) => x(e)} value="Sport">
+				Sport & Leisure{" "}
+			</option>
+		</select>
+
+	} */
+}
+
+{
+	/* { questions && <p>{questions}</p> } */
+}

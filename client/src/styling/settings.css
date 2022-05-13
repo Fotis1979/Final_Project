@@ -34,18 +34,24 @@ select:hover,
 input:hover {
 	background-color: rgb(255, 255, 255);
 }
+
+/*.settings--mode {
+	color: red;
+}*/
+
 .play-btn {
-	width: 300px;
+	background-color: #00ebfcff;
 
 	font-family: 'Coiny', cursive;
 	font-size: xx-large;
-	margin-top: 20px;
+
+	width: 300px;
+	/*margin: 0 auto;*/
+	margin-top: 5px;
 	padding: 5px 50px;
+
 	border: solid 5px #020a89ff;
 	border-radius: 50px;
-
-	background-color: #00ebfcff;
-	color: #020a89ff;
 }
 
 .play-btn:hover {
