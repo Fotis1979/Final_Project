@@ -6,31 +6,28 @@ import "../../src/App.css";
 
 const MyProvider = ({ children }) => {
   const [message, setMessage] = useState();
+  const [clicked,setClicked]= useState(false)
+  const [streak,setStreak]= useState(0)
+  const [messageB, setMessageB] = useState();
   const [color, setColor] = useState();
   const [score, setScore] = useState(0);
-  const [category, setCategory] = useState();
-  const [difficulty, setDifficulty] = useState();
+  const [storedScore, setStoredScore] = useState();
   const [gameMode, setGameMode] = useState();
   const [seconds, setSeconds] = useState(0);
-
   const [error, setError] = useState(false);
-  const [number, setNumber] = useState(10);
-  const [allAnswers, setAllAnswers] = useState();
-  const [correctAnswer, setCorrectAnswer] = useState();
-  const [incorrect, setIncorrect] = useState();
-  const [quest, setQuest] = useState([]);
-
+  const [number, setNumber] = useState(33); 
+  const [gameDiff, setGameDiff] = useState()
+  const [difficulty, setDifficulty] = useState(["easy", "medium", "hard"]);
   const [diff, setDiff] = useState("easy");
-  const [cat, setCat] = useState("arts");
+  const [cat, setCat] = useState("");
   const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
   const [questionArray, setQuestionArray] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [selected, setSelected] = useState();
   const [rightAnswer, setRightAnswer] = useState([]);
-
   const [answers, setAnswers] = useState([]);
 
 
@@ -50,15 +47,20 @@ const MyProvider = ({ children }) => {
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
-  // const questionArray = results.map((item) => item.question); //set state to everything
-  //results.map((item) => setQuestionArray(item.question));
+
   useEffect(() => {
-    if (results !== null) {
+    if (results !== null ) {
       setQuestionArray(results.map((item) => item.question));
       setWrongAnswers(results.map((item) => item.incorrectAnswers));
       setRightAnswer(results.map((item) => item.correctAnswer));
+      
     }
   }, [results]);
+
+  useEffect(()=> {
+
+    console.log("GAMEOVER IS :",gameOver);
+  },[indexCounter])
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
@@ -71,7 +73,17 @@ const MyProvider = ({ children }) => {
         setHighScoreResult,
         highScore,
         setHighScore,
-        answers,
+gameDiff, 
+setGameDiff,    
+answers,
+clicked,
+setClicked,
+streak,
+setStreak,
+selected, 
+setSelected,
+storedScore,
+setStoredScore,
         setAnswers,
         error,
         setError,
@@ -96,15 +108,14 @@ const MyProvider = ({ children }) => {
         setDiff,
         message,
         setMessage,
+        messageB, 
+        setMessageB,
         color,
         setColor,
         rightAnswer,
         setRightAnswer,
         score,
         setScore,
-
-        category,
-        setCategory,
         difficulty,
         setDifficulty,
         gameMode,
@@ -133,6 +144,8 @@ const MyProvider = ({ children }) => {
       {children}
     </MyContext.Provider>
   );
+
+
 
 };
 

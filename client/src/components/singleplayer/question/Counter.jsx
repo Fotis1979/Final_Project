@@ -1,35 +1,50 @@
-import { useEffect, useContext } from "react";
-import MyContext from "../../../context/MyContext";
-import "../../../styling/questions.css";
+import { useEffect, useContext, useState } from 'react';
+import MyContext from '../../../context/MyContext';
+import '../../../styling/rewards.css';
 
 const Counter = () => {
-  const context = useContext(MyContext);
-  const {
-    color,
+	const context = useContext(MyContext);
+	const {
 
-    score,
+		rightAnswer,
+		score,
+		hints,
+		setScore,
+		selected,
+		indexCounter,
+		setHints,
+		streak,
+		setStreak
+	} = context;
 
-    newQuestion,
-    hints,
-    setHints,
-  } = context;
-  // console.log("hints", hints);
-  // useEffect(() => {
-  //   color === "green" && newQuestion === false && setScore((prev) => prev + 10);
-  // }, [color]);
-  useEffect(() => {
-    score !== 0 && score % 50 === 0 && setHints((prev) => prev + 1);
-  }, [score]);
 
-  //   useEffect(() => {
-  //     localStorage.setItem("hints", hints);
-  //   }, [hints]);
-  return (
-    <div className="rewards--btn">
-      <label>SCORE : </label>
-      <span>{score}</span>
-    </div>
-  );
+	useEffect(() => {
+
+		for (let i = 50; i <= 55; i++)
+			score !== 0 && (score % i === 0 ) && setHints((prev) => prev + 1)
+
+	}, [score, setHints]);
+
+
+	useEffect(() => {
+		selected === rightAnswer[indexCounter] && setStreak(streak + 1)
+		console.log("streak is : ", streak);
+		streak === 3
+			&& setScore(score + 20)
+		streak >= 3 && setStreak(0)
+	}, [selected, indexCounter, rightAnswer, setStreak])
+
+
+	return (
+		<div className='Counter'>
+
+		<label>SCORE : </label>
+		{score}
+			
+
+			
+		</div>
+	);
 };
 
 export default Counter;

@@ -14,14 +14,15 @@ import Profile from "../components/authentication/Profile";
 const Routings = () => (
   <Router>
     <Routes>
-      <Route path="/timeMode" element={<QuestionBodyWithTime />} />
+
       <Route path="/" element={<Home />} />
       <Route path="/game_over" element={<GameOver />} />
-
       <Route path="/questions" element={<QuestionBodyNoTime />} />
       <Route path="/form" element={<Form />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/timeMode" element={<QuestionBodyWithTime />} />
+
     </Routes>
   </Router>
 );

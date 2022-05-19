@@ -36,14 +36,14 @@ const Timer = () => {
 		setInterval(incrementMinutes, 60000);
 
 		minutes === 5 && setMinutes(0);
-	}, []);
-	useEffect(() => {
-		seconds === 10 && setSecondsO('');
-		seconds === 60 && setSeconds(0);
-		seconds === 0 && setSecondsO(0);
-		minutes === 3 && setQuestions('');
-		minutes === 3 && setGameOver(true);
-		seconds === 0 && setGameOver(false);
+	// }, []);
+	// useEffect(() => {
+	// 	seconds === 10 && setSecondsO('');
+	// 	seconds === 60 && setSeconds(0);
+	// 	seconds === 0 && setSecondsO(0);
+	// 	minutes === 3 && setQuestions('');
+	// 	minutes === 3 && setGameOver(true);
+	// 	seconds === 0 && setGameOver(false);
 		// gameOver && setQuestions("")
 		//minutes === 3 && setScore(0);
 		minutes === 3 && setMessage('');
