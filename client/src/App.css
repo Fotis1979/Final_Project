@@ -65,50 +65,26 @@ main {
 }
 
 .timer {
-	/*padding-top: 55p0px;*/
 	float: left;
 	display: flex;
 	flex-direction: column;
-	/*width: 300px;*/
 	align-items: center;
+
+	border: 2px solid #fff;
 }
 
 .sec--sec {
-	color: red;
+	color: #ffb4ea;
+	font-size: 2rem;
 }
 
-img {
-	object-fit: cover;
-	position: relative;
-	padding-top: 30px;
-}
-
-.settings {
+.gameOver--img {
+	/*object-fit: cover;*/
+	/*position: relative;*/
 	display: flex;
-	flex-direction: column;
-	width: 200px;
-	height: 300px;
-	text-align: center;
-}
-
-select {
-	height: 40px;
-	font-size: 30px;
-}
-
-.questions {
-	position: absolute;
-	left: 850px;
-	padding-top: 400px;
-}
-
-.buttons {
-	display: flex;
-	flex-direction: column;
-}
-.amount {
-	height: 40px;
-	font-size: 30px;
+	margin: 0 auto;
+	margin-top: 200px;
+	width: 777px;
 }
 
 /*
