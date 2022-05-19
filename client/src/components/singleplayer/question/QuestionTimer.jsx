@@ -1,64 +1,67 @@
-import { useEffect } from 'react';
-import { useState, useContext } from 'react';
-import MyContext from '../../../context/MyContext';
+import { useEffect } from "react";
+import { useState, useContext } from "react";
+import MyContext from "../../../context/MyContext";
 
-import '../../../styling/questions.css';
+import "../../../styling/questions.css";
 
 const QuestionTimer = () => {
-	const context = useContext(MyContext);
-	const {
-		setQuestions,
-		message,
-		setMessage,
-		diff,
-		cat,
-		setIndexCounter,
-		indexCounter,
-		setColor,
-		setRightAnswer,
-		questions,
-		newQuestion,
-		setNewQuestion,
-		questionArray,
-		setWrongAnswers,
-		rightAnswer,
-		setQuestionArray,
-		seconds,
-		setSeconds,
-		wrongAnswers,
-	} = context;
+  const context = useContext(MyContext);
+  const {
+    setQuestions,
+    message,
+    setMessage,
+    diff,
+    cat,
+    setIndexCounter,
+    indexCounter,
+    setColor,
+    setRightAnswer,
+    questions,
+    newQuestion,
+    setNewQuestion,
+    questionArray,
+    setWrongAnswers,
+    rightAnswer,
+    setQuestionArray,
+    gameOver,
+    setGameOver,
+    seconds,
+    setSeconds,
+    wrongAnswers,
+  } = context;
 
-	useEffect(() => {
-		function incrementSeconds() {
-			setSeconds((prev) => prev + 1);
-		}
-		setInterval(incrementSeconds, 1000);
-	}, []);
+  useEffect(() => {
+    function incrementSeconds() {
+      gameOver === false && setSeconds((prev) => prev + 1);
+    }
+    setInterval(incrementSeconds, 1000);
 
-	useEffect(() => {
-		// seconds === 16 && setNewQuestion(true);
-		seconds === 16 && setSeconds(0);
-		// message && setSeconds(0);
-	}, [seconds]);
+    gameOver === true && clearInterval(incrementSeconds);
+  }, [gameOver]);
+  useEffect(() => {
+    // seconds === 16 && setNewQuestion(true);
+    seconds === 16 && setSeconds(0);
+    // message && setSeconds(0);
+  }, [seconds]);
 
-	// useEffect(() => {
-	//   newQuestion &&
-	//     fetch(
-	//       `https://the-trivia-api.com/api/questions?limit=50&difficulty=${diff}&&categories=${cat}`
-	//     )
-	//       .then((res) => res.json())
-	//       .then((data) => setQuestions(data[Math.floor(Math.random() * 50)]));
+  // useEffect(() => {
+  //   newQuestion &&
+  //     fetch(
+  //       `https://the-trivia-api.com/api/questions?limit=50&difficulty=${diff}&&categories=${cat}`
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => setQuestions(data[Math.floor(Math.random() * 50)]));
 
-	//   setRightAnswer("");
-	// }, [newQuestion]);
+  //   setRightAnswer("");
+  // }, [newQuestion]);
 
-	return (
-		<div className='timer'>
-			<span className='sec--sec'>{seconds}</span>
+  return (
+    <div className="timer">
+      <span className="sec--sec">{seconds}</span>
 
-			<span>U have 15 secs for each Question !</span>
-		</div>
-	);
+      <span>U have 15 secs for each Question !</span>
+    </div>
+  );
 };
 
 export default QuestionTimer;
