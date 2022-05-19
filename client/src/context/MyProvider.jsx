@@ -6,8 +6,8 @@ import "../../src/App.css";
 
 const MyProvider = ({ children }) => {
   const [message, setMessage] = useState();
-  const [clicked,setClicked]= useState(false)
-  const [streak,setStreak]= useState(0)
+  const [clicked, setClicked] = useState(false);
+  const [streak, setStreak] = useState(0);
   const [messageB, setMessageB] = useState();
   const [color, setColor] = useState();
   const [score, setScore] = useState(0);
@@ -15,8 +15,8 @@ const MyProvider = ({ children }) => {
   const [gameMode, setGameMode] = useState();
   const [seconds, setSeconds] = useState(0);
   const [error, setError] = useState(false);
-  const [number, setNumber] = useState(33); 
-  const [gameDiff, setGameDiff] = useState()
+  const [number, setNumber] = useState(33);
+  const [gameDiff, setGameDiff] = useState();
   const [difficulty, setDifficulty] = useState(["easy", "medium", "hard"]);
   const [diff, setDiff] = useState("easy");
   const [cat, setCat] = useState("");
@@ -29,40 +29,34 @@ const MyProvider = ({ children }) => {
   const [selected, setSelected] = useState();
   const [rightAnswer, setRightAnswer] = useState([]);
   const [answers, setAnswers] = useState([]);
-	const [indexCounter, setIndexCounter] = useState(0);
-	const [gameOver, setGameOver] = useState(false);
-	const [answerPopup, setAnswerPopup] = useState(false);
-
+  const [indexCounter, setIndexCounter] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [answerPopup, setAnswerPopup] = useState(false);
 
   const [name, setName] = useState("");
   const [isProfileSaved, setIsProfileSaved] = useState(false);
   const [birthDate, setBirthDate] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
-
   const [highScoreResult, setHighScoreResult] = useState(0);
   const [highScore, setHighScore] = useState(0);
-
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
 
   useEffect(() => {
-    if (results !== null ) {
+    if (results !== null) {
       setQuestionArray(results.map((item) => item.question));
       setWrongAnswers(results.map((item) => item.incorrectAnswers));
       setRightAnswer(results.map((item) => item.correctAnswer));
-      
     }
   }, [results]);
 
-  useEffect(()=> {
-
-    console.log("GAMEOVER IS :",gameOver);
-  },[indexCounter])
+  useEffect(() => {
+    console.log("GAMEOVER IS :", gameOver);
+  }, [indexCounter]);
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
-
 
   return (
     <MyContext.Provider
@@ -71,17 +65,17 @@ const MyProvider = ({ children }) => {
         setHighScoreResult,
         highScore,
         setHighScore,
-gameDiff, 
-setGameDiff,    
-answers,
-clicked,
-setClicked,
-streak,
-setStreak,
-selected, 
-setSelected,
-storedScore,
-setStoredScore,
+        gameDiff,
+        setGameDiff,
+        answers,
+        clicked,
+        setClicked,
+        streak,
+        setStreak,
+        selected,
+        setSelected,
+        storedScore,
+        setStoredScore,
         setAnswers,
         error,
         setError,
@@ -106,7 +100,7 @@ setStoredScore,
         setDiff,
         message,
         setMessage,
-        messageB, 
+        messageB,
         setMessageB,
         color,
         setColor,
@@ -135,16 +129,13 @@ setStoredScore,
         setLoginMsg,
         name,
         setName,
-    	answerPopup,
-				setAnswerPopup
+        answerPopup,
+        setAnswerPopup,
       }}
     >
       {children}
     </MyContext.Provider>
   );
-
-
-
 };
 
 export default MyProvider;

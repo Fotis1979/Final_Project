@@ -13,7 +13,6 @@ import Profile from "../components/authentication/Profile";
 const Routings = () => (
   <Router>
     <Routes>
-
       <Route path="/" element={<Home />} />
       <Route path="/game_over" element={<GameOver />} />
       <Route path="/questions" element={<QuestionBodyNoTime />} />
@@ -21,7 +20,6 @@ const Routings = () => (
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/timeMode" element={<QuestionBodyWithTime />} />
-
     </Routes>
   </Router>
 );
