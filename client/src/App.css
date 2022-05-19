@@ -68,7 +68,7 @@ main {
 	float: left;
 	display: flex;
 	flex-direction: column;
-	align-items: center;	
+	align-items: center;
 	border: 2px solid #fff;
 
 }
@@ -100,8 +100,6 @@ main {
 		top: -20px;
 	}
 }
-
-
 
 .sec--sec {
 	color: #ffb4ea;

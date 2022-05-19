@@ -29,10 +29,8 @@ const MyProvider = ({ children }) => {
   const [selected, setSelected] = useState();
   const [rightAnswer, setRightAnswer] = useState([]);
   const [answers, setAnswers] = useState([]);
-
-
 	const [indexCounter, setIndexCounter] = useState(0);
-	const [gameOver, setGameOver] = useState(true);
+	const [gameOver, setGameOver] = useState(false);
 	const [answerPopup, setAnswerPopup] = useState(false);
 
 

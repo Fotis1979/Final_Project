@@ -16,12 +16,11 @@ const QuestionTimer = () => {
 
   useEffect(() => {
     function incrementSeconds() {
-      setSeconds((prev) => prev + 1);
+  gameOver === false  &&   setSeconds((prev) => prev + 1);
 
-    } gameOver !== (true) ? setInterval(incrementSeconds, 1000)
-      :
-      clearInterval(incrementSeconds)
-
+    } setInterval(incrementSeconds, 1000)
+  
+gameOver === true && clearInterval(incrementSeconds)
   }, [gameOver]);
 
 	useEffect(() => {

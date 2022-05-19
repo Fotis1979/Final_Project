@@ -2,20 +2,26 @@ import React from "react";
 import MyContext from "../../../context/MyContext";
 import QuestionTimer from "./QuestionTimer";
 import { useNavigate } from "react-router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Counter from "./Counter";
 import Hints from "../rewards/Hints";
-import '../../../styling/questions.css';
+import '../../../App.css';
 import Popup from '../../Popup/Popup';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 const QuestionBody = () => {
+
   const context = useContext(MyContext);
   const {
+    
+    
+    
+    answerPopup,
+    setAnswerPopup,
     gameOver,
     setClicked,
     setStoredScore,
@@ -45,9 +51,9 @@ const QuestionBody = () => {
     results,
     setGameOver,
     gameDiff,
+    error,
     setError
   } = context;
-
 
 
   const nav = useNavigate();
