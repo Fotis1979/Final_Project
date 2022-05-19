@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Questions from "../components/pages/Questions";
 
 const useFetch = (url, initialState) => {
   const [data, setData] = useState(initialState);
@@ -10,7 +9,6 @@ const useFetch = (url, initialState) => {
       .then((results) =>
         setData({
           results: results,
-          // id: results.map((e) => e.id),
           loading: false,
           error: null,
         })
@@ -18,7 +16,6 @@ const useFetch = (url, initialState) => {
       .catch((error) =>
         setData({
           results: null,
-          //   id: null,
           loading: false,
           error,
         })
@@ -26,7 +23,6 @@ const useFetch = (url, initialState) => {
     console.log("rendered");
   }, [url]);
 
-  // console.log(data.results.map(e => e.id));
   return data;
 };
 export default useFetch;
