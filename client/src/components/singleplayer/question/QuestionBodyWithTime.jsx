@@ -1,17 +1,18 @@
-import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import MyContext from '../../../context/MyContext';
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import MyContext from "../../../context/MyContext";
 
-import arrayRandomize from '../../../hooks/arrayRandomize';
+import arrayRandomize from "../../../hooks/arrayRandomize";
 
-import Counter from './Counter';
-import Timer from './Timer';
-import QuestionCounter from './QuestionCounter';
-import QuestionTimer from './QuestionTimer';
-import Rewards from '../rewards/Rewards';
+import Counter from "./Counter";
+import Timer from "./Timer";
+import QuestionCounter from "./QuestionCounter";
+import QuestionTimer from "./QuestionTimer";
+import Rewards from "../rewards/Rewards";
 
-import Nav from '../../pages/Nav';
-import Nav2 from '../../pages/Nav2';
+import Nav from "../../pages/Nav";
+import Nav2 from "../../pages/Nav2";
+
 
 import '../../../styling/questions.css';
 import Popup from '../../Popup/Popup';
@@ -158,34 +159,7 @@ const QuestionBody = () => {
 			</div>
 		</>
 	);
+
 };
 
 export default QuestionBody;
-
-{
-	/* // !**********!***************!******!********! */
-}
-
-{
-	/* <label>Categories</label>
-	{
-		<select onChange={(e) => x(e)}>
-
-			<option onChange={(e) => x(e)} value="Music">
-				Music
-			</option>
-
-			<option onChange={(e) => x(e)} value="Society">
-				Society & Culture{" "}
-			</option>
-			<option onChange={(e) => x(e)} value="Sport">
-				Sport & Leisure{" "}
-			</option>
-		</select>
-
-	} */
-}
-
-{
-	/* { questions && <p>{questions}</p> } */
-}

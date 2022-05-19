@@ -1,15 +1,17 @@
-import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import MyContext from '../../../context/MyContext';
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import MyContext from "../../../context/MyContext";
 
-import Counter from './Counter';
-import Timer from './Timer';
-import QuestionCounter from './QuestionCounter';
-import QuestionTimer from './QuestionTimer';
+import Counter from "./Counter";
+import Timer from "./Timer";
+import QuestionCounter from "./QuestionCounter";
+import QuestionTimer from "./QuestionTimer";
 
-import Nav from '../../pages/Nav';
-import Nav2 from '../../pages/Nav2';
-import Rewards from '../rewards/Rewards';
+import Nav from "../../pages/Nav";
+import Nav2 from "../../pages/Nav2";
+import Rewards from "../rewards/Rewards";
+
+
 
 import arrayRandomize from '../../../hooks/arrayRandomize';
 import '../../../styling/questions.css';
@@ -148,10 +150,11 @@ const QuestionBody = () => {
 			<QuestionCounter />
 			{/* <QuestionTimer /> */}
 			{/* <Timer />
+
       <Counter /> */}
-			{/* { questions && <p>{questions}</p> } */}
-		</>
-	);
+      {/* { questions && <p>{questions}</p> } */}
+    </>
+  );
 };
 
 export default QuestionBody;
