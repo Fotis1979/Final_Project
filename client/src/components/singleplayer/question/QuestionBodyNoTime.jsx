@@ -2,8 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import MyContext from "../../../context/MyContext";
 import QuestionCounter from "./QuestionCounter";
-import { useNavigate } from "react-router";
-import { useContext, useState, useEffect } from "react";
 import Nav from "../../pages/Nav";
 import Hints from '../rewards/Hints'
 import Counter from "./Counter";
@@ -28,6 +26,7 @@ const QuestionBody = () => {
     wrongAnswers,
     rightAnswer,
     score,
+    error,
     setScore,
     answerPopup,
 		setAnswerPopup,
