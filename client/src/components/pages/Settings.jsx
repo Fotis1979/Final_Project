@@ -1,69 +1,51 @@
-import useFetch from "../../hooks/useFetch";
-import { useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
-import { Link } from "react-router-dom";
 import Nav from "./Nav";
-
-import "../../styling/settings.css";
+import "../../../src/styling/settings.css";
 
 const Settings = () => {
+
   const navigate = useNavigate();
   const context = useContext(MyContext);
   const {
-    results,
-    number,
-    setNumber,
+    setSeconds,
     loading,
-    indexCounter,
-    setIndexCounter,
     eror,
-    diff,
-    email,
-    setDiff,
-    pass,
-
-    setCat,
+    setGameDiff
   } = context;
 
-  const [s, setS] = useState("NoTime");
+  const [mode, setMode] = useState("NoTime");
 
-  // const navigate = useNavigate();
 
-  const f = (e) => {
-    setDiff(e.target.value);
-  };
-  const x = (e) => {
-    setCat(e.target.value);
-  };
+  const gameDifficulty = (e) => {
+    setGameDiff(e.target.value)
+  }
 
-  const n = (e) => {
-    setNumber(e.target.value);
-  };
+  // const n = (e) => {
+  //   setNumber(e.target.value);
+  // };
 
   const gameMode = (e) => {
-    setS(e.target.value);
-
-    console.log(e.target.value);
-    console.log(s);
+    setMode(e.target.value);
+    console.log(mode);
   };
+  
   const checkHandler = () => {
-    if (s === "NoTime") {
+    if (mode === "NoTime") {
       navigate("/questions");
-    } else if (s === "Time") {
+    } else if (mode === "Time") {
       navigate("/timeMode");
     }
   };
 
-  console.log(diff);
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
 
   return (
-    <div>
+    <div className="qa--section">
       <Nav />
-      <h1>ChOOSE SETTINGS</h1>
+
       {/* {s === "NoTime" ? 
        <Link to="/questions">     <button>PLAY</button>  </Link>
         :
@@ -71,9 +53,9 @@ const Settings = () => {
       <button className="play-btn" onClick={checkHandler}>
         PLAY
       </button>
-
+      <h1>ChOOSE SETTINGS</h1>
       <div className="settings">
-        <label>Difficulty</label>
+        {/* <label>Difficulty</label>
 
         {
           <select onChange={(e) => f(e)}>
@@ -127,19 +109,33 @@ const Settings = () => {
               Sport & Leisure{" "}
             </option>
           </select>
-        }
+        } */}
 
-        <label htmlFor="number">Amount of Questions</label>
-        <input
-          className="amount"
-          type="number"
-          name="number"
-          min="1"
-          max="50"
-          required="required"
-          onChange={(e) => n(e)}
-          value={number}
-        ></input>
+        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"easy"}> BEgiNNer MODE  </button>
+
+        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"medium"}> AdVanceD MODE  </button>
+
+        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"hard"}> ExPeRT MODE  </button>
+
+        {/* <label> Amount of Questions</label>
+
+        <select onChange={(e) => n(e)}>
+
+          <option
+
+            className="amount"
+            required="required"
+            onChange={(e) => n(e)}
+            value="15"
+          >15</option>
+          <option
+
+            className="amount"
+            required="required"
+            onChange={(e) => n(e)}
+            value="33"
+          >33</option>
+        </select> */}
         <label>Game Mode</label>
 
         {

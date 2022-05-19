@@ -35,7 +35,6 @@ main {
 	background-color: #fdea03ff;
 	width: 50vw;
 	padding: 15px;
-	margin-bottom: 20px;
 	margin-left: 25vw;
 	border-radius: 30px;
 	border: 5px solid #e57fedff;
@@ -79,9 +78,9 @@ main {
 
 .singleOption {
 	font-family: 'Coiny', cursive;
-	height: 50px;
+	height: 100%;
 	margin: 10px;
-	font-size: 1rem;
+	font-size: 1.3rem;
 
 	/*display: flex;*/
 	/*flex-grow: 1;*/
@@ -136,3 +135,40 @@ main {
 	justify-content: center;
 	background-color: #e57fedff;
 }
+
+.cat{
+
+	font-size: 40px;
+	color: red;
+
+
+}
+.cat2{
+
+	font-size: 40px;
+	color: red;
+}
+
+
+h1{
+	color: red;
+
+}
+
+
+.gameOver{
+
+display: grid;
+text-align: center;
+justify-content: center;
+
+}
+
+.finalScore{
+
+	padding-top: 30px;
+	font-size: 45px;
+	color: rgb(233, 0, 0);
+
+}
+

@@ -15,9 +15,10 @@ const Form = () => {
 	//   }
 	// }, []);
 
-	console.log('email:', email);
-	console.log('pass:', pass);
-	console.log({ email, pass });
+	// console.log('email:', email);
+	// console.log('pass:', pass);
+
+	// console.log({ email, pass });
 
 	const inputHandler = (e) => {
 		//console.log(e);

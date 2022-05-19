@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import '../../styling/nav.css';
 import Form from '../authentication/Form';
+
+
 const Nav = () => {
+
 	return (
 		<nav>
 			<div className='nav--ul'>

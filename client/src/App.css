@@ -141,14 +141,13 @@ form {
 }
 
 .question-timer {
-	margin-left: 20px;
-    padding-bottom: 20px;
+	bottom: 130px;
+	position: absolute;
 	display: flex;
 	font-style: impact;
 	font-size: 55px;
 	font-weight: bold;
 	flex-direction: column;
-	width: 300px;
 	text-align: center;
 	z-index: 20;
 }

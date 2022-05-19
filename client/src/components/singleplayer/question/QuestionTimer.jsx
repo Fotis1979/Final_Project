@@ -5,64 +5,46 @@ import MyContext from '../../../context/MyContext';
 const QuestionTimer = () => {
   const context = useContext(MyContext);
   const {
-    setQuestions,
-    results,
-    message,
-    setMessage,
-      diff,
-      cat,
-      setIndexCounter,
-    indexCounter,
-    setColor,
-    setRightAnswer,
-    questions,
-    newQuestion,
-    setNewQuestion,
-    questionArray,
-    setWrongAnswers,
-    rightAnswer,
-    setQuestionArray,
+    messageB,
+    setMessageB,
     seconds,
     setSeconds,
-    wrongAnswers
-    
-  } = context;
+    gameOver,
+    gameDiff
 
+  } = context;
 
   useEffect(() => {
     function incrementSeconds() {
       setSeconds((prev) => prev + 1);
-    }
-    setInterval(incrementSeconds, 1000);
-  }, []);
+
+    } gameOver !== (true) ? setInterval(incrementSeconds, 1000)
+      :
+      clearInterval(incrementSeconds)
+
+  }, [gameOver]);
+
 
   useEffect(() => {
-    // seconds === 16 && setNewQuestion(true);
-    seconds === 16 && setSeconds(0);
-    // message && setSeconds(0);
+    gameDiff === "easy" && seconds === 21 && setSeconds(0);
+    gameDiff === "medium" && seconds === 16 && setSeconds(0);
+    gameDiff === "hard" && seconds === 13 && setSeconds(0);
+
   }, [seconds]);
 
 
-
-  // useEffect(() => {
-  //   newQuestion &&
-  //     fetch(
-  //       `https://the-trivia-api.com/api/questions?limit=50&difficulty=${diff}&&categories=${cat}`
-  //     )
-  //       .then((res) => res.json())
-  //       .then((data) => setQuestions(data[Math.floor(Math.random() * 50)]));
-
-  //   setRightAnswer("");
-  // }, [newQuestion]);
+  if (gameDiff === "easy") { setMessageB("U have 20 secs for each Question !") }
+  else if (gameDiff === "medium") { setMessageB("U have 15 secs for each Question !") } else { setMessageB("U have 12 secs for each Question !") }
 
   return (
-    <div className="question-timer">
+    <aside className="question-timer">
       <span className="sec">{seconds}</span>
 
       <span style={{ fontSize: "20px", paddingTop: "20px" }}>
-        U have 15 secs for each Question !
+        {messageB}
+
       </span>
-    </div>
+    </aside>
   );
 };
 
