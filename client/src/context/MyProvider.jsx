@@ -33,8 +33,11 @@ const MyProvider = ({ children }) => {
 
   const [answers, setAnswers] = useState([]);
 
-  const [indexCounter, setIndexCounter] = useState(0);
-  const [gameOver, setGameOver] = useState(true);
+
+	const [indexCounter, setIndexCounter] = useState(0);
+	const [gameOver, setGameOver] = useState(true);
+	const [answerPopup, setAnswerPopup] = useState(false);
+
 
   const [name, setName] = useState("");
   const [isProfileSaved, setIsProfileSaved] = useState(false);
@@ -59,6 +62,7 @@ const MyProvider = ({ children }) => {
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
+
 
   return (
     <MyContext.Provider
@@ -122,11 +126,14 @@ const MyProvider = ({ children }) => {
         setLoginMsg,
         name,
         setName,
+    	answerPopup,
+				setAnswerPopup
       }}
     >
       {children}
     </MyContext.Provider>
   );
+
 };
 
 export default MyProvider;
