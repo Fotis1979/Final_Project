@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
+import Nav from "../pages/Nav";
 
 const Profile = () => {
   const context = useContext(MyContext);
@@ -102,13 +103,13 @@ const Profile = () => {
 
   return (
     <div className="flex-col">
+      <Nav />
       {loginMsg !== "" ? (
         loginMsg
       ) : (
         <section className="flex-col">
           <h1>Profile</h1>
-          {/* <img className = 'avatar' src={avatarUrl} /> */}
-          {/* <input id="uploader" type="file" onChange={fileHandler} /> */}
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
@@ -116,6 +117,7 @@ const Profile = () => {
             value={name}
             onChange={inputHandler}
           />
+          <label htmlFor="birthDate">birthDate</label>
           <input
             type="text"
             name="birthDate"

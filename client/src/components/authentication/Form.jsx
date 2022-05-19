@@ -6,7 +6,8 @@ import "../../styling/form.css";
 
 const Form = () => {
   const context = useContext(MyContext);
-  const { email, setEmail, pass, setPass } = context;
+  const { email, setEmail, pass, setPass, highScore, setHighScore, setHints } =
+    context;
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -56,8 +57,11 @@ const Form = () => {
         if (result.token !== undefined) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("email", email);
+          setHighScore(localStorage.getItem("highScore"));
+
+          console.log(highScore);
           setEmail(email);
-          navigate("/settings");
+          navigate("/profile");
         } else {
           alert(result.msg);
         }
@@ -84,7 +88,10 @@ const Form = () => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    // localStorage.removeItem("highScore");
     setEmail("");
+    //
+    navigate("/");
     window.location.reload();
   };
   const loginBtn = (
@@ -92,36 +99,45 @@ const Form = () => {
       Login
     </button>
   );
+  const registerBtn = (
+    <button className="register--btn" onClick={registerHandler}>
+      register
+    </button>
+  );
   const logoutBtn = (
     <button className="login--btn" onClick={logout}>
       Logout
     </button>
   );
-
+  const emailBtn = <button className="email--btn">{email}</button>;
   return (
     <form className="nav--form" onSubmit={submitHandler}>
-      <div className="nav--inputs">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email Address"
-          value={email}
-          onChange={inputHandler}
-        />
-        <input
-          name="pass"
-          type="password"
-          placeholder="Password"
-          value={pass}
-          onChange={inputHandler}
-        />
-      </div>
+      {!localStorage.getItem("token") ? (
+        <div className="nav--inputs">
+          <input
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={inputHandler}
+          />
+          <input
+            name="pass"
+            type="password"
+            placeholder="Password"
+            value={pass}
+            onChange={inputHandler}
+          />
+        </div>
+      ) : (
+        emailBtn
+      )}
       <div>
         <span>{localStorage.getItem("token") ? logoutBtn : loginBtn}</span>
-
-        <button className="register--btn" onClick={registerHandler}>
+        {localStorage.getItem("token") ? " " : registerBtn}
+        {/* <button className="register--btn" onClick={registerHandler}>
           Register
-        </button>
+        </button> */}
       </div>
     </form>
   );
