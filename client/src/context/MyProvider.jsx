@@ -35,6 +35,7 @@ const MyProvider = ({ children }) => {
 
 	const [indexCounter, setIndexCounter] = useState(0);
 	const [gameOver, setGameOver] = useState(true);
+	const [answerPopup, setAnswerPopup] = useState(false);
 
 	const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
 	const initialState = { results: null, loading: true, eror: null };
@@ -109,6 +110,8 @@ const MyProvider = ({ children }) => {
 				setEmail,
 				pass,
 				setPass,
+				answerPopup,
+				setAnswerPopup
 			}}
 		>
 			{children}

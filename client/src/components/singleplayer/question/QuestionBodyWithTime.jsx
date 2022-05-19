@@ -14,6 +14,8 @@ import Nav from '../../pages/Nav';
 import Nav2 from '../../pages/Nav2';
 
 import '../../../styling/questions.css';
+import Popup from '../../Popup/Popup';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
 //import '../../../styling/questionBodyWithTime.css';
 
 const QuestionBody = () => {
@@ -39,6 +41,8 @@ const QuestionBody = () => {
 		score,
 		setScore,
 		setWrongAnswers,
+		answerPopup,
+		setAnswerPopup,
 	} = context;
 
 	const [error, setError] = useState(false);
@@ -62,6 +66,7 @@ const QuestionBody = () => {
 	};
 	const handleCheck = (i) => {
 		setSelected(i);
+		setAnswerPopup(true);
 		if (i === rightAnswer[indexCounter]) setScore(score + 10);
 		setError(false);
 	};
@@ -69,9 +74,10 @@ const QuestionBody = () => {
 	const nextHandler = () => {
 		// console.log("first");
 		if (selected) {
+			setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
 			setSelected();
-		} else setError('Please select an option first');
-		setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+		} else setError(true);
+		
 	};
 
 	const answers = [];
@@ -109,6 +115,8 @@ const QuestionBody = () => {
 		<>
 			<Nav />
 			<Rewards />
+			
+			{error && <ErrorMessage>Please select an option first</ErrorMessage>}
 			<div className='qa--section'>
 				<div className='questions--section'>
 					Q{indexCounter + 1} . {questionArray[indexCounter]}
@@ -140,6 +148,10 @@ const QuestionBody = () => {
 				<button className='next--btn' onClick={nextHandler}>
 					next
 				</button>
+				{selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>Correct answer</p></Popup>}
+				{selected !== rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>wrong answer</p></Popup>}
 				<QuestionTimer />
 				<QuestionCounter />
 				{/*<Counter />*/}

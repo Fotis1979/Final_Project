@@ -13,6 +13,9 @@ import Rewards from '../rewards/Rewards';
 
 import arrayRandomize from '../../../hooks/arrayRandomize';
 import '../../../styling/questions.css';
+import Popup from '../../Popup/Popup';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
+
 
 const QuestionBody = () => {
 	const context = useContext(MyContext);
@@ -32,6 +35,8 @@ const QuestionBody = () => {
 		setRandomAnswers,
 		score,
 		setScore,
+		answerPopup,
+		setAnswerPopup,
 	} = context;
 
 	const [error, setError] = useState(false);
@@ -52,19 +57,22 @@ const QuestionBody = () => {
 		else if (selected === i && selected !== rightAnswer[indexCounter])
 			return 'wrong';
 		else if (i === rightAnswer[indexCounter]) return 'select';
+		
 	};
 	const handleCheck = (i) => {
 		setSelected(i);
-		if (i === rightAnswer[indexCounter]) setScore(score + 10);
-		setError(false);
+		setAnswerPopup(true);
+		if (i === rightAnswer[indexCounter]) return setScore(score + 10) ;
+		setError(false)
+		
 	};
 
 	const nextHandler = () => {
 		// console.log("first");
-		if (selected) {
+		if (selected) {setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
 			setSelected();
-		} else setError('Please select an option first');
-		setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+		} else setError(true);
+		
 	};
 
 	const answers = [];
@@ -89,6 +97,7 @@ const QuestionBody = () => {
 		<>
 			<Nav />
 			<Rewards />
+			{error && <ErrorMessage>Please select an option first</ErrorMessage>}
 
 			{(hints === 1 || hints === 2) && (
 				<button
@@ -103,10 +112,12 @@ const QuestionBody = () => {
 				</button>
 			)}
 			<div className='qa--section'>
+			
 				<div className='questions--section'>
 					Q{indexCounter + 1} . {questionArray[indexCounter]}
 				</div>
 				<div className='answers--section'>
+					
 					{randomAnswers.map((el, index) => (
 						<div key={index} className='align-items'>
 							<button
@@ -115,6 +126,7 @@ const QuestionBody = () => {
 								key={el}
 								onClick={() => handleCheck(el)}
 								disabled={selected}
+								
 							>
 								{index + 1 + '.' + el}
 							</button>
@@ -125,6 +137,12 @@ const QuestionBody = () => {
 				<button className='next--btn' onClick={nextHandler}>
 					next
 				</button>
+				{selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>Correct answer</p></Popup>}
+				{selected !== rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>wrong answer</p></Popup>}
+				
+				
 			</div>
 
 			<QuestionCounter />
