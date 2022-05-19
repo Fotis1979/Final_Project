@@ -24,7 +24,13 @@ const QuestionTimer = () => {
 
   }, [gameOver]);
 
+	useEffect(() => {
+		// seconds === 16 && setNewQuestion(true);
+		seconds === 16 && setSeconds(0);
+		// message && setSeconds(0);
+	}, [seconds]);
 
+<<<<<<< HEAD
   useEffect(() => {
     gameDiff === "easy" && seconds === 21 && setSeconds(0);
     gameDiff === "medium" && seconds === 16 && setSeconds(0);
@@ -46,6 +52,26 @@ const QuestionTimer = () => {
       </span>
     </aside>
   );
+=======
+	// useEffect(() => {
+	//   newQuestion &&
+	//     fetch(
+	//       `https://the-trivia-api.com/api/questions?limit=50&difficulty=${diff}&&categories=${cat}`
+	//     )
+	//       .then((res) => res.json())
+	//       .then((data) => setQuestions(data[Math.floor(Math.random() * 50)]));
+
+	//   setRightAnswer("");
+	// }, [newQuestion]);
+
+	return (
+		<div className='timer'>
+			<span className='sec--sec'>{seconds}</span>
+
+			<span>U have 15 secs for each Question !</span>
+		</div>
+	);
+>>>>>>> c5ce1659e4d70eafd9972bd0b74a339bcde0dc1e
 };
 
 export default QuestionTimer;

@@ -1,0 +1,10 @@
+.e-message{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: orangered;
+    text-align: center;
+    color: white;
+    text-transform: capitalize;
+}

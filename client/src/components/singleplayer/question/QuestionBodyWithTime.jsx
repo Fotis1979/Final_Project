@@ -4,11 +4,14 @@ import QuestionTimer from "./QuestionTimer";
 import { useNavigate } from "react-router";
 import { useContext, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
-import "../../../styling/questions.css";
+import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Counter from "./Counter";
 import Hints from "../rewards/Hints";
+import '../../../styling/questions.css';
+import Popup from '../../Popup/Popup';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
@@ -78,6 +81,9 @@ const QuestionBody = () => {
 
   const handleCheck = (i) => {
     setSelected(i);
+    setAnswerPopup(true);
+		if (i === rightAnswer[indexCounter]) setScore(score + 10);
+		setError(false);
 
     if (i === rightAnswer[indexCounter] && diff === "easy") {
       setScore(score + 6);
@@ -107,15 +113,17 @@ const QuestionBody = () => {
   };
 
   const nextHandler = () => {
-    // console.log("first");
-    !selected && setClicked(false)
-    if (selected) {
-      setSelected();
-    } else setError("Please select an option first");
-    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-    setSeconds(0)
+    // !selected && setClicked(false)
+   setSeconds(0)
+		// console.log("first");
+		if (selected) {
+		
+       setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+	setSelected();
+		} else setError(true);
 
-  };
+		
+	};
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
@@ -189,13 +197,11 @@ const QuestionBody = () => {
   return (
     <div>
       <Nav />
-      <Counter />
-      <Hints />
+     <Rewards />
 
+     {error && <ErrorMessage>Please select an option first</ErrorMessage>}
       <div className="qa--section">
-
-        <header className="App-header">
-          {<button className="play-btn" onClick={(nextHandler)}>next</button>}
+        
           {<div className="questions--section">
 
             Q{indexCounter + 1} . {questionArray[indexCounter]}
@@ -246,9 +252,13 @@ const QuestionBody = () => {
               {hints >= 2 ? "DoubleClick for 50/50 CHANCE" : hints === 1 && "useHint"}
             </button>
           )}
+            {<button className="play-btn" onClick={(nextHandler)}>next</button>}
+          {selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>Correct answer</p></Popup>}
+				{selected !== rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>wrong answer</p></Popup>}
 
           {gameOver === false && <QuestionTimer />}
-        </header>
       </div>
     </div>
   );

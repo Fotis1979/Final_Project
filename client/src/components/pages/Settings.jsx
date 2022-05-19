@@ -57,19 +57,18 @@ const Settings = () => {
       <div className="settings">
         {/* <label>Difficulty</label>
 
-        {
-          <select onChange={(e) => f(e)}>
-            <option onChange={(e) => f(e)} value="easy">
-              easy
-            </option>
-            <option onChange={(e) => f(e)} value="medium">
-              medium
-            </option>
-            <option onChange={(e) => f(e)} value="hard">
-              hard
-            </option>
-          </select>
-        }
+        <select onChange={(e) => f(e)}>
+          <option onChange={(e) => f(e)} value="easy">
+            easy
+          </option>
+          <option onChange={(e) => f(e)} value="medium">
+            medium
+          </option>
+          <option onChange={(e) => f(e)} value="hard">
+            hard
+          </option>
+        </select>
+
         <label>Categories</label>
         {
           <select onChange={(e) => x(e)}>
@@ -138,16 +137,24 @@ const Settings = () => {
         </select> */}
         <label>Game Mode</label>
 
-        {
-          <select onChange={(e) => gameMode(e)}>
-            <option onChange={(e) => gameMode(e)} value="NoTime">
-              NoTime
-            </option>
-            <option onChange={(e) => gameMode(e)} value="Time">
-              Time
-            </option>
-          </select>
-        }
+        <select className="settings--mode" onChange={(e) => gameMode(e)}>
+          <option onChange={(e) => gameMode(e)} value="NoTime">
+            NoTime
+          </option>
+          <option onChange={(e) => gameMode(e)} value="Time">
+            Time
+          </option>
+        </select>
+
+        {s === "NoTime" ? (
+          <Link to="/questions">
+            <button className="play-btn">PLAY</button>
+          </Link>
+        ) : (
+          <Link to="/timeMode">
+            <button className="play-btn">PLAY</button>
+          </Link>
+        )}
       </div>
     </div>
   );

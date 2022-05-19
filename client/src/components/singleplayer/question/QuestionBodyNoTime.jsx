@@ -1,12 +1,17 @@
-import React from "react";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import MyContext from "../../../context/MyContext";
 import QuestionCounter from "./QuestionCounter";
 import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
-import "../../../styling/questions.css";
 import Nav from "../../pages/Nav";
 import Hints from '../rewards/Hints'
 import Counter from "./Counter";
+import Rewards from "../rewards/Rewards";
+import arrayRandomize from '../../../hooks/arrayRandomize';
+import "../../../styling/questions.css";
+import Popup from '../../Popup/Popup';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
@@ -24,6 +29,8 @@ const QuestionBody = () => {
     rightAnswer,
     score,
     setScore,
+    answerPopup,
+		setAnswerPopup,
   } = context;
 
   const [selected, setSelected] = useState();
@@ -51,21 +58,23 @@ const QuestionBody = () => {
       return "wrong";
     else if (i === rightAnswer[indexCounter]) return "select";
   };
-  const handleCheck = (i) => {
-    setSelected(i);
-    if (i === rightAnswer[indexCounter]) setScore(score + 10);
-    setError(false);
-  };
 
-  const nextHandler = () => {
-    // console.log("first");
+	const handleCheck = (i) => {
+		setSelected(i);
+		setAnswerPopup(true);
+		if (i === rightAnswer[indexCounter]) return setScore(score + 10) ;
+		setError(false)
+		
+	};
 
-    if (selected) {
-      setSelected();
-    } else setError("Please select an option first");
-    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+ 	const nextHandler = () => {
+		// console.log("first");
+		if (selected) {setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+			setSelected();
+		} else setError(true);
+		
+	};
 
-  };
 
   const answers = [];
 
@@ -97,8 +106,21 @@ const QuestionBody = () => {
   return (
     <div>
       <Nav />
-      <Counter />
-      <Hints />
+      <Rewards />
+			{error && <ErrorMessage>Please select an option first</ErrorMessage>}
+
+			{(hints === 1 || hints === 2) && (
+				<button
+					className='rewards--btn'
+					onClick={() =>
+						wrongAnswers[indexCounter + 1].length > 1 &&
+						wrongAnswers[indexCounter + 1].pop() &&
+						setHints((prev) => prev - 1)
+					}
+				>
+					{hints === 2 ? 'DoubleClick for 50/50 CHANCHE' : 'useHint'}
+				</button>
+			)}
 
       <div className="qa--section">
         <header className="App-header">
@@ -136,6 +158,10 @@ const QuestionBody = () => {
 
           {/* <QuestionTimer /> */}
           <button className="play-btn" onClick={nextHandler}>next</button>
+          {selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>Correct answer</p></Popup>}
+				{selected !== rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>wrong answer</p></Popup>}
         </header>
       </div>
 
@@ -165,7 +191,7 @@ const QuestionBody = () => {
       {/* <Timer />
       <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}
-    </div>
+  </div>
   );
 };
 
