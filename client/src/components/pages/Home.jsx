@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 //import '../../styling/home.css';
 import h1icon from "../../assets/images/h1 icon.png";
-import LocalStorage from "../localStorage/LocalStorage";
 
 import Nav from "./Nav";
 

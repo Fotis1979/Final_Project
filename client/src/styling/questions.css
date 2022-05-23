@@ -47,7 +47,6 @@ CSS HEX
 	background-color: #fdea03ff;
 	width: 50vw;
 	padding: 15px;
-	margin-bottom: 20px;
 	margin-left: 25vw;
 	border-radius: 30px;
 	border: 5px solid #e57fedff;
@@ -92,7 +91,7 @@ CSS HEX
 .singleOption {
 	background-color: #18a0fb;
 	font-family: 'Coiny', cursive;
-	height: 50px;
+	height: 100%;
 	margin: 10px;
 	font-size: 1rem;
 	/*display: flex;*/

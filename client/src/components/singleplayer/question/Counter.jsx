@@ -1,30 +1,48 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import MyContext from '../../../context/MyContext';
-import '../../../styling/questions.css';
+
 
 const Counter = () => {
 	const context = useContext(MyContext);
 	const {
-		color,
 
+		rightAnswer,
 		score,
-		setScore,
-		newQuestion,
 		hints,
+		setScore,
+		selected,
+		indexCounter,
 		setHints,
+		streak,
+		setStreak
 	} = context;
-	// console.log("hints", hints);
-	// useEffect(() => {
-	//   color === "green" && newQuestion === false && setScore((prev) => prev + 10);
-	// }, [color]);
+
+
 	useEffect(() => {
-		score !== 0 && score % 50 === 0  && setHints((prev) => prev + 1) 
-		
-	}, [score]);
+
+		for (let i = 50; i <= 55; i++)
+			score !== 0 && (score % i === 0 ) && setHints((prev) => prev + 1)
+
+	}, [score, setHints]);
+
+
+	useEffect(() => {
+		selected === rightAnswer[indexCounter] && setStreak(streak + 1)
+		console.log("streak is : ", streak);
+		streak === 3
+			&& setScore(score + 20)
+		streak >= 3 && setStreak(0)
+	}, [selected, indexCounter, rightAnswer, setStreak])
+
+
 	return (
-		<div className='rewards--btn'>
-			<label>SCORE : </label>
-			<span>{score}</span>
+		<div className='Counter'>
+
+		<label>SCORE : </label>
+		{score}
+			
+
+			
 		</div>
 	);
 };
