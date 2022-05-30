@@ -51,7 +51,6 @@ const Settings = () => {
 
   return (
     <div className="qa--section">
-
       <Nav />
 
       <button className="play-btn" onClick={checkHandler}>
@@ -68,16 +67,16 @@ const Settings = () => {
 
         <label>Game Mode</label>
 
-        {
-          <select onChange={(e) => gameMode(e)}>
-            <option onChange={(e) => gameMode(e)} value="NoTime">
-              NoTime
-            </option>
-            <option onChange={(e) => gameMode(e)} value="Time">
-              Time
-            </option>
-          </select>
-        }
+        <select className="settings--mode" onChange={(e) => gameMode(e)}>
+          <option onChange={(e) => gameMode(e)} value="NoTime">
+            NoTime
+          </option>
+          <option onChange={(e) => gameMode(e)} value="Time">
+            Time
+          </option>
+        </select>
+
+     
       </div>
     </div>
   );

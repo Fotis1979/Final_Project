@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import MyContext from "../../../context/MyContext";
 import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
@@ -25,6 +26,7 @@ const QuestionBody = () => {
     wrongAnswers,
     rightAnswer,
     score,
+    error,
     setScore,
     firstCat,
     setFirstCat
@@ -52,20 +54,17 @@ const QuestionBody = () => {
       return "wrong";
     else if (i === rightAnswer[indexCounter]) return "select";
   };
-  const handleCheck = (i) => {
-    setSelected(i);
-    if (i === rightAnswer[indexCounter]) setScore(score + 10);
-    setError(false);
-  };
 
   const nextHandler = () => {
 
-    if (selected) {
-      setSelected();
-    } else setError("Please select an option first");
-    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+ 	const nextHandler = () => {
+		// console.log("first");
+		if (selected) {setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+			setSelected();
+		} else setError(true);
+		
+	};
 
-  };
 
   const answers = [];
 
@@ -76,9 +75,11 @@ const QuestionBody = () => {
   categories.push("arts", "film", "food", "general knowledge", "geography", "history", "music", "science", "society", "sport")
 
 
-  const x = (e) => {
-    setCat(e.target.value);
-  };
+  // useEffect(() => {
+  //   setFirstCat(cat)
+  //   console.log("firstCat is :", cat);
+
+  // }, [])
 
   useEffect(() => {
     setFirstCat(cat)
@@ -135,6 +136,10 @@ const QuestionBody = () => {
             )}
 
           <button className="play-btn" onClick={nextHandler}>next</button>
+          {selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>Correct answer</p></Popup>}
+				{selected !== rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+					<p>wrong answer</p></Popup>}
         </header>
       </div>
 
@@ -159,5 +164,5 @@ const QuestionBody = () => {
     </div>
   );
 };
-
+}
 export default QuestionBody;

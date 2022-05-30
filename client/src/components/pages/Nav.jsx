@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import Form from '../authentication/Form';
 import '../../styling/nav.css';

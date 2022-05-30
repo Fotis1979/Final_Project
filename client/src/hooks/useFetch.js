@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Questions from "../components/pages/Questions";
 
 const useFetch = (url, initialState) => {
   const [data, setData] = useState(initialState);

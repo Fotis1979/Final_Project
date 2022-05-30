@@ -1,6 +1,6 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import MyContext from '../../../context/MyContext';
-import '../../../styling/rewards.css';
+
 
 const Counter = () => {
 	const context = useContext(MyContext);

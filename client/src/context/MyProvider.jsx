@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import MyContext from './MyContext';
-import { useState } from 'react';
-import '../../src/App.css';
-import useFetch from '../hooks/useFetch';
+import { useEffect } from "react";
+import MyContext from "./MyContext";
+import { useState } from "react";
+import useFetch from "../hooks/useFetch";
+import "../../src/App.css";
 
 const MyProvider = ({ children }) => {
+<<<<<<< HEAD
   const [name, setName] = useState("");
   const [isProfileSaved, setIsProfileSaved] = useState(false);
   const [birthDate, setBirthDate] = useState("");
@@ -47,6 +48,23 @@ const MyProvider = ({ children }) => {
   const [difficulty, setDifficulty] = useState(["easy", "medium", "hard"]);
   const [diff, setDiff] = useState("easy");
   const [cat, setCat] = useState();
+=======
+  const [message, setMessage] = useState();
+  const [clicked,setClicked]= useState(false)
+  const [streak,setStreak]= useState(0)
+  const [messageB, setMessageB] = useState();
+  const [color, setColor] = useState();
+  const [score, setScore] = useState(0);
+  const [storedScore, setStoredScore] = useState();
+  const [gameMode, setGameMode] = useState();
+  const [seconds, setSeconds] = useState(0);
+  const [error, setError] = useState(false);
+  const [number, setNumber] = useState(33); 
+  const [gameDiff, setGameDiff] = useState()
+  const [difficulty, setDifficulty] = useState(["easy", "medium", "hard"]);
+  const [diff, setDiff] = useState("easy");
+  const [cat, setCat] = useState("");
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
   const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
   const [email, setEmail] = useState("");
@@ -56,6 +74,7 @@ const MyProvider = ({ children }) => {
   const [selected, setSelected] = useState();
   const [rightAnswer, setRightAnswer] = useState([]);
   const [answers, setAnswers] = useState([]);
+<<<<<<< HEAD
   const [indexCounter, setIndexCounter] = useState(0);
   const [indexCounter2, setIndexCounter2] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -65,20 +84,42 @@ const MyProvider = ({ children }) => {
   const [next, setNext] = useState(false);
   const [timerTrigger, setTimerTrigger] = useState();
   const [diamondPoints, setDiamondPoints] = useState(0);
+=======
+	const [indexCounter, setIndexCounter] = useState(0);
+	const [gameOver, setGameOver] = useState(false);
+	const [answerPopup, setAnswerPopup] = useState(false);
 
+
+  const [name, setName] = useState("");
+  const [isProfileSaved, setIsProfileSaved] = useState(false);
+  const [birthDate, setBirthDate] = useState("");
+  const [loginMsg, setLoginMsg] = useState("");
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
+
+  const [highScoreResult, setHighScoreResult] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
 
   useEffect(() => {
-    if (results !== null) {
+    if (results !== null ) {
       setQuestionArray(results.map((item) => item.question));
       setWrongAnswers(results.map((item) => item.incorrectAnswers));
       setRightAnswer(results.map((item) => item.correctAnswer));
+      
     }
   }, [results]);
+
+  useEffect(()=> {
+
+    console.log("GAMEOVER IS :",gameOver);
+  },[indexCounter])
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
@@ -87,6 +128,7 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+<<<<<<< HEAD
         diamondPoints,
         setDiamondPoints,
         losePoints, 
@@ -101,10 +143,13 @@ const MyProvider = ({ children }) => {
         setMode,
         timeUp,
         setTimeUp,
+=======
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
         highScoreResult,
         setHighScoreResult,
         highScore,
         setHighScore,
+<<<<<<< HEAD
         streakScore,
         setStreakScore,
         categories,
@@ -148,6 +193,19 @@ const MyProvider = ({ children }) => {
         firstCat,
         setFirstCat,
         answers,
+=======
+gameDiff, 
+setGameDiff,    
+answers,
+clicked,
+setClicked,
+streak,
+setStreak,
+selected, 
+setSelected,
+storedScore,
+setStoredScore,
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
         setAnswers,
         error,
         setError,
@@ -174,6 +232,7 @@ const MyProvider = ({ children }) => {
         setDiff,
         message,
         setMessage,
+<<<<<<< HEAD
         messageB,
         setMessageB,
         messageC,
@@ -182,6 +241,10 @@ const MyProvider = ({ children }) => {
         setMessageD,
         messageStreak, 
         setMessageStreak,
+=======
+        messageB, 
+        setMessageB,
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
         color,
         setColor,
         rightAnswer,
@@ -200,6 +263,10 @@ const MyProvider = ({ children }) => {
         setEmail,
         pass,
         setPass,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
         birthDate,
         setBirthDate,
         isProfileSaved,
@@ -208,12 +275,23 @@ const MyProvider = ({ children }) => {
         setLoginMsg,
         name,
         setName,
+<<<<<<< HEAD
         
+=======
+    	answerPopup,
+				setAnswerPopup
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
       }}
     >
       {children}
     </MyContext.Provider>
   );
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 781f5371551eaa35b3103ca8c2d2d78f84632446
 };
 
 export default MyProvider;

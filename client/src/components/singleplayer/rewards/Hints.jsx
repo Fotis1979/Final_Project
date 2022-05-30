@@ -3,7 +3,7 @@ import MyContext from '../../../context/MyContext';
 
 
 const Hints = () => {
-	const context = useContext(MyContext);
+  const context = useContext(MyContext);
 
 	const { hints } = context;
 

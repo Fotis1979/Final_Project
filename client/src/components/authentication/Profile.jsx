@@ -119,7 +119,7 @@ const Profile = () => {
           />
           <label htmlFor="birthDate">birthDate</label>
           <input
-            type="number"
+            type="text"
             name="birthDate"
             placeholder="Birth date"
             value={birthDate}
