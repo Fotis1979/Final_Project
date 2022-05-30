@@ -17,6 +17,7 @@ import ErrorMessage from "../../errorMessage/ErrorMessage";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
+    
     clicked,
     next,
     setNext,
@@ -62,11 +63,10 @@ const QuestionBody = () => {
     message,
     showStreak,
     setShowStreak,
-    setClicked,
+  
     pie,
     storedScore,
     diamondPoints,
-    gameOver
 
   } = context;
 
@@ -269,6 +269,7 @@ const QuestionBody = () => {
 
   useEffect(() => {console.log("GAMEOVER IS : ", gameOver)
   }, [pie])
+
   useEffect(() => {
     gameDiff === "easy" &&
       seconds === 21 &&
@@ -281,6 +282,7 @@ const QuestionBody = () => {
       setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
   }, [seconds]);
 
+  useEffect(()=>{
     console.log("TiMERTriGGeR : ", timerTrigger);
   }, [timerTrigger])
 
@@ -392,7 +394,7 @@ const QuestionBody = () => {
 
           {timeUp === true && setSelected(wrongAnswers[0])}
 
-
+          </header>
       </div>
     </div>
   );
