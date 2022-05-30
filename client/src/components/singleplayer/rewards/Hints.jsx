@@ -8,7 +8,7 @@ const Hints = () => {
 	const { hints } = context;
 
 	return (
-		<div className='Counter'>
+		<div className='rewards--btn'>
 			<span>HINTS : {hints}</span>
 		</div>
 	);

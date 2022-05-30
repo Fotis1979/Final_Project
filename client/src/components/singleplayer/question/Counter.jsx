@@ -100,7 +100,7 @@ const Counter = () => {
 	}, [messageStreak])
 
 	return (
-		<div className='Counter'>
+		<div className='rewards--btn'>
 			<span>SCORE : {score}</span>
 		</div>
 	);

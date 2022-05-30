@@ -1,18 +1,18 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import MyContext from "../../../context/MyContext";
-import { useNavigate } from "react-router";
-import { useContext, useState, useEffect } from "react";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questions.css";
 import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
+import Popup from '../../Popup/Popup'
+import x from '../../../assets/images/x.png'
 
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
-
+    setAnswerPopup,
     loading,
     cat,
     setCat,
@@ -29,14 +29,20 @@ const QuestionBody = () => {
     error,
     setScore,
     firstCat,
-    setFirstCat
+    setFirstCat,
+    answerPopup
 
   } = context;
 
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-
+  const handleCheck = (i) => {
+    setSelected(i);
+    setAnswerPopup(true);
+    if (i === rightAnswer[indexCounter]) return setScore(score + 10);
+    setError(false);
+    }; 
   useEffect(() => {
     console.log(rightAnswer[indexCounter])
   }, [indexCounter])
@@ -55,7 +61,6 @@ const QuestionBody = () => {
     else if (i === rightAnswer[indexCounter]) return "select";
   };
 
-  const nextHandler = () => {
 
  	const nextHandler = () => {
 		// console.log("first");
@@ -81,11 +86,7 @@ const QuestionBody = () => {
 
   // }, [])
 
-  useEffect(() => {
-    setFirstCat(cat)
-    console.log("firstCat is :", cat);
-
-  }, [])
+  
 
   const pop = (e) => {
 
@@ -164,5 +165,5 @@ const QuestionBody = () => {
     </div>
   );
 };
-}
+
 export default QuestionBody;

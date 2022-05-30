@@ -23,7 +23,6 @@ CSS HEX
 	padding-left: 20px;
 	text-align: center;
 	border-radius: 100%;
-	border: 1rem dotted #fdea03ff;
 }
 
 .questions--section {
@@ -35,12 +34,10 @@ CSS HEX
 	margin-bottom: 20px;
 	padding: 5px;
 	font-size: large;
-
 	border-radius: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	border: 5px solid #e57fedff;
 }
 .answers--section {
@@ -115,7 +112,9 @@ CSS HEX
 	padding: 5px 40px;
 	width: 100%;
 	border-radius: 50px;
-	color: #fff;
+	color: rgb(255, 255, 255);
+	background-color: #18a0fb;
+
 	/*border: solid 1px #020a89ff;*/
 }
 .singleOpt {
