@@ -1,36 +1,43 @@
-import { useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
+import arrayRandomize from '../../hooks/arrayRandomize'
 import "../../../src/styling/settings.css";
-import { Link } from "react-router-dom";
+
 const Settings = () => {
 
   const navigate = useNavigate();
+
   const context = useContext(MyContext);
   const {
-    setSeconds,
+
     loading,
     eror,
-    setGameDiff
-  } = context;
+    setGameDiff,
+    categories,
+    setCategories,
+    gameOver,
+    mode,
+    setMode
 
-  const [mode, setMode] = useState("NoTime");
-  const [s, setS] = useState("NoTime"); 
+  } = context;
 
   const gameDifficulty = (e) => {
     setGameDiff(e.target.value)
   }
 
-  // const n = (e) => {
-  //   setNumber(e.target.value);
-  // };
+  useEffect(() => {
+    gameOver === (false) &&
+      setCategories(arrayRandomize(categories).slice(4))
+    console.log(categories);
+  }, [])
+
 
   const gameMode = (e) => {
-    setMode(e.target.value);
-    console.log(mode);
+    setMode(e.target.value)
   };
-  
+
   const checkHandler = () => {
     if (mode === "NoTime") {
       navigate("/questions");
@@ -51,14 +58,13 @@ const Settings = () => {
       </button>
       <h1>ChOOSE SETTINGS</h1>
       <div className="settings">
-      
+
         <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"easy"}> BEgiNNer MODE  </button>
 
         <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"medium"}> AdVanceD MODE  </button>
 
         <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"hard"}> ExPeRT MODE  </button>
 
-      
         <label>Game Mode</label>
 
         <select className="settings--mode" onChange={(e) => gameMode(e)}>

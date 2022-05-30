@@ -10,22 +10,13 @@ const Form = () => {
     context;
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/profile");
-  //   }
-  // }, []);
+	console.log(email);
+	const inputHandler = (e) => {
 
-  console.log("email:", email);
-  console.log("pass:", pass);
-  console.log({ email, pass });
-
-  const inputHandler = (e) => {
-    //console.log(e);
-    switch (e.target.name) {
-      case "email":
-        setEmail(e.target.value);
-        break;
+		switch (e.target.name) {
+			case 'email':
+				setEmail(e.target.value);
+				break;
 
       case "pass":
         setPass(e.target.value);
@@ -51,23 +42,20 @@ const Form = () => {
       body: JSON.stringify({ email, pass }),
     };
 
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.token !== undefined) {
-          localStorage.setItem("token", result.token);
-          localStorage.setItem("email", email);
-          setHighScore(localStorage.getItem("highScore"));
+		fetch(url, options)
+			.then((response) => response.json())
+			.then((result) => {
+				if (result.token !== undefined) {
+					localStorage.setItem('token', result.token);
+					localStorage.setItem('email', email);
+					setEmail(email);
+					navigate('/settings');
+				} else {
+					alert(result.msg);
+				}
+			});
+	};
 
-          console.log(highScore);
-          setEmail(email);
-          navigate("/profile");
-        } else {
-          alert(result.msg);
-        }
-        //alert(result);
-      });
-  };
 
   const registerHandler = () => {
     const url = "http://localhost:8080/auth/register";

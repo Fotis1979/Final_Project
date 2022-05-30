@@ -1,34 +1,22 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Form from '../authentication/Form';
-import MyContext from '../../context/MyContext';
-
 import '../../styling/nav.css';
 
+
 const Nav = () => {
-	const context = useContext(MyContext);
-	const {
-		email,
-		setEmail,
-		pass,
-		setPass,
-		name,
-		setName,
-		avatarFile,
-		setAvatarFile,
-		birthDate,
-		setBirthDate,
-		isProfileSaved,
-		setIsProfileSaved,
-		loginMsg,
-		setLoginMsg,
-	} = context;
 
 	return (
 		<nav>
 			<div className='nav--ul'>
 				<Form />
+				{localStorage.getItem('token') ? (
+					<NavLink to='/highScore'>
+						<span>HighScore</span>
+					</NavLink>
+				) : (
+					''
+				)}
 				<NavLink to='/'>
 					<span>Home</span>
 				</NavLink>

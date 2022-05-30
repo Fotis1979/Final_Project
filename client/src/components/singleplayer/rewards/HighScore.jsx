@@ -6,14 +6,11 @@ const HighScore = () => {
 
   const {
     highScore,
-    setHighScore,
     highScoreResult,
     score,
-    setScore,
     setHighScoreResult,
   } = context;
 
-  /// set highscore to localstorage
   useEffect(() => {
     const scoreSum = Number(score) + Number(highScore);
     setHighScoreResult(scoreSum);

@@ -1,21 +1,21 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import MyContext from "../../../context/MyContext";
-import QuestionCounter from "./QuestionCounter";
-import Nav from "../../pages/Nav";
-import Hints from '../rewards/Hints'
-import Counter from "./Counter";
-import Rewards from "../rewards/Rewards";
-import arrayRandomize from '../../../hooks/arrayRandomize';
+import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questions.css";
-import Popup from '../../Popup/Popup';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
+import Rewards from "../rewards/Rewards";
+import Nav from "../../pages/Nav";
+import Popup from '../../Popup/Popup'
+import x from '../../../assets/images/x.png'
+
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
+    setAnswerPopup,
     loading,
-    results,
+    cat,
+    setCat,
     setStoredScore,
     setError,
     number,
@@ -28,18 +28,21 @@ const QuestionBody = () => {
     score,
     error,
     setScore,
-    answerPopup,
-		setAnswerPopup,
+    firstCat,
+    setFirstCat,
+    answerPopup
+
   } = context;
 
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-  // console.log(questionArray);
-  // console.log(wrongAnswers);
-  // console.log(rightAnswer);
-
-
+  const handleCheck = (i) => {
+    setSelected(i);
+    setAnswerPopup(true);
+    if (i === rightAnswer[indexCounter]) return setScore(score + 10);
+    setError(false);
+    }; 
   useEffect(() => {
     console.log(rightAnswer[indexCounter])
   }, [indexCounter])
@@ -58,13 +61,6 @@ const QuestionBody = () => {
     else if (i === rightAnswer[indexCounter]) return "select";
   };
 
-	const handleCheck = (i) => {
-		setSelected(i);
-		setAnswerPopup(true);
-		if (i === rightAnswer[indexCounter]) return setScore(score + 10) ;
-		setError(false)
-		
-	};
 
  	const nextHandler = () => {
 		// console.log("first");
@@ -83,15 +79,14 @@ const QuestionBody = () => {
   const categories = []
   categories.push("arts", "film", "food", "general knowledge", "geography", "history", "music", "science", "society", "sport")
 
-  // const x = (e) => {
-  //   setCat(e.target.value);
-  // };
 
   // useEffect(() => {
   //   setFirstCat(cat)
   //   console.log("firstCat is :", cat);
 
   // }, [])
+
+  
 
   const pop = (e) => {
 
@@ -106,20 +101,6 @@ const QuestionBody = () => {
     <div>
       <Nav />
       <Rewards />
-			{error && <ErrorMessage>Please select an option first</ErrorMessage>}
-
-			{(hints === 1 || hints === 2) && (
-				<button
-					className='rewards--btn'
-					onClick={() =>
-						wrongAnswers[indexCounter + 1].length > 1 &&
-						wrongAnswers[indexCounter + 1].pop() &&
-						setHints((prev) => prev - 1)
-					}
-				>
-					{hints === 2 ? 'DoubleClick for 50/50 CHANCHE' : 'useHint'}
-				</button>
-			)}
 
       <div className="qa--section">
         <header className="App-header">
@@ -142,7 +123,7 @@ const QuestionBody = () => {
             ))}
           </div>
 
-          <p className="cat">Category : {results[indexCounter].category}</p>
+          <p className="cat">Category : {cat}</p>
           {!selected && (hints === 1 || hints >= 2) && wrongAnswers[indexCounter].length >= 2 &&
             (
               <button
@@ -155,7 +136,6 @@ const QuestionBody = () => {
               </button>
             )}
 
-          {/* <QuestionTimer /> */}
           <button className="play-btn" onClick={nextHandler}>next</button>
           {selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
 					<p>Correct answer</p></Popup>}
@@ -164,8 +144,7 @@ const QuestionBody = () => {
         </header>
       </div>
 
-{/* 
-      { score % 50 === 0 && score !== 0 && !selected ?
+      {score % 50 === 0 && score !== 0 && !selected ?
         <select onChange={(e) => x(e)}>
           <option >
             Choose new CateGory
@@ -179,18 +158,11 @@ const QuestionBody = () => {
           <option onChange={() => x(firstCat)} value={firstCat}>
             YOUR INITIAL CATEGORY
           </option>
-
+         
         </select>
         : setCat(cat)
-      } */}
-
-      {/* !**********!***************!******!********! */}
-      <QuestionCounter />
-      {/* <QuestionTimer /> */}
-      {/* <Timer />
-      <Counter /> */}
-      {/* { questions && <p>{questions}</p> } */}
-  </div>
+      }
+    </div>
   );
 };
 

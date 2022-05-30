@@ -23,7 +23,6 @@ CSS HEX
 	padding-left: 20px;
 	text-align: center;
 	border-radius: 100%;
-	border: 1rem dotted #fdea03ff;
 }
 
 .questions--section {
@@ -35,21 +34,23 @@ CSS HEX
 	margin-bottom: 20px;
 	padding: 5px;
 	font-size: large;
-
 	border-radius: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	border: 5px solid #e57fedff;
 }
 .answers--section {
+	position: relative;
 	background-color: #fdea03ff;
 	width: 50vw;
 	padding: 15px;
 	margin-left: 25vw;
 	border-radius: 30px;
 	border: 5px solid #e57fedff;
+	animation-name: points;
+	animation-duration: 4.5s;
+	transition-timing-function:ease-in-out;
 }
 
 .align-items {
@@ -57,6 +58,7 @@ CSS HEX
 	flex-direction: column;
 	align-items: center;
 	padding: 5px;
+	
 }
 
 .question {
@@ -65,7 +67,13 @@ CSS HEX
 	flex-direction: column;
 	align-items: center;
 }
+.quest{
+	position: relative;
+	animation-name: question;
+	animation-duration: 2s;
+	transition-timing-function:ease-in-out;
 
+}
 .singleQuestion {
 	width: 95%;
 	min-height: 350px;
@@ -89,19 +97,36 @@ CSS HEX
 }
 
 .singleOption {
-	background-color: #18a0fb;
+	position: relative;
 	font-family: 'Coiny', cursive;
 	height: 100%;
 	margin: 10px;
-	font-size: 1rem;
+	font-size: 1.3rem;
+	animation-name: points;
+	animation-duration: 4.5s;
+	transition-timing-function:ease-in-out;
+
 	/*display: flex;*/
 	/*flex-grow: 1;*/
 	/*flex-direction: row;*/
 	padding: 5px 40px;
 	width: 100%;
 	border-radius: 50px;
-	color: #fff;
+	color: rgb(255, 255, 255);
+	background-color: #18a0fb;
+
 	/*border: solid 1px #020a89ff;*/
+}
+.singleOpt {
+	font-family: 'Coiny', cursive;
+	height: 100%;
+	margin: 10px;
+	font-size: 1.3rem;
+	padding: 5px 40px;
+	width: 100%;
+	border-radius: 50px;
+	color: #fff;
+	background-color: #18a0fb;
 }
 
 @media (max-width: 614px) {
@@ -181,15 +206,230 @@ CSS HEX
 	justify-content: center;
 }
 
-/*
+.cat{
 
-CSS HEX
---electric-blue: #00EBFCff;
---violet-web: #E57FEDff;        complement
---baby-powder: #FDFDFBff;
---phthalo-blue: #020A89ff;      dominant
-	button blue: #18A0FB
---middle-yellow: #FDEA03ff;     accent
-	dark green: #66D700
-	bright green: #ACFD63
-*/
+	font-size: 40px;
+	color: red;
+	text-align: center;
+
+}
+.cat2{
+	margin-left: 140px;
+	position: relative;
+	font-size: 40px;
+	color: red;
+	animation-name: points;
+	animation-duration: 1s;
+	transition-timing-function:ease-in-out;
+	width: 100%;
+	
+}
+@keyframes points {
+    0% {
+      left: -126200px;
+    }
+    50% {
+      color: blanchedalmond;
+    }
+    60% {
+      color: blanchedalmond;
+    }
+    70% {
+    }
+    80% {
+      text-shadow: brown 2px 1px 2px;
+    }
+    90% {
+      text-shadow: brown 2px 1px 2px;
+    }
+    95% {
+    }
+    100% {
+      color: black;
+      left: 0px;
+    }
+  }
+
+  @keyframes question {
+    0% {
+      right: -126200px;
+    }
+    50% {
+      color: blanchedalmond;
+    }
+    60% {
+      color: blanchedalmond;
+    }
+    70% {
+    }
+    80% {
+      text-shadow: brown 2px 1px 2px;
+    }
+    90% {
+      text-shadow: brown 2px 1px 2px;
+    }
+    95% {
+    }
+    100% {
+      color: black;
+      right: 0px;
+    }
+  }
+  .cat3{
+    text-align: center;
+	position: relative;
+	font-size: 40px;
+	color: red;
+	animation-name: points;
+	animation-duration: .4s;
+	transition-timing-function:ease-in-out;
+	width: 100%;
+	
+}
+
+.round{
+	color:darkmagenta;
+	font-size: 70px;
+	margin: auto;
+	width: 100%;
+	text-align: center;	
+	font-family:'Faster One';
+	padding-top: 20px;
+}
+
+
+h1{
+	color: red;
+
+}
+
+.mode{
+	font-size: 25px;
+	color: darkmagenta;
+	text-align: center;
+	font-family:'Faster One';
+
+
+
+}
+
+.gameOver{
+
+display: grid;
+text-align: center;
+justify-content: center;
+
+}
+
+.finalScore{
+
+	padding-top: 30px;
+	font-size: 45px;
+	color: rgb(233, 0, 0);
+
+}
+
+.diamondGeo{
+
+	width: 90px;
+	height: 90px;
+	right: 300px;
+	bottom: 10px;
+	object-fit: contain;
+}
+
+
+.diamondArt{
+	width: 90px;
+	height: 90px;
+	right: 360px;
+	bottom: 30px;
+	object-fit: contain;
+}
+
+.diamondSports{
+
+	width: 90px;
+	height: 90px;
+	right:420px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondFood{
+
+	width: 90px;
+	height: 90px;
+	right:480px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondFilm{
+
+	width: 90px;
+	height: 90px;
+	right:540px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondGen{
+
+	width: 90px;
+	height: 90px;
+	right:600px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondMus{
+
+	width: 90px;
+	height: 90px;
+	right:730px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondHist{
+
+	width: 90px;
+	height: 90px;
+	right:830px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondSci{
+
+	width: 90px;
+	height: 90px;
+	right:930px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.diamondSoc{
+
+	width: 90px;
+	height: 90px;
+	right:990px;
+	bottom: 10px;
+	object-fit: contain;
+}
+.popUp{
+	right: 700px;
+    bottom: 135px;
+	position: absolute;
+	width: 400px;
+	z-index: 33;
+}
+
+.img2{
+	margin-bottom: 33px;
+	padding: 0;
+	position: relative;
+	border: 2px solid rebeccapurple;
+	object-fit: cover;
+	border-radius: 45%;
+	width: 350px;
+}
+
+.again{
+	display: flex;
+	flex-direction: column;
+}
