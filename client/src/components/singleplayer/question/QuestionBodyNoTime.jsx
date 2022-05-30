@@ -1,19 +1,21 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import MyContext from "../../../context/MyContext";
 import QuestionCounter from "./QuestionCounter";
 import Nav from "../../pages/Nav";
-import Hints from '../rewards/Hints'
+import Hints from "../rewards/Hints";
 import Counter from "./Counter";
 import Rewards from "../rewards/Rewards";
-import arrayRandomize from '../../../hooks/arrayRandomize';
+import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questions.css";
-import Popup from '../../Popup/Popup';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
+import Popup from "../../Popup/Popup";
+import ErrorMessage from "../../errorMessage/ErrorMessage";
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
+    cat,
     loading,
     results,
     setStoredScore,
@@ -21,6 +23,8 @@ const QuestionBody = () => {
     number,
     eror,
     hints,
+    highScore,
+    setHighScore,
     setHints,
     questionArray,
     wrongAnswers,
@@ -29,28 +33,58 @@ const QuestionBody = () => {
     error,
     setScore,
     answerPopup,
-		setAnswerPopup,
+    setAnswerPopup,
+    loginMsg,
+    setLoginMsg,
+    setHighScoreResult,
+    highScoreResult,
   } = context;
 
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
 
-  // console.log(questionArray);
-  // console.log(wrongAnswers);
-  // console.log(rightAnswer);
+  useEffect(() => {
+    const url = "http://localhost:8080/rewards/save";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ hints, highScoreResult }),
+    };
 
+    fetch(url, options)
+      .then((response) => response.text())
+      .then((result) => {
+        setHints(result.data.hints);
+        setHighScoreResult(result.data.highScoreResult);
+      });
+  }, [hints, highScoreResult, score]);
+
+  //setting highScore
+  useEffect(() => {
+    let scoreSum = Number(score) + Number(highScore);
+    if (scoreSum > highScoreResult) {
+      setHighScoreResult(scoreSum);
+    }
+  }, [score, highScore]);
 
   useEffect(() => {
-    console.log(rightAnswer[indexCounter])
-  }, [indexCounter])
+    for (let i = 50; i <= 55; i++)
+      score !== 0 && score % i === 0 && setHints((prev) => prev + 1);
+  }, [score, setHints]);
+
+  useEffect(() => {
+    console.log(rightAnswer[indexCounter]);
+  }, [indexCounter]);
 
   const nav = useNavigate();
 
-  indexCounter === (number - 1) + 1 && setStoredScore(score)
-  indexCounter === (number - 1) + 1 && nav("/game_over");
+  indexCounter === number - 1 + 1 && setStoredScore(score);
+  indexCounter === number - 1 + 1 && nav("/game_over");
 
   const handleSelect = (i) => {
-
     if (selected === i && selected === rightAnswer[indexCounter])
       return "select";
     else if (selected === i && selected !== rightAnswer[indexCounter])
@@ -58,30 +92,39 @@ const QuestionBody = () => {
     else if (i === rightAnswer[indexCounter]) return "select";
   };
 
-	const handleCheck = (i) => {
-		setSelected(i);
-		setAnswerPopup(true);
-		if (i === rightAnswer[indexCounter]) return setScore(score + 10) ;
-		setError(false)
-		
-	};
+  const handleCheck = (i) => {
+    setSelected(i);
+    setAnswerPopup(true);
+    if (i === rightAnswer[indexCounter]) return setScore(score + 10);
+    setError(false);
+  };
 
- 	const nextHandler = () => {
-		// console.log("first");
-		if (selected) {setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-			setSelected();
-		} else setError(true);
-		
-	};
-
+  const nextHandler = () => {
+    // console.log("first");
+    if (selected) {
+      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+      setSelected();
+    } else setError(true);
+  };
 
   const answers = [];
 
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  const categories = []
-  categories.push("arts", "film", "food", "general knowledge", "geography", "history", "music", "science", "society", "sport")
+  const categories = [];
+  categories.push(
+    "arts",
+    "film",
+    "food",
+    "general knowledge",
+    "geography",
+    "history",
+    "music",
+    "science",
+    "society",
+    "sport"
+  );
 
   // const x = (e) => {
   //   setCat(e.target.value);
@@ -94,10 +137,9 @@ const QuestionBody = () => {
   // }, [])
 
   const pop = (e) => {
-
-    e.pop()
-    setHints((prev) => (prev - 1))
-  }
+    e.pop();
+    setHints((prev) => prev - 1);
+  };
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -106,20 +148,20 @@ const QuestionBody = () => {
     <div>
       <Nav />
       <Rewards />
-			{error && <ErrorMessage>Please select an option first</ErrorMessage>}
+      {error && <ErrorMessage>Please select an option first</ErrorMessage>}
 
-			{(hints === 1 || hints === 2) && (
-				<button
-					className='rewards--btn'
-					onClick={() =>
-						wrongAnswers[indexCounter + 1].length > 1 &&
-						wrongAnswers[indexCounter + 1].pop() &&
-						setHints((prev) => prev - 1)
-					}
-				>
-					{hints === 2 ? 'DoubleClick for 50/50 CHANCHE' : 'useHint'}
-				</button>
-			)}
+      {(hints === 1 || hints === 2) && (
+        <button
+          className="rewards--btn"
+          onClick={() =>
+            wrongAnswers[indexCounter + 1].length > 1 &&
+            wrongAnswers[indexCounter + 1].pop() &&
+            setHints((prev) => prev - 1)
+          }
+        >
+          {hints === 2 ? "DoubleClick for 50/50 CHANCHE" : "useHint"}
+        </button>
+      )}
 
       <div className="qa--section">
         <header className="App-header">
@@ -141,30 +183,41 @@ const QuestionBody = () => {
               </div>
             ))}
           </div>
-
           <p className="cat">Category : {results[indexCounter].category}</p>
-          {!selected && (hints === 1 || hints >= 2) && wrongAnswers[indexCounter].length >= 2 &&
-            (
+
+          {/* >>>>>>   repeated need to be deleted    <<<<<<<<*/}
+
+          {/* {!selected &&
+            (hints === 1 || hints >= 2) &&
+            wrongAnswers[indexCounter].length >= 2 && (
               <button
                 className="Counter"
-                onClick={() =>
-                  pop(wrongAnswers[indexCounter])
-                }
+                onClick={() => pop(wrongAnswers[indexCounter])}
               >
-                {hints >= 2 ? "DoubleClick for 50/50 CHANCE" : hints === 1 && "useHint"}
+                {hints >= 2
+                  ? "DoubleClick for 50/50 CHANCE"
+                  : hints === 1 && "useHint"}
               </button>
-            )}
-
+          )}*/}
           {/* <QuestionTimer /> */}
-          <button className="play-btn" onClick={nextHandler}>next</button>
-          {selected === rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
-					<p>Correct answer</p></Popup>}
-				{selected !== rightAnswer[indexCounter]&&<Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
-					<p>wrong answer</p></Popup>}
+
+          <button className="play-btn" onClick={nextHandler}>
+            next
+          </button>
+          {selected === rightAnswer[indexCounter] && (
+            <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+              <p>Correct answer</p>
+            </Popup>
+          )}
+          {selected !== rightAnswer[indexCounter] && (
+            <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+              <p>wrong answer</p>
+            </Popup>
+          )}
         </header>
       </div>
 
-{/* 
+      {/* 
       { score % 50 === 0 && score !== 0 && !selected ?
         <select onChange={(e) => x(e)}>
           <option >
@@ -190,7 +243,7 @@ const QuestionBody = () => {
       {/* <Timer />
       <Counter /> */}
       {/* { questions && <p>{questions}</p> } */}
-  </div>
+    </div>
   );
 };
 

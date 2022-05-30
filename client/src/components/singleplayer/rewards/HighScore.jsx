@@ -14,17 +14,14 @@ const HighScore = () => {
   } = context;
 
   /// set highscore to localstorage
-  useEffect(() => {
-    const scoreSum = Number(score) + Number(highScore);
-    setHighScoreResult(scoreSum);
-    localStorage.setItem("highScore", scoreSum);
-  }, [score, highScore]);
 
   return (
-    <div className="rewards--btn">
-      <label>High Score :</label>
-      <span>{highScoreResult}</span>
-    </div>
+    localStorage.getItem("token") && (
+      <div className="rewards--btn">
+        <label>High Score :</label>
+        <span>{highScoreResult}</span>
+      </div>
+    )
   );
 };
 

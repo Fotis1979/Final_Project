@@ -6,8 +6,16 @@ import "../../styling/form.css";
 
 const Form = () => {
   const context = useContext(MyContext);
-  const { email, setEmail, pass, setPass, highScore, setHighScore, setHints } =
-    context;
+  const {
+    email,
+    setEmail,
+    pass,
+    setPass,
+    highScore,
+    setHighScore,
+    setHints,
+    setHighScoreResult,
+  } = context;
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -57,17 +65,33 @@ const Form = () => {
         if (result.token !== undefined) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("email", email);
-          setHighScore(localStorage.getItem("highScore"));
 
-          console.log(highScore);
           setEmail(email);
-          navigate("/profile");
+          navigate("/settings");
         } else {
           alert(result.msg);
         }
         //alert(result);
       });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      fetch("http://localhost:8080/rewards/get", {
+        method: "GET",
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(123, result);
+
+          setHints(result.data.hints);
+          setHighScoreResult(result.data.highScoreResult);
+        });
+    }
+  }, []);
 
   const registerHandler = () => {
     const url = "http://localhost:8080/auth/register";
@@ -88,7 +112,7 @@ const Form = () => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    // localStorage.removeItem("highScore");
+    localStorage.removeItem("highScore");
     setEmail("");
     //
     navigate("/");

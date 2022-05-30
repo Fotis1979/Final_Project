@@ -12,6 +12,7 @@ import Hints from "../rewards/Hints";
 import "../../../App.css";
 import Popup from "../../Popup/Popup";
 import ErrorMessage from "../../errorMessage/ErrorMessage";
+import Diamonds from "../rewards/Diamonds";
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
@@ -49,7 +50,26 @@ const QuestionBody = () => {
     gameDiff,
     error,
     setError,
+    categories,
+    setCategories,
   } = context;
+
+  console.log(diff);
+
+  useEffect(() => {
+    console.log(categories);
+    // it display question from category and change it again, fetch again , display question again.
+
+    indexCounter >= 0 && indexCounter <= 5 && setCat(categories[indexCounter]);
+    indexCounter >= 6 &&
+      indexCounter <= 11 &&
+      setCat(categories[indexCounter - 6]);
+    indexCounter >= 12 &&
+      indexCounter <= 18 &&
+      setCat(categories[indexCounter - 12]);
+
+    console.log(rightAnswer[indexCounter]);
+  }, [indexCounter, categories]);
 
   const nav = useNavigate();
 
@@ -144,19 +164,19 @@ const QuestionBody = () => {
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  const categories = [];
-  categories.push(
-    "arts",
-    "film",
-    "food",
-    "general",
-    "geography",
-    "history",
-    "music",
-    "science",
-    "society",
-    "sport"
-  );
+  // const categories = [];
+  // categories.push(
+  //   "arts",
+  //   "film",
+  //   "food",
+  //   "general",
+  //   "geography",
+  //   "history",
+  //   "music",
+  //   "science",
+  //   "society",
+  //   "sport"
+  // );
 
   useEffect(() => {
     setCat(arrayRandomize(categories).slice(4));
@@ -172,17 +192,17 @@ const QuestionBody = () => {
     console.log(rightAnswer[indexCounter]);
   }, [indexCounter]);
 
-  useEffect(() => {
-    gameDiff === "easy" &&
-      seconds === 21 &&
-      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-    gameDiff === "medium" &&
-      seconds === 16 &&
-      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-    gameDiff === "hard" &&
-      seconds === 13 &&
-      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-  }, [seconds]);
+  // useEffect(() => {
+  //   gameDiff === "easy" &&
+  //     seconds === 21 &&
+  //     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+  //   gameDiff === "medium" &&
+  //     seconds === 16 &&
+  //     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+  //   gameDiff === "hard" &&
+  //     seconds === 13 &&
+  //     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+  // }, [seconds]);
 
   indexCounter > 0 && indexCounter <= 11 && setDiff("easy");
 
@@ -207,6 +227,7 @@ const QuestionBody = () => {
     <div>
       <Nav />
       <Rewards />
+      <Diamonds />
 
       {error && <ErrorMessage>Please select an option first</ErrorMessage>}
       <div className="qa--section">
@@ -215,7 +236,6 @@ const QuestionBody = () => {
             Q{indexCounter + 1} . {questionArray[indexCounter]}
           </div>
         }
-
         <div className="answers--section">
           {answers.sort().map((el, index) => (
             <div key={index} className="align-items">
@@ -234,7 +254,6 @@ const QuestionBody = () => {
           <Correct />
           <p>Your streak : {streak}</p>
         </div>
-
         <p className="cat2">Category : {results[indexCounter].category}</p>
         <p>{diff}</p>
         {!selected &&
@@ -264,8 +283,15 @@ const QuestionBody = () => {
             <p>wrong answer</p>
           </Popup>
         )}
-
-        {gameOver === false && <QuestionTimer />}
+        {gameDiff === "easy" && seconds < 21 ? (
+          <QuestionTimer />
+        ) : gameDiff === "medium" && seconds < 16 ? (
+          <QuestionTimer />
+        ) : gameDiff === "hard" && seconds < 13 ? (
+          <QuestionTimer />
+        ) : (
+          <p>"Time Up !! Click NEXT button"</p>
+        )}
       </div>
     </div>
   );

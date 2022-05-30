@@ -4,23 +4,47 @@ import MyContext from "../../../context/MyContext";
 
 const QuestionTimer = () => {
   const context = useContext(MyContext);
-  const { messageB, setMessageB, seconds, setSeconds, gameOver, gameDiff } =
-    context;
-
+  const {
+    messageB,
+    setMessageB,
+    seconds,
+    setSeconds,
+    gameOver,
+    diff,
+    sec,
+    setSec,
+    gameDiff,
+  } = context;
+  function incrementSeconds() {
+    gameOver === false && setSeconds((prev) => prev + 1);
+  }
   useEffect(() => {
-    function incrementSeconds() {
-      gameOver === false && setSeconds((prev) => prev + 1);
-    }
     setInterval(incrementSeconds, 1000);
-
-    gameOver === true && clearInterval(incrementSeconds);
   }, [gameOver]);
 
+  clearInterval(incrementSeconds);
   useEffect(() => {
     // seconds === 16 && setNewQuestion(true);
     seconds === 16 && setSeconds(0);
     // message && setSeconds(0);
   }, [seconds]);
+  // function incrementSeconds() {
+  //   setSeconds((prev) => prev + 1);
+  // }
+  // useEffect(() => {
+  //   if (sec !== 12) {
+  //     setTimeout(incrementSeconds, 1000);
+  //   } else if (sec === 12) {
+  //     setSeconds(0);
+  //   }
+  // }, [sec]);
+
+  // clearInterval(incrementSeconds);
+  // useEffect(() => {
+  //   // seconds === 16 && setNewQuestion(true);
+  //   seconds === 16 && setSeconds(0);
+  //   // message && setSeconds(0);
+  // }, [seconds]);
 
   useEffect(() => {
     gameDiff === "easy" && seconds === 21 && setSeconds(0);
@@ -36,6 +60,7 @@ const QuestionTimer = () => {
     setMessageB("U have 12 secs for each Question !");
   }
 
+  console.log(diff);
   return (
     <aside className="question-timer">
       <span className="sec">{seconds}</span>
