@@ -9,18 +9,9 @@ const Form = () => {
 	const { email, setEmail, pass, setPass } = context;
 	const navigate = useNavigate();
 
-	// useEffect(() => {
-	//   if (localStorage.getItem("token")) {
-	//     navigate("/profile");
-	//   }
-	// }, []);
-
-	console.log('email:', email);
-	console.log('pass:', pass);
-	console.log({ email, pass });
-
+	console.log(email);
 	const inputHandler = (e) => {
-		//console.log(e);
+
 		switch (e.target.name) {
 			case 'email':
 				setEmail(e.target.value);
@@ -61,7 +52,6 @@ const Form = () => {
 				} else {
 					alert(result.msg);
 				}
-				//alert(result);
 			});
 	};
 

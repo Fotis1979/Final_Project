@@ -5,52 +5,72 @@ import '../../src/App.css';
 import useFetch from '../hooks/useFetch';
 
 const MyProvider = ({ children }) => {
-
+  const [name, setName] = useState("");
+  const [isProfileSaved, setIsProfileSaved] = useState(false);
+  const [birthDate, setBirthDate] = useState("");
+  const [loginMsg, setLoginMsg] = useState("");
+  const [highScoreResult, setHighScoreResult] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [categories, setCategories] = useState(["arts", "general", "film", "food", "geography", "history", "music", "science", "society", "sport"])
+  const [clicked, setClicked] = useState(false)
+  const [username, setUsername] = useState()
+  const [mode, setMode] = useState("NoTime");
+  const [streak, setStreak] = useState(0)
+  const [pie, setPie] = useState(false)
+  const [diamonds, setDiamonds] = useState(0)
+  const [diamondGeo, setDiamondGeo] = useState({ easy: false, medium: false, hard: false })
+  const [diamondArts, setDiamondArts] = useState({ easy: false, medium: false, hard: false })
+  const [diamondGen, setDiamondGen] = useState({ easy: false, medium: false, hard: false })
+  const [diamondHist, setDiamondHist] = useState({ easy: false, medium: false, hard: false })
+  const [diamondSport, setDiamondSport] = useState({ easy: false, medium: false, hard: false })
+  const [diamondMus, setDiamondMus] = useState({ easy: false, medium: false, hard: false })
+  const [diamondFood, setDiamondFood] = useState({ easy: false, medium: false, hard: false })
+  const [diamondSoc, setDiamondSoc] = useState({ easy: false, medium: false, hard: false })
+  const [diamondSci, setDiamondSci] = useState({ easy: false, medium: false, hard: false })
+  const [diamondFilm, setDiamondFilm] = useState({ easy: false, medium: false, hard: false })
+  const [losePoints, setLosePoints] = useState(false);
   const [message, setMessage] = useState();
+  const [messageB, setMessageB] = useState();
+  const [messageC, setMessageC] = useState();
+  const [messageD, setMessageD] = useState();
+  const [messageStreak, setMessageStreak] = useState();  
   const [color, setColor] = useState();
   const [score, setScore] = useState(0);
-  const [category, setCategory] = useState();
-  const [difficulty, setDifficulty] = useState();
+  const [streakScore, setStreakScore] = useState(0);
+  const [storedScore, setStoredScore] = useState(0);
+  const [showStreak, setShowStreak] = useState("")
   const [gameMode, setGameMode] = useState();
   const [seconds, setSeconds] = useState(0);
-
   const [error, setError] = useState(false);
-  const [number, setNumber] = useState(10);
-  const [allAnswers, setAllAnswers] = useState();
-  const [correctAnswer, setCorrectAnswer] = useState();
-  const [incorrect, setIncorrect] = useState();
-  const [quest, setQuest] = useState([]);
-
+  const [number, setNumber] = useState(18);
+  const [gameDiff, setGameDiff] = useState()
+  const [difficulty, setDifficulty] = useState(["easy", "medium", "hard"]);
   const [diff, setDiff] = useState("easy");
-  const [cat, setCat] = useState("arts");
+  const [cat, setCat] = useState();
   const [randomAnswers, setRandomAnswers] = useState([]);
   const [hints, setHints] = useState(0);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
   const [questionArray, setQuestionArray] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [selected, setSelected] = useState();
   const [rightAnswer, setRightAnswer] = useState([]);
-
   const [answers, setAnswers] = useState([]);
-
   const [indexCounter, setIndexCounter] = useState(0);
+  const [indexCounter2, setIndexCounter2] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-
+  const [firstCat, setFirstCat] = useState();
+  const [img, setImg] = useState();
+  const [timeUp, setTimeUp] = useState(false);
+  const [next, setNext] = useState(false);
+  const [timerTrigger, setTimerTrigger] = useState();
+  const [diamondPoints, setDiamondPoints] = useState(0);
 
 
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
-  // const questionArray = results.map((item) => item.question); //set state to everything
-  //results.map((item) => setQuestionArray(item.question));
-  useEffect(() => {
-    if (results !== null) {
-      setQuestionArray(results.map((item) => item.question));
-      setWrongAnswers(results.map((item) => item.incorrectAnswers));
-      setRightAnswer(results.map((item) => item.correctAnswer));
-    }
-  }, [results]);
+
 
   useEffect(() => {
     if (results !== null) {
@@ -63,9 +83,70 @@ const MyProvider = ({ children }) => {
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
 
+
   return (
     <MyContext.Provider
       value={{
+        diamondPoints,
+        setDiamondPoints,
+        losePoints, 
+        setLosePoints,
+        timerTrigger, 
+        setTimerTrigger,
+        showStreak,
+        setShowStreak,
+        next, 
+        setNext,
+        mode,
+        setMode,
+        timeUp,
+        setTimeUp,
+        highScoreResult,
+        setHighScoreResult,
+        highScore,
+        setHighScore,
+        streakScore,
+        setStreakScore,
+        categories,
+        setCategories,
+        gameDiff,
+        setGameDiff,
+        diamondSoc, setDiamondSoc,
+        diamondSci, setDiamondSci,
+        diamondFilm,
+        setDiamondFilm,
+        diamondFood,
+        setDiamondFood,
+        diamondMus,
+        setDiamondMus,
+        diamondSport,
+        setDiamondSport,
+        diamondHist,
+        setDiamondHist,
+        diamondGen,
+        setDiamondGen,
+        diamondArts,
+        setDiamondArts,
+        diamondGeo,
+        setDiamondGeo,
+        diamonds,
+        setDiamonds,
+        pie,
+        setPie,
+        clicked,
+        setClicked,
+        username,
+        setUsername,
+        streak,
+        setStreak,
+        img,
+        setImg,
+        selected,
+        setSelected,
+        storedScore,
+        setStoredScore,
+        firstCat,
+        setFirstCat,
         answers,
         setAnswers,
         error,
@@ -74,9 +155,11 @@ const MyProvider = ({ children }) => {
         setQuestionArray,
         indexCounter,
         setIndexCounter,
+        indexCounter2,
+        setIndexCounter2,
         wrongAnswers,
         setWrongAnswers,
-        seconds, 
+        seconds,
         setSeconds,
         randomAnswers,
         setRandomAnswers,
@@ -91,15 +174,20 @@ const MyProvider = ({ children }) => {
         setDiff,
         message,
         setMessage,
+        messageB,
+        setMessageB,
+        messageC,
+        setMessageC,
+        messageD,
+        setMessageD,
+        messageStreak, 
+        setMessageStreak,
         color,
         setColor,
         rightAnswer,
         setRightAnswer,
         score,
         setScore,
-
-        category,
-        setCategory,
         difficulty,
         setDifficulty,
         gameMode,
@@ -112,14 +200,20 @@ const MyProvider = ({ children }) => {
         setEmail,
         pass,
         setPass,
+        birthDate,
+        setBirthDate,
+        isProfileSaved,
+        setIsProfileSaved,
+        loginMsg,
+        setLoginMsg,
+        name,
+        setName,
+        
       }}
     >
       {children}
     </MyContext.Provider>
   );
-
-		
-
 };
 
 export default MyProvider;

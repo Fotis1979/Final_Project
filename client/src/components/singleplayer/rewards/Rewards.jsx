@@ -1,14 +1,17 @@
-import '../../../styling/rewards.css';
-import Counter from '../question/Counter';
-import Hints from './Hints';
+import Counter from "../question/Counter";
+import Hints from "./Hints";
+import "../../../styling/questions.css";
+import HighScore from "./HighScore";
 
 const Rewards = () => {
-	return (
-		<div className='rewards--section'>
-			<Counter />
-			<Hints />
-		</div>
-	);
+
+return (
+<div className="rewards--section">
+<Counter />
+<Hints />
+<HighScore />
+</div>
+);
 };
 
-export default Rewards;
+export default Rewards; 
