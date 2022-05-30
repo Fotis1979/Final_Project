@@ -15,12 +15,16 @@ const QuestionTimer = () => {
 
   } = context;
 
-  useEffect(() => {
+const QuestionTimer = () => {
+  const context = useContext(MyContext);
+  const { messageB, setMessageB, seconds, setSeconds, gameOver, gameDiff } =
+    context;
 
+  useEffect(() => {
+ 
     gameDiff === "easy" && seconds === 21 && setSeconds(0);
     gameDiff === "medium" && seconds === 16 && setSeconds(0);
     gameDiff === "hard" && seconds === 13 && setSeconds(0);
-
   }, [seconds]);
 
   if (gameDiff === "easy") { setMessageB("U have 20 secs for each Question !") }

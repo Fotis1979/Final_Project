@@ -8,6 +8,11 @@ import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Diamonds from "../rewards/Diamonds";
+import Counter from "./Counter";
+import Hints from "../rewards/Hints";
+import "../../../App.css";
+import Popup from "../../Popup/Popup";
+import ErrorMessage from "../../errorMessage/ErrorMessage";
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
@@ -18,6 +23,10 @@ const QuestionBody = () => {
     timerTrigger,
     setTimerTrigger,
     categories,
+    answerPopup,
+    setAnswerPopup,
+    gameOver,
+    setClicked,
     setStoredScore,
     loading,
     number,
@@ -92,15 +101,13 @@ const QuestionBody = () => {
 
   const nav = useNavigate();
 
-  if (indexCounter === (number - 1) + 1) {
-    setGameOver(true)
+  if (indexCounter === number - 1 + 1) {
     console.log("last QUESTion");
     pie === true ? setTimeout(() => {
       setStoredScore(storedScore + 199)
     }, 3000) : setStoredScore(score);
     nav("/game_over");
   }
-
 
   const handleSelect = (i) => {
     setSeconds(0)
@@ -260,10 +267,19 @@ const QuestionBody = () => {
     pie === true ? setStoredScore(score +199) : setStoredScore(score)
   }, [pie])
 
-
   useEffect(() => {console.log("GAMEOVER IS : ", gameOver)
   }, [pie])
   useEffect(() => {
+    gameDiff === "easy" &&
+      seconds === 21 &&
+      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+    gameDiff === "medium" &&
+      seconds === 16 &&
+      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+    gameDiff === "hard" &&
+      seconds === 13 &&
+      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+  }, [seconds]);
 
     console.log("TiMERTriGGeR : ", timerTrigger);
   }, [timerTrigger])
@@ -271,9 +287,6 @@ const QuestionBody = () => {
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el))
-
-  indexCounter === 6 && setDiff("medium")
-  indexCounter === 12 && setDiff("hard")
 
   const pop = (e) => {
     setClicked(true)
@@ -286,6 +299,16 @@ const QuestionBody = () => {
 
   }, [clicked])
 
+  indexCounter > 0 && indexCounter <= 11 && setDiff("easy");
+
+  indexCounter >= 11 && indexCounter <= 21 && setDiff("medium");
+
+  indexCounter >= 22 && indexCounter <= 33 && setDiff("hard");
+
+  const ct = (e) => {
+    !selected && setCat(e.target.value);
+    setSeconds(0);
+  };
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -369,7 +392,7 @@ const QuestionBody = () => {
 
           {timeUp === true && setSelected(wrongAnswers[0])}
 
-        </header>
+
       </div>
     </div>
   );

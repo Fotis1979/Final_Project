@@ -65,28 +65,24 @@ const MyProvider = ({ children }) => {
   const [next, setNext] = useState(false);
   const [timerTrigger, setTimerTrigger] = useState();
   const [diamondPoints, setDiamondPoints] = useState(0);
-
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
 
   useEffect(() => {
-    if (results !== null ) {
+    if (results !== null) {
       setQuestionArray(results.map((item) => item.question));
       setWrongAnswers(results.map((item) => item.incorrectAnswers));
       setRightAnswer(results.map((item) => item.correctAnswer));
-      
     }
   }, [results]);
 
-  useEffect(()=> {
-
-    console.log("GAMEOVER IS :",gameOver);
-  },[indexCounter])
+  useEffect(() => {
+    console.log("GAMEOVER IS :", gameOver);
+  }, [indexCounter]);
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
-
 
   return (
     <MyContext.Provider
@@ -211,8 +207,7 @@ const MyProvider = ({ children }) => {
         loginMsg,
         setLoginMsg,
         name,
-        setName,
-        
+        setName
       }}
     >
       {children}
