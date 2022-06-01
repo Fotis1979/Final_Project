@@ -34,7 +34,55 @@ const HighScoreBoard = () => {
     setLoginMsg,
   } = context;
 
-  const [collection, setCollection] = useState([]);
+  const [collectionProfiles, setCollectionProfiles] = useState([]);
+  const [collectionRewards, setCollectionRewards] = useState([]);
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     setLoginMsg(
+  //       <p className="fullScreenText">
+  //         You should <Link to={"/form"}>login</Link> to see your profile!
+  //       </p>
+  //     );
+  //   } else {
+  //     fetch("http://localhost:8080/rewards/get", {
+  //       method: "GET",
+  //       headers: {
+  //         "x-auth-token": localStorage.getItem("token"),
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(123, result);
+
+  //         setHighScoreResult(result.data.highScoreResult);
+  //       });
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     setLoginMsg(
+  //       <p className="fullScreenText">
+  //         You should <Link to={"/form"}>login</Link> to see your profile!
+  //       </p>
+  //     );
+  //   } else {
+  //     fetch("http://localhost:8080/profile/get", {
+  //       method: "GET",
+  //       headers: {
+  //         "x-auth-token": localStorage.getItem("token"),
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(123, result);
+  //         setAvatarUrl(result.data.avatarUrl);
+  //         setUserName(result.data.userName);
+  //         setBirthDate(result.data.birthDate);
+  //       });
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -44,7 +92,7 @@ const HighScoreBoard = () => {
         </p>
       );
     } else {
-      fetch("http://localhost:8080/rewards/get", {
+      fetch("http://localhost:8080/collection/Profiles", {
         method: "GET",
         headers: {
           "x-auth-token": localStorage.getItem("token"),
@@ -52,9 +100,9 @@ const HighScoreBoard = () => {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log(123, result);
-
-          setHighScoreResult(result.data.highScoreResult);
+          // console.log("result length", result.data[0].hints);
+          setCollectionProfiles(result.data);
+          console.log("collection profiles is", collectionProfiles);
         });
     }
   }, []);
@@ -67,7 +115,7 @@ const HighScoreBoard = () => {
         </p>
       );
     } else {
-      fetch("http://localhost:8080/profile/get", {
+      fetch("http://localhost:8080/collection/Rewards", {
         method: "GET",
         headers: {
           "x-auth-token": localStorage.getItem("token"),
@@ -75,33 +123,9 @@ const HighScoreBoard = () => {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log(123, result);
-          setAvatarUrl(result.data.avatarUrl);
-          setUserName(result.data.userName);
-          setBirthDate(result.data.birthDate);
-        });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      setLoginMsg(
-        <p className="fullScreenText">
-          You should <Link to={"/form"}>login</Link> to see your profile!
-        </p>
-      );
-    } else {
-      fetch("http://localhost:8080/collection/get", {
-        method: "GET",
-        headers: {
-          "x-auth-token": localStorage.getItem("token"),
-        },
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          console.log("result length", result.data[0].hints);
-          setCollection(result.data);
-          console.log("collection is", collection);
+          // console.log("result length", result.data[0].hints);
+          setCollectionRewards(result.data);
+          console.log("collection rewards is", collectionRewards);
         });
     }
   }, []);
@@ -109,13 +133,26 @@ const HighScoreBoard = () => {
   return (
     <div>
       <div>
-        {highScoreResult}
-        {userName}
+        {collectionProfiles.map((el, index) => (
+          <div key={index}>
+            <span> {el.userName}</span>
+
+            <img
+              src={`http://localhost:8080/${el.avatarName}`}
+              alt=""
+              width="200px"
+            />
+          </div>
+        ))}
       </div>
-      <div className="collection-display">
-        {collection.map((el) => el.highScoreResult)}
+
+      <div>
+        {collectionRewards.map((el) => (
+          <div>
+            <span> {el.highScoreResult}</span>
+          </div>
+        ))}
       </div>
-      {/* <div>{collection.map((el, index) => el.hints)}</div> */}
     </div>
   );
 };
