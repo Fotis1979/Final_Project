@@ -1,0 +1,39 @@
+.profile--header {
+	background-color: #fffcd7;
+	position: absolute;
+	left: 400px;
+	width: 630px;
+	/*min-width: 400px;*/
+	height: 120px;
+
+	display: flex;
+	align-items: center;
+
+	padding-left: 30px;
+	margin: 0 auto;
+	/*margin-top: 55px;*/
+
+	border-radius: 16px;
+	border: 5px solid #fdea03;
+}
+.header--container {
+	/*background-color: rgba(255, 255, 255, 0.418);*/
+	font-family: 'Coiny', cursive;
+	font-size: 20px;
+	line-height: 16px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-left: -111px;
+	padding: 5px;
+	/*border: 4px solid #03cbfd;*/
+}
+
+.header--avatar {
+	width: 156px;
+	height: 156px;
+	border-radius: 50%;
+	border: 4px solid #fdea03;
+}

@@ -18,9 +18,9 @@ CSS HEX
 }
 
 .qa--section {
-	padding-bottom: 10px;
-	padding-top: 20px;
-	padding-left: 20px;
+	padding-bottom: 8px;
+	padding-top: 16px;
+	padding-left: 16px;
 	text-align: center;
 	border-radius: 100%;
 	border: 1rem dotted #fdea03ff;
@@ -28,28 +28,44 @@ CSS HEX
 
 .questions--section {
 	background-color: #fdea03ff;
-	min-height: 150px;
-	width: 70%;
-	height: 100%;
+	min-height: 160px;
+	/*height: 200px;*/
+	width: 720px;
 	margin: 0 auto;
-	margin-bottom: 20px;
+	margin-bottom: 16px;
 	padding: 5px;
-	font-size: large;
+	font-size: 24px;
 
-	border-radius: 30px;
+	border-radius: 16px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
+	/*align-items: center;*/
+	/*justify-content: center;*/
 
 	border: 5px solid #e57fedff;
 }
+.cat {
+	background-color: #fffcd7;
+	display: flex;
+	/*align-items: center;*/
+	justify-content: center;
+	margin: 8px auto;
+	width: 50%;
+
+	/*padding: 2px;*/
+
+	font-size: 16px;
+	border: 2px solid #e57fed;
+	border-radius: 16px;
+}
 .answers--section {
 	background-color: #fdea03ff;
-	width: 50vw;
-	padding: 15px;
-	margin-left: 25vw;
-	border-radius: 30px;
-	border: 5px solid #e57fedff;
+	width: 540px;
+	height: 352px;
+	padding: 8px;
+	margin: 0 auto;
+	border-radius: 16px;
+	border: 4px solid #e57fedff;
 }
 
 .align-items {
@@ -133,21 +149,38 @@ CSS HEX
 .rewards--section {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	/*position: absolute;*/
+	justify-content: space-evenly;
+
+	width: 100%;
+	margin-top: 96px;
+	border: 2px solid brown;
 }
-.qCounter {
-	background: #fff;
+.rewards--btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	margin: 30px;
-	float: right;
-	border-radius: 22px;
-	width: 250px;
-	font-size: medium;
-	box-shadow: 3px -3px 3px #ffffffe7;
-	border: ridge 3px #fdea03ff;
+	margin: 0px 8px;
+	border-radius: 32px;
+	width: 200px;
+	height: 40px;
+	/*box-shadow: 3px -3px 2px #ffffffe7;*/
+
+	background: #fffcd7;
+	border: solid 3px #18a0fbb0;
+}
+.qCounter {
+	background: #fffcd7;
+	display: flex;
+	justify-content: center;
+
+	margin-right: 64px;
+	border-radius: 16px;
+	width: 240px;
+	font-size: 16px;
+	/*box-shadow: 3px -3px 3px #ffffffe7;*/
+	border: ridge 4px #00ebfc;
 }
 
 .counter--hints {
@@ -163,7 +196,7 @@ CSS HEX
 	color: rgb(19, 5, 5);
 	font-size: 1.2rem;
 	font-weight: lighter;
-	border: deeppink 11px solid;
+	border: solid 8px#e57fedff;
 }
 
 .next--btn {

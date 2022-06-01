@@ -1,7 +1,7 @@
 .nav--form {
-	height: 8vh;
+	height: 80px;
 	width: auto;
-	float: right;
+	/*float: right;*/
 	border: dotted 3px #fff;
 	border-radius: 50px;
 	display: flex;
@@ -21,8 +21,8 @@
 }
 .register--btn,
 .login--btn {
-	height: 4vh;
-	width: 7vw;
+	height: 40px;
+	width: 100px;
 	padding: 20px 80px;
 	font-family: 'Faster One', cursive;
 	font-size: 1.3rem;
