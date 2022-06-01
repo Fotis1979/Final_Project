@@ -1,41 +1,36 @@
-import { useEffect, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
-import arrayRandomize from '../../hooks/arrayRandomize'
+import arrayRandomize from "../../hooks/arrayRandomize";
 import "../../../src/styling/settings.css";
 
 const Settings = () => {
-
   const navigate = useNavigate();
 
   const context = useContext(MyContext);
   const {
-
     loading,
+    setCategories,
+    gameOver,
     eror,
     setGameDiff,
     categories,
-    setCategories,
-    gameOver,
     mode,
-    setMode
-
+    setMode,
   } = context;
 
   const gameDifficulty = (e) => {
-    setGameDiff(e.target.value)
-  }
+    setGameDiff(e.target.value);
+  };
 
   useEffect(() => {
-    gameOver === (false) &&
-      setCategories(arrayRandomize(categories).slice(4))
+    gameOver === false && setCategories(arrayRandomize(categories).slice(4));
     console.log(categories);
-  }, [])
-
+  }, []);
 
   const gameMode = (e) => {
-    setMode(e.target.value)
+    setMode(e.target.value);
   };
 
   const checkHandler = () => {
@@ -58,12 +53,32 @@ const Settings = () => {
       </button>
       <h1>ChOOSE SETTINGS</h1>
       <div className="settings">
+        <button
+          className="play-btn"
+          onClick={(e) => gameDifficulty(e)}
+          value={"easy"}
+        >
+          {" "}
+          BEgiNNer MODE{" "}
+        </button>
 
-        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"easy"}> BEgiNNer MODE  </button>
+        <button
+          className="play-btn"
+          onClick={(e) => gameDifficulty(e)}
+          value={"medium"}
+        >
+          {" "}
+          AdVanceD MODE{" "}
+        </button>
 
-        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"medium"}> AdVanceD MODE  </button>
-
-        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"hard"}> ExPeRT MODE  </button>
+        <button
+          className="play-btn"
+          onClick={(e) => gameDifficulty(e)}
+          value={"hard"}
+        >
+          {" "}
+          ExPeRT MODE{" "}
+        </button>
 
         <label>Game Mode</label>
 
@@ -75,8 +90,6 @@ const Settings = () => {
             Time
           </option>
         </select>
-
-     
       </div>
     </div>
   );

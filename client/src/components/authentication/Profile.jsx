@@ -3,16 +3,25 @@ import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
 import Nav from "../pages/Nav";
+import "./profil.css";
+import av1 from "./avatarImages/av1.jpg";
+import av2 from "./avatarImages/av2.jpg";
+import av3 from "./avatarImages/av3.jpg";
 
+const img = [av1, av2, av3];
 const Profile = () => {
   const context = useContext(MyContext);
   const {
+    hints,
+    highScore,
     email,
     setEmail,
     pass,
     setPass,
-    name,
-    setName,
+    userName,
+    setUserName,
+    avatarUrl,
+    setAvatarUrl,
     avatarFile,
     setAvatarFile,
     birthDate,
@@ -22,6 +31,37 @@ const Profile = () => {
     loginMsg,
     setLoginMsg,
   } = context;
+
+  const saveHandler = () => {
+    const formData = new FormData();
+    formData.append("avatarFile", avatarFile);
+    formData.append("userName", userName);
+    formData.append("birthDate", birthDate);
+
+    console.log(formData);
+
+    const url = "http://localhost:8080/profile/save";
+    const options = {
+      method: "POST",
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      body: formData,
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "x-auth-token": localStorage.getItem("token"),
+      //   },
+      //   body: JSON.stringify({ name, birthDate, avatarFile }),
+    };
+
+    fetch(url, options)
+      .then((response) => response.text())
+      .then((result) => {
+        setIsProfileSaved(true);
+        alert(result);
+      });
+  };
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -40,8 +80,8 @@ const Profile = () => {
         .then((response) => response.json())
         .then((result) => {
           console.log(123, result);
-
-          setName(result.data.name);
+          setAvatarUrl(result.data.avatarUrl);
+          setUserName(result.data.userName);
           setBirthDate(result.data.birthDate);
         });
     }
@@ -50,8 +90,8 @@ const Profile = () => {
   const inputHandler = (e) => {
     //console.log(e);
     switch (e.target.name) {
-      case "name":
-        setName(e.target.value);
+      case "userName":
+        setUserName(e.target.value);
         break;
 
       case "birthDate":
@@ -63,43 +103,20 @@ const Profile = () => {
         break;
     }
   };
-  console.log(name);
+  console.log(userName);
   console.log(birthDate);
 
-  const saveHandler = () => {
-    // const formData = new FormData();
-    // //formData.append("avatarFile", avatarFile);
-    // formData.append("name", name);
-    // formData.append("birthDate", birthDate);
-
-    // console.log(formData);
-
-    const url = "http://localhost:8080/profile/save";
-    const options = {
-      // method: "POST",
-      // headers: {
-      //   "x-auth-token": localStorage.getItem("token"),
-      // },
-      // body: formData,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ name, birthDate }),
-    };
-
-    fetch(url, options)
-      .then((response) => response.text())
-      .then((result) => {
-        setIsProfileSaved(true);
-        alert(result);
-      });
+  const fileHandler = (e) => {
+    setAvatarFile(e.target.files[0]);
   };
 
-  //   const fileHandler = (e) => {
-  //     setAvatarFile(e.target.files[0]);
-  //   };
+  // const avatarHandler = (e) => {
+  //   setAvatarFile(e.target.name);
+  // };
+  console.log(avatarFile);
+  //use this to give selected avatarImage style when selected and when not
+  //I have an issue saving images to db when not using upload profile
+  const [imageChosen, setImageChosen] = useState(undefined);
 
   return (
     <div className="flex-col">
@@ -109,12 +126,81 @@ const Profile = () => {
       ) : (
         <section className="flex-col">
           <h1>Profile</h1>
-          <label htmlFor="name">Name</label>
+          <img className="avatar" src={avatarUrl} alt="" />
+
+          <input id="uploader" type="file" onChange={(e) => fileHandler(e)} />
+
+          <label htmlFor="selectAvatar">Select Avatar </label>
+
+          {/* //use this to choose between mant images and highlight the choosen one */}
+
+          {/* <div>
+            {img.map((e, i) => {
+              console.log(e);
+              return (
+                <div
+                  key={i}
+                  className={
+                    imageChosen === "http://localhost:3000" + e
+                      ? "imageWrapSelected"
+                      : "imageWrapNormal"
+                  }
+                >
+                  <img
+                    onClick={(e) => {
+                      setImageChosen(e.target.src);
+                      avatarHandler(e);
+                      console.log("clicked", imageChosen);
+                    }}
+                    src={e}
+                    alt={e}
+                    width="50px"
+                    height="50px"
+                    name="aviName"
+                  />
+                </div>
+              );
+            })}
+          </div> */}
+
+          {/* <selcet>
+            <div>
+              <img
+                className="select-avatar-img"
+                src={q}
+                name="avatarPic1.jpg"
+                alt=""
+                width="50px"
+                height="50px"
+                onClick={avatarHandler}
+              />
+              <img
+                className="select-avatar-img"
+                src={q}
+                name="avatarPic2.jpg"
+                alt=""
+                width="50px"
+                height="50px"
+                onClick={avatarHandler}
+              />
+              <img
+                className="select-avatar-img"
+                src={q}
+                name="avatarPic3.jpg"
+                alt=""
+                width="50px"
+                height="50px"
+                onClick={avatarHandler}
+              />
+            </div>
+          </selcet> */}
+
+          <label htmlFor="userName">UserName</label>
           <input
             type="text"
-            name="name"
-            placeholder="Name"
-            value={name}
+            name="userName"
+            placeholder="userName"
+            value={userName}
             onChange={inputHandler}
           />
           <label htmlFor="birthDate">birthDate</label>

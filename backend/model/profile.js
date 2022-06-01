@@ -5,9 +5,9 @@ const profiles = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  name: String,
+  userName: String,
   birthDate: Number,
-  // avatarName: String,
+  avatarName: String,
 });
 
 module.exports = mongoose.model("profiles", profiles);

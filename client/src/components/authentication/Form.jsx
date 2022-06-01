@@ -6,16 +6,23 @@ import "../../styling/form.css";
 
 const Form = () => {
   const context = useContext(MyContext);
-  const { email, setEmail, pass, setPass, highScore, setHighScore, setHints } =
-    context;
+  const {
+    email,
+    setEmail,
+    pass,
+    setPass,
+    highScore,
+    setHighScore,
+    setHints,
+    setHighScoreResult,
+  } = context;
   const navigate = useNavigate();
 
-	const inputHandler = (e) => {
-
-		switch (e.target.name) {
-			case 'email':
-				setEmail(e.target.value);
-				break;
+  const inputHandler = (e) => {
+    switch (e.target.name) {
+      case "email":
+        setEmail(e.target.value);
+        break;
 
       case "pass":
         setPass(e.target.value);
@@ -41,20 +48,39 @@ const Form = () => {
       body: JSON.stringify({ email, pass }),
     };
 
-		fetch(url, options)
-			.then((response) => response.json())
-			.then((result) => {
-				if (result.token !== undefined) {
-					localStorage.setItem('token', result.token);
-					localStorage.setItem('email', email);
-					setEmail(email);
-					navigate('/settings');
-				} else {
-					alert(result.msg);
-				}
-			});
-	};
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.token !== undefined) {
+          localStorage.setItem("token", result.token);
+          localStorage.setItem("email", email);
 
+          setEmail(email);
+          navigate("/settings");
+        } else {
+          alert(result.msg);
+        }
+        //alert(result);
+      });
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      fetch("http://localhost:8080/rewards/get", {
+        method: "GET",
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(123, result);
+
+          setHints(result.data.hints);
+          setHighScoreResult(result.data.highScoreResult);
+        });
+    }
+  }, []);
 
   const registerHandler = () => {
     const url = "http://localhost:8080/auth/register";
@@ -75,7 +101,7 @@ const Form = () => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    // localStorage.removeItem("highScore");
+    localStorage.removeItem("highScore");
     setEmail("");
     //
     navigate("/");

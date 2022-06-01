@@ -6,9 +6,9 @@ const rewards = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  Hints: String,
-  HeighScore: String,
-  Diamonds: String,
+  hints: Number,
+  highScoreResult: Number,
+  diamonds: String,
 });
 
 module.exports = mongoose.model("rewards", rewards);
