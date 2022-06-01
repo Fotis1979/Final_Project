@@ -15,10 +15,6 @@ const QuestionTimer = () => {
 
   } = context;
 
-const QuestionTimer = () => {
-  const context = useContext(MyContext);
-  const { messageB, setMessageB, seconds, setSeconds, gameOver, gameDiff } =
-    context;
 
   useEffect(() => {
  

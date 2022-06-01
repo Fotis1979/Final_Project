@@ -15,25 +15,31 @@ const GameOver = () => {
 
         categories,
         setCategories,
-        setScore,
+        setStoredScore,
         storedScore,
         diamondPoints,
         pie,
         setGameOver,
         gameOver,
-        indexCounter
+        indexCounter,
+        pieImg, 
+        setPieImg,
+        score,
+        diamondsScore,
+        setDiamondsScore
 
     } = context;
 
+storedScore && setGameOver(true)
 
+
+    
+    
     useEffect(() => {
-            setCategories(arrayRandomize(categories).slice(4))
-        console.log(categories);
-    }, [])
+      
+pie === true && setPieImg(<img src={pie3} alt="pieImg"/> )
+    }, [gameOver,diamondsScore,storedScore])
 
-    setScore(0)
-    indexCounter === (prev => (prev + 1)) && console.log("GAMEOVER IS :", gameOver);
-    storedScore  && console.log(gameOver);
 
 
     return (
@@ -41,18 +47,17 @@ const GameOver = () => {
             <Nav />
             {diamondPoints}
             <div className="gameOver">
-            {pie === true ? <img className="popUp" src={pie3} alt="Game_Over" /> : <img src={x} alt="Game_Over" />} 
-                
+                {pieImg}
+            
+
                 <p className="finalScore"> Your Final Score : {storedScore}</p>
             </div>
-            <div className="again">
-            <label>(Button doesn't work XXX)</label>
-            <button className="play-btn"><Link to="/settings">PLAY AGAIN</Link></button>
-            </div>
-            {pie === true && <p className="cat">CONGRATS' !!!! U CoMpleTeD the PiE !!!</p>} 
-            {pie === true && <p className="cat"> +199 Points !!!</p>} 
-
             
+             
+            {pie === true && <p className="cat">CONGRATS' !!!! U CoMpleTeD the PiE !!!</p>}
+            {pie === true && <p className="cat"> +199 Points !!!</p>}
+
+
         </div>
     )
 }

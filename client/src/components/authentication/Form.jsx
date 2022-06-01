@@ -10,7 +10,6 @@ const Form = () => {
     context;
   const navigate = useNavigate();
 
-	console.log(email);
 	const inputHandler = (e) => {
 
 		switch (e.target.name) {
