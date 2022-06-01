@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import MyContext from "./MyContext";
-import { useState } from "react";
-import useFetch from "../hooks/useFetch";
-import "../../src/App.css";
+import { useEffect } from 'react';
+import MyContext from './MyContext';
+import { useState } from 'react';
+import '../../src/App.css';
+import useFetch from '../hooks/useFetch';
 
 const MyProvider = ({ children }) => {
   const [name, setName] = useState("");
@@ -17,6 +17,7 @@ const MyProvider = ({ children }) => {
   const [mode, setMode] = useState("NoTime");
   const [streak, setStreak] = useState(0)
   const [pie, setPie] = useState(false)
+  const [pieImg, setPieImg] = useState(false)  
   const [diamonds, setDiamonds] = useState(0)
   const [diamondGeo, setDiamondGeo] = useState({ easy: false, medium: false, hard: false })
   const [diamondArts, setDiamondArts] = useState({ easy: false, medium: false, hard: false })
@@ -29,6 +30,7 @@ const MyProvider = ({ children }) => {
   const [diamondSci, setDiamondSci] = useState({ easy: false, medium: false, hard: false })
   const [diamondFilm, setDiamondFilm] = useState({ easy: false, medium: false, hard: false })
   const [losePoints, setLosePoints] = useState(false);
+  const [diamondPoints, setDiamondPoints] = useState(false);
   const [message, setMessage] = useState();
   const [messageB, setMessageB] = useState();
   const [messageC, setMessageC] = useState();
@@ -38,6 +40,7 @@ const MyProvider = ({ children }) => {
   const [score, setScore] = useState(0);
   const [streakScore, setStreakScore] = useState(0);
   const [storedScore, setStoredScore] = useState(0);
+  const [diamondsScore, setDiamondsScore] = useState(0);  
   const [showStreak, setShowStreak] = useState("")
   const [gameMode, setGameMode] = useState();
   const [seconds, setSeconds] = useState(0);
@@ -64,10 +67,12 @@ const MyProvider = ({ children }) => {
   const [timeUp, setTimeUp] = useState(false);
   const [next, setNext] = useState(false);
   const [timerTrigger, setTimerTrigger] = useState();
-  const [diamondPoints, setDiamondPoints] = useState(0);
+
+
   const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
   const initialState = { results: null, loading: true, eror: null };
   const { results, loading, eror } = useFetch(url, initialState);
+
 
   useEffect(() => {
     if (results !== null) {
@@ -77,18 +82,13 @@ const MyProvider = ({ children }) => {
     }
   }, [results]);
 
-  useEffect(() => {
-    console.log("GAMEOVER IS :", gameOver);
-  }, [indexCounter]);
-
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
+
 
   return (
     <MyContext.Provider
       value={{
-        diamondPoints,
-        setDiamondPoints,
         losePoints, 
         setLosePoints,
         timerTrigger, 
@@ -131,8 +131,14 @@ const MyProvider = ({ children }) => {
         setDiamondGeo,
         diamonds,
         setDiamonds,
+        diamondPoints, 
+        setDiamondPoints,
+        diamondsScore, 
+        setDiamondsScore,
         pie,
         setPie,
+        pieImg, 
+        setPieImg,
         clicked,
         setClicked,
         username,
@@ -207,7 +213,7 @@ const MyProvider = ({ children }) => {
         loginMsg,
         setLoginMsg,
         name,
-        setName
+        setName,
       }}
     >
       {children}
