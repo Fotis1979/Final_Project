@@ -35,11 +35,6 @@ input:hover {
 	background-color: rgb(255, 255, 255);
 }
 
-.amount {
-	height: 40px;
-	font-size: 30px;
-}
-
 /*.settings--mode {
 	color: red;
 }*/
@@ -63,3 +58,6 @@ input:hover {
 	background-color: #fff;
 }
 
+.amount{
+
+background-color: red;}

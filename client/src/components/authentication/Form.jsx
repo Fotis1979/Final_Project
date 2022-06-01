@@ -18,18 +18,7 @@ const Form = () => {
   } = context;
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/profile");
-  //   }
-  // }, []);
-
-  console.log("email:", email);
-  console.log("pass:", pass);
-  console.log({ email, pass });
-
   const inputHandler = (e) => {
-    //console.log(e);
     switch (e.target.name) {
       case "email":
         setEmail(e.target.value);

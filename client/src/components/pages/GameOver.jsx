@@ -1,35 +1,63 @@
 import React from 'react'
 import x from '../../../src/assets/images/x.png'
+import pie3 from '../../../src/assets/images/pie3.png'
 import MyContext from "../.././context/MyContext"
-import { useContext, useNavigate } from 'react';
+import { useContext, useEffect } from 'react';
 import Nav from './Nav';
 import { Link } from 'react-router-dom';
 import "../../../src/styling/settings.css";
-
+import arrayRandomize from '../../hooks/arrayRandomize'
 
 const GameOver = () => {
-
 
     const context = useContext(MyContext);
     const {
 
-        setScore,
-        setGameOver,
+        categories,
+        setCategories,
+        setStoredScore,
         storedScore,
+        diamondPoints,
+        pie,
+        setGameOver,
+        gameOver,
+        indexCounter,
+        pieImg, 
+        setPieImg,
+        score,
+        diamondsScore,
+        setDiamondsScore
+
     } = context;
 
+storedScore && setGameOver(true)
 
-    setScore(0)
-    storedScore && setGameOver(true)
+
+    
+    
+    useEffect(() => {
+      
+pie === true && setPieImg(<img src={pie3} alt="pieImg"/> )
+    }, [gameOver,diamondsScore,storedScore])
+
+
 
     return (
         <div>
             <Nav />
+            {diamondPoints}
             <div className="gameOver">
-                <img src={x} alt="Game_Over" />
+                {pieImg}
+            
+
                 <p className="finalScore"> Your Final Score : {storedScore}</p>
             </div>
-            <button className="play-btn"><Link to="/settings">PLAY AGAIN</Link></button>
+            
+             
+            {pie === true && <p className="cat">CONGRATS' !!!! U CoMpleTeD the PiE !!!</p>}
+            {pie === true && <p className="cat"> +199 Points !!!</p>}
+
+
         </div>
     )
 }

@@ -15,9 +15,11 @@ import ErrorMessage from "../../errorMessage/ErrorMessage";
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
-    cat,
     loading,
     results,
+    error,
+    cat,
+    setCat,
     setStoredScore,
     setError,
     number,
@@ -30,7 +32,6 @@ const QuestionBody = () => {
     wrongAnswers,
     rightAnswer,
     score,
-    error,
     setScore,
     answerPopup,
     setAnswerPopup,
@@ -91,20 +92,17 @@ const QuestionBody = () => {
       return "wrong";
     else if (i === rightAnswer[indexCounter]) return "select";
   };
-
   const handleCheck = (i) => {
     setSelected(i);
-    setAnswerPopup(true);
-    if (i === rightAnswer[indexCounter]) return setScore(score + 10);
+    if (i === rightAnswer[indexCounter]) setScore(score + 10);
     setError(false);
   };
 
   const nextHandler = () => {
-    // console.log("first");
     if (selected) {
-      setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
       setSelected();
-    } else setError(true);
+    } else setError("Please select an option first");
+    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
   };
 
   const answers = [];
@@ -126,15 +124,9 @@ const QuestionBody = () => {
     "sport"
   );
 
-  // const x = (e) => {
-  //   setCat(e.target.value);
-  // };
-
-  // useEffect(() => {
-  //   setFirstCat(cat)
-  //   console.log("firstCat is :", cat);
-
-  // }, [])
+  const x = (e) => {
+    setCat(e.target.value);
+  };
 
   const pop = (e) => {
     e.pop();
@@ -216,33 +208,6 @@ const QuestionBody = () => {
           )}
         </header>
       </div>
-
-      {/* 
-      { score % 50 === 0 && score !== 0 && !selected ?
-        <select onChange={(e) => x(e)}>
-          <option >
-            Choose new CateGory
-          </option>
-
-          {arrayRandomize(categories).map(e => e !== firstCat && <option onChange={(e) => x(e)}
-            key={e}
-            value={e}>
-            {e}
-          </option>).slice(7)}
-          <option onChange={() => x(firstCat)} value={firstCat}>
-            YOUR INITIAL CATEGORY
-          </option>
-
-        </select>
-        : setCat(cat)
-      } */}
-
-      {/* !**********!***************!******!********! */}
-      <QuestionCounter />
-      {/* <QuestionTimer /> */}
-      {/* <Timer />
-      <Counter /> */}
-      {/* { questions && <p>{questions}</p> } */}
     </div>
   );
 };

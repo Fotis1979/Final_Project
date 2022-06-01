@@ -2,33 +2,28 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
-import "../../../src/styling/settings.css";
-import { Link } from "react-router-dom";
-
 import arrayRandomize from "../../hooks/arrayRandomize";
+import "../../../src/styling/settings.css";
+
 const Settings = () => {
   const navigate = useNavigate();
+
   const context = useContext(MyContext);
   const {
-    setSeconds,
-    categories,
     loading,
     setCategories,
     gameOver,
     eror,
     setGameDiff,
+    categories,
+    mode,
+    setMode,
   } = context;
-
-  const [mode, setMode] = useState("NoTime");
-  const [s, setS] = useState("NoTime");
 
   const gameDifficulty = (e) => {
     setGameDiff(e.target.value);
   };
 
-  // const n = (e) => {
-  //   setNumber(e.target.value);
-  // };
   useEffect(() => {
     gameOver === false && setCategories(arrayRandomize(categories).slice(4));
     console.log(categories);
@@ -36,7 +31,6 @@ const Settings = () => {
 
   const gameMode = (e) => {
     setMode(e.target.value);
-    console.log(mode);
   };
 
   const checkHandler = () => {

@@ -4,14 +4,7 @@ import MyContext from "../../../context/MyContext";
 const HighScore = () => {
   const context = useContext(MyContext);
 
-  const {
-    highScore,
-    setHighScore,
-    highScoreResult,
-    score,
-    setScore,
-    setHighScoreResult,
-  } = context;
+  const { highScore, highScoreResult, score, setHighScoreResult } = context;
 
   /// set highscore to localstorage
 

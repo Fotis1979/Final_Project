@@ -75,7 +75,7 @@ const QuestionBody = () => {
     setTimeout(() => {
       timerTrigger === true && setSeconds((prev) => prev + 1);
     }, 1000);
-  }, [setSeconds, timerTrigger, seconds]);
+  }, [timerTrigger, seconds]);
 
   useEffect(() => {
     console.log(categories);
@@ -91,12 +91,11 @@ const QuestionBody = () => {
   const nav = useNavigate();
 
   if (indexCounter === number - 1 + 1) {
-    console.log("last QUESTion");
-    pie === true && gameOver === true
-      ? setTimeout(() => {
-          setStoredScore(storedScore + 199);
-        }, 3000)
-      : setStoredScore(score);
+    // console.log("last QUESTion");
+    // (pie === true && gameOver === true) ? setTimeout(() => {
+    //   setStoredScore(storedScore + 199)
+    // }, 3000) :
+    setStoredScore(score);
     nav("/game_over");
   }
 
@@ -272,13 +271,15 @@ const QuestionBody = () => {
     setTimeUp(false);
   };
 
-  useEffect(() => {
-    console.log("TiMERTriGGeR : ", timerTrigger);
-  }, [timerTrigger]);
+  // useEffect(() => {
 
-  useEffect(() => {
-    console.log("GAMEOVER IS : ", gameOver);
-  }, [gameOver, indexCounter]);
+  //   console.log("TiMERTriGGeR : ", timerTrigger);
+  // }, [timerTrigger])
+
+  // useEffect(() => {
+
+  //   console.log("GAMEOVER IS : ", gameOver);
+  // }, [gameOver, indexCounter])
 
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
