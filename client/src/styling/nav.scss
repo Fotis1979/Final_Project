@@ -1,0 +1,39 @@
+@use '../App.scss' as scss;
+
+nav {
+	/*height: 100px;*/
+	font-family: 'Faster One', cursive;
+	/*font-size: x-large;*/
+	font-size: 24px;
+	/*position: absolute;*/
+	/*width: 100%;*/
+}
+.nav--ul {
+	background-color: #e67fedde;
+	//background-color: scss.$primary-color;
+	position: relative;
+	top: 24px;
+	height: 70px;
+	padding: 16px;
+	margin: auto 32px;
+	border-radius: 8px;
+	/*border: solid 2px #00ebfc;*/
+	outline: ridge 8px #fdea03;
+
+	display: flex;
+	/*flex-direction: row;*/
+	justify-content: space-between;
+	align-items: center;
+	/*color: red;*/
+}
+
+.nav--ul span {
+	list-style: none;
+	/*color: red;*/
+}
+
+.nav--link {
+	color: #fdea03;
+	font-size: larger;
+	text-decoration: dashed underline 4px #00ebfc;
+}

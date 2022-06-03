@@ -1,0 +1,12 @@
+@use '../App.scss' as scss;
+
+.e-message {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	background-color: red;
+	text-align: center;
+	color: white;
+	text-transform: capitalize;
+}

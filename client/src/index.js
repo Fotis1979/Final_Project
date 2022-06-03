@@ -1,6 +1,6 @@
 import MyProvider from "./context/MyProvider";
 import Routings from "./routers/Routings";
-//import "./App.css";
+//import "./App.scss";
 import { createRoot } from 'react-dom/client';
 
 
