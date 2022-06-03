@@ -4,6 +4,7 @@ import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
 import arrayRandomize from "../../hooks/arrayRandomize";
 import "../../../src/styling/settings.css";
+import useFetch from "../../hooks/useFetch";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -18,16 +19,20 @@ const Settings = () => {
     categories,
     mode,
     setMode,
+    url,
+    initialState,
+    results
   } = context;
+
+
+  useEffect(() => {
+    setCategories(arrayRandomize(categories))
+    
+    }, [setCategories])
 
   const gameDifficulty = (e) => {
     setGameDiff(e.target.value);
   };
-
-  useEffect(() => {
-    gameOver === false && setCategories(arrayRandomize(categories).slice(4));
-    console.log(categories);
-  }, []);
 
   const gameMode = (e) => {
     setMode(e.target.value);
@@ -40,6 +45,9 @@ const Settings = () => {
       navigate("/timeMode");
     }
   };
+
+
+
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;

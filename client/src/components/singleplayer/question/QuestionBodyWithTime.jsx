@@ -8,6 +8,7 @@ import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Diamonds from "../rewards/Diamonds";
+import pie3 from '../../../assets/images/pie3.png'
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
@@ -38,6 +39,8 @@ const QuestionBody = () => {
     setCat,
     score,
     setScore,
+    setImg,
+    setImgPie,
     indexCounter,
     setIndexCounter,
     selected,
@@ -78,7 +81,7 @@ const QuestionBody = () => {
   }, [timerTrigger, seconds]);
 
   useEffect(() => {
-    console.log(categories);
+    console.log(categories)
     indexCounter >= 0 && indexCounter <= 5 && setCat(categories[indexCounter]);
     indexCounter >= 6 &&
       indexCounter <= 11 &&
@@ -86,18 +89,19 @@ const QuestionBody = () => {
     indexCounter >= 12 &&
       indexCounter <= 18 &&
       setCat(categories[indexCounter - 12]);
-  }, [indexCounter, categories]);
+  }, [indexCounter, categories,setCat]);
 
   const nav = useNavigate();
 
   if (indexCounter === number - 1 + 1) {
-    // console.log("last QUESTion");
-    // (pie === true && gameOver === true) ? setTimeout(() => {
-    //   setStoredScore(storedScore + 199)
-    // }, 3000) :
-    setStoredScore(score);
     nav("/game_over");
   }
+  
+
+
+
+
+
 
   const handleSelect = (i) => {
     setSeconds(0);
@@ -114,8 +118,12 @@ const QuestionBody = () => {
   }, [clicked]);
 
   useEffect(() => {
-    img && score === 0 && setNext(true);
-  }, [img, setNext, setTimerTrigger, score]);
+  console.log(gameOver);
+  }, [gameOver,indexCounter])
+
+  useEffect(() => {
+    img && score === 0 && indexCounter !== 17 && setNext(true);
+  }, [img, setNext, setTimerTrigger, score,indexCounter]);
 
   useEffect(() => {
     console.log(rightAnswer[indexCounter]);
@@ -269,8 +277,8 @@ const QuestionBody = () => {
     setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
     setSeconds(0);
     setTimeUp(false);
-  };
-
+  }
+    
   // useEffect(() => {
 
   //   console.log("TiMERTriGGeR : ", timerTrigger);

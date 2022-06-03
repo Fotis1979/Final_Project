@@ -3,6 +3,7 @@ import MyContext from "./MyContext";
 import { useState } from "react";
 import "../../src/App.css";
 import useFetch from "../hooks/useFetch";
+import arrayRandomize from '../hooks/arrayRandomize'
 
 const MyProvider = ({ children }) => {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ const MyProvider = ({ children }) => {
   const [streak, setStreak] = useState(0);
 
   const [pieImg, setPieImg] = useState(false);
-
+  const [imgPie, setImgPie] = useState()
   const [losePoints, setLosePoints] = useState(false);
   const [diamondPoints, setDiamondPoints] = useState(false);
   const [message, setMessage] = useState();
@@ -55,6 +56,9 @@ const MyProvider = ({ children }) => {
   const [answerPopup, setAnswerPopup] = useState(false);
   const [sec, setSec] = useState(0);
   const [userName, setUserName] = useState("");
+  const [messagePie, setMessagePie] = useState("");
+  const [messageDiamonds, setMessageDiamonds] = useState("");
+
 
   const [avatarUrl, setAvatarUrl] = useState(
     "https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png"
@@ -82,6 +86,7 @@ const MyProvider = ({ children }) => {
     "society",
     "sport",
   ]);
+
 
   //Diamond part
 
@@ -153,6 +158,12 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        messagePie, 
+        setMessagePie,
+        messageDiamonds, 
+        setMessageDiamonds,
+        imgPie,
+        setImgPie,
         losePoints,
         setLosePoints,
         timerTrigger,
