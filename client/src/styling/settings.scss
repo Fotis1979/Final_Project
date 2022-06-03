@@ -1,6 +1,8 @@
-html {
+@use '../App.scss' as scss;
+
+/*html {
 	background-color: #00ebfcff;
-}
+}*/
 
 .settings {
 	background-color: #fdea03ff;
@@ -24,7 +26,7 @@ html {
 	font-family: 'Coiny', cursive;
 	font-size: larger;
 	width: 100%;
-	background-color: #00ebfcff;
+	background-color: #00ebfc;
 	border: solid 2px #fff;
 
 	padding: 10px 0;
@@ -35,12 +37,17 @@ input:hover {
 	background-color: rgb(255, 255, 255);
 }
 
+.amount {
+	height: 40px;
+	font-size: 30px;
+}
+
 /*.settings--mode {
 	color: red;
 }*/
 
-.play-btn {
-	background-color: #00ebfcff;
+.settings--btn {
+	background-color: scss.$accent-color;
 
 	font-family: 'Coiny', cursive;
 	font-size: xx-large;
@@ -50,14 +57,18 @@ input:hover {
 	margin-top: 5px;
 	padding: 5px 50px;
 
-	border: solid 5px #020a89ff;
-	border-radius: 50px;
+	border: solid 5px scss.$dominant-color;
+	border-radius: 16px;
 }
-
-.play-btn:hover {
-	background-color: #fff;
+.play--btn {
+	background-color: scss.$secondary-color;
+	width: 240px;
 }
-
-.amount{
-
-background-color: red;}
+.settings--btn:hover {
+	background-color: scss.$accent-color;
+	color: #fff;
+}
+/*
+.amount {
+	background-color: red;
+}*/
