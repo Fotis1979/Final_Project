@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MyContext from "../../../context/MyContext";
 import { Link } from "react-router-dom";
 import "./highScoreBoard.css";
-
+import Nav from "../../pages/Nav";
 const HighScoreBoard = () => {
   //TODO: display users highScore and users Avatar
   //from dataBase
@@ -132,25 +132,27 @@ const HighScoreBoard = () => {
 
   return (
     <div>
-      <div>
+      <Nav />
+      <div className="collection-container">
         {collectionProfiles.map((el, index) => (
           <div key={index}>
-            <span> {el.userName}</span>
-
-            <img
-              src={`http://localhost:8080/${el.avatarName}`}
-              alt=""
-              width="200px"
-            />
+            <div>
+              {" "}
+              <img
+                src={`http://localhost:8080/${el.avatarName}`}
+                alt=""
+                width="200px"
+              />
+              <p> {el.userName}</p>
+              <div> {el.highScoreResult} points</div>
+            </div>
           </div>
         ))}
       </div>
 
       <div>
         {collectionRewards.map((el) => (
-          <div>
-            <span> {el.highScoreResult}</span>
-          </div>
+          <div></div>
         ))}
       </div>
     </div>

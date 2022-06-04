@@ -66,7 +66,7 @@ const Form = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      fetch("http://localhost:8080/rewards/get", {
+      fetch("http://localhost:8080/profile/get", {
         method: "GET",
         headers: {
           "x-auth-token": localStorage.getItem("token"),

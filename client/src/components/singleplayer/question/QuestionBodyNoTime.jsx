@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import MyContext from "../../../context/MyContext";
-import QuestionCounter from "./QuestionCounter";
 import Nav from "../../pages/Nav";
 import Hints from "../rewards/Hints";
 import Counter from "./Counter";
@@ -43,9 +42,10 @@ const QuestionBody = () => {
 
   const [selected, setSelected] = useState();
   const [indexCounter, setIndexCounter] = useState(0);
-
+  console.log(highScoreResult);
+  console.log(highScore);
   useEffect(() => {
-    const url = "http://localhost:8080/rewards/save";
+    const url = "http://localhost:8080/profile/save";
     const options = {
       method: "POST",
       headers: {
@@ -58,8 +58,8 @@ const QuestionBody = () => {
     fetch(url, options)
       .then((response) => response.text())
       .then((result) => {
-        setHints(result.data.hints);
-        setHighScoreResult(result.data.highScoreResult);
+        // setHints(result.data.hints);
+        // setHighScoreResult(result.data.highScoreResult);
       });
   }, [hints, highScoreResult, score]);
 
@@ -68,6 +68,7 @@ const QuestionBody = () => {
     let scoreSum = Number(score) + Number(highScore);
     if (scoreSum > highScoreResult) {
       setHighScoreResult(scoreSum);
+      console.log("scoresum", scoreSum);
     }
   }, [score, highScore]);
 
