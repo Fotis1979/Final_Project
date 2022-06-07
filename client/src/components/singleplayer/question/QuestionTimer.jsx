@@ -1,26 +1,11 @@
 import { useEffect } from "react";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import MyContext from "../../../context/MyContext";
 
 const QuestionTimer = () => {
   const context = useContext(MyContext);
-  const { messageB, setMessageB, seconds, setSeconds, gameOver, gameDiff } =
+  const { messageB, setMessageB, message, seconds, setSeconds, gameDiff } =
     context;
-
-  useEffect(() => {
-    function incrementSeconds() {
-      gameOver === false && setSeconds((prev) => prev + 1);
-    }
-    setInterval(incrementSeconds, 1000);
-
-    gameOver === true && clearInterval(incrementSeconds);
-  }, [gameOver]);
-
-  useEffect(() => {
-    // seconds === 16 && setNewQuestion(true);
-    seconds === 16 && setSeconds(0);
-    // message && setSeconds(0);
-  }, [seconds]);
 
   useEffect(() => {
     gameDiff === "easy" && seconds === 21 && setSeconds(0);
@@ -40,7 +25,9 @@ const QuestionTimer = () => {
     <aside className="question-timer">
       <span className="sec">{seconds}</span>
 
-      <span style={{ fontSize: "20px", paddingTop: "20px" }}>{messageB}</span>
+      <span style={{ fontSize: "20px", paddingTop: "20px" }}>
+        {messageB || message}
+      </span>
     </aside>
   );
 };

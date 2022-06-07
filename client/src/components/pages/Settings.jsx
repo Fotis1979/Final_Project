@@ -1,79 +1,96 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import MyContext from "../../context/MyContext";
-import Nav from "./Nav";
-import "../../../src/styling/settings.css";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MyContext from '../../context/MyContext';
+import Nav from './Nav';
+import arrayRandomize from '../../hooks/arrayRandomize';
+import '../../../src/styling/settings.scss';
+
 const Settings = () => {
+	const navigate = useNavigate();
 
-  const navigate = useNavigate();
-  const context = useContext(MyContext);
-  const {
-    setSeconds,
-    loading,
-    eror,
-    setGameDiff
-  } = context;
+	const context = useContext(MyContext);
+	const {
+		loading,
+		setCategories,
+		gameOver,
+		eror,
+		setGameDiff,
+		categories,
+		mode,
+		setMode,
+	} = context;
 
-  const [mode, setMode] = useState("NoTime");
-  const [s, setS] = useState("NoTime"); 
+	const gameDifficulty = (e) => {
+		setGameDiff(e.target.value);
+	};
 
-  const gameDifficulty = (e) => {
-    setGameDiff(e.target.value)
-  }
+	useEffect(() => {
+		gameOver === false && setCategories(arrayRandomize(categories).slice(4));
+		console.log(categories);
+	}, []);
 
-  // const n = (e) => {
-  //   setNumber(e.target.value);
-  // };
+	const gameMode = (e) => {
+		setMode(e.target.value);
+	};
 
-  const gameMode = (e) => {
-    setMode(e.target.value);
-    console.log(mode);
-  };
-  
-  const checkHandler = () => {
-    if (mode === "NoTime") {
-      navigate("/questions");
-    } else if (mode === "Time") {
-      navigate("/timeMode");
-    }
-  };
+	const checkHandler = () => {
+		if (mode === 'NoTime') {
+			navigate('/questions');
+		} else if (mode === 'Time') {
+			navigate('/timeMode');
+		}
+	};
 
-  if (loading) return <p>loading ..</p>;
-  if (eror) return <p>{eror}</p>;
+	if (loading) return <p>loading ..</p>;
+	if (eror) return <p>{eror}</p>;
 
-  return (
-    <div className="qa--section">
-      <Nav />
+	return (
+		<>
+			<Nav />
+			<div className='qa--section'>
+				<div className='settings'>
+					<h1>Choose Your Difficulty:</h1>
+					<button
+						className='settings--btn'
+						onClick={(e) => gameDifficulty(e)}
+						value={'easy'}
+					>
+						{' '}
+						BEGINNER{''}
+					</button>
+					<button
+						className='settings--btn'
+						onClick={(e) => gameDifficulty(e)}
+						value={'medium'}
+					>
+						{' '}
+						EXPERT{' '}
+					</button>
+					<button
+						className='settings--btn'
+						onClick={(e) => gameDifficulty(e)}
+						value={'hard'}
+					>
+						{' '}
+						PROFESSOR{' '}
+					</button>
 
-      <button className="play-btn" onClick={checkHandler}>
-        PLAY
-      </button>
-      <h1>ChOOSE SETTINGS</h1>
-      <div className="settings">
-      
-        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"easy"}> BEgiNNer MODE  </button>
-
-        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"medium"}> AdVanceD MODE  </button>
-
-        <button className="play-btn" onClick={(e) => gameDifficulty(e)} value={"hard"}> ExPeRT MODE  </button>
-
-      
-        <label>Game Mode</label>
-
-        <select className="settings--mode" onChange={(e) => gameMode(e)}>
-          <option onChange={(e) => gameMode(e)} value="NoTime">
-            NoTime
-          </option>
-          <option onChange={(e) => gameMode(e)} value="Time">
-            Time
-          </option>
-        </select>
-
-     
-      </div>
-    </div>
-  );
+					<label>Game Mode</label>
+					<select className='settings--mode' onChange={(e) => gameMode(e)}>
+						<option onChange={(e) => gameMode(e)} value='NoTime'>
+							NoTime
+						</option>
+						<option onChange={(e) => gameMode(e)} value='Time'>
+							Time
+						</option>
+					</select>
+				</div>{' '}
+				<button className='settings--btn play--btn' onClick={checkHandler}>
+					PLAY
+				</button>
+			</div>
+		</>
+	);
 };
 
 export default Settings;

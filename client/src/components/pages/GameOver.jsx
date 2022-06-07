@@ -1,37 +1,51 @@
-import React from 'react'
-import x from '../../../src/assets/images/x.png'
-import MyContext from "../.././context/MyContext"
-import { useContext, useNavigate } from 'react';
+import React from 'react';
+import pie3 from '../../../src/assets/images/pie3.png';
+import MyContext from '../.././context/MyContext';
+import { useContext, useEffect } from 'react';
 import Nav from './Nav';
 import { Link } from 'react-router-dom';
-import "../../../src/styling/settings.css";
-
+import '../../../src/styling/settings.scss';
+import arrayRandomize from '../../hooks/arrayRandomize';
 
 const GameOver = () => {
+	const context = useContext(MyContext);
+	const {
+		categories,
+		setCategories,
+		setStoredScore,
+		storedScore,
+		diamondPoints,
+		pie,
+		setGameOver,
+		gameOver,
+		indexCounter,
+		pieImg,
+		setPieImg,
+		score,
+		diamondsScore,
+		setDiamondsScore,
+	} = context;
 
+	storedScore && setGameOver(true);
 
-    const context = useContext(MyContext);
-    const {
+	useEffect(() => {
+		pie === true && setPieImg(<img src={pie3} alt='pieImg' />);
+	}, [gameOver, diamondsScore, storedScore]);
 
-        setScore,
-        setGameOver,
-        storedScore,
-    } = context;
+	return (
+		<div>
+			<Nav />
+			{diamondPoints}
+			<div className='gameOver'>
+				{pieImg}
 
+				<p className='finalScore'> Your Final Score: {storedScore}</p>
+			</div>
 
-    setScore(0)
-    storedScore && setGameOver(true)
-
-    return (
-        <div>
-            <Nav />
-            <div className="gameOver">
-                <img src={x} alt="Game_Over" />
-                <p className="finalScore"> Your Final Score : {storedScore}</p>
-            </div>
-            <button className="play-btn"><Link to="/settings">PLAY AGAIN</Link></button>
-        </div>
-    )
-}
+			{pie === true && <p className='cat'>CONGRATS! You completed the Pie!</p>}
+			{pie === true && <p className='cat'> +199 Points!</p>}
+		</div>
+	);
+};
 
 export default GameOver;

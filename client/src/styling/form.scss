@@ -1,0 +1,65 @@
+@use '../App.scss' as scss;
+
+.nav--form {
+	height: 64px;
+	/*border: dotted 3px #fff;*/
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.nav--inputs {
+	//border: 1px solid red;
+}
+.nav--input {
+	font-family: 'Coiny', cursive;
+	display: flex;
+	height: 12px;
+	width: 160px;
+	/*gap: 5px;*/
+	margin: 4px 0px;
+	/*margin-right: 10px;*/
+	padding: 8px;
+	border-radius: 8px;
+}
+.register--btn,
+.login--btn,
+.email--btn {
+	padding: 8px 16px;
+	height: 48px;
+	/*width: 100%;*/
+	font-family: 'Faster One', cursive;
+	font-size: 1.3rem;
+	border: none;
+	outline: solid 2px #fff;
+	float: right;
+	border-radius: 8px;
+}
+/*display: flex;
+	justify-content: center;
+	align-items: center;
+	float: right;*/
+
+button {
+	margin-left: 16px;
+}
+.register--btn {
+	//background-color: #fdea03ff;
+	background-color: scss.$secondary-color;
+	color: #18a0fb;
+	border: none;
+	outline: solid 2px #18a0fb;
+}
+.login--btn {
+	background-color: #18a0fb;
+	color: #fff;
+	/*margin-right: 6px;*/
+}
+
+/*.email--btn {
+	background-color: #fdea03ff;
+	color: #18a0fb;
+	margin-right: 10px;
+	max-width: 200px;
+}*/

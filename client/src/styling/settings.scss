@@ -1,0 +1,74 @@
+@use '../App.scss' as scss;
+
+/*html {
+	background-color: #00ebfcff;
+}*/
+
+.settings {
+	background-color: #fdea03ff;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	margin-top: 10vh;
+	padding: 30px;
+	width: 500px;
+	height: 500px;
+	border-radius: 50px;
+	border: groove 20px #e57fedff;
+
+	/*gap: 10vh;*/
+}
+.settings select,
+.settings input {
+	font-family: 'Coiny', cursive;
+	font-size: larger;
+	width: 100%;
+	background-color: #00ebfc;
+	border: solid 2px #fff;
+
+	padding: 10px 0;
+	margin: 5px 0;
+}
+select:hover,
+input:hover {
+	background-color: rgb(255, 255, 255);
+}
+
+.amount {
+	height: 40px;
+	font-size: 30px;
+}
+
+/*.settings--mode {
+	color: red;
+}*/
+
+.settings--btn {
+	background-color: scss.$accent-color;
+
+	font-family: 'Coiny', cursive;
+	font-size: xx-large;
+
+	width: 300px;
+	/*margin: 0 auto;*/
+	margin-top: 5px;
+	padding: 5px 50px;
+
+	border: solid 5px scss.$dominant-color;
+	border-radius: 16px;
+}
+.play--btn {
+	background-color: scss.$secondary-color;
+	width: 240px;
+}
+.settings--btn:hover {
+	background-color: scss.$accent-color;
+	color: #fff;
+}
+/*
+.amount {
+	background-color: red;
+}*/
