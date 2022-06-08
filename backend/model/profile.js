@@ -8,6 +8,8 @@ const profiles = new mongoose.Schema({
   userName: String,
   birthDate: Number,
   avatarName: String,
+  hints: Number,
+  highScoreResult: Number,
 });
 
 module.exports = mongoose.model("profiles", profiles);
