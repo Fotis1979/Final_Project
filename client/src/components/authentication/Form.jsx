@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 
-import "../../styling/form.css";
+import "../../App.scss";
+import "../../styling/form.scss";
 
 const Form = () => {
   const context = useContext(MyContext);
@@ -114,7 +115,7 @@ const Form = () => {
   );
   const registerBtn = (
     <button className="register--btn" onClick={registerHandler}>
-      register
+      Register
     </button>
   );
   const logoutBtn = (
@@ -122,12 +123,13 @@ const Form = () => {
       Logout
     </button>
   );
-  const emailBtn = <button className="email--btn">{email}</button>;
+  //const emailBtn = <button className='email--btn'>{email}</button>;
   return (
     <form className="nav--form" onSubmit={submitHandler}>
       {!localStorage.getItem("token") ? (
         <div className="nav--inputs">
           <input
+            className="nav--input"
             name="email"
             type="email"
             placeholder="Email Address"
@@ -135,6 +137,7 @@ const Form = () => {
             onChange={inputHandler}
           />
           <input
+            className="nav--input"
             name="pass"
             type="password"
             placeholder="Password"
@@ -143,10 +146,11 @@ const Form = () => {
           />
         </div>
       ) : (
-        emailBtn
+        //emailBtn
+        ""
       )}
+      <div>{localStorage.getItem("token") ? logoutBtn : loginBtn}</div>
       <div>
-        <span>{localStorage.getItem("token") ? logoutBtn : loginBtn}</span>
         {localStorage.getItem("token") ? " " : registerBtn}
         {/* <button className="register--btn" onClick={registerHandler}>
           Register

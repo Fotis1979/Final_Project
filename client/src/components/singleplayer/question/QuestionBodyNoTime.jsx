@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import MyContext from "../../../context/MyContext";
 import Nav from "../../pages/Nav";
 import Hints from "../rewards/Hints";
-import Counter from "./Counter";
+import ScoreCounter from "./ScoreCounter";
 import Rewards from "../rewards/Rewards";
 import arrayRandomize from "../../../hooks/arrayRandomize";
 import "../../../styling/questions.css";
@@ -140,8 +140,8 @@ const QuestionBody = () => {
   return (
     <div>
       <Nav />
-      <Rewards />
-      {error && <ErrorMessage>Please select an option first</ErrorMessage>}
+
+      {/* {error && <ErrorMessage>Please select an option first</ErrorMessage>} */}
 
       {(hints === 1 || hints === 2) && (
         <button
@@ -157,30 +157,32 @@ const QuestionBody = () => {
       )}
 
       <div className="qa--section">
-        <header className="App-header">
-          <div className="questions--section ">
-            Q{indexCounter + 1} . {questionArray[indexCounter]}
-          </div>
-          <div className="answers--section ">
-            {answers.sort().map((el, index) => (
-              <div key={index} className="align-items">
-                <button
-                  value={el}
-                  className={`singleOption  ${selected && handleSelect(el)}`}
-                  key={el}
-                  onClick={() => handleCheck(el)}
-                  disabled={selected}
-                >
-                  {index + 1 + "." + el}
-                </button>
-              </div>
-            ))}
-          </div>
-          <p className="cat">Category : {results[indexCounter].category}</p>
+        <Rewards />
+        {/* <header className="App-header"> */}
+        <div className="questions--section ">
+          <p className="cat">Category : {results[indexCounter].category}</p>Q
+          {indexCounter + 1} . {questionArray[indexCounter]}
+        </div>
+        <div className="answers--section ">
+          {answers.sort().map((el, index) => (
+            <div key={index} className="answers--answerdiv">
+              <button
+                value={el}
+                className={`singleOption  ${selected && handleSelect(el)}`}
+                key={el}
+                onClick={() => handleCheck(el)}
+                disabled={selected}
+              >
+                {index + 1 + "." + el}
+              </button>
+            </div>
+          ))}
+        </div>
+        {/* <p className="cat">Category : {results[indexCounter].category}</p> */}
 
-          {/* >>>>>>   repeated need to be deleted    <<<<<<<<*/}
+        {/* >>>>>>   repeated need to be deleted    <<<<<<<<*/}
 
-          {/* {!selected &&
+        {/* {!selected &&
             (hints === 1 || hints >= 2) &&
             wrongAnswers[indexCounter].length >= 2 && (
               <button
@@ -192,22 +194,21 @@ const QuestionBody = () => {
                   : hints === 1 && "useHint"}
               </button>
           )}*/}
-          {/* <QuestionTimer /> */}
+        {/* <QuestionTimer /> */}
 
-          <button className="play-btn" onClick={nextHandler}>
-            next
-          </button>
-          {selected === rightAnswer[indexCounter] && (
-            <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
-              <p>Correct answer</p>
-            </Popup>
-          )}
-          {selected !== rightAnswer[indexCounter] && (
-            <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
-              <p>wrong answer</p>
-            </Popup>
-          )}
-        </header>
+        <button className="next--btn" onClick={nextHandler}>
+          next
+        </button>
+        {selected === rightAnswer[indexCounter] && (
+          <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+            <p>Correct answer</p>
+          </Popup>
+        )}
+        {selected !== rightAnswer[indexCounter] && (
+          <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
+            <p>wrong answer</p>
+          </Popup>
+        )}
       </div>
     </div>
   );

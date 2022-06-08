@@ -1,54 +1,63 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Form from "../authentication/Form";
-import MyContext from "../../context/MyContext";
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import "../../styling/nav.css";
+import Form from '../authentication/Form';
+import MyContext from '../../context/MyContext';
+
+import ProfileHeader from './ProfileHeader';
+import '../../styling/nav.scss';
 
 const Nav = () => {
-  const context = useContext(MyContext);
-  const {
-    email,
-    setEmail,
-    pass,
-    setPass,
-    name,
-    setName,
-    avatarFile,
-    setAvatarFile,
-    birthDate,
-    setBirthDate,
-    isProfileSaved,
-    setIsProfileSaved,
-    loginMsg,
-    setLoginMsg,
-  } = context;
+	const context = useContext(MyContext);
+	const {
+		email,
+		setEmail,
+		pass,
+		setPass,
+		name,
+		setName,
+		avatarFile,
+		setAvatarFile,
+		birthDate,
+		setBirthDate,
+		isProfileSaved,
+		setIsProfileSaved,
+		loginMsg,
+		setLoginMsg,
+	} = context;
 
-  return (
-    <nav>
-      <div className="nav--ul">
-        <Form />
-        <NavLink to="/">
-          <span>Home</span>
-        </NavLink>
-        {localStorage.getItem("token") ? (
-          <>
-            <NavLink to="/profile">
-              <span>profile</span>
-            </NavLink>
-            <NavLink to="/highScoreBoard">
-              <span>HighScore</span>
-            </NavLink>
-          </>
-        ) : (
-          ""
-        )}
-        <NavLink to="/settings">
-          <span>Settings</span>
-        </NavLink>
-      </div>
-    </nav>
-  );
+	return (
+		<nav>
+			<ul className='nav--ul'>
+				<NavLink className={'nav--link'} to='/'>
+					<span>Home</span>
+				</NavLink>
+				<NavLink className={'nav--link'} to='/settings'>
+					<span>Play</span>
+				</NavLink>
+				{/* ProfileHeader should become the link to profile */}
+				<NavLink className={'nav--link'} to='/profile'>
+					<span>Profile</span>
+				</NavLink>
+				<NavLink className={'nav--link'} to='/highScoreBoard'>
+					<span>Scoreboard</span>
+				</NavLink>
+				{localStorage.getItem('token') ? (
+					//
+					<></>
+				) : (
+					//
+					''
+				)}
+				{/* ProfileHeader should become the link to profile */}
+				{/*<NavLink to='/profile'>
+					<ProfileHeader />
+				</NavLink>*/}
+				{/* ProfileHeader props: username, avatarUrl (avatar = profile image that you can unlock and change*/}
+				<Form />
+			</ul>
+		</nav>
+	);
 };
 export default Nav;
