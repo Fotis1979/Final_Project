@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
 import arrayRandomize from "../../hooks/arrayRandomize";
-import "../../../src/styling/settings.css";
-import useFetch from "../../hooks/useFetch";
+import "../../../src/styling/settings.scss";
 
 const Settings = () => {
   const navigate = useNavigate();

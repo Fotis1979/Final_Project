@@ -2,7 +2,7 @@ import React from "react";
 import MyContext from "../../../context/MyContext";
 import QuestionTimer from "./QuestionTimer";
 import { useContext, useEffect } from "react";
-import "../../../styling/questions.css";
+import "../../../styling/questions.scss";
 import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";

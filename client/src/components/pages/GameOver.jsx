@@ -4,7 +4,7 @@ import pie3 from '../../assets/images/pie3.png'
 import MyContext from "../.././context/MyContext"
 import { useContext, useEffect } from 'react';
 import Nav from './Nav';
-import "../../../src/styling/settings.css";
+import "../../../src/styling/settings.scss";
 
 
 const GameOver = () => {

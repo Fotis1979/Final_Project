@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import MyContext from "./MyContext";
 import { useState } from "react";
-import "../../src/App.css";
+import "../../src/App.scss";
 import useFetch from "../hooks/useFetch";
 import arrayRandomize from '../hooks/arrayRandomize'
 
@@ -55,104 +55,100 @@ const MyProvider = ({ children }) => {
   const [messageDiamonds, setMessageDiamonds] = useState("");
   const [storedScore, setStoredScore] = useState("");
 
-  const [avatarUrl, setAvatarUrl] = useState(
-    "https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png"
-  );
-  const [avatarFile, setAvatarFile] = useState();
+	const [avatarUrl, setAvatarUrl] = useState(
+		'https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png'
+	);
+	const [avatarFile, setAvatarFile] = useState();
 
-  const [firstCat, setFirstCat] = useState();
+	const [firstCat, setFirstCat] = useState();
 
-  const [timeUp, setTimeUp] = useState(false);
-  const [next, setNext] = useState(false);
-  const [timerTrigger, setTimerTrigger] = useState();
+	const [timeUp, setTimeUp] = useState(false);
+	const [next, setNext] = useState(false);
+	const [timerTrigger, setTimerTrigger] = useState();
 
-  const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
-  const initialState = { results: null, loading: true, eror: null };
-  const { results, loading, eror } = useFetch(url, initialState);
-  const [categories, setCategories] = useState([
-    "arts",
-    "general",
-    "film",
-    "food",
-    "geography",
-    "history",
-    "music",
-    "science",
-    "society",
-    "sport",
-  ]);
+	const url = `https://the-trivia-api.com/api/questions?limit=${number}&&categories=${cat}&&difficulty=${diff}`;
+	const initialState = { results: null, loading: true, eror: null };
+	const { results, loading, eror } = useFetch(url, initialState);
+	const [categories, setCategories] = useState([
+		'arts',
+		'general',
+		'film',
+		'food',
+		'geography',
+		'history',
+		'music',
+		'science',
+		'society',
+		'sport',
+	]);
 
 
   //Diamond part
 
-  const [pie, setPie] = useState(false);
-  const [diamonds, setDiamonds] = useState(0);
-  const [diamondGeo, setDiamondGeo] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondArts, setDiamondArts] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondGen, setDiamondGen] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondHist, setDiamondHist] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondSport, setDiamondSport] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondMus, setDiamondMus] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondFood, setDiamondFood] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondSoc, setDiamondSoc] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondSci, setDiamondSci] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [diamondFilm, setDiamondFilm] = useState({
-    easy: false,
-    medium: false,
-    hard: false,
-  });
-  const [img, setImg] = useState();
+	const [pie, setPie] = useState(false);
+	const [diamonds, setDiamonds] = useState(0);
+	const [diamondGeo, setDiamondGeo] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondArts, setDiamondArts] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondGen, setDiamondGen] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondHist, setDiamondHist] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondSport, setDiamondSport] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondMus, setDiamondMus] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondFood, setDiamondFood] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondSoc, setDiamondSoc] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondSci, setDiamondSci] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [diamondFilm, setDiamondFilm] = useState({
+		easy: false,
+		medium: false,
+		hard: false,
+	});
+	const [img, setImg] = useState();
 
-  useEffect(() => {
-    if (results !== null) {
-      setQuestionArray(results.map((item) => item.question));
-      setWrongAnswers(results.map((item) => item.incorrectAnswers));
-      setRightAnswer(results.map((item) => item.correctAnswer));
-    }
-  }, [results]);
-  useEffect(() => {
-    setCategories(arrayRandomize(categories))
-    
-    }, [setCategories,categories])
+	useEffect(() => {
+		if (results !== null) {
+			setQuestionArray(results.map((item) => item.question));
+			setWrongAnswers(results.map((item) => item.incorrectAnswers));
+			setRightAnswer(results.map((item) => item.correctAnswer));
+		}
+	}, [results]);
 
-  if (loading) return <p>loading ..</p>;
-  if (eror) return <p>'eror'</p>;
+	if (loading) return <p>loading ..</p>;
+	if (eror) return <p>'eror'</p>;
 
   return (
     <MyContext.Provider

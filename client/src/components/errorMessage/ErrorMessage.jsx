@@ -1,13 +1,7 @@
-import React from 'react'
-import "../../styling/errorMessage.css";
+import '../../styling/errorMessage.scss';
 
 const ErrorMessage = ({ children }) => {
-    return (
-        <div className='e-message'>
-            {children}
-        </div>
-    );
-
+	return <div className='e-message'>{children}</div>;
 };
 
-export default ErrorMessage
+export default ErrorMessage;

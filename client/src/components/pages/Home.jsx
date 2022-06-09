@@ -22,7 +22,7 @@ const Home = () => {
 	return (
 		<div className='page--home'>
 			<Nav />
-			<div className='home--section'>
+			<div className='page--section'>
 				<img className='trivia--banner' src={`${h1icon}`} alt='banner' />
 			</div>
 		</div>

@@ -1,7 +1,7 @@
-import "../../../styling/rewards.css";
-import { useContext, useEffect } from "react";
-import MyContext from "../../../context/MyContext";
-import diamondArt from "../../../assets/images/diamondArt.png";
+import '../../../styling/diamonds.scss';
+import { useContext, useEffect } from 'react';
+import MyContext from '../../../context/MyContext';
+import diamondArt from '../../../assets/images/diamondArt.png';
 
 const Diamonds = () => {
   const context = useContext(MyContext);

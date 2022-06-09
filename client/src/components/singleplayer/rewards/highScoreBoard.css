@@ -3,3 +3,8 @@
     flex-direction: column;
     background-color: blanchedalmond;
 }
+.collection-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
