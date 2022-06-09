@@ -3,24 +3,23 @@ import MyContext from "./MyContext";
 import { useState } from "react";
 import "../../src/App.css";
 import useFetch from "../hooks/useFetch";
+import arrayRandomize from '../hooks/arrayRandomize'
 
 const MyProvider = ({ children }) => {
-  const [name, setName] = useState("");
   const [isProfileSaved, setIsProfileSaved] = useState(false);
   const [birthDate, setBirthDate] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
   const [highScoreResult, setHighScoreResult] = useState(0);
   const [highScore, setHighScore] = useState(0);
-
   const [clicked, setClicked] = useState(false);
   const [username, setUsername] = useState();
   const [mode, setMode] = useState("NoTime");
   const [streak, setStreak] = useState(0);
-
   const [pieImg, setPieImg] = useState(false);
-
+  const [imgPie, setImgPie] = useState()
   const [losePoints, setLosePoints] = useState(false);
   const [diamondPoints, setDiamondPoints] = useState(false);
+  const [hintPoints, setHintPoints] = useState(0);
   const [message, setMessage] = useState();
   const [messageB, setMessageB] = useState();
   const [messageC, setMessageC] = useState();
@@ -29,7 +28,6 @@ const MyProvider = ({ children }) => {
   const [color, setColor] = useState();
   const [score, setScore] = useState(0);
   const [streakScore, setStreakScore] = useState(0);
-  const [storedScore, setStoredScore] = useState(0);
   const [diamondsScore, setDiamondsScore] = useState(0);
   const [showStreak, setShowStreak] = useState("");
   const [gameMode, setGameMode] = useState();
@@ -48,13 +46,14 @@ const MyProvider = ({ children }) => {
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [selected, setSelected] = useState();
   const [rightAnswer, setRightAnswer] = useState([]);
-  const [answers, setAnswers] = useState([]);
   const [indexCounter, setIndexCounter] = useState(0);
   const [indexCounter2, setIndexCounter2] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [answerPopup, setAnswerPopup] = useState(false);
-  const [sec, setSec] = useState(0);
   const [userName, setUserName] = useState("");
+  const [messagePie, setMessagePie] = useState("");
+  const [messageDiamonds, setMessageDiamonds] = useState("");
+  const [storedScore, setStoredScore] = useState("");
 
   const [avatarUrl, setAvatarUrl] = useState(
     "https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png"
@@ -82,6 +81,7 @@ const MyProvider = ({ children }) => {
     "society",
     "sport",
   ]);
+
 
   //Diamond part
 
@@ -146,6 +146,10 @@ const MyProvider = ({ children }) => {
       setRightAnswer(results.map((item) => item.correctAnswer));
     }
   }, [results]);
+  useEffect(() => {
+    setCategories(arrayRandomize(categories))
+    
+    }, [setCategories,categories])
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>'eror'</p>;
@@ -153,6 +157,14 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        storedScore, 
+        setStoredScore,
+        messagePie, 
+        setMessagePie,
+        messageDiamonds, 
+        setMessageDiamonds,
+        imgPie,
+        setImgPie,
         losePoints,
         setLosePoints,
         timerTrigger,
@@ -201,6 +213,8 @@ const MyProvider = ({ children }) => {
         setDiamondPoints,
         diamondsScore,
         setDiamondsScore,
+        hintPoints, 
+        setHintPoints,
         pie,
         setPie,
         pieImg,
@@ -215,12 +229,8 @@ const MyProvider = ({ children }) => {
         setImg,
         selected,
         setSelected,
-        storedScore,
-        setStoredScore,
         firstCat,
         setFirstCat,
-        answers,
-        setAnswers,
         error,
         setError,
         questionArray,

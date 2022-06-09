@@ -3,6 +3,7 @@ import { useEffect, useContext } from 'react'
 import MyContext from '../../../context/MyContext'
 import right from '../../../assets/images/right.png'
 import wrong from '../../../assets/images/wrong.png'
+import GameOver from '../../pages/GameOver'
 
 const Correct = () => {
     const context = useContext(MyContext);
@@ -23,20 +24,21 @@ const Correct = () => {
         next,
         setMessageStreak,
         messageStreak,
+        gameOver
 
     } = context;
 
     useEffect(() => {
-        selected === rightAnswer[indexCounter] ?
-            setTimeout(() => {
-                setImg(<img src={right} alt="" />)
+        gameOver === false &&   selected === rightAnswer[indexCounter] ? 
+          setTimeout(() => {
+       setImg(<img src={right} alt="" />)
             }, 800)
-            : setImg(null)
+            :  setImg(null)
             
-    }, [selected])
+    }, [selected,gameOver])
 
     useEffect(() => {
-        selected && selected !== rightAnswer[indexCounter] ?
+      gameOver === false && selected && selected !== rightAnswer[indexCounter] ?
             setTimeout(() => {
                 timeUp === false &&
                     setImg(<img className="img2" src={wrong} alt="" />)

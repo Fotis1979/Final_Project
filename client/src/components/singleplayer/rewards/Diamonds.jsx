@@ -50,6 +50,7 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondGeo({ easy: false, medium: false, hard: false });
   }, [diamondGeo]);
+  gameOver === true && setDiamondGeo({ easy: false, medium: false, hard: false });
 
   useEffect(() => {
     diamondArts.easy === true &&
@@ -58,6 +59,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondArts({ easy: false, medium: false, hard: false });
   }, [diamondArts]);
+  gameOver === true && setDiamondArts({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondSport.easy === true &&
@@ -66,6 +69,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondSport({ easy: false, medium: false, hard: false });
   }, [diamondSport]);
+  gameOver === true && setDiamondSport({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondFood.easy === true &&
@@ -74,6 +79,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondFood({ easy: false, medium: false, hard: false });
   }, [diamondFood]);
+  gameOver === true && setDiamondFood({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondFilm.easy === true &&
@@ -82,6 +89,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondFilm({ easy: false, medium: false, hard: false });
   }, [diamondFilm]);
+  gameOver === true && setDiamondFilm({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondGen.easy === true &&
@@ -90,6 +99,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondGen({ easy: false, medium: false, hard: false });
   }, [diamondGen]);
+  gameOver === true && setDiamondGen({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondMus.easy === true &&
@@ -98,6 +109,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondMus({ easy: false, medium: false, hard: false });
   }, [diamondMus]);
+  gameOver === true && setDiamondMus({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondHist.easy === true &&
@@ -106,6 +119,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondHist({ easy: false, medium: false, hard: false });
   }, [diamondHist]);
+  gameOver === true && setDiamondHist({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondSci.easy === true &&
@@ -114,6 +129,8 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondSci({ easy: false, medium: false, hard: false });
   }, [diamondSci]);
+  gameOver === true && setDiamondSci({ easy: false, medium: false, hard: false });
+
 
   useEffect(() => {
     diamondSoc.easy === true &&
@@ -122,6 +139,9 @@ const Diamonds = () => {
       setDiamonds((prev) => prev + 1) &&
       setDiamondSoc({ easy: false, medium: false, hard: false });
   }, [diamondSoc]);
+  gameOver === true && setDiamondSoc({ easy: false, medium: false, hard: false });
+
+  gameOver === true && setDiamonds(0);
 
   useEffect(() => {
     (diamonds === 1 ||
@@ -298,6 +318,10 @@ const Diamonds = () => {
   useEffect(() => {
     diamonds === 6 && setPie(true);
   }, [diamonds]);
+
+  useEffect(() => {
+//  console.log("DIAMONDS ARE : ", diamonds);
+  }, [diamonds,indexCounter]);
 
   return (
     <div>

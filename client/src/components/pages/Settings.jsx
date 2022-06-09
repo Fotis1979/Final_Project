@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
@@ -10,6 +10,9 @@ const Settings = () => {
 
   const context = useContext(MyContext);
   const {
+
+    setStreak,
+    setDiamonds,
     loading,
     setCategories,
     gameOver,
@@ -18,16 +21,68 @@ const Settings = () => {
     categories,
     mode,
     setMode,
+    indexCounter,
+    setIndexCounter,
+    setGameOver,
+    setDiff,
+    setScore,
+    setHints,
+    setSelected,
+    setTimeUp,
+    setDiamondPoints,
+    setPie,
+    setMessagePie,
+    setMessageDiamonds,
+    setSeconds,
+    setHintPoints
+
   } = context;
+
+  useEffect(() => {
+    setHintPoints(0)
+    setTimeUp(false)
+    setMessagePie("")
+    setMessageDiamonds("")
+    setPie(false)
+    setDiamonds(0)
+    setSeconds(0)
+    setDiamondPoints(0)
+    setDiff("easy")
+    setSelected(null)
+    setScore(0)
+    setHints(0)
+    setIndexCounter(0)
+    setStreak(0)
+    setDiamonds(0)
+    setGameDiff("easy")
+
+  }, [setIndexCounter, indexCounter])
+
+
+  useEffect(() => {
+    gameOver === true && setGameOver(false)
+
+    console.log(gameOver);
+    console.log(indexCounter);
+
+  }, [setGameOver,gameOver])
+  useEffect(() => {
+        console.log(indexCounter);
+
+     setIndexCounter(0)
+  }, [indexCounter, setIndexCounter])
+
+
+
+  useEffect(() => {
+    setCategories(arrayRandomize(categories))
+
+  }, [setCategories, categories])
+
 
   const gameDifficulty = (e) => {
     setGameDiff(e.target.value);
   };
-
-  useEffect(() => {
-    gameOver === false && setCategories(arrayRandomize(categories).slice(4));
-    console.log(categories);
-  }, []);
 
   const gameMode = (e) => {
     setMode(e.target.value);
@@ -40,6 +95,9 @@ const Settings = () => {
       navigate("/timeMode");
     }
   };
+
+
+
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -83,6 +141,9 @@ const Settings = () => {
         <label>Game Mode</label>
 
         <select className="settings--mode" onChange={(e) => gameMode(e)}>
+          <option>
+            Choose Mode
+          </option>
           <option onChange={(e) => gameMode(e)} value="NoTime">
             NoTime
           </option>

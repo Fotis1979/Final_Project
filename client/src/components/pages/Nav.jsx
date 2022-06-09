@@ -13,6 +13,7 @@ const Nav = () => {
     setEmail,
     pass,
     setPass,
+    rightAnswer,
     name,
     setName,
     avatarFile,
@@ -20,6 +21,7 @@ const Nav = () => {
     birthDate,
     setBirthDate,
     isProfileSaved,
+    indexCounter,
     setIsProfileSaved,
     loginMsg,
     setLoginMsg,
@@ -44,9 +46,9 @@ const Nav = () => {
         ) : (
           ""
         )}
-        <NavLink to="/settings">
+       {indexCounter !==17  && <NavLink to="/settings">
           <span>Settings</span>
-        </NavLink>
+        </NavLink>}
       </div>
     </nav>
   );

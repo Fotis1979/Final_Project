@@ -1,13 +1,13 @@
 import React from "react";
 import MyContext from "../../../context/MyContext";
 import QuestionTimer from "./QuestionTimer";
-import { useNavigate } from "react-router";
 import { useContext, useEffect } from "react";
 import "../../../styling/questions.css";
 import Rewards from "../rewards/Rewards";
 import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Diamonds from "../rewards/Diamonds";
+import GameOver from "../../pages/GameOver";
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
@@ -19,9 +19,7 @@ const QuestionBody = () => {
     timerTrigger,
     setTimerTrigger,
     categories,
-    setStoredScore,
     loading,
-    number,
     eror,
     streak,
     hints,
@@ -38,10 +36,12 @@ const QuestionBody = () => {
     setCat,
     score,
     setScore,
+    setImg,
     indexCounter,
     setIndexCounter,
     selected,
     setSelected,
+    setStoredScore,
     img,
     img2,
     gameOver,
@@ -55,10 +55,25 @@ const QuestionBody = () => {
     showStreak,
     setShowStreak,
     setClicked,
-    storedScore,
-    pie,
     setGameOver,
+    setMessageStreak,
+    diamonds
   } = context;
+
+  useEffect(() => {
+
+gameOver === true && setMessageStreak("")
+  },[indexCounter,setGameOver,gameOver,score,setImg,setMessageStreak]);
+
+
+indexCounter === 17 && selected && setTimeout(() => {
+  setGameOver(true)
+}, 10000);
+
+useEffect(() => {
+  indexCounter === 0 && setGameOver(false)
+
+  }, [setGameOver,indexCounter])
 
   useEffect(() => {
     selected && setTimerTrigger(false);
@@ -77,8 +92,21 @@ const QuestionBody = () => {
     }, 1000);
   }, [timerTrigger, seconds]);
 
+
+  const nextHandler = () => {
+    setStoredScore(score)
+    setClicked(false);
+    if (selected) {
+      setSelected();
+    } else setError("Please select an option first");
+    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
+    setSeconds(0);
+    setTimeUp(false);
+  }
+    
+
   useEffect(() => {
-    console.log(categories);
+    console.log(categories)
     indexCounter >= 0 && indexCounter <= 5 && setCat(categories[indexCounter]);
     indexCounter >= 6 &&
       indexCounter <= 11 &&
@@ -86,18 +114,8 @@ const QuestionBody = () => {
     indexCounter >= 12 &&
       indexCounter <= 18 &&
       setCat(categories[indexCounter - 12]);
-  }, [indexCounter, categories]);
+  }, [indexCounter, categories,setCat]);
 
-  const nav = useNavigate();
-
-  if (indexCounter === number - 1 + 1) {
-    // console.log("last QUESTion");
-    // (pie === true && gameOver === true) ? setTimeout(() => {
-    //   setStoredScore(storedScore + 199)
-    // }, 3000) :
-    setStoredScore(score);
-    nav("/game_over");
-  }
 
   const handleSelect = (i) => {
     setSeconds(0);
@@ -114,12 +132,17 @@ const QuestionBody = () => {
   }, [clicked]);
 
   useEffect(() => {
+    console.log("SCoRE IS :", score);
+  }, [score]);
+
+  useEffect(() => {
     img && score === 0 && setNext(true);
-  }, [img, setNext, setTimerTrigger, score]);
+  }, [img, setNext, setTimerTrigger, score,indexCounter]);
 
   useEffect(() => {
     console.log(rightAnswer[indexCounter]);
   }, [rightAnswer, indexCounter]);
+  
 
   useEffect(() => {
     (selected === wrongAnswers[indexCounter][0] ||
@@ -260,27 +283,6 @@ const QuestionBody = () => {
     timeUp === true && setNext(true);
   }, [gameDiff, seconds, setTimeUp, timeUp, setNext]);
 
-  const nextHandler = () => {
-    setClicked(false);
-    if (selected) {
-      setSelected();
-      setStoredScore(score);
-    } else setError("Please select an option first");
-    setIndexCounter((prevIndexCounter) => prevIndexCounter + 1);
-    setSeconds(0);
-    setTimeUp(false);
-  };
-
-  // useEffect(() => {
-
-  //   console.log("TiMERTriGGeR : ", timerTrigger);
-  // }, [timerTrigger])
-
-  // useEffect(() => {
-
-  //   console.log("GAMEOVER IS : ", gameOver);
-  // }, [gameOver, indexCounter])
-
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el));
@@ -293,75 +295,85 @@ const QuestionBody = () => {
     e.pop();
     setHints((prev) => prev - 1);
   };
+
+
   useEffect(() => {
-    console.log("CLICKED IS : ", clicked);
-  }, [clicked]);
+    console.log("GAMEOVER IS : ", gameOver);
+  }, [gameOver,indexCounter]);
 
   useEffect(() => {
     console.log("INDEXCOUNTER IS : ", indexCounter);
   }, [indexCounter]);
+
+  useEffect(() => {
+    console.log("DIAMONDS ARE : ", diamonds);
+  }, [indexCounter]);
+
+
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
 
   return (
     <div>
-      <Nav />
+      { gameOver === true&&  <GameOver />}
 
-      {indexCounter < 6 && <p className="round">1st RoUnD !</p>}
-      {indexCounter >= 6 && indexCounter <= 11 && (
+     {gameOver === false && <Nav />}
+
+      {gameOver === false && indexCounter < 6 && <p className="round">1st RoUnD !</p>}
+      {gameOver === false && indexCounter >= 6 && indexCounter <= 11 && (
         <p className="round">2nd RoUnD !</p>
       )}
-      {indexCounter >= 12 && <p className="round">Diamonds RoUnD !</p>}
-      {!img && !timeUp && <p className="mode">{diff}</p>}
+      {gameOver === false && indexCounter >= 12 && <p className="round">Diamonds RoUnD !</p>}
+      {gameOver === false && !img && !timeUp && <p className="mode">{diff}</p>}
 
-      {indexCounter >= 12 && (
+      { gameOver === false && indexCounter >= 12 && (
         <p style={{ color: "red", fontSize: "25px", marginLeft: "20px" }}>
           DiamondPointS {diamondPoints}
         </p>
       )}
 
-      <Rewards />
+     {gameOver === false && <Rewards />}
 
-      {!img && !timeUp && <p className="cat">Category : {cat}</p>}
+      {gameOver === false &&!img && !timeUp && <p className="cat">Category : {cat}</p>}
 
-      {!img ? setShowStreak(`STREAK is : ${streak}`) : setShowStreak()}
+      {gameOver === false && !img ? setShowStreak(`STREAK is : ${streak}`) : setShowStreak()}
       {!img && <p className="cat"> {showStreak}</p>}
       {next === true && img && streak !== 0 && streak >= 2 && (
         <p className="cat3">{messageStreak}</p>
       )}
       {!messageStreak && !showStreak && (
-        <p className="cat2">
+     gameOver === false &&   <p className="cat2">
           {selected !== rightAnswer[indexCounter] ? messageD : message}
         </p>
       )}
 
       <div className="qa--section">
-        {timeUp === true && <p className="cat">TIME UP !!! CLICK NEXT</p>}
+        {gameOver === false && timeUp === true && <p className="cat">TIME UP !!! CLICK NEXT</p>}
 
         <header className="App-header">
           {(img || timeUp || img2) &&
-            next === true &&
+           ( next === true && indexCounter !==17 ) &&
             (messageStreak || (message && streak < 3)) && (
               <button className="play-btn" onClick={nextHandler}>
                 NEXT
               </button>
             )}
-          {!img && !timeUp && (
-            <div className="questions--section">
+          { !img && !timeUp && (
+           gameOver === false && <div className="questions--section">
               Q{indexCounter + 1} .{" "}
               <p className="quest">{questionArray[indexCounter]}</p>
             </div>
           )}
 
           {/* ********** Remove style to show everything !! ********** */}
-          <div
+       {  gameOver === false && <div
             //  style={img && { visibility: "hidden" }}
 
             className="answers--section"
           >
             {answers.sort().map((el, index) => (
-              <div key={index} className="align-items">
+             gameOver === false && <div key={index} className="align-items">
                 <button
                   value={el}
                   className={
@@ -379,7 +391,7 @@ const QuestionBody = () => {
                 </button>
               </div>
             ))}
-          </div>
+          </div>}
 
           {
             <div className="popUp">
@@ -411,7 +423,7 @@ const QuestionBody = () => {
           {timeUp === true && setSelected(wrongAnswers[0])}
         </header>
       </div>
-    </div>
+    </div> 
   );
 };
 

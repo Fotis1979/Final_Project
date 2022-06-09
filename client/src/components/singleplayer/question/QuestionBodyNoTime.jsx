@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import MyContext from "../../../context/MyContext";
-import QuestionCounter from "./QuestionCounter";
 import Nav from "../../pages/Nav";
 import Hints from "../rewards/Hints";
 import Counter from "./Counter";
