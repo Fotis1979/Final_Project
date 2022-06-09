@@ -168,7 +168,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Geography" &&
       diff === "hard" &&
       setDiamondGeo({ ...diamondGeo, hard: true });
-    // console.log("Geography Diamonds are : ", diamondGeo)
+    console.log("Geography Diamonds are : ", diamondGeo)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Arts & Literature" &&
@@ -184,7 +184,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Arts & Literature" &&
       diff === "hard" &&
       setDiamondArts({ ...diamondArts, hard: true });
-    // console.log("Arts Diamonds are : ", diamondArts)
+    console.log("Arts Diamonds are : ", diamondArts)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "General Knowledge" &&
@@ -200,7 +200,7 @@ const Diamonds = () => {
       results[indexCounter].category === "General Knowledge" &&
       diff === "hard" &&
       setDiamondGen({ ...diamondGen, hard: true });
-    // console.log("General Knowledge Diamonds are : ", diamondGen)
+    console.log("General Knowledge Diamonds are : ", diamondGen)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Food & Drink" &&
@@ -216,7 +216,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Food & Drink" &&
       diff === "hard" &&
       setDiamondFood({ ...diamondFood, hard: true });
-    // console.log("Food Diamonds are : ", diamondFood)
+    console.log("Food Diamonds are : ", diamondFood)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Film & TV" &&
@@ -232,7 +232,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Film & TV" &&
       diff === "hard" &&
       setDiamondFilm({ ...diamondFilm, hard: true });
-    // console.log("Film Diamonds are : ", diamondFilm)
+    console.log("Film Diamonds are : ", diamondFilm)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Music" &&
@@ -248,7 +248,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Music" &&
       diff === "hard" &&
       setDiamondMus({ ...diamondMus, hard: true });
-    // console.log("Music Diamonds are : ", diamondMus)
+    console.log("Music Diamonds are : ", diamondMus)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Society & Culture" &&
@@ -264,7 +264,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Society & Culture" &&
       diff === "hard" &&
       setDiamondSoc({ ...diamondSoc, hard: true });
-    // console.log("Society Diamonds are : ", diamondSoc)
+    console.log("Society Diamonds are : ", diamondSoc)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Sport & Leisure" &&
@@ -280,7 +280,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Sport & Leisure" &&
       diff === "hard" &&
       setDiamondSport({ ...diamondSport, hard: true });
-    // console.log("Sport Diamonds are : ", diamondSport)
+    console.log("Sport Diamonds are : ", diamondSport)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "Science" &&
@@ -296,7 +296,7 @@ const Diamonds = () => {
       results[indexCounter].category === "Science" &&
       diff === "hard" &&
       setDiamondSci({ ...diamondSci, hard: true });
-    // console.log("Science Diamonds are : ", diamondSci)
+    console.log("Science Diamonds are : ", diamondSci)
 
     selected === rightAnswer[indexCounter] &&
       results[indexCounter].category === "History" &&
@@ -312,7 +312,7 @@ const Diamonds = () => {
       results[indexCounter].category === "History" &&
       diff === "hard" &&
       setDiamondHist({ ...diamondHist, hard: true });
-    // console.log("History Diamonds are : ", diamondHist)
+    console.log("History Diamonds are : ", diamondHist)
   }, [selected]);
 
   useEffect(() => {

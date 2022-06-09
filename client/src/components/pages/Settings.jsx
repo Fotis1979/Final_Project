@@ -4,6 +4,7 @@ import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
 import arrayRandomize from "../../hooks/arrayRandomize";
 import "../../../src/styling/settings.css";
+import useFetch from "../../hooks/useFetch";
 
 const Settings = () => {
   const navigate = useNavigate();

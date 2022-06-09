@@ -11,7 +11,6 @@ const GameOver = () => {
 
     const context = useContext(MyContext);
     const {
-
         messagePie,
         setMessagePie,
         messageDiamonds,

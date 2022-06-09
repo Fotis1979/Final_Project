@@ -116,7 +116,6 @@ useEffect(() => {
       setCat(categories[indexCounter - 12]);
   }, [indexCounter, categories,setCat]);
 
-
   const handleSelect = (i) => {
     setSeconds(0);
 
