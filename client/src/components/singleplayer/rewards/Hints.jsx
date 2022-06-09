@@ -10,7 +10,9 @@ const Hints = () => {
 	return (
 		<div className='rewards--btn'>
 			<span>HINTS : {hints}</span>
+			
 		</div>
+		
 	);
 };
 
