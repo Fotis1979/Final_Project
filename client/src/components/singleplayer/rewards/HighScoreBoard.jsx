@@ -150,11 +150,11 @@ const HighScoreBoard = () => {
         ))}
       </div>
 
-      <div>
+      {/* <div>
         {collectionRewards.map((el) => (
           <div></div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

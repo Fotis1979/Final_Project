@@ -1,3 +1,4 @@
+
 import React from "react";
 import MyContext from "../../../context/MyContext";
 import QuestionTimer from "./QuestionTimer";
@@ -14,11 +15,14 @@ import useSound from 'use-sound';
 import correctanswer from '../../../assets/sounds/correctanswer.mp3';
 import wronganswear from '../../../assets/sounds/wronganswear.mp3';
 
+
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
+
     trigger,
     setTrigger,
+
     diamondPoints,
     clicked,
     next,
@@ -26,7 +30,9 @@ const QuestionBody = () => {
     timerTrigger,
     setTimerTrigger,
     categories,
+    setStoredScore,
     loading,
+    number,
     eror,
     streak,
     hints,
@@ -43,12 +49,16 @@ const QuestionBody = () => {
     setCat,
     score,
     setScore,
+
     setImg,
+
     indexCounter,
     setIndexCounter,
     selected,
     setSelected,
+
     setStoredScore,
+
     img,
     img2,
     gameOver,
@@ -62,16 +72,52 @@ const QuestionBody = () => {
     showStreak,
     setShowStreak,
     setClicked,
-    setGameOver,
+
+      setGameOver,
     setMessageStreak,
     diamonds,
     questionCount, 
     setQuestionCount,
-    setSettings
+    setSettings,
+
+    highScoreResult,
+    setHighScoreResult,
+    highScore,
+  
   } = context;
+
+  //setting highScore
+  useEffect(() => {
+    let scoreSum = Number(score) + Number(highScore);
+    if (scoreSum > highScoreResult) {
+      setHighScoreResult(scoreSum);
+      console.log("scoresum", scoreSum);
+    }
+  }, [score, highScore]);
+  useEffect(() => {
+    const url = "http://localhost:8080/profile/save";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ hints, highScoreResult, diamonds }),
+    };
+
+    fetch(url, options)
+      .then((response) => response.text())
+      .then((result) => {
+        // setHints(result.data.hints);
+        // setHighScoreResult(result.data.highScoreResult);
+      });
+  }, [hints, highScoreResult, score, diamonds]);
+
 
   const [playR] = useSound(correctanswer);
    const [playW] = useSound(wronganswear);
+  
+  
   useEffect(()=>{
     if(selected === rightAnswer[indexCounter]){
       playR()
@@ -115,6 +161,7 @@ const QuestionBody = () => {
 
   }, [setGameOver, indexCounter])
 
+
   useEffect(() => {
     selected && setTimerTrigger(false);
   }, [selected, setTimerTrigger, seconds]);
@@ -131,6 +178,7 @@ const QuestionBody = () => {
       timerTrigger === true && setSeconds((prev) => prev + 1);
     }, 1000);
   }, [timerTrigger, seconds]);
+
 
 
   const nextHandler = () => {
@@ -156,6 +204,7 @@ const QuestionBody = () => {
       setIndexCounter(0);
       }, [indexCounter, categories, setCat]);
 
+
   const handleSelect = (i) => {
     setSeconds(0);
 
@@ -170,18 +219,16 @@ const QuestionBody = () => {
     console.log("CLICKED IS :", clicked);
   }, [clicked]);
 
-  useEffect(() => {
-    console.log("SCoRE IS :", score);
-  }, [score]);
+
 
   useEffect(() => {
     img && score === 0 && setNext(true);
   }, [img, setNext, setTimerTrigger, score, indexCounter]);
 
+
   useEffect(() => {
     console.log(rightAnswer[indexCounter]);
   }, [rightAnswer, indexCounter]);
-
 
   useEffect(() => {
     (selected === wrongAnswers[indexCounter][0] ||
@@ -322,9 +369,11 @@ const QuestionBody = () => {
     timeUp === true && setNext(true);
   }, [gameDiff, seconds, setTimeUp, timeUp, setNext]);
 
+
   const answers = [];
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el));
+
 
   questionCount === 6 && setDiff("medium")
   questionCount === 12 && setDiff("hard")
@@ -335,22 +384,16 @@ const QuestionBody = () => {
     e.pop();
     setHints((prev) => prev - 1);
   };
+
 const tr = ()=> {
   setTrigger(true)
 }
 indexCounter=== 0 && setTrigger(false)
 
-  useEffect(() => {
-    console.log("GAMEOVER IS : ", gameOver);
-  }, [gameOver, indexCounter]);
 
-  useEffect(() => {
-    console.log("INDEXCOUNTER IS : ", indexCounter);
-  }, [indexCounter]);
 
-  useEffect(() => {
-    console.log("DIAMONDS ARE : ", diamonds);
-  }, [indexCounter]);
+
+
 
   const nav = useNavigate()
 
@@ -361,6 +404,7 @@ indexCounter=== 0 && setTrigger(false)
 
   return (
     <>
+
     <Nav />    
       <div className="qa--section">
     
@@ -385,10 +429,12 @@ indexCounter=== 0 && setTrigger(false)
           {!img && <p className="cat"> {showStreak}</p>}
         </div>
 
+
         {next === true && img && streak !== 0 && streak >= 2 && (
           <p className="cat3">{messageStreak}</p>
         )}
         {!messageStreak && !showStreak && (
+
           gameOver === false && <p className="cat2">
 
             {selected !== rightAnswer[indexCounter] ? messageD : message}
@@ -406,10 +452,12 @@ indexCounter=== 0 && setTrigger(false)
 
           {!img && !timeUp && (
             gameOver === false && <div className="questions--section">
+
               Q{indexCounter + 1} .{" "}
               <p className="quest">{questionArray[indexCounter]}</p>
             </div>
           )}
+
 
           {/* ********** Remove style to show everything !! ********** */}
           {gameOver === false && <div
@@ -419,6 +467,7 @@ indexCounter=== 0 && setTrigger(false)
           >
             {answers.sort().map((el, index) => (
               gameOver === false && <div key={index} className="answers--answerdiv">
+
                 <button
                   value={el}
                   className={
@@ -437,13 +486,16 @@ indexCounter=== 0 && setTrigger(false)
               </div>
             ))}
 
+
             {(img || timeUp || img2) &&
               (next === true && questionCount !== 18) &&
+
               (messageStreak || (message && streak < 3)) && (
                 <button className="next--btn" onClick={nextHandler}>
                   NEXT
                 </button>
               )}
+
           </div>}
 
           {
@@ -453,6 +505,7 @@ indexCounter=== 0 && setTrigger(false)
             </div>
           }
 
+
           {!selected &&
             (hints === 1 || hints >= 2) &&
             wrongAnswers[indexCounter].length >= 2 && (
@@ -461,11 +514,13 @@ indexCounter=== 0 && setTrigger(false)
                 onClick={() => pop(wrongAnswers[indexCounter])}
               >
                 {hints >= 2
+
                   ? "DoubleClick for 50/50 CHANCE"
                   : hints === 1 && "useHint"}
               </button>
             )}
           <Diamonds />
+
 
           {timeUp === false &&
             !selected &&
@@ -473,7 +528,9 @@ indexCounter=== 0 && setTrigger(false)
               (gameDiff === "medium" && seconds < 16) ||
               (gameDiff === "hard" && seconds < 13)) && <QuestionTimer />}
 
+
           {timeUp === true && setSelected(wrongAnswers[0])}
+
         </div>
       </div>
     </>

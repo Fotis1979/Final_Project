@@ -1,20 +1,26 @@
-import { useContext, useEffect } from "react";
+
+import { useState, useContext, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
 import arrayRandomize from "../../hooks/arrayRandomize";
+
 import "../../styling/settings.scss";
 import useSound from 'use-sound';
 import correctanswer from '../../assets/sounds/correctanswer.mp3';
+
 
 const Settings = () => {
   const navigate = useNavigate();
 
   const context = useContext(MyContext);
   const {
+
     settings, setSettings,
     setStreak,
     setDiamonds,
+
     loading,
     setCategories,
     gameOver,
@@ -89,6 +95,7 @@ questionCount === 0 && setMessageDiamonds(false)
   }, [setCategories, categories])
 
 
+
   const gameDifficulty = (e) => {
     setGameDiff(e.target.value);
   };
@@ -102,8 +109,11 @@ questionCount === 0 && setMessageDiamonds(false)
       navigate("/questions");
     } else if (mode === "Time") {
       navigate("/timeMode");
-    }else{navigate("/timeMode")}
+
+    }
   };
+
+
 
   const [playR] = useSound(correctanswer);
 
@@ -117,6 +127,7 @@ questionCount === 0 && setMessageDiamonds(false)
   if (eror) return <p>{eror}</p>;
 
   return (
+
     
     <>
     <Nav />
@@ -170,6 +181,7 @@ questionCount === 0 && setMessageDiamonds(false)
         PLAY
       </button>
     </div>
+
     </>
   );
 };

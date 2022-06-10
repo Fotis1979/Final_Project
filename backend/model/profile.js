@@ -10,6 +10,7 @@ const profiles = new mongoose.Schema({
   avatarName: String,
   hints: Number,
   highScoreResult: Number,
+  diamonds: Number,
 });
 
 module.exports = mongoose.model("profiles", profiles);

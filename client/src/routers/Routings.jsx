@@ -9,6 +9,7 @@ import Form from "../components/authentication/Form";
 import Profile from "../components/authentication/Profile";
 import HighScoreBoard from "../components/singleplayer/rewards/HighScoreBoard";
 import HighScore from "../components/singleplayer/rewards/HighScore";
+import Shop from "../components/pages/Shop";
 
 const Routings = () => (
   <Router>
@@ -22,6 +23,7 @@ const Routings = () => (
       <Route path="/highScoreBoard" element={<HighScoreBoard />} />
       <Route path="/highScore" element={<HighScore />} />
       <Route path="/timeMode" element={<QuestionBodyWithTime />} />
+      <Route path="/shop" element={<Shop />} />
     </Routes>
   </Router>
 );
