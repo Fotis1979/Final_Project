@@ -22,6 +22,50 @@
 	border: 2px solid rgb(0, 60, 255);
 }
 
+
+.qa--section2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 55;
+	background-color: rgb(104, 143, 103);
+	position: absolute;
+	top: 70px;
+	width: 60vw;
+	height: 70vh;
+	right: 350px;
+	//height: 100vh;
+
+	text-align: center;
+	//border-radius: 100%;
+	//border: 12px dotted #fde80383;
+	//outline: 12px dotted #fdea03;
+	border: 2px solid rgb(0, 60, 255);
+}
+.gameOver--section {
+	background: rgb(0, 235, 252);
+	background: linear-gradient(
+		90deg,
+		rgba(229, 127, 237, 1) 5%,
+		rgba(0, 235, 252, 1) 25%,
+		rgba(0, 235, 252, 1) 50%,
+		rgba(0, 235, 252, 1) 75%,
+		rgba(229, 127, 237, 1) 95%
+	);
+	top: 100px;
+	width: 100%;
+	height: 90vh;
+	//height: 100vh;
+	padding-bottom: 8px;
+	padding-top: 16px;
+	padding-left: 16px;
+	text-align: center;
+	//border-radius: 100%;
+	//border: 12px dotted #fde80383;
+	//outline: 12px dotted #fdea03;
+	border: 2px solid rgb(0, 60, 255);
+}
+
 .questions--section {
 	background-color: #fdea03ff;
 	min-height: 160px;
@@ -78,6 +122,7 @@
 }
 
 .singleOption {
+	position: relative;
 	border: 2px solid #020a89ff;
 	/*position: relative;*/
 	font-family: 'Coiny', cursive;
@@ -398,22 +443,32 @@
 	object-fit: contain;
 }
 .popUp {
-	//right: 700px;
-	//bottom: 16px;
+	right: 700px;
+	bottom: 360px;
 	position: absolute;
 	margin: 0 auto;
 	//width: 200px;
 	z-index: 33;
-	border: 2px solid rgb(0, 255, 115);
+	// border: 2px solid rgb(0, 255, 115);
+}
+
+.popUp2 {
+	right: 700px;
+	bottom: 60px;
+	position: absolute;
+	margin: 0 auto;
+	//width: 200px;
+	z-index: 33;
+	// border: 2px solid rgb(0, 255, 115);
 }
 .popUp > div {
 	//border: 2px solid red;
 }
 .img2 {
-	//margin-bottom: 33px;
-	//padding: 0;
-	//object-fit: cover;
-
+	margin-bottom: 33px;
+	padding: 0;
+	object-fit: cover;
+	margin-right: 80px;
 	border-radius: 50%;
 	width: 250px;
 }
