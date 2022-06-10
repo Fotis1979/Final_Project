@@ -54,6 +54,13 @@ const MyProvider = ({ children }) => {
   const [messagePie, setMessagePie] = useState("");
   const [messageDiamonds, setMessageDiamonds] = useState("");
   const [storedScore, setStoredScore] = useState("");
+  const [questionCount, setQuestionCount] = useState(1);
+  const [trigger, setTrigger] = useState(false);
+  const [settings, setSettings] = useState(true);
+
+
+
+
 
 	const [avatarUrl, setAvatarUrl] = useState(
 		'https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png'
@@ -153,6 +160,10 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        settings, setSettings,
+        trigger, setTrigger,
+        questionCount, 
+        setQuestionCount,
         storedScore, 
         setStoredScore,
         messagePie, 

@@ -10,11 +10,9 @@ const Home = () => {
 		IndexCounter,
 		setGameOver,
 		gameOver,
-		setCategories
 	} = context;
 
 	useEffect(() => {
-		gameOver === true && 
 		setGameOver(false)
 		setIndexCounter(0)
 	}, [IndexCounter, setGameOver,gameOver,setIndexCounter])

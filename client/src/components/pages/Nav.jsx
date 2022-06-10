@@ -25,17 +25,19 @@ const Nav = () => {
 		setIsProfileSaved,
 		loginMsg,
 		setLoginMsg,
+		gameOver,
+		settings
 	} = context;
 
 	return (
 		<nav>
 			<ul className='nav--ul'>
-				<NavLink className={'nav--link'} to='/'>
+			{(settings === true || gameOver === true) &&	<NavLink className={'nav--link'} to='/'>
 					<span>Home</span>
-				</NavLink>
-				<NavLink className={'nav--link'} to='/settings'>
+				</NavLink>}
+				{(settings === true || gameOver=== true) &&<NavLink className={'nav--link'} to='/settings'>
 					<span>Play</span>
-				</NavLink>
+				</NavLink>}
 				{/* ProfileHeader should become the link to profile */}
 				<NavLink className={'nav--link'} to='/profile'>
 					<span>Profile</span>
