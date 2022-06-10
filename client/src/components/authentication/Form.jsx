@@ -16,8 +16,11 @@ const Form = () => {
     setHighScore,
     setHints,
     setHighScoreResult,
+    setDiamonds,
+    diamonds,
   } = context;
   const navigate = useNavigate();
+  console.log(diamonds);
 
   const inputHandler = (e) => {
     switch (e.target.name) {
@@ -79,6 +82,7 @@ const Form = () => {
 
           setHints(result.data.hints);
           setHighScoreResult(result.data.highScoreResult);
+          setDiamonds(result.data.diamonds);
         });
     }
   }, []);

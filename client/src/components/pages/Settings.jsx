@@ -1,96 +1,127 @@
-import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import MyContext from '../../context/MyContext';
-import Nav from './Nav';
-import arrayRandomize from '../../hooks/arrayRandomize';
-import '../../../src/styling/settings.scss';
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import MyContext from "../../context/MyContext";
+import Nav from "./Nav";
+import arrayRandomize from "../../hooks/arrayRandomize";
+import "../../../src/styling/settings.scss";
 
 const Settings = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const context = useContext(MyContext);
-	const {
-		loading,
-		setCategories,
-		gameOver,
-		eror,
-		setGameDiff,
-		categories,
-		mode,
-		setMode,
-	} = context;
+  const context = useContext(MyContext);
+  const {
+    loading,
+    setCategories,
+    gameOver,
+    eror,
+    setGameDiff,
+    categories,
+    mode,
+    setMode,
+    setTimeUp,
+    setMessagePie,
+    setMessageDiamonds,
+    setPie,
+    setDiamonds,
+    setSeconds,
+    setDiamondPoints,
+    setDiff,
+    setSelected,
+    setScore,
+    setHints,
+    setIndexCounter,
+    setStreak,
+  } = context;
 
-	const gameDifficulty = (e) => {
-		setGameDiff(e.target.value);
-	};
+  useEffect(() => {
+    setTimeUp(false);
+    // setMessagePie("");
+    // setMessageDiamonds("");
+    setPie(false);
+    setDiamonds(0);
+    setSeconds(0);
+    setDiamondPoints(0);
+    setDiff("easy");
+    setSelected("");
+    setScore(0);
+    setHints(0);
+    gameOver === true && setIndexCounter(0);
+    setStreak(0);
+    setDiamonds(0);
+    gameOver === true && setGameDiff("easy");
+  }, [gameOver]);
 
-	useEffect(() => {
-		gameOver === false && setCategories(arrayRandomize(categories).slice(4));
-		console.log(categories);
-	}, []);
+  const gameDifficulty = (e) => {
+    setGameDiff(e.target.value);
+  };
 
-	const gameMode = (e) => {
-		setMode(e.target.value);
-	};
+  useEffect(() => {
+    gameOver === false && setCategories(arrayRandomize(categories).slice(4));
+    console.log(categories);
+  }, []);
 
-	const checkHandler = () => {
-		if (mode === 'NoTime') {
-			navigate('/questions');
-		} else if (mode === 'Time') {
-			navigate('/timeMode');
-		}
-	};
+  const gameMode = (e) => {
+    setMode(e.target.value);
+  };
 
-	if (loading) return <p>loading ..</p>;
-	if (eror) return <p>{eror}</p>;
+  const checkHandler = () => {
+    if (mode === "NoTime") {
+      navigate("/questions");
+    } else if (mode === "Time") {
+      navigate("/timeMode");
+    }
+  };
 
-	return (
-		<>
-			<Nav />
-			<div className='qa--section'>
-				<div className='settings'>
-					<h1>Choose Your Difficulty:</h1>
-					<button
-						className='settings--btn'
-						onClick={(e) => gameDifficulty(e)}
-						value={'easy'}
-					>
-						{' '}
-						BEGINNER{''}
-					</button>
-					<button
-						className='settings--btn'
-						onClick={(e) => gameDifficulty(e)}
-						value={'medium'}
-					>
-						{' '}
-						EXPERT{' '}
-					</button>
-					<button
-						className='settings--btn'
-						onClick={(e) => gameDifficulty(e)}
-						value={'hard'}
-					>
-						{' '}
-						PROFESSOR{' '}
-					</button>
+  if (loading) return <p>loading ..</p>;
+  if (eror) return <p>{eror}</p>;
 
-					<label>Game Mode</label>
-					<select className='settings--mode' onChange={(e) => gameMode(e)}>
-						<option onChange={(e) => gameMode(e)} value='NoTime'>
-							NoTime
-						</option>
-						<option onChange={(e) => gameMode(e)} value='Time'>
-							Time
-						</option>
-					</select>
-				</div>{' '}
-				<button className='settings--btn play--btn' onClick={checkHandler}>
-					PLAY
-				</button>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <Nav />
+      <div className="qa--section">
+        <div className="settings">
+          <h1>Choose Your Difficulty:</h1>
+          <button
+            className="settings--btn"
+            onClick={(e) => gameDifficulty(e)}
+            value={"easy"}
+          >
+            {" "}
+            BEGINNER{""}
+          </button>
+          <button
+            className="settings--btn"
+            onClick={(e) => gameDifficulty(e)}
+            value={"medium"}
+          >
+            {" "}
+            EXPERT{" "}
+          </button>
+          <button
+            className="settings--btn"
+            onClick={(e) => gameDifficulty(e)}
+            value={"hard"}
+          >
+            {" "}
+            PROFESSOR{" "}
+          </button>
+
+          <label>Game Mode</label>
+          <select className="settings--mode" onChange={(e) => gameMode(e)}>
+            <option onChange={(e) => gameMode(e)} value="NoTime">
+              NoTime
+            </option>
+            <option onChange={(e) => gameMode(e)} value="Time">
+              Time
+            </option>
+          </select>
+        </div>{" "}
+        <button className="settings--btn play--btn" onClick={checkHandler}>
+          PLAY
+        </button>
+      </div>
+    </>
+  );
 };
 
 export default Settings;
