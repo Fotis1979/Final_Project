@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 import Nav from "./Nav";
 import arrayRandomize from "../../hooks/arrayRandomize";
-import "../../../src/styling/settings.scss";
+import "../../styling/settings.scss";
+import useSound from 'use-sound';
+import correctanswer from '../../assets/sounds/correctanswer.mp3';
 
 const Settings = () => {
   const navigate = useNavigate();
 
   const context = useContext(MyContext);
   const {
-
+    settings, setSettings,
     setStreak,
     setDiamonds,
     loading,
@@ -34,11 +36,14 @@ const Settings = () => {
     setMessagePie,
     setMessageDiamonds,
     setSeconds,
-    setHintPoints
+    setHintPoints,
+    setQuestionCount,
+    questionCount
 
   } = context;
 
   useEffect(() => {
+    setSettings(true)
     setHintPoints(0)
     setTimeUp(false)
     setMessagePie("")
@@ -55,23 +60,27 @@ const Settings = () => {
     setStreak(0)
     setDiamonds(0)
     setGameDiff("easy")
+    console.log("QUESTIONCOUNT IS : " ,questionCount);
 
   }, [setIndexCounter, indexCounter])
 
+    setQuestionCount(0)
+
+questionCount === 0 && setMessageDiamonds(false)
+
 
   useEffect(() => {
-    gameOver === true && setGameOver(false)
-
+    settings === true && setGameOver(false)
     console.log(gameOver);
     console.log(indexCounter);
 
-  }, [setGameOver,gameOver])
-  useEffect(() => {
+  }, [setGameOver,questionCount])
+
+
+  useEffect(() => { setIndexCounter(0)
         console.log(indexCounter);
 
-     setIndexCounter(0)
   }, [indexCounter, setIndexCounter])
-
 
 
   useEffect(() => {
@@ -93,9 +102,14 @@ const Settings = () => {
       navigate("/questions");
     } else if (mode === "Time") {
       navigate("/timeMode");
-    }
+    }else{navigate("/timeMode")}
   };
 
+  const [playR] = useSound(correctanswer);
+
+   settings === true && playR()
+ 
+ 
 
 
 
@@ -103,16 +117,15 @@ const Settings = () => {
   if (eror) return <p>{eror}</p>;
 
   return (
+    
+    <>
+    <Nav />
     <div className="qa--section">
-      <Nav />
-
-      <button className="play-btn" onClick={checkHandler}>
-        PLAY
-      </button>
+     <div className="settings">
       <h1>ChOOSE SETTINGS</h1>
-      <div className="settings">
+    
         <button
-          className="play-btn"
+          className="settings--btn" 
           onClick={(e) => gameDifficulty(e)}
           value={"easy"}
         >
@@ -121,7 +134,7 @@ const Settings = () => {
         </button>
 
         <button
-          className="play-btn"
+          className="settings--btn" 
           onClick={(e) => gameDifficulty(e)}
           value={"medium"}
         >
@@ -130,7 +143,7 @@ const Settings = () => {
         </button>
 
         <button
-          className="play-btn"
+          className="settings--btn" 
           onClick={(e) => gameDifficulty(e)}
           value={"hard"}
         >
@@ -141,9 +154,9 @@ const Settings = () => {
         <label>Game Mode</label>
 
         <select className="settings--mode" onChange={(e) => gameMode(e)}>
-          <option>
+          {/* <option>
             Choose Mode
-          </option>
+          </option> */}
           <option onChange={(e) => gameMode(e)} value="NoTime">
             NoTime
           </option>
@@ -151,8 +164,13 @@ const Settings = () => {
             Time
           </option>
         </select>
+        
       </div>
+      <button className="settings--btn play--btn"  onClick={checkHandler}>
+        PLAY
+      </button>
     </div>
+    </>
   );
 };
 

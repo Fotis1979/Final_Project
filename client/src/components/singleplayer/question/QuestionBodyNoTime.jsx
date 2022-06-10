@@ -7,7 +7,7 @@ import Hints from "../rewards/Hints";
 import ScoreCounter from "./ScoreCounter";
 import Rewards from "../rewards/Rewards";
 import arrayRandomize from "../../../hooks/arrayRandomize";
-import "../../../styling/questions.css";
+import "../../../styling/questions.scss";
 import Popup from "../../Popup/Popup";
 import ErrorMessage from "../../errorMessage/ErrorMessage";
 

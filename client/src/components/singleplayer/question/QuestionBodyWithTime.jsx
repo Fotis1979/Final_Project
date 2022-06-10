@@ -8,10 +8,17 @@ import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Diamonds from "../rewards/Diamonds";
 import GameOver from "../../pages/GameOver";
+import { useNavigate } from "react-router";
+import Popup from '../../Popup/Popup'
+import useSound from 'use-sound';
+import correctanswer from '../../../assets/sounds/correctanswer.mp3';
+import wronganswear from '../../../assets/sounds/wronganswear.mp3';
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
+    trigger,
+    setTrigger,
     diamondPoints,
     clicked,
     next,
@@ -57,23 +64,56 @@ const QuestionBody = () => {
     setClicked,
     setGameOver,
     setMessageStreak,
-    diamonds
+    diamonds,
+    questionCount, 
+    setQuestionCount,
+    setSettings
   } = context;
+
+  const [playR] = useSound(correctanswer);
+   const [playW] = useSound(wronganswear);
+  useEffect(()=>{
+    if(selected === rightAnswer[indexCounter]){
+      playR()
+      console.log('rightAnswer');
+    }else if (selected === wrongAnswers[indexCounter][0] || selected === wrongAnswers[indexCounter][1] || selected === wrongAnswers[indexCounter][2]) {
+      playW()
+      console.log('wrongAnswers');
+    }
+  },[selected])
 
   useEffect(() => {
 
-gameOver === true && setMessageStreak("")
-  },[indexCounter,setGameOver,gameOver,score,setImg,setMessageStreak]);
+    setSettings(false)
+  }, [setSettings]);
 
 
-indexCounter === 17 && selected && setTimeout(() => {
-  setGameOver(true)
-}, 10000);
+  useEffect(() => {
 
-useEffect(() => {
-  indexCounter === 0 && setGameOver(false)
+    gameOver === true && setMessageStreak("")
+  }, [indexCounter, setGameOver, gameOver, score, setImg, setMessageStreak]);
 
-  }, [setGameOver,indexCounter])
+  useEffect(() => {
+    next && selected && setQuestionCount(prev => (prev + 1))
+
+  }, [next,setQuestionCount]);
+
+  useEffect(() => {
+  console.log("QUESTIONCOUNT IS", questionCount);
+
+  }, [indexCounter,questionCount])
+
+
+    questionCount === 18 && selected &&
+     setTimeout(() => {
+    setGameOver(true)
+  }, 6000);
+
+
+  useEffect(() => {
+    questionCount === 0 && setGameOver(false)
+
+  }, [setGameOver, indexCounter])
 
   useEffect(() => {
     selected && setTimerTrigger(false);
@@ -103,18 +143,18 @@ useEffect(() => {
     setSeconds(0);
     setTimeUp(false);
   }
-    
+
 
   useEffect(() => {
     console.log(categories)
     indexCounter >= 0 && indexCounter <= 5 && setCat(categories[indexCounter]);
     indexCounter >= 6 &&
       indexCounter <= 11 &&
-      setCat(categories[indexCounter - 6]);
+      setIndexCounter(0);
     indexCounter >= 12 &&
       indexCounter <= 18 &&
-      setCat(categories[indexCounter - 12]);
-  }, [indexCounter, categories,setCat]);
+      setIndexCounter(0);
+      }, [indexCounter, categories, setCat]);
 
   const handleSelect = (i) => {
     setSeconds(0);
@@ -136,12 +176,12 @@ useEffect(() => {
 
   useEffect(() => {
     img && score === 0 && setNext(true);
-  }, [img, setNext, setTimerTrigger, score,indexCounter]);
+  }, [img, setNext, setTimerTrigger, score, indexCounter]);
 
   useEffect(() => {
     console.log(rightAnswer[indexCounter]);
   }, [rightAnswer, indexCounter]);
-  
+
 
   useEffect(() => {
     (selected === wrongAnswers[indexCounter][0] ||
@@ -286,19 +326,23 @@ useEffect(() => {
   answers.push(rightAnswer[indexCounter]);
   wrongAnswers[indexCounter].map((el) => answers.push(el));
 
-  indexCounter === 6 && setDiff("medium");
-  indexCounter === 12 && setDiff("hard");
+  questionCount === 6 && setDiff("medium")
+  questionCount === 12 && setDiff("hard")
+
 
   const pop = (e) => {
     setClicked(true);
     e.pop();
     setHints((prev) => prev - 1);
   };
-
+const tr = ()=> {
+  setTrigger(true)
+}
+indexCounter=== 0 && setTrigger(false)
 
   useEffect(() => {
     console.log("GAMEOVER IS : ", gameOver);
-  }, [gameOver,indexCounter]);
+  }, [gameOver, indexCounter]);
 
   useEffect(() => {
     console.log("INDEXCOUNTER IS : ", indexCounter);
@@ -308,71 +352,73 @@ useEffect(() => {
     console.log("DIAMONDS ARE : ", diamonds);
   }, [indexCounter]);
 
+  const nav = useNavigate()
+
 
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
 
   return (
-    <div>
-      { gameOver === true&&  <GameOver />}
-
-     {gameOver === false && <Nav />}
-
-      {gameOver === false && indexCounter < 6 && <p className="round">1st RoUnD !</p>}
-      {gameOver === false && indexCounter >= 6 && indexCounter <= 11 && (
-        <p className="round">2nd RoUnD !</p>
-      )}
-      {gameOver === false && indexCounter >= 12 && <p className="round">Diamonds RoUnD !</p>}
-      {gameOver === false && !img && !timeUp && <p className="mode">{diff}</p>}
-
-      { gameOver === false && indexCounter >= 12 && (
-        <p style={{ color: "red", fontSize: "25px", marginLeft: "20px" }}>
-          DiamondPointS {diamondPoints}
-        </p>
-      )}
-
-     {gameOver === false && <Rewards />}
-
-      {gameOver === false &&!img && !timeUp && <p className="cat">Category : {cat}</p>}
-
-      {gameOver === false && !img ? setShowStreak(`STREAK is : ${streak}`) : setShowStreak()}
-      {!img && <p className="cat"> {showStreak}</p>}
-      {next === true && img && streak !== 0 && streak >= 2 && (
-        <p className="cat3">{messageStreak}</p>
-      )}
-      {!messageStreak && !showStreak && (
-     gameOver === false &&   <p className="cat2">
-          {selected !== rightAnswer[indexCounter] ? messageD : message}
-        </p>
-      )}
-
+    <>
+    <Nav />    
       <div className="qa--section">
-        {gameOver === false && timeUp === true && <p className="cat">TIME UP !!! CLICK NEXT</p>}
+    
+        {gameOver === true && <GameOver />}
 
-        <header className="App-header">
-          {(img || timeUp || img2) &&
-           ( next === true && indexCounter !==17 ) &&
-            (messageStreak || (message && streak < 3)) && (
-              <button className="play-btn" onClick={nextHandler}>
-                NEXT
-              </button>
-            )}
-          { !img && !timeUp && (
-           gameOver === false && <div className="questions--section">
+        {gameOver === false && diff === "easy" && <p className="round">1st RoUnD !</p>}
+        {gameOver === false && diff === "medium"  &&  (
+          <p className="round">2nd RoUnD !</p>
+        )}
+        {gameOver === false && diff === "hard"  && <p className="round">Diamonds RoUnD !</p>}
+        {gameOver === false && !img && !timeUp && <p className="mode">{diff}</p>}
+
+        {gameOver === false && questionCount >= 12 && !img &&(
+          <p style={{ color: "red", fontSize: "25px", marginLeft: "20px" }}>
+            DiamondPointS {diamondPoints}
+          </p>
+        )}
+        <div className="round--info">
+          {gameOver === false && !img && !timeUp && <p className="cat">Category : {cat}</p>}
+
+          {gameOver === false && !img ? setShowStreak(`STREAK is : ${streak}`) : setShowStreak()}
+          {!img && <p className="cat"> {showStreak}</p>}
+        </div>
+
+        {next === true && img && streak !== 0 && streak >= 2 && (
+          <p className="cat3">{messageStreak}</p>
+        )}
+        {!messageStreak && !showStreak && (
+          gameOver === false && <p className="cat2">
+
+            {selected !== rightAnswer[indexCounter] ? messageD : message}
+          </p>
+        )}
+        {gameOver === false && <Rewards />}
+
+        <button className="rewards--btn" onClick={tr} >LEAVE GAME</button>
+
+        <Popup trigger={trigger} setTrigger={setTrigger} />
+
+        <div>
+          {gameOver === false && timeUp === true && <p className="cat">TIME UP !!! CLICK NEXT</p>}
+
+
+          {!img && !timeUp && (
+            gameOver === false && <div className="questions--section">
               Q{indexCounter + 1} .{" "}
               <p className="quest">{questionArray[indexCounter]}</p>
             </div>
           )}
 
           {/* ********** Remove style to show everything !! ********** */}
-       {  gameOver === false && <div
+          {gameOver === false && <div
             //  style={img && { visibility: "hidden" }}
 
             className="answers--section"
           >
             {answers.sort().map((el, index) => (
-             gameOver === false && <div key={index} className="align-items">
+              gameOver === false && <div key={index} className="answers--answerdiv">
                 <button
                   value={el}
                   className={
@@ -390,6 +436,14 @@ useEffect(() => {
                 </button>
               </div>
             ))}
+
+            {(img || timeUp || img2) &&
+              (next === true && questionCount !== 18) &&
+              (messageStreak || (message && streak < 3)) && (
+                <button className="next--btn" onClick={nextHandler}>
+                  NEXT
+                </button>
+              )}
           </div>}
 
           {
@@ -403,7 +457,7 @@ useEffect(() => {
             (hints === 1 || hints >= 2) &&
             wrongAnswers[indexCounter].length >= 2 && (
               <button
-                className="rewards--btn"
+                className="rewards--btn hints--btn"
                 onClick={() => pop(wrongAnswers[indexCounter])}
               >
                 {hints >= 2
@@ -420,9 +474,9 @@ useEffect(() => {
               (gameDiff === "hard" && seconds < 13)) && <QuestionTimer />}
 
           {timeUp === true && setSelected(wrongAnswers[0])}
-        </header>
+        </div>
       </div>
-    </div> 
+    </>
   );
 };
 
