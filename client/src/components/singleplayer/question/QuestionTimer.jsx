@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import MyContext from "../../../context/MyContext";
 
+
 const QuestionTimer = () => {
   const context = useContext(MyContext);
   const { messageB, setMessageB, message, seconds, setSeconds, gameDiff } =

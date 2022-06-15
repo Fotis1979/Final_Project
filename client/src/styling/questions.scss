@@ -222,8 +222,9 @@
 	font-weight: lighter;
 	border: deeppink 11px solid;
 }
-
 .next--btn {
+
+	position: relative;
 	background-color: scss.$primary-color;
 	font-family: 'Faster One', cursive;
 	font-size: 2.5rem;
@@ -234,7 +235,28 @@
 	justify-content: center;
 	margin: 0 auto;
 	margin-top: 24px;
+	z-index: 100;
+	padding: 16px 40px;
+	padding-bottom: 24px;
+	border-radius: 32px;
+}
 
+.next--btn2 {
+	font-size: 1.3rem;
+	animation-name: points;
+	animation-duration: 2.5s;
+	position: relative;
+	background-color: scss.$primary-color;
+	font-family: 'Faster One', cursive;
+	font-size: 2.5rem;
+	height: 32px;
+	width: 220px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	margin-top: 24px;
+	z-index: 100;
 	padding: 16px 40px;
 	padding-bottom: 24px;
 	border-radius: 32px;
@@ -274,7 +296,7 @@
 	//margin-left: 140px;
 	position: relative;
 	font-size: 24px;
-	color: scss.$light-color;
+	color:blueviolet;
 	animation-name: points;
 	animation-duration: 1s;
 	transition-timing-function: ease-in-out;
@@ -335,10 +357,48 @@
 	text-align: center;
 	position: relative;
 	font-size: 16px;
-	color: scss.$secondary-color;
+	color: blueviolet;
 	animation-name: points;
 	animation-duration: 0.4s;
 	transition-timing-function: ease-in-out;
+	width: 100%;
+}
+
+li{
+	list-style-type: none;
+	}
+
+.cat4 {
+	border: 10px solid #18a0fb;
+	border-radius: 10%;
+	background-color: yellow;
+	margin: 0;
+	padding: 20px;
+	position: relative;
+	height: 40px;
+	left: 1420px;
+	bottom: 450px;
+	
+	font-size: 30px;
+	color: rgb(59, 19, 97);
+	
+	width: 20%;
+}
+.cat5 {
+	position: relative;
+	font-size: 44px;
+	color:blueviolet;
+
+	bottom: 33px;
+	width: 100%;
+	text-align: center;
+}
+.cat6 {
+	position: relative;
+	font-size: 24px;
+	color:rgb(45, 8, 80);
+
+	bottom: 17px;
 	width: 100%;
 }
 
@@ -383,9 +443,21 @@
 	height: 90px;
 	right: 360px;
 	bottom: 30px;
-	object-fit: contain;
 }
+.diamondArt2 {
+	margin-left:17px;
+	padding-top: 10px;
+	width: 30px;
+	height: 30px;
 
+}
+.diamondArt3 {
+	margin-left:27px;
+	padding-top: 10px;
+	width: 30px;
+	height: 30px;
+
+}
 .diamondSports {
 	width: 90px;
 	height: 90px;
@@ -448,7 +520,7 @@
 	position: absolute;
 	margin: 0 auto;
 	//width: 200px;
-	z-index: 33;
+	// z-index: 33;
 	// border: 2px solid rgb(0, 255, 115);
 }
 
@@ -477,3 +549,4 @@
 	display: flex;
 	flex-direction: column;
 }
+

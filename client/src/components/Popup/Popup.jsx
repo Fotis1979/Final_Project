@@ -11,7 +11,7 @@ function Popup(props) {
 	const tm = () => {
 		props.setTrigger(false)
 	}
-	return props.trigger ? (
+	return props.trigger && (
 		<div >
 			<div className='qa--section2'>
 				<button className='next--btn' onClick={trigger}>
@@ -22,9 +22,7 @@ function Popup(props) {
 				{props.children}
 			</div>
 		</div>
-	) : (
-		''
-	);
+	) 
 }
 
 export default Popup;

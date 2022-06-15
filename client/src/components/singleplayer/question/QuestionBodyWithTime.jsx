@@ -8,18 +8,18 @@ import Nav from "../../pages/Nav";
 import Correct from "../rewards/Correct";
 import Diamonds from "../rewards/Diamonds";
 import GameOver from "../../pages/GameOver";
-import { useNavigate } from "react-router";
 import Popup from "../../Popup/Popup";
 import useSound from "use-sound";
 import correctanswer from "../../../assets/sounds/correctanswer.mp3";
 import wronganswear from "../../../assets/sounds/wronganswear.mp3";
+import green from '../../../assets/images/green.png'
+import diamondArt from '../../../assets/images/diamondArt.png'
 
 const QuestionBody = () => {
   const context = useContext(MyContext);
   const {
     trigger,
     setTrigger,
-
     diamondPoints,
     clicked,
     next,
@@ -29,8 +29,8 @@ const QuestionBody = () => {
     categories,
     setStoredScore,
     loading,
-    number,
     eror,
+    settings,
     streak,
     hints,
     setHints,
@@ -46,14 +46,11 @@ const QuestionBody = () => {
     setCat,
     score,
     setScore,
-
     setImg,
-
     indexCounter,
     setIndexCounter,
     selected,
     setSelected,
-
     img,
     img2,
     gameOver,
@@ -67,17 +64,50 @@ const QuestionBody = () => {
     showStreak,
     setShowStreak,
     setClicked,
-
     setGameOver,
     setMessageStreak,
     diamonds,
     questionCount,
     setQuestionCount,
     setSettings,
-
     highScoreResult,
     setHighScoreResult,
     highScore,
+    circleArts, setCircleArts,
+    circleArts2, setCircleArts2,
+    circleGeo, setCircleGeo,
+    circleGeo2, setCircleGeo2,
+    circleFood, setCircleFood,
+    circleFood2, setCircleFood2,
+    circleGen, setCircleGen,
+    circleGen2, setCircleGen2,
+    circleFilm, setCircleFilm,
+    circleFilm2, setCircleFilm2,
+    circleSport, setCircleSport,
+    circleSport2, setCircleSport2,
+    circleSoc, setCircleSoc,
+    circleSoc2, setCircleSoc2,
+    circleSci, setCircleSci,
+    circleSci2, setCircleSci2,
+    circleMus, setCircleMus,
+    circleMus2, setCircleMus2,
+    circleHist, setCircleHist,
+    circleHist2, setCircleHist2,
+    imgC,
+    setImgC,
+    diamondFilm,
+    diamondGeo,
+    diamondGen,
+    diamondSoc,
+    diamondSci,
+    diamondSport, diamondFood
+    , diamondHist,
+    diamondArts,
+    diamondMus
+
+
+
+
   } = context;
 
   //setting highScore
@@ -107,6 +137,8 @@ const QuestionBody = () => {
       });
   }, [hints, highScoreResult, score, diamonds]);
 
+  // *** SOUND *** 
+
   const [playR] = useSound(correctanswer);
   const [playW] = useSound(wronganswear);
 
@@ -124,8 +156,11 @@ const QuestionBody = () => {
     }
   }, [selected]);
 
+  // **********
+
   useEffect(() => {
     setSettings(false);
+    console.log(settings);
   }, [setSettings]);
 
   useEffect(() => {
@@ -134,11 +169,11 @@ const QuestionBody = () => {
 
   useEffect(() => {
     next && selected && setQuestionCount((prev) => prev + 1);
-  }, [next, setQuestionCount]);
+  }, [next, setQuestionCount, selected]);
 
-  useEffect(() => {
-    console.log("QUESTIONCOUNT IS", questionCount);
-  }, [indexCounter, questionCount]);
+  // useEffect(() => {
+  //   console.log("QUESTIONCOUNT IS", questionCount);
+  // }, [indexCounter, questionCount]);
 
   questionCount === 18 &&
     selected &&
@@ -184,6 +219,7 @@ const QuestionBody = () => {
     indexCounter >= 6 && indexCounter <= 11 && setIndexCounter(0);
     indexCounter >= 12 && indexCounter <= 18 && setIndexCounter(0);
   }, [indexCounter, categories, setCat]);
+
 
   const handleSelect = (i) => {
     setSeconds(0);
@@ -339,6 +375,65 @@ const QuestionBody = () => {
   };
 
   useEffect(() => {
+
+
+    questionCount === 0 &&
+      setCircleGeo(false)
+    questionCount === 0 &&
+      setCircleGeo2(false)
+    questionCount === 0 &&
+      setCircleFood(false)
+    questionCount === 0 &&
+      setCircleFood2(false)
+    questionCount === 0 &&
+      setCircleGen(false)
+    questionCount === 0 &&
+      setCircleGen2(false)
+    questionCount === 0 &&
+      setCircleFilm(false)
+    questionCount === 0 &&
+      setCircleFilm2(false)
+    questionCount === 0 &&
+      setCircleSport(false)
+    questionCount === 0 &&
+      setCircleSport2(false)
+    questionCount === 0 &&
+      setCircleSoc(false)
+    questionCount === 0 &&
+      setCircleSoc2(false)
+    questionCount === 0 &&
+      setCircleSci(false)
+    questionCount === 0 &&
+      setCircleSci2(false)
+    questionCount === 0 &&
+      setCircleMus(false)
+    questionCount === 0 &&
+      setCircleMus2(false)
+    questionCount === 0 &&
+      setCircleHist(false)
+    questionCount === 0 &&
+      setCircleHist2(false)
+  }, [questionCount, setCircleArts, setCircleArts2, setCircleFilm, setCircleFilm2, setCircleFood, setCircleFood2, setCircleGen, setCircleGen2, setCircleHist, setCircleHist2, setCircleMus, setCircleMus2, setCircleSci, setCircleSci2, setCircleSoc, setCircleSoc2, setCircleSport, setCircleSport2, setCircleGeo2, setCircleGeo])
+
+  useEffect(() => {
+
+    questionCount === 0 && setImgC(" ")
+  }, [questionCount, setImgC])
+
+
+  useEffect(() => {
+    questionCount === 0 &&
+      setCircleArts(false)
+    questionCount === 0 &&
+      setCircleArts2(false)
+  }, [questionCount, setCircleArts, setCircleArts2])
+
+  useEffect(() => {
+    console.log("circleArts IS.", circleArts);
+  }, [indexCounter, circleArts])
+
+
+  useEffect(() => {
     ((gameDiff === "easy" && seconds > 20) ||
       (gameDiff === "medium" && seconds > 15) ||
       (gameDiff === "hard" && seconds > 12)) &&
@@ -363,8 +458,6 @@ const QuestionBody = () => {
     setTrigger(true);
   };
   indexCounter === 0 && setTrigger(false);
-
-  const nav = useNavigate();
 
   if (loading) return <p>loading ..</p>;
   if (eror) return <p>{eror}</p>;
@@ -414,13 +507,14 @@ const QuestionBody = () => {
         )}
         {gameOver === false && <Rewards />}
 
-        <button className="rewards--btn" onClick={tr}>
+        {!img && gameOver !== true && <button className="rewards--btn" onClick={tr}>
           LEAVE GAME
-        </button>
+        </button>}
 
         <Popup trigger={trigger} setTrigger={setTrigger} />
 
         <div>
+
           {gameOver === false && timeUp === true && (
             <p className="cat">TIME UP !!! CLICK NEXT</p>
           )}
@@ -432,6 +526,18 @@ const QuestionBody = () => {
             </div>
           )}
 
+          {!selected &&
+            (hints === 1 || hints >= 2) &&
+            wrongAnswers[indexCounter].length >= 2 && (
+              <button
+                className="rewards--btn hints--btn"
+                onClick={() => pop(wrongAnswers[indexCounter])}
+              >
+                {hints >= 2
+                  ? "DoubleClick for 50/50 CHANCE"
+                  : hints === 1 && "useHint"}
+              </button>
+            )}
           {/* ********** Remove style to show everything !! ********** */}
           {gameOver === false && (
             <div
@@ -462,6 +568,7 @@ const QuestionBody = () => {
                   )
               )}
 
+
               {(img || timeUp || img2) &&
                 next === true &&
                 questionCount !== 18 &&
@@ -473,25 +580,48 @@ const QuestionBody = () => {
             </div>
           )}
 
-          {
-            <div className="popUp">
-              {" "}
-              <Correct />
-            </div>
+          <div >
+
+            {!selected && gameOver !== true && categories.splice(6) && categories.map(e => (
+              <div className="cat4">
+                <ul >
+                  <li value={e} className={cat === e ? "cat5" : "cat6"}>
+                    {e}
+                    {circleGeo === true && e === "geography" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleGeo2 === true && e === "geography" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleArts === true && e === "arts" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleArts2 === true && e === "arts" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleGen === true && e === "general" ? <img className="diamondArt2" src={green} alt="" /> : ""}
+                    {circleGen2 === true && e === "general" ? <img className="diamondArt3" src={green} alt="" /> : ""}
+                    {circleFood === true && e === "food" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleFood2 === true && e === "food" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleFilm === true && e === "film" ? (<img className="diamondArt2" src={green} alt="" />) :
+                      ""}
+                    {circleFilm2 === true && e === "film" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleSci === true && e === "science" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleSci2 === true && e === "science" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleSoc === true && e === "society" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleSoc2 === true && e === "society" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleHist === true && e === "history" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleHist2 === true && e === "history" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleSport === true && e === "sport" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleSport2 === true && e === "sport" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleMus === true && e === "music" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
+                    {circleMus2 === true && e === "music" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                  </li>
+                </ul>
+              </div>
+
+            ))
+            }
+          </div>
+
+
+          {<div className="popUp">
+            <Correct />
+          </div>
           }
 
-          {!selected &&
-            (hints === 1 || hints >= 2) &&
-            wrongAnswers[indexCounter].length >= 2 && (
-              <button
-                className="rewards--btn hints--btn"
-                onClick={() => pop(wrongAnswers[indexCounter])}
-              >
-                {hints >= 2
-                  ? "DoubleClick for 50/50 CHANCE"
-                  : hints === 1 && "useHint"}
-              </button>
-            )}
           <Diamonds />
 
           {timeUp === false &&

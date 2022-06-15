@@ -5,8 +5,11 @@
 }*/
 
 .settings {
+	position: relative;
 	background-color: #fdea03ff;
-
+	animation-name: points;
+	animation-duration: 1s;
+		transition-timing-function: ease-in-out;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -23,6 +26,11 @@
 }
 .settings select,
 .settings input {
+	position: relative;
+
+	animation-name: points;
+animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	font-family: 'Coiny', cursive;
 	font-size: larger;
 	width: 100%;
@@ -47,6 +55,11 @@ input:hover {
 }*/
 
 .settings--btn {
+	position: relative;
+
+	animation-name: points;
+animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	background-color: scss.$accent-color;
 
 	font-family: 'Coiny', cursive;
@@ -61,6 +74,10 @@ input:hover {
 	border-radius: 16px;
 }
 .play--btn {
+	position: relative;
+	animation-name: points;
+animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	background-color: scss.$secondary-color;
 	width: 240px;
 }
@@ -72,3 +89,19 @@ input:hover {
 .amount {
 	background-color: red;
 }*/
+.rules{
+position: relative;
+width: 1200px;
+height: 770px;
+text-align: center;
+padding: 20px;
+background-color: #66d700;
+border: 3px solid blueviolet;
+border-radius: 20%;
+// margin-bottom: 402px;
+margin-left: 315px;
+animation-name: question;
+animation-duration: 1s;
+transition-timing-function: ease-in-out;
+
+}
