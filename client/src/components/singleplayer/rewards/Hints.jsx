@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import MyContext from '../../../context/MyContext';
 
-
 const Hints = () => {
   const context = useContext(MyContext);
 

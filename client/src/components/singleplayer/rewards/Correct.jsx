@@ -3,7 +3,7 @@ import { useEffect, useContext } from 'react'
 import MyContext from '../../../context/MyContext'
 import right from '../../../assets/images/right.png'
 import wrong from '../../../assets/images/wrong.png'
-import GameOver from '../../pages/GameOver'
+
 
 const Correct = () => {
     const context = useContext(MyContext);
@@ -55,6 +55,7 @@ const Correct = () => {
         !img && setMessageStreak("")
     }, [setMessageStreak, next, messageStreak])
 
+
     switch (diff) {
         case "easy":
             setMessage("+10 points !!!")
@@ -70,8 +71,8 @@ const Correct = () => {
 
     (score === 3 || score === 6) && setMessageD()
 
-    switch (diff) {
 
+    switch (diff) {
         case "easy":
             score !== 0 && score !== 6 && score !== 3 && setMessageD("-7 points !!!")
             break;
@@ -86,11 +87,12 @@ const Correct = () => {
 
     (storedScore === 3 || storedScore === 6) && diff === "easy" && setMessageD("U've lost All your Points")
     storedScore === 0 && diff === "easy" && setMessageD("U get n0 Points !!")
+    score === 0 && diff === "easy" && setMessageD("U get n0 Points !!")
     storedScore <= 5 && (diff === "hard" || diff === "medium") && setMessageD("U've lost All your Points !!")
     storedScore === 0 && (diff === "hard" || diff === "medium") && setMessageD("U get n0 Points !!")
 
     return (
-
+        
         <div>
             {img}
         </div>

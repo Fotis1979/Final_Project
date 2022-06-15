@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import MyContext from '../../../context/MyContext';
 
 const ScoreCounter = () => {

@@ -4,7 +4,6 @@ import pie3 from '../../assets/images/pie3.png'
 import MyContext from "../.././context/MyContext"
 import { useContext, useEffect } from 'react';
 import "../../../src/styling/questions.scss";
-import Popup from '../Popup/Popup';
 
 
 const GameOver = () => {
@@ -12,7 +11,6 @@ const GameOver = () => {
     const context = useContext(MyContext);
     const {
        
-        indexCounter,
         messagePie,
         setMessagePie,
         messageDiamonds,
@@ -39,12 +37,15 @@ const GameOver = () => {
     useEffect(() => {
         pie === true && gameOver === true &&
             setMessagePie("Congrats' U CompleteD the Pie +199 PointS")
-        messagePie && score < 1969 &&
+        messagePie && 
             setScore(score + 199)
-        console.log(score);
-        console.log(indexCounter);
-
     }, [gameOver, pie, messagePie, setScore])
+   
+
+    useEffect(() => {
+        console.log(score)
+    }, [score])
+
 
     return (
         <div className="gameOver--section">

@@ -199,7 +199,7 @@ const QuestionBody = () => {
         <button className="next--btn" onClick={nextHandler}>
           next
         </button>
-        {selected === rightAnswer[indexCounter] && (
+        {/* {selected === rightAnswer[indexCounter] && (
           <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
             <p>Correct answer</p>
           </Popup>
@@ -208,7 +208,7 @@ const QuestionBody = () => {
           <Popup trigger={answerPopup} setTrigger={setAnswerPopup}>
             <p>wrong answer</p>
           </Popup>
-        )}
+        )} */}
       </div>
     </div>
   );
