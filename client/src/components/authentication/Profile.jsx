@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import { Link } from 'react-router-dom';
 import Nav from '../pages/Nav';
-import './profile.scss';
+import '../../styling/profile.scss';
 import av1 from './avatarImages/av1.jpg';
 import av2 from './avatarImages/av2.jpg';
 import av3 from './avatarImages/av3.jpg';
@@ -119,19 +119,26 @@ const Profile = () => {
 	const [imageChosen, setImageChosen] = useState(undefined);
 
 	return (
-		<div className='flex-col'>
+		<div className='profile--page'>
 			<Nav />
 			{loginMsg !== '' ? (
 				loginMsg
 			) : (
-				<section className='flex-col'>
+				<section className='profile--section'>
 					<h1>Profile</h1>
 					<img className='avatar' src={avatarUrl} alt='' />
+					{/*<label htmlFor='selectAvatar'>Select Avatar </label>*/}
+					{/*<input id='uploader' type='file' onChange={(e) => fileHandler(e)} />*/}
 
-					<input id='uploader' type='file' onChange={(e) => fileHandler(e)} />
-
-					<label htmlFor='selectAvatar'>Select Avatar </label>
-
+					<div class='parent-div'>
+						<button class='btn-upload'>Choose Avatar</button>
+						<input
+							id='uploader'
+							type='file'
+							onChange={(e) => fileHandler(e)}
+							name='upfile'
+						/>
+					</div>
 					{/* //use this to choose between mant images and highlight the choosen one */}
 
 					{/* <div>
@@ -195,24 +202,31 @@ const Profile = () => {
             </div>
           </selcet> */}
 
-					<label htmlFor='userName'>UserName</label>
-					<input
-						type='text'
-						name='userName'
-						placeholder='userName'
-						value={userName}
-						onChange={inputHandler}
-					/>
-					<label htmlFor='birthDate'>birthDate</label>
-					<input
-						type='text'
-						name='birthDate'
-						placeholder='Birth date'
-						value={birthDate}
-						onChange={inputHandler}
-					/>
+					<div className='userinfo--input username--input'>
+						<label htmlFor='userName'>UserName</label>
+						<input
+							type='text'
+							name='userName'
+							placeholder='userName'
+							value={userName}
+							onChange={inputHandler}
+						/>
+					</div>
+					<div className='userinfo--input birthdate--input'>
+						<label htmlFor='birthDate'>birthDate</label>
+						<input
+							type='text'
+							name='birthDate'
+							placeholder='Birth date'
+							value={birthDate}
+							onChange={inputHandler}
+							maxLength={8}
+						/>
+					</div>
 
-					<button onClick={saveHandler}>Save</button>
+					<button className='save--btn' onClick={saveHandler}>
+						Save
+					</button>
 				</section>
 			)}
 		</div>
