@@ -1,14 +1,12 @@
-
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import MyContext from "../../context/MyContext";
-import Nav from "./Nav";
-import arrayRandomize from "../../hooks/arrayRandomize";
-import "../../styling/settings.scss";
-import useSound from "use-sound";
-import correctanswer from "../../assets/sounds/correctanswer.mp3";
-import Rules from "./Rules";
-
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MyContext from '../../context/MyContext';
+import Nav from './Nav';
+import arrayRandomize from '../../hooks/arrayRandomize';
+import '../../styling/settings.scss';
+import useSound from 'use-sound';
+import correctanswer from '../../assets/sounds/correctanswer.mp3';
+import Rules from './Rules';
 
 const Settings = () => {
   const navigate = useNavigate();

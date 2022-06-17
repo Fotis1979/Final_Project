@@ -1,7 +1,7 @@
-import React from 'react'
-import x from '../../../src/assets/images/x.png'
-import pie3 from '../../assets/images/pie3.png'
-import MyContext from "../.././context/MyContext"
+import React from 'react';
+import x from '../../../src/assets/images/x.png';
+import pie3 from '../../assets/images/pie3.png';
+import MyContext from '../.././context/MyContext';
 import { useContext, useEffect } from 'react';
 import "../../../src/styling/questions.scss";
 import Diamonds from '../singleplayer/rewards/Diamonds';
