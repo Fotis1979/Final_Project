@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useContext } from 'react';
 import MyContext from '../../../context/MyContext';
 import right from '../../../assets/images/right.png';
@@ -21,18 +22,19 @@ const Correct = () => {
 		next,
 		setMessageStreak,
 		messageStreak,
+		gameOver,
 	} = context;
 
 	useEffect(() => {
-		selected === rightAnswer[indexCounter]
+		gameOver === false && selected === rightAnswer[indexCounter]
 			? setTimeout(() => {
 					setImg(<img src={right} alt='' />);
 			  }, 800)
 			: setImg(null);
-	}, [selected]);
+	}, [selected, gameOver]);
 
 	useEffect(() => {
-		selected && selected !== rightAnswer[indexCounter]
+		gameOver === false && selected && selected !== rightAnswer[indexCounter]
 			? setTimeout(() => {
 					timeUp === false &&
 						setImg(<img className='img2' src={wrong} alt='' />);
@@ -94,6 +96,7 @@ const Correct = () => {
 		diff === 'easy' &&
 		setMessageD("U've lost All your Points");
 	storedScore === 0 && diff === 'easy' && setMessageD('U get n0 Points !!');
+	score === 0 && diff === 'easy' && setMessageD('U get n0 Points !!');
 	storedScore <= 5 &&
 		(diff === 'hard' || diff === 'medium') &&
 		setMessageD("U've lost All your Points !!");

@@ -1,0 +1,57 @@
+@use '../App.scss' as scss;
+
+.fullScreenText {
+	//color: red;
+}
+
+.collection--container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	@media screen and (max-width: 1258px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media screen and (max-width: 930px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media screen and (max-width: 580px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	margin: 0 auto;
+	margin-top: 54px;
+	width: 80%;
+	height: 70%;
+	gap: 8px;
+	//border: 2px solid red;
+
+	img {
+		//border: 4px solid scss.$comp2-color;
+		border-radius: 4px;
+		height: 240px;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+.user--container {
+	//background-color: scss.$comp1-color;
+	border: 4px solid scss.$primary-color;
+	border-radius: 8px;
+	margin: 0 auto;
+	width: 240px;
+	//padding: 8px;
+	.user-stats {
+		padding: 0 8px;
+	}
+	h3 {
+		//color: scss.$secondary-color;
+		letter-spacing: 2px;
+		font-size: x-large;
+		color: #000;
+	}
+	p {
+		//color: scss.$comp2-color;
+		color: #000;
+
+		letter-spacing: 1px;
+	}
+}

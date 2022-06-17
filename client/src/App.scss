@@ -33,6 +33,11 @@ $comp1-color: #acfd63;
 $comp2-color: #66d700;
 $light-color: #fffcd7;
 
+@mixin flex-flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -91,7 +96,7 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: solid 1px #acfd63;
+	//border: solid 1px #acfd63;
 }
 
 .trivia--banner {
@@ -112,25 +117,24 @@ main {
 }
 
 .question-timer {
-	bottom: 130px;
+	z-index: 20;
 	position: absolute;
+	bottom: 40px;
+	left: 40px;
 	display: flex;
 	font-style: impact;
 	font-size: 55px;
 	font-weight: bold;
 	flex-direction: column;
 	text-align: center;
-	z-index: 20;
 }
 
 .sec {
 	position: relative;
-	top: 25px;
+	top: 16px;
 	animation: bounce 0.3s ease infinite alternate;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-	color: red;
-	text-shadow: 0 1px 0 red;
+
+	color: $secondary-color;
 }
 
 @keyframes bounce {
