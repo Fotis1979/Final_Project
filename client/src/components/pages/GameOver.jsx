@@ -4,6 +4,8 @@ import pie3 from '../../assets/images/pie3.png'
 import MyContext from "../.././context/MyContext"
 import { useContext, useEffect } from 'react';
 import "../../../src/styling/questions.scss";
+import Diamonds from '../singleplayer/rewards/Diamonds';
+
 
 
 const GameOver = () => {
@@ -59,6 +61,7 @@ const GameOver = () => {
 
             {pie === true && <p className="cat">
                 {messagePie}</p>}
+                <Diamonds />
 
         </div>
     )

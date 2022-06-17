@@ -15,26 +15,7 @@ const Settings = () => {
 
   const context = useContext(MyContext);
   const {
-    circleArts,setCircleArts,
-    circleArts2,setCircleArts2,
-    circleGeo,setCircleGeo,
-    circleGeo2,setCircleGeo2,
-    circleFood,setCircleFood,
-    circleFood2,setCircleFood2,
-    circleGen,setCircleGen,
-    circleGen2,setCircleGen2,
-    circleFilm,setCircleFilm,
-    circleFilm2,setCircleFilm2,
-    circleSport,setCircleSport,
-    circleSport2,setCircleSport2,
-    circleSoc,setCircleSoc,
-    circleSoc2,setCircleSoc2,
-    circleSci,setCircleSci,
-    circleSci2,setCircleSci2,
-    circleMus,setCircleMus,
-    circleMus2,setCircleMus2,
-    circleHist,setCircleHist,
-    circleHist2,setCircleHist2,
+
     setHelloMsg,
     settings, setSettings,
     setStreak,
@@ -63,13 +44,12 @@ const Settings = () => {
     setHintPoints,
     setQuestionCount,
     questionCount,
-    hello, setHello,
     helloMsg
 
   } = context;
 
   useEffect(() => {
-   
+
     setSettings(false)
     setHintPoints(0)
     setTimeUp(false)
@@ -95,11 +75,11 @@ const Settings = () => {
 
   questionCount === 0 && setMessageDiamonds(false)
 
-    useEffect(() => {
-      console.log("SETTINGS ARE: " ,settings);
-      }, [settings])
+  useEffect(() => {
+    console.log("SETTINGS ARE: ", settings);
+  }, [settings])
 
- 
+
   useEffect(() => {
     settings === true && setGameOver(false)
     console.log(gameOver);
@@ -152,57 +132,57 @@ const Settings = () => {
     <>
       <Nav />
       <div className="qa--section">
-      {helloMsg === true && <Rules />}
+        {helloMsg === true && <Rules />}
 
-   { helloMsg !== true && <div>
-        {helloMsg === false && <button className="next--btn2" onClick={() => setHelloMsg(true)}>RULES</button>}
-        <div className="settings">
+        {helloMsg !== true && <div>
+          {helloMsg === false && <button className="next--btn2" onClick={() => setHelloMsg(true)}>RULES</button>}
+          <div className="settings">
 
-          {helloMsg !== true &&  <h1 >ChOOSE SETTINGS</h1>}
-          {helloMsg !== true && <button className="settings--btn"
-            onClick={(e) => gameDifficulty(e)}
-            value={"easy"}
-          >
-            {" "}
-            BEgiNNer MODE{" "}
+            {helloMsg !== true && <h1 >ChOOSE SETTINGS</h1>}
+            {helloMsg !== true && <button className="settings--btn"
+              onClick={(e) => gameDifficulty(e)}
+              value={"easy"}
+            >
+              {" "}
+              BEgiNNer MODE{" "}
+            </button>}
+
+            {helloMsg !== true && <button
+
+              className="settings--btn"
+              onClick={(e) => gameDifficulty(e)}
+              value={"medium"}
+            >
+              {" "}
+              AdVanceD MODE{" "}
+            </button>}
+
+            {helloMsg !== true && <button
+
+              className="settings--btn"
+              onClick={(e) => gameDifficulty(e)}
+              value={"hard"}
+            >
+              {" "}
+              ExPeRT MODE{" "}
+            </button>}
+
+            {helloMsg !== true && <label >Game Mode</label>}
+
+            {helloMsg !== true && <select className="settings--mode" onChange={(e) => gameMode(e)}>
+
+              <option onChange={(e) => gameMode(e)} value="NoTime">
+                NoTime
+              </option>
+              <option onChange={(e) => gameMode(e)} value="Time">
+                Time
+              </option>
+            </select>}
+
+          </div>
+          {helloMsg !== true && <button className="settings--btn play--btn" onClick={checkHandler}>
+            PLAY
           </button>}
-
-          {helloMsg !== true && <button
-
-            className="settings--btn"
-            onClick={(e) => gameDifficulty(e)}
-            value={"medium"}
-          >
-            {" "}
-            AdVanceD MODE{" "}
-          </button>}
-
-          {helloMsg !== true && <button
-
-            className="settings--btn"
-            onClick={(e) => gameDifficulty(e)}
-            value={"hard"}
-          >
-            {" "}
-            ExPeRT MODE{" "}
-          </button>}
-
-          {helloMsg !== true && <label >Game Mode</label>}
-
-          {helloMsg !== true && <select className="settings--mode" onChange={(e) => gameMode(e)}>
-
-            <option onChange={(e) => gameMode(e)} value="NoTime">
-              NoTime
-            </option>
-            <option onChange={(e) => gameMode(e)} value="Time">
-              Time
-            </option>
-          </select>}
-
-        </div>
-        {helloMsg !== true && <button className="settings--btn play--btn" onClick={checkHandler}>
-          PLAY
-        </button>}
         </div>}
       </div>
 

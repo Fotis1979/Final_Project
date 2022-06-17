@@ -13,6 +13,7 @@ import useSound from "use-sound";
 import correctanswer from "../../../assets/sounds/correctanswer.mp3";
 import wronganswear from "../../../assets/sounds/wronganswear.mp3";
 import green from '../../../assets/images/green.png'
+import red from '../../../assets/images/red.png'
 import diamondArt from '../../../assets/images/diamondArt.png'
 
 const QuestionBody = () => {
@@ -93,20 +94,16 @@ const QuestionBody = () => {
     circleMus2, setCircleMus2,
     circleHist, setCircleHist,
     circleHist2, setCircleHist2,
-    imgC,
-    setImgC,
     diamondFilm,
     diamondGeo,
     diamondGen,
     diamondSoc,
     diamondSci,
-    diamondSport, diamondFood
-    , diamondHist,
+    diamondSport,
+    diamondFood,
+    diamondHist,
     diamondArts,
-    diamondMus
-
-
-
+    diamondMus,
 
   } = context;
 
@@ -170,10 +167,6 @@ const QuestionBody = () => {
   useEffect(() => {
     next && selected && setQuestionCount((prev) => prev + 1);
   }, [next, setQuestionCount, selected]);
-
-  // useEffect(() => {
-  //   console.log("QUESTIONCOUNT IS", questionCount);
-  // }, [indexCounter, questionCount]);
 
   questionCount === 18 &&
     selected &&
@@ -415,11 +408,6 @@ const QuestionBody = () => {
       setCircleHist2(false)
   }, [questionCount, setCircleArts, setCircleArts2, setCircleFilm, setCircleFilm2, setCircleFood, setCircleFood2, setCircleGen, setCircleGen2, setCircleHist, setCircleHist2, setCircleMus, setCircleMus2, setCircleSci, setCircleSci2, setCircleSoc, setCircleSoc2, setCircleSport, setCircleSport2, setCircleGeo2, setCircleGeo])
 
-  useEffect(() => {
-
-    questionCount === 0 && setImgC(" ")
-  }, [questionCount, setImgC])
-
 
   useEffect(() => {
     questionCount === 0 &&
@@ -510,7 +498,7 @@ const QuestionBody = () => {
         {!img && gameOver !== true && <button className="rewards--btn" onClick={tr}>
           LEAVE GAME
         </button>}
-
+        
         <Popup trigger={trigger} setTrigger={setTrigger} />
 
         <div>
@@ -539,6 +527,7 @@ const QuestionBody = () => {
               </button>
             )}
           {/* ********** Remove style to show everything !! ********** */}
+       
           {gameOver === false && (
             <div
               //  style={img && { visibility: "hidden" }}
@@ -567,7 +556,7 @@ const QuestionBody = () => {
                     </div>
                   )
               )}
-
+              
 
               {(img || timeUp || img2) &&
                 next === true &&
@@ -580,34 +569,57 @@ const QuestionBody = () => {
             </div>
           )}
 
-          <div >
-
-            {!selected && gameOver !== true && categories.splice(6) && categories.map(e => (
+          <div > 
+             {!img && gameOver === false && timeUp === false && !selected && <div className="cat5"><h1 className="cat7">Turn all circles of EACH CATEGORY to GREEN FOR a DIAMOND</h1></div>}
+        
+            {!selected && gameOver !== true &&  categories.splice(6) && categories.map(e => (
               <div className="cat4">
+                
                 <ul >
                   <li value={e} className={cat === e ? "cat5" : "cat6"}>
                     {e}
-                    {circleGeo === true && e === "geography" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleGeo2 === true && e === "geography" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleArts === true && e === "arts" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleArts2 === true && e === "arts" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleGen === true && e === "general" ? <img className="diamondArt2" src={green} alt="" /> : ""}
-                    {circleGen2 === true && e === "general" ? <img className="diamondArt3" src={green} alt="" /> : ""}
-                    {circleFood === true && e === "food" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleFood2 === true && e === "food" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleFilm === true && e === "film" ? (<img className="diamondArt2" src={green} alt="" />) :
-                      ""}
-                    {circleFilm2 === true && e === "film" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleSci === true && e === "science" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleSci2 === true && e === "science" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleSoc === true && e === "society" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleSoc2 === true && e === "society" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleHist === true && e === "history" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleHist2 === true && e === "history" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleSport === true && e === "sport" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleSport2 === true && e === "sport" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
-                    {circleMus === true && e === "music" ? (<img className="diamondArt2" src={green} alt="" />) : ""}
-                    {circleMus2 === true && e === "music" ? (<img className="diamondArt3" src={green} alt="" />) : ""}
+                    {circleGeo === true && e === "geography" ? (<img className="diamondArt2" src={green} alt="" />) : e === "geography" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleGeo2 === true && e === "geography" ? (<img className="diamondArt3" src={green} alt="" />) : e === "geography" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondGeo.easy === true && diamondGeo.medium === true && diamondGeo.hard === true && e === "geography") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "geography" && diamondGeo.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "geography" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleArts === true && e === "arts" ? (<img className="diamondArt2" src={green} alt="" />) : e === "arts" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleArts2 === true && e === "arts" ? (<img className="diamondArt3" src={green} alt="" />) : e === "arts" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondArts.easy === true && diamondArts.medium === true && diamondArts.hard === true && e === "arts") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "arts" && diamondArts.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "arts" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleGen === true && e === "general" ? <img className="diamondArt2" src={green} alt="" /> : e === "general" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleGen2 === true && e === "general" ? <img className="diamondArt3" src={green} alt="" /> : e === "general" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondGen.easy === true && diamondGen.medium === true && diamondGen.hard === true && e === "general") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "general" && diamondGen.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "general" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleFood === true && e === "food" ? (<img className="diamondArt2" src={green} alt="" />) : e === "food" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleFood2 === true && e === "food" ? (<img className="diamondArt3" src={green} alt="" />) : e === "food" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondFood.easy === true && diamondFood.medium === true && diamondFood.hard === true && e === "food") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "food" && diamondFood.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "food" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleFilm === true && e === "film" ? (<img className="diamondArt2" src={green} alt="" />) : e === "film" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleFilm2 === true && e === "film" ? (<img className="diamondArt3" src={green} alt="" />) : e === "film" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondFilm.easy === true && diamondFilm.medium === true && diamondFilm.hard === true && e === "film") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "film" && diamondFilm.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "film" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleSci === true && e === "science" ? (<img className="diamondArt2" src={green} alt="" />) : e === "science" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleSci2 === true && e === "science" ? (<img className="diamondArt3" src={green} alt="" />) : e === "science" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondSci.easy === true && diamondSci.medium === true && diamondSci.hard === true && e === "science") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "science" && diamondSci.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "science" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleSoc === true && e === "society" ? (<img className="diamondArt2" src={green} alt="" />) : e === "society" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleSoc2 === true && e === "society" ? (<img className="diamondArt3" src={green} alt="" />) : e === "society" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondSoc.easy === true && diamondSoc.medium === true && diamondSoc.hard === true && e === "society") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> : e === "society" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleHist === true && e === "history" ? (<img className="diamondArt2" src={green} alt="" />) : e === "history" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleHist2 === true && e === "history" ? (<img className="diamondArt3" src={green} alt="" />) : e === "history" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondHist.easy === true && diamondHist.medium === true && diamondHist.hard === true && e === "history") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "history" && diamondHist.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "history" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleSport === true && e === "sport" ? (<img className="diamondArt2" src={green} alt="" />) : e === "sport" && <img className="diamondArt2" src={red} alt="" />}
+                    {circleSport2 === true && e === "sport" ? (<img className="diamondArt3" src={green} alt="" />) : e === "sport" && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondSport.easy === true && diamondSport.medium === true && diamondSport.hard === true && e === "sport") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "sport" && diamondSport.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "sport" && <img className="diamondArt2" src={red} alt="" />}
+
+                    {circleMus === true && e === "music" ? (<img className="diamondArt2" src={green} alt="" />) : e === "music" && diamondMus !== { easy: true, medium: true, hard: true } && <img className="diamondArt2" src={red} alt="" />}
+                    {circleMus2 === true && e === "music" ? (<img className="diamondArt3" src={green} alt="" />) : e === "music" && diamondMus !== { easy: true, medium: true, hard: true } && <img className="diamondArt2" src={red} alt="" />}
+                    {(diamondMus.easy === true && diamondMus.medium === true && diamondMus.hard === true && e === "music") ? <img className="diamondArt2" src={diamondArt} alt="diamond" /> :e === "music" && diamondMus.hard === true  ? <img className="diamondArt2" src={green} alt="" /> : e === "music" && <img className="diamondArt2" src={red} alt="" />}
+                    {/* <li className="l">{circleGeo === true && e === "geography" ? <img className="diamondArt2" src={diamondArt} alt="" /> : <img className="diamondArt2" src={red} alt="" />}
+
+                    </li>     */}
                   </li>
                 </ul>
               </div>
