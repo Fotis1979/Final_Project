@@ -79,11 +79,6 @@ const MyProvider = ({ children }) => {
   const [circleHist2,setCircleHist2] = useState(false)
   const [circleMus,setCircleMus] = useState(false)
   const [circleMus2,setCircleMus2] = useState(false)
-  const [imgC,setImgC] = useState(null)
-
-
-
-
 
 
 
@@ -208,7 +203,6 @@ const MyProvider = ({ children }) => {
         hello, setHello,
         helloMsg,
         setHelloMsg,
-        imgC,setImgC,
         settings, setSettings,
         trigger, setTrigger,
         questionCount, 
