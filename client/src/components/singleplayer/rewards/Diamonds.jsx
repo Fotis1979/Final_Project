@@ -1,13 +1,14 @@
 import "../../../styling/diamonds.scss";
 import { useContext, useEffect } from "react";
 import MyContext from "../../../context/MyContext";
+import pie2 from "../../../assets/images/pie2.png";
 import diamondArt from "../../../assets/images/diamondArt.png";
+
 
 const Diamonds = () => {
   const context = useContext(MyContext);
   const {
-    score,
-    setScore,
+    messageDiamonds,
     diamondGeo,
     setDiamondGeo,
     diamondSoc,
@@ -35,12 +36,33 @@ const Diamonds = () => {
     indexCounter,
     results,
     diff,
-    setStoredScore,
     gameOver,
-    img,
     setPie,
     diamondPoints,
     setDiamondPoints,
+    setCircleArts,
+    setCircleArts2,
+    setCircleGeo,
+    setCircleGeo2,
+    setCircleFood,
+    setCircleFood2,
+    setCircleGen,
+    setCircleGen2,
+    setCircleFilm,
+    setCircleFilm2,
+    setCircleSport,
+    setCircleSport2,
+    setCircleSoc,
+    setCircleSoc2,
+    setCircleSci,
+    setCircleSci2,
+    setCircleMus,
+    setCircleMus2,
+    setCircleHist,
+    setCircleHist2,
+    questionCount,
+    img
+
   } = context;
 
   useEffect(() => {
@@ -51,8 +73,13 @@ const Diamonds = () => {
       setDiamondGeo({ easy: false, medium: false, hard: false });
   }, [diamondGeo]);
 
-  gameOver === true && setDiamondGeo({ easy: false, medium: false, hard: false });
+  useEffect(() => {
+    diamondGeo.easy === true && setCircleGeo(true)
+    diamondGeo.medium === true && setCircleGeo2(true)
+    diamondGeo.easy === true && diamondGeo.medium === true && diamondGeo.hard === true && (<img className="diamondArt3" src={pie2} alt="" />)
+  }, [diamondGeo]);
 
+  gameOver === true && setDiamondGeo({ easy: false, medium: false, hard: false });
 
   useEffect(() => {
     diamondArts.easy === true &&
@@ -62,20 +89,30 @@ const Diamonds = () => {
       setDiamondArts({ easy: false, medium: false, hard: false });
   }, [diamondArts]);
 
-  gameOver === true && setDiamondArts({ easy: false, medium: false, hard: false });
+  useEffect(() => {
+    diamondArts.easy === true && setCircleArts(true)
+    diamondArts.medium === true && setCircleArts2(true)
+    diamondArts.easy === true && diamondArts.medium === true && diamondArts.hard === true && (<img className="diamondArt3" src={pie2} alt="" />)
+  }, [diamondArts]);
 
+  gameOver === true && setDiamondArts({ easy: false, medium: false, hard: false });
 
 
   useEffect(() => {
     diamondSport.easy === true &&
       diamondSport.medium === true &&
       diamondSport.hard === true &&
+
       setDiamonds((prev) => prev + 1) &&
       setDiamondSport({ easy: false, medium: false, hard: false });
   }, [diamondSport]);
 
+  useEffect(() => {
+    diamondSport.easy === true && setCircleSport(true)
+    diamondSport.medium === true && setCircleSport2(true)
+    diamondSport.easy === true && diamondSport.medium === true && diamondSport.hard === true && (<img className="diamondArt3" src={pie2} alt="" />)
+  }, [diamondSport]);
   gameOver === true && setDiamondSport({ easy: false, medium: false, hard: false });
-
 
 
   useEffect(() => {
@@ -86,8 +123,13 @@ const Diamonds = () => {
       setDiamondFood({ easy: false, medium: false, hard: false });
   }, [diamondFood]);
 
-  gameOver === true && setDiamondFood({ easy: false, medium: false, hard: false });
 
+  useEffect(() => {
+    diamondFood.easy === true && setCircleFood(true)
+    diamondFood.medium === true && setCircleFood2(true)
+    diamondFood.easy === true && diamondFood.medium === true && diamondFood.hard === true && (<img className="diamondArt3" src={pie2} alt="" />)
+  }, [diamondFood]);
+  gameOver === true && setDiamondFood({ easy: false, medium: false, hard: false });
 
 
   useEffect(() => {
@@ -98,8 +140,12 @@ const Diamonds = () => {
       setDiamondFilm({ easy: false, medium: false, hard: false });
   }, [diamondFilm]);
 
-  gameOver === true && setDiamondFilm({ easy: false, medium: false, hard: false });
+  useEffect(() => {
+    diamondFilm.easy === true && setCircleFilm(true)
+    diamondFilm.medium === true && setCircleFilm2(true)
+  }, [diamondFilm]);
 
+  gameOver === true && setDiamondFilm({ easy: false, medium: false, hard: false });
 
 
   useEffect(() => {
@@ -110,8 +156,12 @@ const Diamonds = () => {
       setDiamondGen({ easy: false, medium: false, hard: false });
   }, [diamondGen]);
 
-  gameOver === true && setDiamondGen({ easy: false, medium: false, hard: false });
 
+  useEffect(() => {
+    diamondGen.easy === true && setCircleGen(true)
+    diamondGen.medium === true && setCircleGen2(true)
+  }, [diamondGen, diamondGen.easy, diamondGen.medium, diamondGen.hard, diamondArts]);
+  gameOver === true && setDiamondGen({ easy: false, medium: false, hard: false });
 
 
   useEffect(() => {
@@ -119,11 +169,16 @@ const Diamonds = () => {
       diamondMus.medium === true &&
       diamondMus.hard === true &&
       setDiamonds((prev) => prev + 1) &&
+
       setDiamondMus({ easy: false, medium: false, hard: false });
   }, [diamondMus]);
 
-  gameOver === true && setDiamondMus({ easy: false, medium: false, hard: false });
 
+  useEffect(() => {
+    diamondMus.easy === true && setCircleMus(true)
+    diamondMus.medium === true && setCircleMus2(true)
+  }, [diamondMus]);
+  gameOver === true && setDiamondMus({ easy: false, medium: false, hard: false });
 
 
   useEffect(() => {
@@ -134,8 +189,12 @@ const Diamonds = () => {
       setDiamondHist({ easy: false, medium: false, hard: false });
   }, [diamondHist]);
 
-  gameOver === true && setDiamondHist({ easy: false, medium: false, hard: false });
 
+  useEffect(() => {
+    diamondHist.easy === true && setCircleHist(true)
+    diamondHist.medium === true && setCircleHist2(true)
+  }, [diamondHist]);
+  gameOver === true && setDiamondHist({ easy: false, medium: false, hard: false });
 
 
   useEffect(() => {
@@ -146,8 +205,12 @@ const Diamonds = () => {
       setDiamondSci({ easy: false, medium: false, hard: false });
   }, [diamondSci]);
 
-  gameOver === true && setDiamondSci({ easy: false, medium: false, hard: false });
+  useEffect(() => {
+    diamondSci.easy === true && setCircleSci(true)
+    diamondSci.medium === true && setCircleSci2(true)
+  }, [diamondSci]);
 
+  gameOver === true && setDiamondSci({ easy: false, medium: false, hard: false });
 
   useEffect(() => {
     diamondSoc.easy === true &&
@@ -157,10 +220,14 @@ const Diamonds = () => {
       setDiamondSoc({ easy: false, medium: false, hard: false });
   }, [diamondSoc]);
 
+  useEffect(() => {
+    diamondSoc.easy === true && setCircleSoc(true)
+    diamondSoc.medium === true && setCircleSoc2(true)
+  },
+    [diamondSoc]);
+
   gameOver === true && setDiamondSoc({ easy: false, medium: false, hard: false });
-
   gameOver === true && setDiamonds(0);
-
 
   useEffect(() => {
     (diamonds === 1 ||
@@ -171,6 +238,7 @@ const Diamonds = () => {
       diamonds === 6) &&
       setDiamondPoints(diamondPoints + 150);
   }, [diamonds]);
+
 
   useEffect(() => {
     selected === rightAnswer[indexCounter] &&
@@ -338,64 +406,56 @@ const Diamonds = () => {
     diamonds === 6 && setPie(true);
   }, [diamonds]);
 
-
-
-
-
   return (
-    <div>
+    <div className="diamondsDiv">
       {diamondGeo.easy === true &&
         diamondGeo.medium === true &&
-        diamondGeo.hard === true && (
-          <img
-            className="diamondArt"
-            src={diamondArt}
-            alt="Diamond_geography"
-          />
+        diamondGeo.hard === true && questionCount === 18 && img && (
+          <img className="diamondArt" src={diamondArt} alt="Diamond_geography" />
         )}
       {diamondArts.easy === true &&
         diamondArts.medium === true &&
-        diamondArts.hard === true && (
+        diamondArts.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_art" />
         )}
       {diamondSport.easy === true &&
         diamondSport.medium === true &&
-        diamondSport.hard === true && (
+        diamondSport.hard === true  && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_sports" />
         )}
       {diamondFood.easy === true &&
         diamondFood.medium === true &&
-        diamondFood.hard === true && (
+        diamondFood.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_food" />
         )}
       {diamondFilm.easy === true &&
         diamondFilm.medium === true &&
-        diamondFilm.hard === true && (
+        diamondFilm.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_film" />
         )}
       {diamondGen.easy === true &&
         diamondGen.medium === true &&
-        diamondGen.hard === true && (
+        diamondGen.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_gen" />
         )}
       {diamondMus.easy === true &&
         diamondMus.medium === true &&
-        diamondMus.hard === true && (
+        diamondMus.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_music" />
         )}
       {diamondHist.easy === true &&
         diamondHist.medium === true &&
-        diamondHist.hard === true && (
+        diamondHist.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_history" />
         )}
       {diamondSci.easy === true &&
         diamondSci.medium === true &&
-        diamondSci.hard === true && (
+        diamondSci.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_science" />
         )}
       {diamondSoc.easy === true &&
         diamondSoc.medium === true &&
-        diamondSoc.hard === true && (
+        diamondSoc.hard === true && questionCount === 18 && img &&(
           <img className="diamondArt" src={diamondArt} alt="Diamond_social" />
         )}
     </div>

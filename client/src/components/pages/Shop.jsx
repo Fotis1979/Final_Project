@@ -1,11 +1,11 @@
-import React from "react";
-
 import { useState, useEffect, useContext } from "react";
-
 import MyContext from "../../context/MyContext";
+
 import Nav from "./Nav";
-import "./shop.css";
+
 import q from "../../assets/images/q.jpg";
+import "../../styling/shop.scss";
+
 const Shop = () => {
   const context = useContext(MyContext);
   const {

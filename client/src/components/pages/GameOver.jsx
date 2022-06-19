@@ -1,10 +1,11 @@
-import React from 'react'
-import x from '../../../src/assets/images/x.png'
-import pie3 from '../../assets/images/pie3.png'
-import MyContext from "../.././context/MyContext"
+import React from 'react';
+import x from '../../../src/assets/images/x.png';
+import pie3 from '../../assets/images/pie3.png';
+import MyContext from '../.././context/MyContext';
 import { useContext, useEffect } from 'react';
 import "../../../src/styling/questions.scss";
-import Popup from '../Popup/Popup';
+import Diamonds from '../singleplayer/rewards/Diamonds';
+
 
 
 const GameOver = () => {
@@ -12,7 +13,6 @@ const GameOver = () => {
     const context = useContext(MyContext);
     const {
        
-        indexCounter,
         messagePie,
         setMessagePie,
         messageDiamonds,
@@ -39,12 +39,15 @@ const GameOver = () => {
     useEffect(() => {
         pie === true && gameOver === true &&
             setMessagePie("Congrats' U CompleteD the Pie +199 PointS")
-        messagePie && score < 1969 &&
+        messagePie && 
             setScore(score + 199)
-        console.log(score);
-        console.log(indexCounter);
-
     }, [gameOver, pie, messagePie, setScore])
+   
+
+    useEffect(() => {
+        console.log(score)
+    }, [score])
+
 
     return (
         <div className="gameOver--section">
@@ -58,6 +61,7 @@ const GameOver = () => {
 
             {pie === true && <p className="cat">
                 {messagePie}</p>}
+                <Diamonds />
 
         </div>
     )

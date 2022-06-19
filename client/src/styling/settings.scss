@@ -5,17 +5,20 @@
 }*/
 
 .settings {
+	position: relative;
 	background-color: #fdea03ff;
-
+	animation-name: points;
+	animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	margin: 0 auto;
-	margin-top: 10vh;
+	margin-top: 32px;
 	padding: 30px;
 	width: 500px;
-	height: 500px;
+	min-height: 500px;
 	border-radius: 50px;
 	border: groove 20px #e57fedff;
 
@@ -23,6 +26,11 @@
 }
 .settings select,
 .settings input {
+	position: relative;
+
+	animation-name: points;
+	animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	font-family: 'Coiny', cursive;
 	font-size: larger;
 	width: 100%;
@@ -42,33 +50,70 @@ input:hover {
 	font-size: 30px;
 }
 
-/*.settings--mode {
-	color: red;
-}*/
+.settings--mode {
+	//color: red;
+	text-align: center;
+	border-radius: 16px;
+	select {
+		width: 50px;
+		padding: 52px;
+	}
+}
 
 .settings--btn {
+	position: relative;
+
+	animation-name: points;
+	animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	background-color: scss.$accent-color;
 
 	font-family: 'Coiny', cursive;
-	font-size: xx-large;
+	font-size: 32px;
 
-	width: 300px;
+	min-width: 300px;
 	/*margin: 0 auto;*/
 	margin-top: 5px;
 	padding: 5px 50px;
 
 	border: solid 5px scss.$dominant-color;
 	border-radius: 16px;
+	p {
+		font-size: 14px;
+	}
 }
 .play--btn {
+	position: relative;
+	animation-name: points;
+	animation-duration: 1s;
+	transition-timing-function: ease-in-out;
 	background-color: scss.$secondary-color;
-	width: 240px;
+	margin-top: 32px;
+	//width: 122px;
 }
 .settings--btn:hover {
-	background-color: scss.$accent-color;
+	background-color: scss.$primary-color;
 	color: #fff;
 }
 /*
 .amount {
 	background-color: red;
 }*/
+.rules {
+	//background-color: scss.$secondary-color;
+	//position: relative;
+	//width: 1200px;
+	//height: 770px;
+	//text-align: center;
+	padding: 20px;
+	border-radius: 16px;
+	margin: 0 auto;
+	max-width: 72%;
+	line-height: 20px;
+	animation-name: question;
+	animation-duration: 1s;
+	transition-timing-function: ease-in-out;
+
+	//border: 5px solid scss.$primary-color;
+	//background-color: scss.$accent-color;
+}

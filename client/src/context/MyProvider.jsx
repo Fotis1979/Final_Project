@@ -54,11 +54,31 @@ const MyProvider = ({ children }) => {
   const [messagePie, setMessagePie] = useState("");
   const [messageDiamonds, setMessageDiamonds] = useState("");
   const [storedScore, setStoredScore] = useState("");
-  const [questionCount, setQuestionCount] = useState(1);
+  const [questionCount, setQuestionCount] = useState(0);
   const [trigger, setTrigger] = useState(false);
   const [settings, setSettings] = useState(true);
-
-
+  const [hello, setHello] = useState("");
+  const [helloMsg,setHelloMsg] = useState(false)
+  const [circleGeo,setCircleGeo] = useState(false)
+  const [circleGeo2,setCircleGeo2] = useState(false)
+  const [circleArts,setCircleArts] = useState(false)
+  const [circleArts2,setCircleArts2] = useState(false)
+  const [circleGen,setCircleGen] = useState(false)
+  const [circleGen2,setCircleGen2] = useState(false)
+  const [circleFood,setCircleFood] = useState(false)
+  const [circleFood2,setCircleFood2] = useState(false)
+  const [circleFilm,setCircleFilm] = useState(false)
+  const [circleFilm2,setCircleFilm2] = useState(false)
+  const [circleSoc,setCircleSoc] = useState(false)
+  const [circleSoc2,setCircleSoc2] = useState(false)
+  const [circleSci,setCircleSci] = useState(false)
+  const [circleSci2,setCircleSci2] = useState(false)
+  const [circleSport,setCircleSport] = useState(false)
+  const [circleSport2,setCircleSport2] = useState(false)
+  const [circleHist,setCircleHist] = useState(false)
+  const [circleHist2,setCircleHist2] = useState(false)
+  const [circleMus,setCircleMus] = useState(false)
+  const [circleMus2,setCircleMus2] = useState(false)
 
 
 
@@ -160,6 +180,29 @@ const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        circleArts,setCircleArts,
+        circleArts2,setCircleArts2,
+        circleGeo,setCircleGeo,
+        circleGeo2,setCircleGeo2,
+        circleFood,setCircleFood,
+        circleFood2,setCircleFood2,
+        circleGen,setCircleGen,
+        circleGen2,setCircleGen2,
+        circleFilm,setCircleFilm,
+        circleFilm2,setCircleFilm2,
+        circleSport,setCircleSport,
+        circleSport2,setCircleSport2,
+        circleSoc,setCircleSoc,
+        circleSoc2,setCircleSoc2,
+        circleSci,setCircleSci,
+        circleSci2,setCircleSci2,
+        circleMus,setCircleMus,
+        circleMus2,setCircleMus2,
+        circleHist,setCircleHist,
+        circleHist2,setCircleHist2,
+        hello, setHello,
+        helloMsg,
+        setHelloMsg,
         settings, setSettings,
         trigger, setTrigger,
         questionCount, 
@@ -302,34 +345,8 @@ const MyProvider = ({ children }) => {
         userName,
         setUserName,
         answerPopup,
-        setAnswerPopup,
-        //diamond part
-        diamondSoc,
-        setDiamondSoc,
-        diamondSci,
-        setDiamondSci,
-        diamondFilm,
-        setDiamondFilm,
-        diamondFood,
-        setDiamondFood,
-        diamondMus,
-        setDiamondMus,
-        diamondSport,
-        setDiamondSport,
-        diamondHist,
-        setDiamondHist,
-        diamondGen,
-        setDiamondGen,
-        diamondArts,
-        setDiamondArts,
-        diamondGeo,
-        setDiamondGeo,
-        diamonds,
-        setDiamonds,
-        pie,
-        setPie,
-        img,
-        setImg,
+        setAnswerPopup
+        
       }}
     >
       {children}
